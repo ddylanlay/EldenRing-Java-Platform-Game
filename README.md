@@ -4,5 +4,6 @@
 ## XX_Lab09Team02
 Team members:
 Dylan Lay
+Jamie Tran
 
 ## Design Rationale
