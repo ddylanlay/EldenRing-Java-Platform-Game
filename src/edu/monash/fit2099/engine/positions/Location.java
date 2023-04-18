@@ -116,6 +116,7 @@ public class Location implements Printable {
 	 * important to them.
 	 */
 	public void tick() {
+		// calls tick method of ground and tick method of all items located in that location
 		ground.tick(this);
 		for(Item item :  new ArrayList<>(items)) {
 			item.tick(this);
@@ -176,6 +177,7 @@ public class Location implements Printable {
 	 * @return true if the Actor can enter this location
 	 */
 	public boolean canActorEnter(Actor actor) {
+		// whether there is another actor at that location and whether the actor can enter that ground
 		return !map.isAnActorAt(this) && ground.canActorEnter(actor);
 	}
 

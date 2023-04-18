@@ -79,12 +79,19 @@ public class World {
 		}
 
 		// This loop is basically the whole game
+
+		// game runs as long as player is still alive and  can be found in one of the game maps within the game world
 		while (stillRunning()) {
+			// gets map where player is currently located
+			// .locationof gets the location of the player then .map gets the specific game map where that location is found
 			GameMap playersMap = actorLocations.locationOf(player).map();
+
+			// draws each (x,y) position in the game map
 			playersMap.draw(display);
 
-			// Process all the actors.
+			// Process each actor's turn
 			for (Actor actor : actorLocations) {
+				// checks if player is alive in case heavy blow from enemy removes player from game map during the same turn as checking
 				if (stillRunning())
 					processActorTurn(actor);
 			}
@@ -113,10 +120,12 @@ public class World {
 	 * @param actor the Actor whose turn it is.
 	 */
 	protected void processActorTurn(Actor actor) {
-		Location here = actorLocations.locationOf(actor);
-		GameMap map = here.map();
+		Location here = actorLocations.locationOf(actor); // gets specific location
+		GameMap map = here.map(); // gets specific game map based on specific location
+
 
 		ActionList actions = new ActionList();
+		// loops through all items carried by actor and checks what actions are possible by the player with the particular item
 		for (Item item : actor.getItemInventory()) {
 			actions.add(item.getAllowableActions());
 			// Game rule. If you're carrying it, you can drop it.
@@ -132,27 +141,36 @@ public class World {
 		// Game rule. Allows the actor to interact with current ground
 		actions.add(here.getGround().allowableActions(actor, here, ""));
 
+		// other actors and ground reachable from current actor's exits, 8 surrounding squares
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
 
 			if (actorLocations.isAnActorAt(destination)) {
+				// actions with other actors in that direction
 				actions.add(actorLocations.getActorAt(destination).allowableActions(actor, exit.getName(), map));
 			} else {
+				// otherwise actions they can do to the ground in that direction
 				actions.add(destination.getGround().allowableActions(actor, destination, exit.getName()));
 			}
+			// gives a MoveActorAction to a particular direction if the actor can go there
 			actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
 		}
 
+		// if actor is currently standing on item that is on the ground, they can do something with it
 		for (Item item : here.getItems()) {
 			actions.add(item.getAllowableActions());
 			// Game rule. If it's on the ground you can pick it up.
 			actions.add(item.getPickUpAction(actor));
 		}
+		// if they choose to do nothing in that turn
 		actions.add(new DoNothingAction());
-
+		// collected list of actions that can be performed by actor during that turn
 		Action action = actor.playTurn(actions, lastActionMap.get(actor), map, display);
+
+		// records the list of actions in lastActionMap
 		lastActionMap.put(actor, action);
-		
+
+		// execute action that is chosen in the current turn and display result of the action
 		String result = action.execute(actor, map);
 		display.println(result);
 	}
