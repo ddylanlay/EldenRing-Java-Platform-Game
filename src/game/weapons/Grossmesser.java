@@ -1,4 +1,7 @@
 package game.weapons;
 
-public class Grossmesser {
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+
+public class Grossmesser extends WeaponItem {
+    public Grossmesser()
 }
