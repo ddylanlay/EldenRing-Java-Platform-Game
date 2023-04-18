@@ -31,7 +31,9 @@ public class Player extends Actor {
 		// Useful when you want to implement chain-actions like sleeping implementation.
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+		// executes at each iteration of the game loop, displaying the console menu
 
+		// shows menu to user at each iteration to let user choose which action they want to perform at particular turn
 		return menu.showMenu(this, actions, display);
 	}
 }

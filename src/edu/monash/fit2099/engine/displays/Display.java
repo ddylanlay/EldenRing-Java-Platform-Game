@@ -6,7 +6,8 @@ import java.util.Scanner;
  * Class that manages I/O for the system
  */
 public class Display  {
-
+ 	// having all the printing done by this class allows the extension of other libraries in the future without the need for modifications
+	// this follows the open closed principle
 	/**
 	 * Input
 	 */

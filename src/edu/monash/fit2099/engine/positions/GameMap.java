@@ -65,6 +65,7 @@ public class GameMap {
 		Objects.requireNonNull(lines);
 
 		this.groundFactory = groundFactory;
+		// createMapFromStrings uses the ground factory to translate the string representation of the ground to an actual ground object
 		createMapFromStrings(groundFactory, lines);
 	}
 	
@@ -87,6 +88,7 @@ public class GameMap {
 	 * @param lines         List of Strings representing rows of the map
 	 */
 	private void createMapFromStrings(GroundFactory groundFactory, List<String> lines) {
+		// uses the ground factory to translate the string representation of the ground to an actual ground object
 		int width = lines.get(0).length();
 		int height = lines.size();
 		initMap(width, height);
@@ -225,6 +227,9 @@ public class GameMap {
 		// Tick over all the items in inventories.
 		for (Actor actor : actorLocations) {
 			if (this.contains(actor)) {
+				// if actor does not eat apple, the apple may be unedible every time its tick method is called
+
+				// creates copy of actor's inventory and runs through it, then modify the original inventory
 				for (Item item : new ArrayList<Item>(actor.getItemInventory())) { // Copy the list in case the item wants to leave
 					item.tick(actorLocations.locationOf(actor), actor);
 				}
@@ -234,7 +239,7 @@ public class GameMap {
 				}
 			}
 		}
-
+		// location's tick method
 		for (int y : heights) {
 			for (int x : widths) {
 				this.at(x, y).tick();
