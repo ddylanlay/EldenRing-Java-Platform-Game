@@ -1,4 +1,6 @@
 package game.weapons;
 
-public class GreatKnife {
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+
+public class GreatKnife extends WeaponItem {
 }
