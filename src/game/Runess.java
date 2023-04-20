@@ -1,5 +1,7 @@
 package game;
 
+import edu.monash.fit2099.engine.actors.Actor;
+
 public class Runess {
     public boolean addRunes(int totalRunes, int runes){
 
@@ -14,6 +16,7 @@ public class Runess {
     }
 
     public static int enemyDrop(int low, int high){
+        if
         int num = RandomNumberGenerator.getRandomInt(low, high);
         return num;
 

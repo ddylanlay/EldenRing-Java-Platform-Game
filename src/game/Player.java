@@ -16,7 +16,7 @@ import game.weapons.Club;
  * Modified by:
  *
  */
-public class Player extends Actor implements Resettable, Runes {
+public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	int runesInInventory = 0;
@@ -45,13 +45,7 @@ public class Player extends Actor implements Resettable, Runes {
 		return menu.showMenu(this, actions, display);
 	}
 
-	@Override
-	public void exchangeRunes(Runes runes){
-		runes.addRunes(runesInInventory);
-		runes.
-	}
 
-	public
 	@Override
 	public void reset() {}
 }

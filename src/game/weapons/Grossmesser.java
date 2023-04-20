@@ -1,4 +1,10 @@
 package game.weapons;
 
-public class Grossmesser {
+import game.SellableItem;
+
+public class Grossmesser implements SellableItem {
+    public int getSellingPrice(){
+        int sellingPrice = 100;
+        return sellingPrice;
+    }
 }
