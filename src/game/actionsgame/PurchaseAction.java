@@ -14,7 +14,6 @@ public class PurchaseAction extends Action {
         this.weapon = weapon;
     }
     public String execute(Actor actor, GameMap map){
-
     }
 
     public String menuDescription(Actor actor){
