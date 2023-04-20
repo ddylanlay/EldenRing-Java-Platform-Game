@@ -13,7 +13,6 @@ public class RunesManager implements Runes {
     }
 
     public boolean addRunes(Actor actor, int runes){
-        return Runes.super.addRunes(actor, runes)
     }
 
 }
