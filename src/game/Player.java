@@ -6,20 +6,25 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.combatclass.CombatClass;
 import game.weapons.Club;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
  * It carries around a club to attack a hostile creature in the Lands Between.
+ *
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
  *
+ * Modified by:
+ * @author Arosh Heenkenda
  */
 public class Player extends Actor implements Resettable, Runes {
 
 	private final Menu menu = new Menu();
 	int runesInInventory = 0;
+
+	private CombatClass combatClass;
 
 
 	/**
@@ -54,4 +59,19 @@ public class Player extends Actor implements Resettable, Runes {
 	public
 	@Override
 	public void reset() {}
+
+
+	/**
+	 * Getter for combatClass.
+	 *
+	 * @return a CombatClass object.
+	 */
+	public CombatClass getCombatClass() { return combatClass; }
+
+	/**
+	 * Setter for combatClass.
+	 *
+	 * @param combatClass a CombatClass object.
+	 */
+	public void setCombatClass(CombatClass combatClass) { this.combatClass = combatClass; }
 }
