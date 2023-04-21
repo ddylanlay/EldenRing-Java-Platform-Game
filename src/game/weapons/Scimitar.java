@@ -4,20 +4,18 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 /**
  * A curved sword that both enemies and player can use to attack.
- * It deals 115 damage with 85% hit rate
+ * It deals 118 damage with 88% hit rate
  *
  * Created by:
  * @author Arosh Heenkenda
  *
  * Modified by:
- * 
+ *
  */
-public class Grossmesser extends WeaponItem {
+public class Scimitar extends WeaponItem {
 
     /**
      * Constructor
      */
-    public Grossmesser(){
-        super("Grossmesser", '?', 115, "slashes", 85);
-    }
+    public Scimitar() { super("Scimitar", 's', 118, "slashes", 88); }
 }
