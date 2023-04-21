@@ -16,12 +16,12 @@ public abstract class CombatClass {
     /**
      * The max health for a given combat class.
      */
-    private int maxHitPoints;
+    private final int maxHitPoints;
 
     /**
      * The starting weapon for a given combat class.
      */
-    private WeaponItem classWeapon;
+    private final WeaponItem classWeapon;
 
     /**
      * Constructor
@@ -34,4 +34,19 @@ public abstract class CombatClass {
         this.maxHitPoints = _maxHitPoints;
         this.classWeapon = _classWeapon;
     }
+
+    /**
+     * Getter for maxHitPoints
+     *
+     * @return an int value for the max hit points of a combat class.
+     */
+    public int getMaxHitPoints() { return maxHitPoints; }
+
+    /**
+     * Getter for classWeapon
+     *
+     * @return an object of WeaponItem for the weapon of a combat class
+     */
+    public WeaponItem getClassWeapon() { return classWeapon;}
+
 }
