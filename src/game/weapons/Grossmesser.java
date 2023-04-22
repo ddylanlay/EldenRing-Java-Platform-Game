@@ -1,7 +1,7 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.SellableItem;
+import game.trading.SellableItem;
 
 public class Grossmesser extends WeaponItem implements SellableItem {
     public Grossmesser() {

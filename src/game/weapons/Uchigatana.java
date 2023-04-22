@@ -1,7 +1,7 @@
 package game.weapons;
 
-import game.PurchasableItem;
-import game.SellableItem;
+import game.trading.PurchasableItem;
+import game.trading.SellableItem;
 
 public class Uchigatana implements PurchasableItem, SellableItem {
     public int getPurchasePrice(){
