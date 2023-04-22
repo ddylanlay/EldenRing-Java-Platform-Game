@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.enemies.Enemies;
 import game.trading.RunesManager;
 
 import java.util.Random;
@@ -21,7 +22,6 @@ public class AttackAction extends Action {
 	 * The Actor that is to be attacked
 	 */
 	private Actor target;
-
 	/**
 	 * The direction of incoming attack.
 	 */
@@ -86,7 +86,8 @@ public class AttackAction extends Action {
 		if (!target.isConscious()) {
 			result += new DeathAction(actor).execute(target, map);
 			if (actor.getDisplayChar() == '@'){
-				runesManager.transferRunes(target, actor);
+				Enemies enemy = (Enemies) target;
+				enemy.dropRunes();
 				}
 			}
 

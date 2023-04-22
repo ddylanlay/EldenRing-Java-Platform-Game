@@ -4,10 +4,10 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.combatclass.CombatClass;
-import game.trading.RunesDoing;
+import game.trading.Runes;
 import game.weapons.Club;
 
 /**
@@ -20,7 +20,7 @@ import game.weapons.Club;
  * Modified by:
  * @author Arosh Heenkenda
  */
-public class Player extends Actor implements Resettable, RunesDoing {
+public class Player extends Actor implements Resettable{
 
 	private final Menu menu = new Menu();
 	int runesInInventory = 0;
@@ -72,6 +72,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	 */
 	public void setCombatClass(CombatClass combatClass) { this.combatClass = combatClass; }
 	public int addRunes(int runes){
+			this.addItemToInventory(new Runes(runes));
 		runesInInventory = runesInInventory + runes;
 		return runesInInventory;
 	}
@@ -79,6 +80,9 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	// may need to make a boolean method to check for invalid purchase
 
 	public int removeRunes(int runes){
+//		for(int i = 0; i <= runes; i++){
+//			this.
+//		}
 		if (runesInInventory - runes >= 0){
 			runesInInventory = runesInInventory - runes;
 		}

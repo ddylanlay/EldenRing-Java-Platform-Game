@@ -74,7 +74,6 @@ public class HeavySkeletalSwordsman extends Actor {
         return RandomNumberGenerator.getRandomInt(35, 892);
     }
 
-}
 
 
     public WeaponItem getWeaponItem() {
