@@ -1,8 +1,9 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.PurchasableItem;
-import game.SellableItem;
+import game.trading.PurchasableItem;
+import game.trading.SellableItem;
+
 /**
  * A katana weapon that can be used to attack the enemy.
  * It deals 115 damage with 80% hit rate

@@ -18,7 +18,7 @@ import game.weaponabilities.SlamAttack;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GiantCrab extends Actor, Enemies implements SlamAttack {
+public class GiantCrab extends Actor implements SlamAttack, dropRunes {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public GiantCrab() {

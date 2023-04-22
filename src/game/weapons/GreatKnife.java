@@ -1,8 +1,8 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.PurchasableItem;
-import game.SellableItem;
+import game.trading.SellableItem;
+import game.trading.PurchasableItem;
 
 /**
  * A knife weapon that can be used to attack the enemy.
