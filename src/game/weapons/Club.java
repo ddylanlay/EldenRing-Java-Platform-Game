@@ -9,10 +9,12 @@ import game.SellableItem;
 /**
  * A simple weapon that can be used to attack the enemy.
  * It deals 103 damage with 80% hit rate
+ *
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
  *
+ * Modified by:
+ * @author Arosh Heenkenda
  */
 public class Club extends WeaponItem implements PurchasableItem, SellableItem {
 
