@@ -17,7 +17,7 @@ import game.weapons.Grossmesser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeavySkeletalSwordsman extends Actor implements dropRunes{
+public class HeavySkeletalSwordsman extends Actor{
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public HeavySkeletalSwordsman() {

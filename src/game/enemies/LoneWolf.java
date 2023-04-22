@@ -24,7 +24,7 @@ import java.util.Map;
  * Modified by:
  *
  */
-public class LoneWolf extends Actor implements dropRunes{
+public class LoneWolf extends Actor{
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public LoneWolf() {
