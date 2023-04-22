@@ -65,10 +65,6 @@ public class HeavySkeletalSwordsman extends Actor {
     }
 
 
-    @Override
-    public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
-    }
 
 
     public WeaponItem getWeaponItem() {
