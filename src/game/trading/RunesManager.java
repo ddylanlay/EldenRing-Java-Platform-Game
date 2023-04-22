@@ -20,12 +20,13 @@ public class RunesManager{
         }
         return instance;
     }
-    @Override
-    public void execute(Actor target, Actor actor, Runes runes){
+    public void transferRunes(Actor loser, Actor gainer){
+        loser.allowableActions(gainer, )
 
     }
 
-    public boolean addRunes(Actor actor, int runes){
+    public addRunesToList(Runes runes){
+        runesList.add(runes);
     }
 
 }

@@ -22,9 +22,9 @@ public class MerchantKale extends Actor {
 
     public ActionList getAllowableActions(Actor otherActor, String direction, GameMap map){
        ActionList actions = new ActionList();
-       actions.add(new PurchaseAction(otherActor, new Uchigatana()));
+       actions.add(new PurchaseAction(otherActor, (PurchasableItem) new Uchigatana()));
        actions.add(new PurchaseAction(otherActor, new Club()));
-       actions.add(new PurchaseAction(otherActor, new GreatKnife()));
+       actions.add(new PurchaseAction(otherActor, (PurchasableItem) new GreatKnife()));
 
        return actions;
 

@@ -83,5 +83,8 @@ public class Player extends Actor implements Resettable, Runes {
 		}
 		return runesInInventory;
 	}
+	public int getNumOfRunes(){
+		return runesInInventory;
+	}
 
 }

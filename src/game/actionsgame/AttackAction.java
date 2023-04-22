@@ -86,7 +86,9 @@ public class AttackAction extends Action {
 		if (!target.isConscious()) {
 			result += new DeathAction(actor).execute(target, map);
 			if (actor.getDisplayChar() == '@'){
-				runesManager.execute()
+				runesManager.transferRunes(target, actor){
+					target.
+				}
 			}
 		}
 

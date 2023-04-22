@@ -17,7 +17,9 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
     /**
      * Constructor
      */
+
     public Uchigatana(){ super("Uchigatana", ')', 115, "slashes", 80); }
+
 
     public int getPurchasePrice(){
         int purchasePrice = 5000;
