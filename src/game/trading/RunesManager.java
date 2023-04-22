@@ -21,7 +21,8 @@ public class RunesManager{
         return instance;
     }
     public void transferRunes(Actor loser, Actor gainer){
-        loser.allowableActions(gainer, )
+        loser.dropRunes()
+
 
     }
 
