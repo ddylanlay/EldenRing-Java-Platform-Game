@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.enemies.Enemies;
 
 /**
  * An action executed if an actor is killed.
@@ -41,7 +42,10 @@ public class DeathAction extends Action {
         for (Action drop : dropActions)
             drop.execute(target, map);
         if (target.getDisplayChar() != '@'){
-            (Enemies)
+            //CASTING USED HERE!
+            Enemies enemy = (Enemies) target;
+            enemy.dropRunes();
+            map.locationOf(target).addItem();
 
         }
         // remove actor

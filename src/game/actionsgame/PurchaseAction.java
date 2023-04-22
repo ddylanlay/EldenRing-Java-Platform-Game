@@ -20,7 +20,7 @@ public class PurchaseAction extends Action {
             return "Not enough runes to purchase weapon!";
         }
         else{
-            player.dropRunes(weapon.getPurchasePrice());
+            player.removeRunes(weapon.getPurchasePrice());
             return menuDescription(player);
         }
 
