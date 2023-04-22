@@ -32,7 +32,6 @@ public class DeathAction extends Action {
     @Override
     public String execute(Actor target, GameMap map) {
         String result = "";
-
         ActionList dropActions = new ActionList();
         // drop all items
         for (Item item : target.getItemInventory())
@@ -41,6 +40,10 @@ public class DeathAction extends Action {
             dropActions.add(weapon.getDropAction(target));
         for (Action drop : dropActions)
             drop.execute(target, map);
+        if (target.getDisplayChar() != '@'){
+            (Enemies)
+
+        }
         // remove actor
         map.removeActor(target);
         result += System.lineSeparator() + menuDescription(target);
