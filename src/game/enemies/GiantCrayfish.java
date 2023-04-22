@@ -1,30 +1,32 @@
 package game.enemies;
 
+
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 import game.utils.RandomNumberGenerator;
-import game.weapons.Grossmesser;
+import game.weaponabilities.SlamAttack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeavySkeletalSwordsman extends Actor {
+public class GiantCrayfish extends Actor implements SlamAttack {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-
-    public HeavySkeletalSwordsman() {
-        super("Heavy Skeletal Swordsman", 'q', 153);
+    private ArrayList<Actor> actorInRange = new ArrayList<>();
+    public GiantCrayfish() {
+        super("Giant Crayfish", 'R', 4803);
         this.behaviours.put(999, new WanderBehaviour());
-        addWeaponToInventory(new Grossmesser());
     }
 
     /**
@@ -40,7 +42,7 @@ public class HeavySkeletalSwordsman extends Actor {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
-            if (action != null)
+            if(action != null)
                 return action;
         }
         return new DoNothingAction();
@@ -57,7 +59,7 @@ public class HeavySkeletalSwordsman extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
@@ -68,17 +70,46 @@ public class HeavySkeletalSwordsman extends Actor {
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
-    }
-    public int dropRunes(){
-        return RandomNumberGenerator.getRandomInt(35, 892);
-    }
-
-}
+        return new IntrinsicWeapon(527, "pinches", 100);
 
 
-    public WeaponItem getWeaponItem() {
-        return new Grossmesser();
     }
+
+    public void SlamAttack(GameMap map) {
+        scanAround(map);
+        for(Actor actor: actorInRange){
+            if(RandomNumberGenerator.getRandomInt(100)<=100){
+                actor.hurt(527);
+                System.out.println(actor + " is slammed for 527 damage.");
+                if(actor.isConscious() == false){
+                    map.removeActor(actor);
+                    System.out.println(actor + " has been killed.");
+                }
+            }
+        }
+        actorInRange.clear();
+
+
+
+
+    }
+
+    public void scanAround(GameMap map){
+        Location crabLocation = map.locationOf(this);
+        int xLocation = crabLocation.x();
+        int yLocation = crabLocation.y();
+
+        for(int x = xLocation - 1; x <= xLocation + 1; x++){
+            for(int y = yLocation - 1; y <= yLocation + 1; y++){
+                Location tempLocation = new Location(map, x, y);
+                if(map.isAnActorAt(tempLocation)){
+                    if(xLocation != x && yLocation != y){
+                        actorInRange.add(map.getActorAt(tempLocation));
+                    }
+                }
+            }
+        }
+    }
+
 
 }

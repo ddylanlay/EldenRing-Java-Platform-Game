@@ -1,12 +1,14 @@
-package game.environments;
+package game.environments.west;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.enemies.GiantCrab;
+import game.environments.enemyfactory.CrustaceanFactory;
 import game.utils.RandomNumberGenerator;
 
-public class PuddleOfWater extends Ground {
+public class WestPuddleOfWater extends Ground implements CrustaceanFactory {
 
-    public PuddleOfWater(){
+    public WestPuddleOfWater(){
         super('~');
     }
     public void tick(Location spawnLocation){
@@ -17,5 +19,8 @@ public class PuddleOfWater extends Ground {
         }
 
 
+    }
+    public void spawnCrustacean(Location location){
+        location.addActor(new GiantCrab());
     }
 }

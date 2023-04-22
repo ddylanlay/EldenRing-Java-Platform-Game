@@ -7,7 +7,9 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -15,12 +17,13 @@ import game.behaviours.WanderBehaviour;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GiantCrab extends Actor implements SlamAttack {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-
+    private ArrayList<Actor> actorInRange = new ArrayList<>();
     public GiantCrab() {
         super("Giant Crab", 'c', 407);
         this.behaviours.put(999, new WanderBehaviour());
@@ -72,12 +75,40 @@ public class GiantCrab extends Actor implements SlamAttack {
 
     }
 
-    public IntrinsicWeapon SlamAttack() {
-        return new IntrinsicWeapon(97, "slam", 95);
+    public void SlamAttack(GameMap map) {
+        scanAround(map);
+        for(Actor actor: actorInRange){
+            if(RandomNumberGenerator.getRandomInt(100)<=90){
+                actor.hurt(97);
+                System.out.println(actor + " is slammed for 97 damage.");
+                if(actor.isConscious() == false){
+                    map.removeActor(actor);
+                    System.out.println(actor + " has been killed.");
+                }
+            }
+        }
+        actorInRange.clear();
+
+
+
+
     }
-    public int dropRunes()
-    {
-        return RandomNumberGenerator.getRandomInt(318, 4961);
+
+    public void scanAround(GameMap map){
+        Location crabLocation = map.locationOf(this);
+        int xLocation = crabLocation.x();
+        int yLocation = crabLocation.y();
+
+        for(int x = xLocation - 1; x <= xLocation + 1; x++){
+            for(int y = yLocation - 1; y <= yLocation + 1; y++){
+                Location tempLocation = new Location(map, x, y);
+                if(map.isAnActorAt(tempLocation)){
+                    if(xLocation != x && yLocation != y){
+                        actorInRange.add(map.getActorAt(tempLocation));
+                    }
+                }
+            }
+        }
     }
 
 }

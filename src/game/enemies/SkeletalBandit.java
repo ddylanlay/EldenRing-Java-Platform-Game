@@ -12,19 +12,20 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-import game.utils.RandomNumberGenerator;
+import game.weapons.Club;
 import game.weapons.Grossmesser;
+import game.weapons.Scimitar;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeavySkeletalSwordsman extends Actor {
+public class SkeletalBandit extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
-    public HeavySkeletalSwordsman() {
-        super("Heavy Skeletal Swordsman", 'q', 153);
+    public SkeletalBandit() {
+        super("Skeletal Bandit", 'b', 184);
         this.behaviours.put(999, new WanderBehaviour());
-        addWeaponToInventory(new Grossmesser());
+        addWeaponToInventory(new Scimitar());
     }
 
     /**
@@ -40,7 +41,7 @@ public class HeavySkeletalSwordsman extends Actor {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
-            if (action != null)
+            if(action != null)
                 return action;
         }
         return new DoNothingAction();
@@ -57,7 +58,7 @@ public class HeavySkeletalSwordsman extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
@@ -66,19 +67,11 @@ public class HeavySkeletalSwordsman extends Actor {
     }
 
 
-    @Override
-    public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
-    }
-    public int dropRunes(){
-        return RandomNumberGenerator.getRandomInt(35, 892);
+
+
+    public WeaponItem getWeaponItem(){
+        return new Scimitar();
     }
 
 }
 
-
-    public WeaponItem getWeaponItem() {
-        return new Grossmesser();
-    }
-
-}
