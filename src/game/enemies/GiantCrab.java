@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -110,5 +109,8 @@ public class GiantCrab extends Actor implements SlamAttack {
             }
         }
     }
-
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(318, 4961);
+    }
 }
