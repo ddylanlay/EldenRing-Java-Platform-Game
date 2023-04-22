@@ -1,16 +1,14 @@
-package game.environments;
+package game.environments.east;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.enemies.HeavySkeletalSwordsman;
 import game.enemies.SkeletalBandit;
+import game.environments.enemyfactory.SkeletonFactory;
 import game.utils.RandomNumberGenerator;
 
-import java.rmi.server.Skeleton;
+public class EastGraveyard extends Ground implements SkeletonFactory {
 
-public class WestGraveyard extends Ground implements SkeletonFactory {
-
-    public WestGraveyard(){
+    public EastGraveyard(){
         super('n');
     }
     public void tick(Location spawnLocation){
@@ -25,6 +23,8 @@ public class WestGraveyard extends Ground implements SkeletonFactory {
     }
     @Override
     public void spawnSkeleton(Location location){
-        location.addActor(new HeavySkeletalSwordsman());
+        location.addActor(new SkeletalBandit());
     }
+
+
 }
