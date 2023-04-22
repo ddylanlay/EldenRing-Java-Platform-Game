@@ -1,6 +1,5 @@
 package game.enemies;
 
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -8,22 +7,25 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-import game.weaponabilities.SlamAttack;
+import game.weapons.Club;
+import game.weapons.Grossmesser;
+import game.weapons.Scimitar;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GiantCrab extends Actor implements SlamAttack {
+public class SkeletalBandit extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
-    public GiantCrab() {
-        super("Giant Crab", 'c', 407);
+    public SkeletalBandit() {
+        super("Skeletal Bandit", 'b', 184);
         this.behaviours.put(999, new WanderBehaviour());
+        addWeaponToInventory(new Scimitar());
     }
 
     /**
@@ -68,14 +70,12 @@ public class GiantCrab extends Actor implements SlamAttack {
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
-
-
     }
 
-    public Weapon SlamAttack() {
-        return new IntrinsicWeapon(97, "slam", 95);
 
-
+    public WeaponItem getWeaponItem(){
+        return new Scimitar();
     }
 
 }
+

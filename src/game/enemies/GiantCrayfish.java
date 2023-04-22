@@ -18,11 +18,11 @@ import game.weaponabilities.SlamAttack;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GiantCrab extends Actor implements SlamAttack {
+public class GiantCrayfish extends Actor implements SlamAttack {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
-    public GiantCrab() {
-        super("Giant Crab", 'c', 407);
+    public GiantCrayfish() {
+        super("Giant Crayfish", 'c', 407);
         this.behaviours.put(999, new WanderBehaviour());
     }
 

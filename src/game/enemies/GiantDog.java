@@ -1,6 +1,5 @@
 package game.enemies;
 
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -13,16 +12,15 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-import game.weaponabilities.SlamAttack;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GiantCrab extends Actor implements SlamAttack {
+public class GiantDog extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
-    public GiantCrab() {
-        super("Giant Crab", 'c', 407);
+    public GiantDog() {
+        super("Giant Dog", 'G', 693);
         this.behaviours.put(999, new WanderBehaviour());
     }
 
@@ -67,7 +65,7 @@ public class GiantCrab extends Actor implements SlamAttack {
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
+        return new IntrinsicWeapon(314, "slam", 90);
 
 
     }
@@ -79,3 +77,5 @@ public class GiantCrab extends Actor implements SlamAttack {
     }
 
 }
+
+
