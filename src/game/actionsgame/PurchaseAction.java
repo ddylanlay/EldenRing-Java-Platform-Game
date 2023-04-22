@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Player;
 import game.trading.PurchasableItem;
-import game.trading.RunesManager;
 
 public class PurchaseAction extends Action {
 
@@ -21,7 +20,7 @@ public class PurchaseAction extends Action {
             return "Not enough runes to purchase weapon!";
         }
         else{
-            player.removeRunes(weapon.getPurchasePrice());
+            player.dropRunes(weapon.getPurchasePrice());
             return menuDescription(player);
         }
 

@@ -11,6 +11,7 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.utils.RandomNumberGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,5 +74,8 @@ public class LoneWolf extends Actor {
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
+    }
+    public int dropRunes(){
+        return RandomNumberGenerator.getRandomInt(55, 1470);
     }
 }

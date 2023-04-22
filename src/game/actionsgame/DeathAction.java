@@ -41,7 +41,7 @@ public class DeathAction extends Action {
         for (Action drop : dropActions)
             drop.execute(target, map);
         if (target.getDisplayChar() != '@'){
-            runes.
+
 
         }
         // remove actor

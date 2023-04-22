@@ -77,7 +77,7 @@ public class Player extends Actor implements Resettable, Runes {
 
 	// may need to make a boolean method to check for invalid purchase
 
-	public int removeRunes(int runes){
+	public int dropRunes(int runes){
 		if (runesInInventory - runes >= 0){
 			runesInInventory = runesInInventory - runes;
 		}

@@ -12,12 +12,13 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GiantCrab extends Actor implements SlamAttack {
+public class GiantCrab extends Actor, Enemies implements SlamAttack {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public GiantCrab() {
@@ -73,8 +74,10 @@ public class GiantCrab extends Actor implements SlamAttack {
 
     public IntrinsicWeapon SlamAttack() {
         return new IntrinsicWeapon(97, "slam", 95);
-
-
+    }
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(318, 4961);
     }
 
 }

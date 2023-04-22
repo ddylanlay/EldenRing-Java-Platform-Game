@@ -11,6 +11,7 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 
 import java.util.HashMap;
@@ -68,6 +69,10 @@ public class HeavySkeletalSwordsman extends Actor{
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
     }
+    public int dropRunes(){
+        return RandomNumberGenerator.getRandomInt(35, 892);
+    }
+
 }
 
 
