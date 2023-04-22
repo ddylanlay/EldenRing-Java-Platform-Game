@@ -1,4 +1,4 @@
-package game;
+package game.trading;
 
 import edu.monash.fit2099.engine.actors.Actor;
 
@@ -21,9 +21,8 @@ public class RunesManager{
         return instance;
     }
     @Override
-    public void exchangeRunes(Runes runes){
-//        runes.addRunes(runesInInventory);
-//        runes.
+    public void execute(Actor target, Actor actor, Runes runes){
+
     }
 
     public boolean addRunes(Actor actor, int runes){

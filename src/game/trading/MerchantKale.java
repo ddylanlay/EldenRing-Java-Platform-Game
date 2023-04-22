@@ -1,4 +1,4 @@
-package game;
+package game.trading;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -13,7 +13,7 @@ import game.weapons.Uchigatana;
 
 public class MerchantKale extends Actor {
     public MerchantKale(String name, char displayChar, int hitPoints){
-        super(name, displayChar, hitPoints);
+        super("MerchantKale", 'K', 1);
     }
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display)
     {

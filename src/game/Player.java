@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.combatclass.CombatClass;
+import game.trading.Runes;
 import game.weapons.Club;
 
 /**
@@ -19,7 +20,7 @@ import game.weapons.Club;
  * Modified by:
  * @author Arosh Heenkenda
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Actor implements Resettable, Runes {
 
 	private final Menu menu = new Menu();
 	int runesInInventory = 0;
@@ -35,7 +36,7 @@ public class Player extends Actor implements Resettable {
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
-		super(name, displayChar, hitPoints);
+		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
 	}
@@ -55,6 +56,7 @@ public class Player extends Actor implements Resettable {
 	public void reset() {}
 
 
+
 	/**
 	 * Getter for combatClass.
 	 *
@@ -68,4 +70,18 @@ public class Player extends Actor implements Resettable {
 	 * @param combatClass a CombatClass object.
 	 */
 	public void setCombatClass(CombatClass combatClass) { this.combatClass = combatClass; }
+	public int addRunes(int runes){
+		runesInInventory = runesInInventory + runes;
+		return runesInInventory;
+	}
+
+	// may need to make a boolean method to check for invalid purchase
+
+	public int removeRunes(int runes){
+		if (runesInInventory - runes >= 0){
+			runesInInventory = runesInInventory - runes;
+		}
+		return runesInInventory;
+	}
+
 }

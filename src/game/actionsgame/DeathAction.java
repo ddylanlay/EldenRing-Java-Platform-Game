@@ -32,7 +32,6 @@ public class DeathAction extends Action {
     @Override
     public String execute(Actor target, GameMap map) {
         String result = "";
-
         ActionList dropActions = new ActionList();
         // drop all items
         for (Item item : target.getItemInventory())
