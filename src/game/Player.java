@@ -71,6 +71,12 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	 * @param combatClass a CombatClass object.
 	 */
 	public void setCombatClass(CombatClass combatClass) { this.combatClass = combatClass; }
+
+	/**
+	 *
+	 * @param runes
+	 * @return
+	 */
 	public int addRunes(int runes){
 		runesInInventory = runesInInventory + runes;
 		return runesInInventory;
@@ -78,12 +84,22 @@ public class Player extends Actor implements Resettable, RunesDoing {
 
 	// may need to make a boolean method to check for invalid purchase
 
+	/**
+	 *
+	 * @param runes
+	 * @return
+	 */
 	public int removeRunes(int runes){
 		if (runesInInventory - runes >= 0){
 			runesInInventory = runesInInventory - runes;
 		}
 		return runesInInventory;
 	}
+
+	/**
+	 *
+	 * @return
+	 */
 	public int getNumOfRunes(){
 		return runesInInventory;
 	}
