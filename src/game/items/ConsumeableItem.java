@@ -28,4 +28,6 @@ public abstract class ConsumeableItem extends Item {
     }
 
     abstract void consume(Actor actor);
+
+    abstract void resetConsumeable();
 }

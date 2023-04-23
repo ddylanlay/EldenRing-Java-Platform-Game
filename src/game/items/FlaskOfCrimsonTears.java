@@ -22,20 +22,17 @@ public class FlaskOfCrimsonTears extends ConsumeableItem {
     /**
      *
      */
+    final int HEALTH_INCREASE = 250;
+
+    /**
+     *
+     */
     private int currentUses = MAX_USES;
 
     /**
      * Constructor.
      */
     public FlaskOfCrimsonTears() { super("Flask of Crimson Tears", 'c', false); }
-
-    /**
-     *
-     * @return
-     */
-    public int getCurrentUses() {
-        return currentUses;
-    }
 
     /**
      *
@@ -68,6 +65,24 @@ public class FlaskOfCrimsonTears extends ConsumeableItem {
      */
     @Override
     void consume(Actor actor) {
+
+        if (currentUses == 0){
+
+            System.out.println(this + " is empty, cannot be used until it is refilled.");
+        }
+        else {
+
+            System.out.println(this + " replenished " + actor.toString() + " by " + HEALTH_INCREASE + " health.");
+            actor.heal(HEALTH_INCREASE);
+            currentUses -= 1;
+        }
+    }
+
+    /**
+     *
+     */
+    @Override
+    void resetConsumeable() {
 
     }
 }
