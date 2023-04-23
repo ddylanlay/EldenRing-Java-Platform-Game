@@ -20,12 +20,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GiantCrab extends Actor implements SlamAttack {
+public class GiantCrab extends Enemies implements SlamAttack {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     public GiantCrab() {
         super("Giant Crab", 'c', 407);
         this.behaviours.put(999, new WanderBehaviour());
+
     }
 
     /**
@@ -110,8 +111,9 @@ public class GiantCrab extends Actor implements SlamAttack {
         }
     }
 
-    public int dropRunes()
-    {
-        return RandomNumberGenerator.getRandomInt(318, 4961);
-    }
+//    public int dropRunes()
+//    {
+//        return RandomNumberGenerator.getRandomInt(318, 4961);
+//    }
+
 }

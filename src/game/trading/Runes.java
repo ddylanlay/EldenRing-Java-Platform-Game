@@ -1,7 +1,6 @@
 package game.trading;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.*;
+import edu.monash.fit2099.engine.items.Item;
 
 public class Runes extends Item {
 
@@ -11,16 +10,7 @@ public class Runes extends Item {
         super("Runes", '$', true);
         this.value = value;
     }
-    public PickUpAction getPickUpAction(Actor actor) {
-        if(portable)
-            return new PickUpItemAction(this);
-        return null;
-    }
-    public DropAction getDropAction(Actor actor) {
-        if(portable)
-            return new DropItemAction(this);
-        return null;
-    }
+
 
 
 }

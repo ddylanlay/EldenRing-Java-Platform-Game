@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.Player;
 import game.enemies.Enemies;
 import game.trading.RunesManager;
 
@@ -22,6 +23,7 @@ public class AttackAction extends Action {
 	 * The Actor that is to be attacked
 	 */
 	private Actor target;
+	private Enemies enemyTarget;
 	/**
 	 * The direction of incoming attack.
 	 */
@@ -36,7 +38,7 @@ public class AttackAction extends Action {
 	 * Weapon used for the attack
 	 */
 	private Weapon weapon;
-	RunesManager runesManager;
+	public RunesManager runesManager;
 
 	/**
 	 * Constructor.
@@ -85,10 +87,18 @@ public class AttackAction extends Action {
 		target.hurt(damage);
 		if (!target.isConscious()) {
 			result += new DeathAction(actor).execute(target, map);
-			if (actor.getDisplayChar() == '@'){
+			if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@'){
+				//CASTING USED!
+				Player player = (Player) actor;
 				Enemies enemy = (Enemies) target;
-				enemy.dropRunes();
+				int numOfRunes = RunesManager.transferRunes(enemy, player);
+				String string = target + " drops " + numOfRunes + " runes";
+
+				result += System.lineSeparator() + string;
+				System.out.println(player.getNumOfRunes());
+				return result;
 				}
+
 			}
 
 		return result;

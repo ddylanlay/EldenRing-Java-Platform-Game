@@ -34,17 +34,17 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
         // drop all items
-        if (target.getDisplayChar() != '@') {
             for (Item item : target.getItemInventory())
                 dropActions.add(item.getDropAction(target));
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
-        }
 
-        // remove actor
-        map.removeActor(target);
+        // remove actor if not player
+        if (target.getDisplayChar() != '@') {
+            map.removeActor(target);
+        }
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }
