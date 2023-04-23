@@ -109,6 +109,7 @@ public class GiantCrab extends Actor implements SlamAttack {
             }
         }
     }
+
     public int dropRunes()
     {
         return RandomNumberGenerator.getRandomInt(318, 4961);

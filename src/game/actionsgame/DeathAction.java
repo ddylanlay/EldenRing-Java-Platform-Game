@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.enemies.Enemies;
 
 /**
  * An action executed if an actor is killed.
@@ -35,19 +34,15 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
         // drop all items
-        for (Item item : target.getItemInventory())
-            dropActions.add(item.getDropAction(target));
-        for (WeaponItem weapon : target.getWeaponInventory())
-            dropActions.add(weapon.getDropAction(target));
-        for (Action drop : dropActions)
-            drop.execute(target, map);
-        if (target.getDisplayChar() != '@'){
-            //CASTING USED HERE!
-            Enemies enemy = (Enemies) target;
-            enemy.dropRunes();
-            map.locationOf(target).addItem();
-
+        if (target.getDisplayChar() != '@') {
+            for (Item item : target.getItemInventory())
+                dropActions.add(item.getDropAction(target));
+            for (WeaponItem weapon : target.getWeaponInventory())
+                dropActions.add(weapon.getDropAction(target));
+            for (Action drop : dropActions)
+                drop.execute(target, map);
         }
+
         // remove actor
         map.removeActor(target);
         result += System.lineSeparator() + menuDescription(target);
