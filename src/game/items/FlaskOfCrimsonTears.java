@@ -2,6 +2,8 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.*;
+import game.Resettable;
+import game.actionsgame.HealAction;
 
 /**
  * Flask of Crimson Tears, allows the Player to gain 250 health points.
@@ -12,7 +14,7 @@ import edu.monash.fit2099.engine.items.*;
  * Modified by:
  *
  */
-public class FlaskOfCrimsonTears extends ConsumeableItem {
+public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
 
     /**
      *
@@ -64,7 +66,7 @@ public class FlaskOfCrimsonTears extends ConsumeableItem {
      * @param actor
      */
     @Override
-    void consume(Actor actor) {
+    public HealAction consume(Actor actor) {
 
         if (currentUses == 0){
 
@@ -72,7 +74,7 @@ public class FlaskOfCrimsonTears extends ConsumeableItem {
         }
         else {
 
-            System.out.println(this + " replenished " + actor.toString() + " by " + HEALTH_INCREASE + " health.");
+
             actor.heal(HEALTH_INCREASE);
             currentUses -= 1;
         }
@@ -82,7 +84,7 @@ public class FlaskOfCrimsonTears extends ConsumeableItem {
      *
      */
     @Override
-    void resetConsumeable() {
+    public void reset() {
 
     }
 }
