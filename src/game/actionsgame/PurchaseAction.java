@@ -15,7 +15,8 @@ public class PurchaseAction extends Action {
         this.actor = target;
         this.weapon = weapon;
     }
-    public String execute(Player player, GameMap map){
+
+    public String TradeAction(Player player){
         if(player.getNumOfRunes() < weapon.getPurchasePrice()){
             return "Not enough runes to purchase weapon!";
         }
@@ -24,6 +25,11 @@ public class PurchaseAction extends Action {
             return menuDescription(player);
         }
 
+    }
+
+    @Override
+    public String execute(Actor actor, GameMap map) {
+        return null;
     }
 
     public String menuDescription(Actor actor){

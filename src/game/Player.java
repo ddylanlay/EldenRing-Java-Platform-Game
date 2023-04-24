@@ -4,8 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.combatclass.CombatClass;
 import game.trading.RunesDoing;
 import game.weapons.Club;
@@ -48,6 +48,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
+		playerDescription();
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
@@ -72,28 +73,18 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	 */
 	public void setCombatClass(CombatClass combatClass) { this.combatClass = combatClass; }
 
-	/**
-	 *
-	 * @param runes
-	 * @return
-	 */
-	public int addRunes(int runes){
+	public void playerDescription(){
+		System.out.println(name + " (" + hitPoints + "/" + maxHitPoints + "), runes: " + getNumOfRunes());
+	}
+
+	public void addRunes(int runes){
 		runesInInventory = runesInInventory + runes;
-		return runesInInventory;
 	}
 
 	// may need to make a boolean method to check for invalid purchase
 
-	/**
-	 *
-	 * @param runes
-	 * @return
-	 */
-	public int removeRunes(int runes){
-		if (runesInInventory - runes >= 0){
-			runesInInventory = runesInInventory - runes;
-		}
-		return runesInInventory;
+	public void removeRunes(int runes){
+		runesInInventory = runesInInventory - runes;
 	}
 
 	/**
@@ -103,5 +94,10 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	public int getNumOfRunes(){
 		return runesInInventory;
 	}
+
+
+
+
+
 
 }
