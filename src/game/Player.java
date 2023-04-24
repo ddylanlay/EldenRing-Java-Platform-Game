@@ -86,6 +86,11 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	public void removeRunes(int runes){
 		runesInInventory = runesInInventory - runes;
 	}
+
+	/**
+	 *
+	 * @return
+	 */
 	public int getNumOfRunes(){
 		return runesInInventory;
 	}
