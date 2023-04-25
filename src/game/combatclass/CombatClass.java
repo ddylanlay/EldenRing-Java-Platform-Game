@@ -17,7 +17,7 @@ import game.actionsgame.SelectCombatClassAction;
  *
  */
 public class CombatClass extends Actor {
-    private final CombatClassMenu menu = new CombatClassMenu();
+    private final CombatClassMenu combatClassMenu = new CombatClassMenu();
 
 //    /**
 //     * The max health for a given combat class.
@@ -48,21 +48,24 @@ public class CombatClass extends Actor {
         return "the One";
     }
 
-    public ActionList allowableActions(){
-        ActionList actions = new ActionList();
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = super.allowableActions(otherActor, direction, map);
         actions.add(new SelectCombatClassAction(new Bandit()));
         actions.add(new SelectCombatClassAction(new Samurai()));
         actions.add(new SelectCombatClassAction(new Wretch()));
         return actions;
-
     }
+
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
+        System.out.println("Select your role:");
         // return/print the console menu
-        return menu.showMenu(this, actions, display);
+        return combatClassMenu.showMenu(this, actions, display);
     }
 
 //    /**

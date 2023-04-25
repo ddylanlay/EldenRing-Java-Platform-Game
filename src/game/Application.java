@@ -67,6 +67,7 @@ public class Application {
 		}
 
 		// Implement combat class here
+//		CombatClass combatClass = new CombatClass("Tester", '@', 300);
 
 		gameMap.at(23, 17).addActor(new LoneWolf());
 		//tester below
