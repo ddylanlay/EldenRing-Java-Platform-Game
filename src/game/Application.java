@@ -1,5 +1,6 @@
 package game;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
@@ -83,7 +84,8 @@ public class Application {
 		Player player = new Player("Tarnished", '@', 300);
 
 		//Select Combat Class
-
+		Action classAction = new CombatClassMenu(player).showMenu();
+		System.out.println(classAction.execute(player, gameMap));
 
 		world.addPlayer(player, gameMap.at(36, 10));
 		world.run();

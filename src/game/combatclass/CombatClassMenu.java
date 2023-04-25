@@ -46,7 +46,7 @@ public class CombatClassMenu {
         for (SelectCombatClassAction action : actions) {
             char c = action.getCombatClass().getDisplayChar();
             keyToActionMap.put(c, action);
-            display.println(c + ": " + action.menuDescription(player));
+            display.println(c + ": to choose the " + action.getCombatClass().getClassName() + " class.");
         }
 
         char key;
