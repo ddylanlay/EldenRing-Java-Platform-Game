@@ -6,27 +6,40 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Player;
 import game.actionsgame.PurchaseAction;
+import game.actionsgame.SellAction;
 import game.weapons.Club;
 import game.weapons.GreatKnife;
 import game.weapons.Uchigatana;
+import game.weapons.WeaponType;
+
+import java.util.List;
 
 public class MerchantKale extends Actor {
-    public MerchantKale(String name, char displayChar, int hitPoints){
-        super("MerchantKale", 'K', 1);
+    public MerchantKale(){
+        super("MerchantKale", 'K', 1000);
     }
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display)
     {
         return new DoNothingAction();
     }
 
-    public ActionList getAllowableActions(Actor otherActor, String direction, GameMap map){
-       ActionList actions = new ActionList();
-       actions.add(new PurchaseAction(otherActor, new Uchigatana()));
-       actions.add(new PurchaseAction(otherActor, new Club()));
-       actions.add(new PurchaseAction(otherActor, new GreatKnife()));
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        List<WeaponItem> weaponInventory = ((Player) otherActor).getWeaponInventory();
+        actions.add(new PurchaseAction(otherActor, new Uchigatana()));
+        actions.add(new PurchaseAction(otherActor, new Club()));
+        actions.add(new PurchaseAction(otherActor, new GreatKnife()));
+        for (WeaponItem weapon : weaponInventory) {
+            if (weapon.hasCapability(WeaponType.SELLABLE)) {
+                actions.add(new SellAction(otherActor, weapon));
+            }
+        }
 
-       return actions;
-
+        return actions;
     }
+
 }

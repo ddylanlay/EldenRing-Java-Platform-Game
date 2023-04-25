@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.combatclass.CombatClass;
+import game.items.FlaskOfCrimsonTears;
 import game.trading.RunesDoing;
 import game.weapons.Club;
 
@@ -23,10 +24,12 @@ import game.weapons.Club;
 public class Player extends Actor implements Resettable, RunesDoing {
 
 	private final Menu menu = new Menu();
-	int runesInInventory = 0;
-
+	int runesInInventory = 99999;
 	private CombatClass combatClass;
 
+
+	//every time a new player is made, a new instance of flask of crimson tears comes with it
+	public FlaskOfCrimsonTears bottle = new FlaskOfCrimsonTears();
 
 	/**
 	 * Constructor.
@@ -40,6 +43,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
+		this.addItemToInventory(bottle);
 	}
 
 	@Override
@@ -81,7 +85,6 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		runesInInventory = runesInInventory + runes;
 	}
 
-	// may need to make a boolean method to check for invalid purchase
 
 	public void removeRunes(int runes){
 		runesInInventory = runesInInventory - runes;

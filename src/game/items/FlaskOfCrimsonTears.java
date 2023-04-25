@@ -1,9 +1,11 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.*;
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import game.Resettable;
 import game.actionsgame.HealAction;
+
+import java.util.List;
 
 /**
  * Flask of Crimson Tears, allows the Player to gain 250 health points.
@@ -19,65 +21,52 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
     /**
      *
      */
-    final int MAX_USES = 2;
-
+    public final int MAX_USES = 2;
     /**
      *
      */
-    final int HEALTH_INCREASE = 250;
-
-    /**
-     *
-     */
-    private int currentUses = MAX_USES;
+    public int remainingUses = MAX_USES;
 
     /**
      * Constructor.
      */
-    public FlaskOfCrimsonTears() { super("Flask of Crimson Tears", 'c', false); }
+    public FlaskOfCrimsonTears() {
+        super("Flask of Crimson Tears", 'c', false);
 
-    /**
-     *
-     * @param actor
-     * @return
-     */
-    @Override
-    public PickUpAction getPickUpAction(Actor actor) {
-        if(portable)
-            return new PickUpItemAction(this);
-        return null;
     }
 
-    /**
-     *
-     * @param actor
-     * @return
-     */
-    @Override
-    public DropAction getDropAction(Actor actor) {
-        if(portable)
-            return new DropItemAction(this);
-        return null;
+//    @Override
+//    public HealAction consume(Actor actor) {
+//
+//        if (currentUses == 0){
+//
+//            System.out.println(this + " (" + remainingUses + "/" + MAX_USES + ") is empty.");
+//        }
+//        else {
+//
+//
+//            actor.heal(HEALTH_INCREASE);
+//            currentUses -= 1;
+//        }
+//    }
+    public void consume(){
+        if (remainingUses != 0) {
+            remainingUses -= 1;
+        }
+        else{
+            System.out.println(this + " (" + remainingUses + "/" + MAX_USES + ") is empty. It cannot be used until it is refilled.");
+        }
+
     }
 
+    public String toString() {
+        return super.toString();
+    }
+    public List<Action> getAllowableActions() {
+        ActionList actions = new ActionList();
+        actions.add(new HealAction());
 
-    /**
-     *
-     * @param actor
-     */
-    @Override
-    public HealAction consume(Actor actor) {
-
-        if (currentUses == 0){
-
-            System.out.println(this + " is empty, cannot be used until it is refilled.");
-        }
-        else {
-
-
-            actor.heal(HEALTH_INCREASE);
-            currentUses -= 1;
-        }
+        return actions.getUnmodifiableActionList();
     }
 
     /**
@@ -87,4 +76,6 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
     public void reset() {
 
     }
+
+
 }

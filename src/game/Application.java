@@ -4,11 +4,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.enemies.GiantCrab;
 import game.enemies.LoneWolf;
 import game.environments.Dirt;
 import game.environments.Floor;
 import game.environments.Wall;
+import game.trading.MerchantKale;
 
 import java.util.Arrays;
 import java.util.List;
@@ -67,14 +67,12 @@ public class Application {
 		}
 		gameMap.at(23, 17).addActor(new LoneWolf());
 		//tester below
-		gameMap.at(36, 11).addActor(new GiantCrab());
-		gameMap.at(35, 10).addActor(new LoneWolf());
-
+//		gameMap.at(35, 10).addActor(new LoneWolf());
+		gameMap.at(37,10).addActor(new MerchantKale());
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300);
 		world.addPlayer(player, gameMap.at(36, 10));
-
 		world.run();
 	}
 }

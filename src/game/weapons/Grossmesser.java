@@ -1,7 +1,10 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.trading.SellableItem;
+
+import java.util.List;
 
 /**
  * A curved sword that both enemies and player can use to attack.
@@ -19,9 +22,16 @@ public class Grossmesser extends WeaponItem implements SellableItem {
      */
     public Grossmesser(){
         super("Grossmesser", '?', 115, "slashes", 85);
+
+
     }
     public int getSellingPrice(){
         int sellingPrice = 100;
         return sellingPrice;
+    }
+    @Override
+    public List<Action> getAllowableActions() {
+        this.addCapability(WeaponType.SELLABLE);
+        return super.getAllowableActions();
     }
 }
