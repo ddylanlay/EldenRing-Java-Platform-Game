@@ -1,12 +1,6 @@
 package game.combatclass;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actionsgame.SelectCombatClassAction;
 
 /**
  * An abstract combat class used to initialise concrete combat classes
@@ -15,6 +9,7 @@ import game.actionsgame.SelectCombatClassAction;
  * @author Arosh Heenkenda
  *
  * Modified by:
+ * @author Dylan Lay
  *
  */
 public abstract class CombatClass {
@@ -31,12 +26,12 @@ public abstract class CombatClass {
     private WeaponItem classWeapon;
 
     /**
-     *
+     * The class name of the combat class.
      */
     private String className;
 
     /**
-     *
+     * The display character for the combat class.
      */
     private char displayChar;
 
@@ -56,14 +51,39 @@ public abstract class CombatClass {
         this.displayChar = _displayChar;
     }
 
+    /**
+     * Getter for the max hit points.
+     *
+     * @return integer representing max hit points.
+     */
     public int getMaxHitPoints() { return maxHitPoints; }
 
+    /**
+     * Getter for the class weapon.
+     *
+     * @return WeaponItem instance, weapon of the associated class.
+     */
     public WeaponItem getClassWeapon() { return classWeapon; }
 
+    /**
+     * Getter for class name.
+     *
+     * @return String representing the class name.
+     */
     public String getClassName() { return className; }
 
+    /**
+     * Getter for the display character.
+     *
+     * @return Char representing character name.
+     */
     public char getDisplayChar() { return displayChar; }
 
+    /**
+     * To String method
+     *
+     * @return A formatted string.
+     */
     @Override
     public String toString(){ return className; }
 

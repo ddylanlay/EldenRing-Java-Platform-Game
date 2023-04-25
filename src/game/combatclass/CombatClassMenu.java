@@ -1,20 +1,27 @@
 package game.combatclass;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.displays.Menu;
 import game.Player;
 import game.actionsgame.SelectCombatClassAction;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 
-
+/**
+ * A class that allows selection of the player combat class.
+ *
+ * Created by:
+ * @author Dylan Lay
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
+ */
 public class CombatClassMenu {
 
+    /**
+     * Array List of all the combat classes.
+     */
     private ArrayList<CombatClass> classes = new ArrayList<CombatClass>() {
 
         {
@@ -24,13 +31,23 @@ public class CombatClassMenu {
         }
     };
 
+    /**
+     * The player.
+     */
     private Player player;
 
-    public CombatClassMenu(Player _player){
-        this.player = _player;
-    }
+    /**
+     * Constructor
+     *
+     * @param _player the player.
+     */
+    public CombatClassMenu(Player _player){ this.player = _player; }
 
-
+    /**
+     * Display the menu and allow the player to select their combat class.
+     *
+     * @return Action that will allow player to select combat class and give the correct stats.
+     */
     public Action showMenu(){
 
         Display display = new Display();
