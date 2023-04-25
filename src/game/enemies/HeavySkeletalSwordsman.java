@@ -18,7 +18,7 @@ import game.weapons.Grossmesser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeavySkeletalSwordsman extends Actor {
+public class HeavySkeletalSwordsman extends Enemies {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public HeavySkeletalSwordsman() {
@@ -73,7 +73,6 @@ public class HeavySkeletalSwordsman extends Actor {
     public int dropRunes(){
         return RandomNumberGenerator.getRandomInt(35, 892);
     }
-
 
 
 

@@ -1,9 +1,7 @@
 package game.trading;
 
 public interface RunesDoing {
-    int addRunes(int runes);
-    int removeRunes(int runes);
-//    void transferRunes(Actor target);
+    void addRunes(int runes);
 
-
+    void removeRunes(int runes);
 }
