@@ -3,6 +3,7 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.trading.PurchasableItem;
 
@@ -21,6 +22,7 @@ public class PurchaseAction extends Action {
         }
         else{
             player.removeRunes(weapon.getPurchasePrice());
+            player.addWeaponToInventory((WeaponItem) weapon);
             return menuDescription(player);
         }
 
