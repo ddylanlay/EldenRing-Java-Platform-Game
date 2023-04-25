@@ -6,6 +6,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actionsgame.AttackAction;
 
+/**
+ * @author Jamie Tran
+ */
 public class AttackBehaviour extends Action implements Behaviour{
     private Actor target;
     public AttackBehaviour(Actor target){

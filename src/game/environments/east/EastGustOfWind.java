@@ -6,6 +6,9 @@ import game.enemies.GiantDog;
 import game.environments.enemyfactory.CanisFactory;
 import game.utils.RandomNumberGenerator;
 
+/**
+ * @author Jamie Tran
+ */
 public class EastGustOfWind extends Ground implements CanisFactory {
 
     public EastGustOfWind(){

@@ -6,6 +6,9 @@ import game.enemies.HeavySkeletalSwordsman;
 import game.environments.enemyfactory.SkeletonFactory;
 import game.utils.RandomNumberGenerator;
 
+/**
+ * @author Jamie Tran
+ */
 public class WestGraveyard extends Ground implements SkeletonFactory {
 
     public WestGraveyard(){

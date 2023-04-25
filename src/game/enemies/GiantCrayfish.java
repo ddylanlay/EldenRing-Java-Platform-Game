@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Jamie Tran
+ */
 public class GiantCrayfish extends Actor implements SlamAttack {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();

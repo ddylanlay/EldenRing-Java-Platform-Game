@@ -6,7 +6,9 @@ import game.enemies.SkeletalBandit;
 import game.environments.enemyfactory.SkeletonFactory;
 import game.utils.RandomNumberGenerator;
 
-
+/**
+ * @author Jamie Tran
+ */
 public class EastGraveyard extends Ground implements SkeletonFactory {
 
     public EastGraveyard(){

@@ -6,6 +6,9 @@ import game.enemies.GiantCrab;
 import game.environments.enemyfactory.CrustaceanFactory;
 import game.utils.RandomNumberGenerator;
 
+/**
+ * @author Jamie Tran
+ */
 public class WestPuddleOfWater extends Ground implements CrustaceanFactory {
 
     public WestPuddleOfWater(){

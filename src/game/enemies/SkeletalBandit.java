@@ -19,6 +19,9 @@ import game.weapons.Scimitar;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Jamie Tran
+ */
 public class SkeletalBandit extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 

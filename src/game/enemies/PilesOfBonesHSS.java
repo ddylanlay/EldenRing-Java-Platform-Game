@@ -14,6 +14,9 @@ import game.behaviours.Behaviour;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Jamie Tran
+ */
 public class PilesOfBonesHSS extends Enemies{
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private int Counter = 0;

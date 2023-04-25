@@ -6,6 +6,9 @@ import game.enemies.GiantCrayfish;
 import game.environments.enemyfactory.CrustaceanFactory;
 import game.utils.RandomNumberGenerator;
 
+/**
+ * @author Jamie Tran
+ */
 public class EastPuddleOfWater extends Ground implements CrustaceanFactory {
 
     public EastPuddleOfWater(){

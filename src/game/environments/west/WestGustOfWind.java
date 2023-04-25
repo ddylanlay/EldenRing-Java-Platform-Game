@@ -6,6 +6,9 @@ import game.enemies.LoneWolf;
 import game.environments.enemyfactory.CanisFactory;
 import game.utils.RandomNumberGenerator;
 
+/**
+ * @author Jamie Tran
+ */
 public class WestGustOfWind extends Ground implements CanisFactory {
 
     public WestGustOfWind(){
