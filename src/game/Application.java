@@ -1,9 +1,15 @@
 package game;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actionsgame.SelectCombatClassAction;
+import game.combatclass.Bandit;
+import game.combatclass.CombatClassMenu;
+import game.combatclass.Samurai;
+import game.combatclass.Wretch;
 import game.enemies.LoneWolf;
 import game.environments.Dirt;
 import game.environments.Floor;
@@ -66,8 +72,7 @@ public class Application {
 			}
 		}
 
-		// Implement combat class here
-//		CombatClass combatClass = new CombatClass("Tester", '@', 300);
+
 
 		gameMap.at(23, 17).addActor(new LoneWolf());
 		//tester below
@@ -76,6 +81,18 @@ public class Application {
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300);
+
+		ActionList combatClassActionList = new ActionList();
+		combatClassActionList.add(new SelectCombatClassAction(new Bandit()));
+		combatClassActionList.add(new SelectCombatClassAction(new Samurai()));
+		combatClassActionList.add(new SelectCombatClassAction(new Wretch()));
+
+		// Implement combat class here
+//		CombatClass combatClass = new CombatClass("Tester", '@', 300);
+		CombatClassMenu classSelect = new CombatClassMenu();
+		classSelect.showMenu(combatClassActionList, new Display());
+
+
 		world.addPlayer(player, gameMap.at(36, 10));
 		world.run();
 	}

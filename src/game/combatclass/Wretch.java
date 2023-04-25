@@ -18,11 +18,7 @@ public class Wretch extends CombatClass {
 //     */
 //    public Wretch(){ super(414, new Club()); }
     public Wretch(){
-        super("Wretch", 'w', 414);
-        this.addWeaponToInventory(new Club());
-    }
-    public String toString(){
-        return name;
+        super("Wretch", 'w', 414, new Club());
     }
 
 }

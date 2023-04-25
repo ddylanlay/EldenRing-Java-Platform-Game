@@ -18,10 +18,7 @@ public class Samurai extends CombatClass {
      */
 //    public Samurai(){ super(455, new Uchigatana()); }
     public Samurai(){
-        super("Samurai", 's', 455);
-        this.addWeaponToInventory(new Uchigatana());
+        super("Samurai", 's', 455, new Uchigatana());
     }
-    public String toString(){
-        return name;
-    }
+
 }
