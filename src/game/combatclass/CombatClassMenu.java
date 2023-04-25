@@ -59,6 +59,7 @@ public class CombatClassMenu {
             actions.add(new SelectCombatClassAction(combatclass, player));
         }
 
+        display.println("Select your role: ");
         // Show with the actions with hotkeys first;
         for (SelectCombatClassAction action : actions) {
             char c = action.getCombatClass().getDisplayChar();
