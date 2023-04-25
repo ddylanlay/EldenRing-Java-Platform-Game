@@ -1,17 +1,12 @@
 package game.combatclass;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.displays.Display;
-import game.actionsgame.SelectCombatClassAction;
-
-import java.util.Comparator;
-import java.util.HashMap;
-
+import java.util.ArrayList;
 
 
 public class CombatClassMenu {
 
+    ArrayList<CombatClass> classes = new ArrayList<>();
+    classes.add(new void Bandit());
 
 
 

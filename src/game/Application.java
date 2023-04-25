@@ -82,15 +82,7 @@ public class Application {
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300);
 
-		ActionList combatClassActionList = new ActionList();
-		combatClassActionList.add(new SelectCombatClassAction(new Bandit()));
-		combatClassActionList.add(new SelectCombatClassAction(new Samurai()));
-		combatClassActionList.add(new SelectCombatClassAction(new Wretch()));
-
-		// Implement combat class here
-//		CombatClass combatClass = new CombatClass("Tester", '@', 300);
-		CombatClassMenu classSelect = new CombatClassMenu();
-		classSelect.showMenu(combatClassActionList, new Display());
+		//Select Combat Class
 
 
 		world.addPlayer(player, gameMap.at(36, 10));
