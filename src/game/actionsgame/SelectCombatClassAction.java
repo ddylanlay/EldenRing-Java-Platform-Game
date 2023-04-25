@@ -9,8 +9,10 @@ import game.combatclass.CombatClass;
 
 public class SelectCombatClassAction extends Action {
 
-    CombatClass combatClass;
-    Player player;
+    private CombatClass combatClass;
+    private Player player;
+
+    public CombatClass getCombatClass() { return combatClass; }
 
     public SelectCombatClassAction(CombatClass _combatClass, Player _player){
         this.combatClass = _combatClass;
