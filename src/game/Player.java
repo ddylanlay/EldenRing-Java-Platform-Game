@@ -51,6 +51,8 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+		System.out.println("Select your role:");
+
 
 		playerDescription();
 		// return/print the console menu

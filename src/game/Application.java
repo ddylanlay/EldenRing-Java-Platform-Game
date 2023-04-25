@@ -65,6 +65,9 @@ public class Application {
 				exception.printStackTrace();
 			}
 		}
+
+		// Implement combat class here
+
 		gameMap.at(23, 17).addActor(new LoneWolf());
 		//tester below
 //		gameMap.at(35, 10).addActor(new LoneWolf());
