@@ -86,7 +86,7 @@ public class HeavySkeletalSwordsman extends Enemies {
         Location currentLocation = map.locationOf(this);
         if(isConscious() == false){
             map.removeActor(this);
-            map.addActor(new PilesOfBones(), currentLocation);
+            map.addActor(new PilesOfBonesHSS(), currentLocation);
         }
     }
 }

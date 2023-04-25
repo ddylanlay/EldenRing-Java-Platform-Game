@@ -14,13 +14,13 @@ import game.behaviours.Behaviour;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PilesOfBones extends Enemies{
+public class PilesOfBonesSB extends Enemies{
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private int Counter = 0;
-    private Enemies origin;
-    public PilesOfBones(Enemies origin){
+
+    public PilesOfBonesSB(){
         super("Piles of Bones", 'X', 1);
-        this.origin = origin;
+
 
     }
 
@@ -28,8 +28,8 @@ public class PilesOfBones extends Enemies{
         if(!this.isConscious() && Counter >= 3){
             Location currentLocation = map.locationOf(this);
             map.removeActor(this);
-            if(this.origin)
-            map.addActor(new HeavySkeletalSwordsman(), currentLocation);
+
+            map.addActor(new SkeletalBandit(), currentLocation);
         }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
@@ -53,3 +53,4 @@ public class PilesOfBones extends Enemies{
         return actions;
     }
 }
+

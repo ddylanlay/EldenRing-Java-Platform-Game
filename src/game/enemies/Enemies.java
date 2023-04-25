@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Status;
 import game.actionsgame.AttackAction;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.utils.RandomNumberGenerator;
@@ -36,11 +37,13 @@ public abstract class Enemies extends Actor{
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
+            if(followContained(followBehaviour)){
+                behaviours.clear();
+                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(500, followBehaviour);
+            }
         }
-        if(followContained(followBehaviour)){
-            behaviours.clear();
-            behaviours.add(new Attaack)
-        }
+
         return actions;
     }
     public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);

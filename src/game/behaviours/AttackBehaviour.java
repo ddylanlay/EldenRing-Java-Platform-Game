@@ -18,15 +18,20 @@ public class AttackBehaviour extends Action implements Behaviour{
         Location targetPosition = map.locationOf(target);
         int distance = distance(actorPosition, targetPosition);
         if(distance == 1){
-            return new AttackAction(target, "towards");
+            return new AttackAction(target, "to the enemy");
         }
         return null;
     }
     public String execute(Actor actor, GameMap map){
         return menuDescription(actor);
     }
+
     private int distance(Location a, Location b) {
         return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
+    }
+
+    public String menuDescription(Actor actor){
+        return "AttackBehaviour";
     }
 
 }
