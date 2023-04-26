@@ -83,7 +83,6 @@ public class Application {
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
 
-		world.addPlayer(player, gameMap.at(36, 10));
-		world.run();
+		world.addPlayer(player, gameMap.at(36, 10));world.run();
 	}
 }

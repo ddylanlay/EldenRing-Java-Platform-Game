@@ -36,6 +36,7 @@ public class MerchantKale extends Actor {
         actions.add(new PurchaseAction(otherActor, new GreatKnife()));
         for (WeaponItem weapon : weaponInventory) {
             if (weapon.hasCapability(WeaponType.SELLABLE)) {
+                weapon.toString();
                 actions.add(new SellAction(otherActor, weapon));
             }
         }

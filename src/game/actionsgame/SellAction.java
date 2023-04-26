@@ -18,15 +18,26 @@ public class SellAction extends Action {
         this.actor = target;
         this.weapon = weapon;
     }
+    public String sell(SellableItem weapon, Player player){
+        player.addRunes(weapon.getSellingPrice());
+        player.removeWeaponFromInventory((WeaponItem) weapon);
+        return theMenuDescription(weapon, player);
+
+    }
+
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        player.addRunes(((SellableItem) weapon).getSellingPrice());
-        player.removeWeaponFromInventory(weapon);
-        return menuDescription(player);
+        return sell((SellableItem) weapon, (Player) actor);
     }
+
+    public String theMenuDescription(SellableItem weapon, Player player){
+        return player + " sells " + weapon + " for " + weapon.getSellingPrice();
+    }
+
+
     @Override
     public String menuDescription(Actor actor){
-        return actor + " sells " + weapon + " for " + ((SellableItem) weapon).getSellingPrice();
+        return theMenuDescription((SellableItem) weapon, (Player) actor);
     }
 }
