@@ -12,7 +12,7 @@ public class PurchaseAction extends Action {
 
     PurchasableItem weapon;
     Actor actor;
-    RunesManager runesManager;
+    RunesManager runesManager = RunesManager.getInstance();
     public PurchaseAction(Actor target, PurchasableItem weapon){
         this.actor = target;
         this.weapon = weapon;

@@ -11,6 +11,7 @@ import game.Player;
 public class HealAction extends Action {
 
     final int HEALTH_INCREASE = 250;
+    private Player player;
 
 //    /**
 //     *
@@ -30,7 +31,7 @@ public class HealAction extends Action {
     }
     @Override
     public String execute(Actor actor, GameMap map) {
-       return heal((Player) actor);
+       return heal(player);
     }
 
     public String theMenuDescription(Player player){
@@ -39,6 +40,6 @@ public class HealAction extends Action {
     }
     @Override
     public String menuDescription(Actor actor) {
-        return theMenuDescription((Player) actor);
+        return theMenuDescription(player);
     }
 }
