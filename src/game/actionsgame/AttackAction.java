@@ -38,7 +38,7 @@ public class AttackAction extends Action {
 	 * Weapon used for the attack
 	 */
 	private Weapon weapon;
-	public RunesManager runesManager = new RunesManager();
+	RunesManager runesManager = RunesManager.getInstance();
 
 	/**
 	 * Constructor.

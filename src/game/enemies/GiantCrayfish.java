@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -27,6 +26,7 @@ public class GiantCrayfish extends Actor implements SlamAttack {
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
         this.behaviours.put(999, new WanderBehaviour());
+
     }
 
     /**

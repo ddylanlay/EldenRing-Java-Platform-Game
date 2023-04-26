@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.RunesDoing;
+import game.trading.RunesManager;
 import game.weapons.Club;
 
 /**
@@ -24,9 +25,9 @@ import game.weapons.Club;
 public class Player extends Actor implements Resettable, RunesDoing {
 
 	private final Menu menu = new Menu();
-	int runesInInventory = 99999;
+	//	int runesInInventory = 99999;
 	private CombatClass combatClass;
-
+	RunesManager runesManager = RunesManager.getInstance();
 
 	//every time a new player is made, a new instance of flask of crimson tears comes with it
 	public FlaskOfCrimsonTears bottle = new FlaskOfCrimsonTears();
@@ -44,6 +45,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addWeaponToInventory(new Club());
 		this.addItemToInventory(bottle);
+		runesManager.storeActorsRunes(this, 0);
 	}
 
 	@Override
@@ -60,8 +62,8 @@ public class Player extends Actor implements Resettable, RunesDoing {
 
 
 	@Override
-	public void reset() {}
-
+	public void reset() {
+	}
 
 
 	/**
@@ -69,39 +71,48 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	 *
 	 * @return a CombatClass object.
 	 */
-	public CombatClass getCombatClass() { return combatClass; }
+	public CombatClass getCombatClass() {
+		return combatClass;
+	}
 
 	/**
 	 * Setter for combatClass.
 	 *
 	 * @param combatClass a CombatClass object.
 	 */
-	public void setCombatClass(CombatClass combatClass) { this.combatClass = combatClass; }
+	public void setCombatClass(CombatClass combatClass) {
+		this.combatClass = combatClass;
+	}
 
-	public void playerDescription(){
+	public void playerDescription() {
 		System.out.println(name + " (" + hitPoints + "/" + maxHitPoints + "), runes: " + getNumOfRunes());
 	}
 
-	public void addRunes(int runes){
-		runesInInventory = runesInInventory + runes;
+	public void addRunes(int runes) {
+		int storedRunes = runesManager.retrieveActorsRunes(this);
+		int newRunes = storedRunes + runes;
+		runesManager.storeActorsRunes(this, newRunes);
+//		runesInInventory = runesInInventory + runes;
 	}
 
 
-	public void removeRunes(int runes){
-		runesInInventory = runesInInventory - runes;
+	public void removeRunes(int runes) {
+		int storedRunes = runesManager.retrieveActorsRunes(this);
+		int newRunes = storedRunes + runes;
+		runesManager.storeActorsRunes(this, newRunes);
+//		runesInInventory = runesInInventory - runes;
 	}
 
 	/**
-	 *
 	 * @return
 	 */
-	public int getNumOfRunes(){
-		return runesInInventory;
+	public int getNumOfRunes() {
+		return runesManager.retrieveActorsRunes(this);
+//		return runesInInventory;
 	}
 
-
-
-
-
+//	public void inputRunes(RunesManager runesManager){
+//		runesManager.storeActorsRunes(this, 0);
+//	}
 
 }

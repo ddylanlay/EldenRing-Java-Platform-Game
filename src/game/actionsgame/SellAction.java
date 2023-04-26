@@ -5,12 +5,14 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
+import game.trading.RunesManager;
 import game.trading.SellableItem;
 
 public class SellAction extends Action {
 
     private final WeaponItem weapon;
     Actor actor;
+    RunesManager runesManager;
     public SellAction(Actor target, WeaponItem weapon){
         this.actor = target;
         this.weapon = weapon;

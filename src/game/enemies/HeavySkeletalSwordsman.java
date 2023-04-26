@@ -12,6 +12,7 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 
@@ -20,11 +21,13 @@ import java.util.Map;
 
 public class HeavySkeletalSwordsman extends Enemies {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    RunesManager runesManager = RunesManager.getInstance();
 
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
+        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     /**
@@ -79,5 +82,4 @@ public class HeavySkeletalSwordsman extends Enemies {
     public WeaponItem getWeaponItem() {
         return new Grossmesser();
     }
-
 }

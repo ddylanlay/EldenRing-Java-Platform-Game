@@ -11,6 +11,7 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 
 import java.util.HashMap;
@@ -26,10 +27,14 @@ import java.util.Map;
  */
 public class LoneWolf extends Enemies{
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    RunesManager runesManager = RunesManager.getInstance();
+
 
     public LoneWolf() {
-        super("Lone Wolf", 'h', 102);
+        super("Lone Wolf", 'h', 1); //102
         this.behaviours.put(999, new WanderBehaviour());
+        runesManager.storeActorsRunes(this, dropRunes());
+
     }
 
     /**
@@ -78,6 +83,5 @@ public class LoneWolf extends Enemies{
     public int dropRunes(){
         return RandomNumberGenerator.getRandomInt(55, 1470);
     }
-
 
 }

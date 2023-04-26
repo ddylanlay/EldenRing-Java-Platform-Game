@@ -35,7 +35,7 @@ public class CombatClassMenu {
 //            }
 //            freeChars.remove(Character.valueOf(c));
             keyToActionMap.put(c, action);
-            display.println(c + ": " + action.menuDescription(combatClass));
+            display.println(combatClass.getDisplayChar() + ": " + action.menuDescription(combatClass));
         }
 
         char key;
