@@ -14,7 +14,7 @@ import game.weapons.Club;
 public class Wretch extends CombatClass {
 
     public Wretch(){
-        super("Wretch", 'w', 414, new Club());
+        super("Wretch", 'w', 414, new Club(), new Club());
     }
 
 }

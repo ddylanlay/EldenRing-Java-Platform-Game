@@ -1,9 +1,11 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.trading.SellableItem;
+import game.Player;
 import game.trading.PurchasableItem;
+import game.trading.SellableItem;
 
 import java.util.List;
 
@@ -18,7 +20,8 @@ import java.util.List;
  *
  */
 public class GreatKnife extends WeaponItem implements PurchasableItem, SellableItem {
-
+    private Player player;
+    private Actor actor;
     /**
      * Constructor
      */

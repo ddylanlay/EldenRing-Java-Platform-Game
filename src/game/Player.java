@@ -88,16 +88,16 @@ public class Player extends Actor implements Resettable, RunesDoing {
 
 	public void addRunes(int runes) {
 		int storedRunes = runesManager.retrieveActorsRunes(this);
-		int newRunes = storedRunes + runes;
-		runesManager.storeActorsRunes(this, newRunes);
+		storedRunes += runes;
+		runesManager.storeActorsRunes(this, storedRunes);
 //		runesInInventory = runesInInventory + runes;
 	}
 
 
 	public void removeRunes(int runes) {
 		int storedRunes = runesManager.retrieveActorsRunes(this);
-		int newRunes = storedRunes + runes;
-		runesManager.storeActorsRunes(this, newRunes);
+		storedRunes -= runes;
+		runesManager.storeActorsRunes(this, storedRunes);
 //		runesInInventory = runesInInventory - runes;
 	}
 

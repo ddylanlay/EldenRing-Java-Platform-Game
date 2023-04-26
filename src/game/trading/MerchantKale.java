@@ -10,14 +10,12 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.actionsgame.PurchaseAction;
 import game.actionsgame.SellAction;
-import game.weapons.Club;
-import game.weapons.GreatKnife;
-import game.weapons.Uchigatana;
-import game.weapons.WeaponType;
+import game.weapons.*;
 
 import java.util.List;
 
 public class MerchantKale extends Actor {
+    private SellableWeaponInventory sellableWeaponInventory = SellableWeaponInventory.getInstance();
     private Player player;
     public MerchantKale(){
         super("MerchantKale", 'K', 1000);
@@ -36,7 +34,8 @@ public class MerchantKale extends Actor {
         actions.add(new PurchaseAction(otherActor, new GreatKnife()));
         for (WeaponItem weapon : weaponInventory) {
             if (weapon.hasCapability(WeaponType.SELLABLE)) {
-                actions.add(new SellAction(otherActor, weapon));
+                sellableWeaponInventory.addWeaponToInventory((SellableItem) weapon);
+                actions.add(new SellAction(otherActor, weapon, (SellableItem) weapon));
             }
         }
 
