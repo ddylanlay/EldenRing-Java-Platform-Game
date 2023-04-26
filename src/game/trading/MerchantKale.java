@@ -18,6 +18,7 @@ import game.weapons.WeaponType;
 import java.util.List;
 
 public class MerchantKale extends Actor {
+    private Player player;
     public MerchantKale(){
         super("MerchantKale", 'K', 1000);
     }
@@ -29,7 +30,7 @@ public class MerchantKale extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        List<WeaponItem> weaponInventory = ((Player) otherActor).getWeaponInventory();
+        List<WeaponItem> weaponInventory = otherActor.getWeaponInventory();
         actions.add(new PurchaseAction(otherActor, new Uchigatana()));
         actions.add(new PurchaseAction(otherActor, new Club()));
         actions.add(new PurchaseAction(otherActor, new GreatKnife()));

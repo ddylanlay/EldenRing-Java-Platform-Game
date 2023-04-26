@@ -10,7 +10,6 @@ import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.RunesDoing;
 import game.trading.RunesManager;
-import game.weapons.Club;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -44,7 +43,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addItemToInventory(bottle);
-		runesManager.storeActorsRunes(this, 0);
+		runesManager.storeActorsRunes(this, 9999);
 	}
 
 	@Override

@@ -31,6 +31,7 @@ public class RunesManager {
         storeActorsRunes(gainer, playerRunes);
         return enemyRunes;
     }
+
 }
 
 
