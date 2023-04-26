@@ -43,7 +43,6 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		// name and displayChar are altered in the Application class
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
-		this.addWeaponToInventory(new Club());
 		this.addItemToInventory(bottle);
 		runesManager.storeActorsRunes(this, 0);
 	}

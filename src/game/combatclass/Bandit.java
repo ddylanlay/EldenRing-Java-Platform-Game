@@ -16,14 +16,9 @@ public class Bandit extends CombatClass {
     /**
      * Constructor
      */
-//    public Bandit()
-//    { super(414, new GreatKnife()); }
     public Bandit(){
-        super("Bandit", 'b', 414);
-        this.addWeaponToInventory(new GreatKnife());
-    }
-    public String toString(){
-        return name;
+        super("Bandit", 'b', 414, new GreatKnife());
+
     }
 
 }

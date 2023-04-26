@@ -1,41 +1,70 @@
 package game.combatclass;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
-
-import java.util.Comparator;
+import game.Player;
+import game.actionsgame.SelectCombatClassAction;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * A class that allows selection of the player combat class.
+ *
+ * Created by:
+ * @author Dylan Lay
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
+ */
 public class CombatClassMenu {
-    public Action showMenu(CombatClass combatClass, ActionList actions, Display display) {
-//        ArrayList<Character> freeChars = new ArrayList<Character>();
+
+    /**
+     * Array List of all the combat classes.
+     */
+    private ArrayList<CombatClass> classes = new ArrayList<CombatClass>() {
+
+        {
+            add(new Bandit());
+            add(new Samurai());
+            add(new Wretch());
+        }
+    };
+
+    /**
+     * The player.
+     */
+    private Player player;
+
+    /**
+     * Constructor
+     *
+     * @param _player the player.
+     */
+    public CombatClassMenu(Player _player){ this.player = _player; }
+
+    /**
+     * Display the menu and allow the player to select their combat class.
+     *
+     * @return Action that will allow player to select combat class and give the correct stats.
+     */
+    public Action showMenu(){
+
+        Display display = new Display();
         HashMap<Character, Action> keyToActionMap = new HashMap<Character, Action>();
+        ArrayList<SelectCombatClassAction> actions = new ArrayList<SelectCombatClassAction>();
 
-//        for (char i = 'a'; i <= 'z'; i++) {
-//            freeChars.add(i);
-//        }
-//
-//        for (char i = 'A'; i <= 'Z'; i++) {
-//            freeChars.add(i);
-//        }
+        for (CombatClass combatclass : classes){
 
+            actions.add(new SelectCombatClassAction(combatclass, player));
+        }
 
-//
-//        // Show with the actions with hotkeys first;
-        for (Action action : actions.sorted(new SortHotkeysFirst())) {
-            String hotKey = action.hotkey();
-            char c = 0;
-//            if (hotKey == null || hotKey == "") {
-//                if (freeChars.isEmpty())
-//                    break; // we've run out of characters to pick from.
-//                c = freeChars.get(0);
-//            } else {
-//                c = hotKey.charAt(0);
-//            }
-//            freeChars.remove(Character.valueOf(c));
+        display.println("Select your role: ");
+        // Show with the actions with hotkeys first;
+        for (SelectCombatClassAction action : actions) {
+            char c = action.getCombatClass().getDisplayChar();
             keyToActionMap.put(c, action);
-            display.println(combatClass.getDisplayChar() + ": " + action.menuDescription(combatClass));
+            display.println(c + ": to choose the " + action.getCombatClass().getClassName() + " class.");
         }
 
         char key;
@@ -44,22 +73,7 @@ public class CombatClassMenu {
         } while (!keyToActionMap.containsKey(key));
 
         return keyToActionMap.get(key);
+
     }
 
-    /**
-     * Inner class that provides the ability to compare two Actions.
-     * This allows Actions to be sorted in order of their hotkeys.
-     *
-     */
-    class SortHotkeysFirst implements Comparator<Action> {
-        public int compare(Action a, Action b) {
-            if (a.hotkey() != null && b.hotkey() == null)
-                return -1;
-
-            if (a.hotkey() == null && b.hotkey() != null)
-                return 1;
-
-            return 0;
-        }
-    }
 }
