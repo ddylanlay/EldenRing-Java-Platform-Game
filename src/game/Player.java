@@ -29,7 +29,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	RunesManager runesManager = RunesManager.getInstance();
 
 	//every time a new player is made, a new instance of flask of crimson tears comes with it
-	public FlaskOfCrimsonTears bottle = new FlaskOfCrimsonTears();
+	public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
 
 	/**
 	 * Constructor.
@@ -58,7 +58,11 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		return menu.showMenu(this, actions, display);
 	}
 
-
+	@Override
+	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+		ActionList actions = new ActionList();
+		return actions;
+	}
 	@Override
 	public void reset() {
 	}
