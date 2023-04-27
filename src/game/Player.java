@@ -6,14 +6,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actionsgame.SellAction;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.RunesDoing;
 import game.trading.RunesManager;
-import game.weapons.Club;
-import game.weapons.GreatKnife;
-import game.weapons.Uchigatana;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -33,7 +29,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	RunesManager runesManager = RunesManager.getInstance();
 
 	//every time a new player is made, a new instance of flask of crimson tears comes with it
-	public FlaskOfCrimsonTears bottle = new FlaskOfCrimsonTears();
+	public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
 
 	/**
 	 * Constructor.
@@ -65,9 +61,6 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		ActionList actions = new ActionList();
-		actions.add(new SellAction(otherActor, new Club()));
-		actions.add(new SellAction(otherActor, new Uchigatana()));
-		actions.add(new SellAction(otherActor, new GreatKnife()));
 		return actions;
 	}
 	@Override

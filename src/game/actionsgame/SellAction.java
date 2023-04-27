@@ -3,13 +3,16 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.trading.RunesManager;
 import game.trading.SellableItem;
 
-public class SellAction extends Action {
+import java.util.ArrayList;
 
+public class SellAction extends Action {
+    private ArrayList<Actor> actorInRange = new ArrayList<>();
     private Player player;
     WeaponItem weapon;
     private Actor actor;
@@ -20,7 +23,33 @@ public class SellAction extends Action {
         this.weapon = weapon;
     }
 
+    public void scanAround(Actor actor, GameMap map){
+        Location actorLocation = map.locationOf(actor);
+        int xLocation = actorLocation.x();
+        int yLocation = actorLocation.y();
+
+        for(int x = xLocation - 1; x <= xLocation + 1; x++){
+            for(int y = yLocation - 1; y <= yLocation + 1; y++){
+                Location tempLocation = new Location(map, x, y);
+                if(map.isAnActorAt(tempLocation)){
+                    if(xLocation != x && yLocation != y){
+                        actorInRange.add(map.getActorAt(tempLocation));
+                    }
+                }
+            }
+        }
+    }
+
+    public void findMerchant(Actor actor, GameMap map) {
+        for (Actor target : actorInRange) {
+            if (target.toString() == "Merchant Kale") {
+
+            }
+        }
+        actorInRange.clear();
+    }
     public String sell(SellableItem weapon, Player player) {
+
         player.addRunes(weapon.getSellingPrice());
         player.removeWeaponFromInventory((WeaponItem) weapon);
         return theMenuDescription(weapon, player);

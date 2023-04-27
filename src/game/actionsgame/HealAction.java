@@ -3,7 +3,7 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Player;
+import game.items.FlaskOfCrimsonTears;
 
 /**
  *
@@ -11,7 +11,7 @@ import game.Player;
 public class HealAction extends Action {
 
     final int HEALTH_INCREASE = 250;
-    private Player player;
+    public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
 
 //    /**
 //     *
@@ -24,22 +24,18 @@ public class HealAction extends Action {
 //        this.healIncrease = _healthIncrease;
 //
 //    }
-    public String heal(Player player){
-        player.heal(HEALTH_INCREASE);
-        player.bottle.consume();
-        return theMenuDescription(player);
+    public String heal(Actor actor, FlaskOfCrimsonTears bottle){
+        actor.heal(HEALTH_INCREASE);
+        bottle.consume();
+        return menuDescription(actor);
     }
     @Override
     public String execute(Actor actor, GameMap map) {
-       return heal(player);
+        return heal(actor, bottle);
     }
 
-    public String theMenuDescription(Player player){
-        String result = player + " consumes " + player.bottle.toString() + " (" + player.bottle.remainingUses + "/" + player.bottle.MAX_USES + ").";
-        return result;
-    }
     @Override
     public String menuDescription(Actor actor) {
-        return theMenuDescription((Player) actor);
+        return actor + " consumes " + bottle.toString() + " (" + bottle.remainingUses + "/" + bottle.MAX_USES + ").";
     }
 }
