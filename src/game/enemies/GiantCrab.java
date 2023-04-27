@@ -117,10 +117,10 @@ public class GiantCrab extends Enemies implements SlamAttack {
         }
     }
 
-    public int dropRunes()
-    {
-        return RandomNumberGenerator.getRandomInt(318, 4961);
-    }
 
+//    public int dropRunes()
+//    {
+//        return RandomNumberGenerator.getRandomInt(318, 4961);
+//    }
 
 }
