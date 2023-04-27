@@ -40,6 +40,6 @@ public class HealAction extends Action {
     }
     @Override
     public String menuDescription(Actor actor) {
-        return theMenuDescription(player);
+        return theMenuDescription((Player) actor);
     }
 }
