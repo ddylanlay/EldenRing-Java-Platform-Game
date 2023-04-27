@@ -12,18 +12,6 @@ public class HealAction extends Action {
 
     final int HEALTH_INCREASE = 250;
     public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
-
-//    /**
-//     *
-//     * @param target
-//     * @param healthIncrease
-//     */
-//    public HealAction(Actor _target, int _healthIncrease){
-//
-//        this.target = _target;
-//        this.healIncrease = _healthIncrease;
-//
-//    }
     public String heal(Actor actor, FlaskOfCrimsonTears bottle){
         actor.heal(HEALTH_INCREASE);
         bottle.consume();

@@ -42,12 +42,15 @@ public class DeathAction extends Action {
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
-        if (target.getDisplayChar() == '@'){
-            int runesDropped = runesManager.retrieveActorsRunes(target);
-//            dropActions.add(
-            runesManager.storeActorsRunes(target, 0);
-
-        }
+//        if (target.getDisplayChar() == '@'){
+//            for ( runes: target.getItemInventory()){
+//                dropActions.add(runes.getDropAction(target));
+//            }
+//            int runesDropped = runesManager.retrieveActorsRunes(target);
+//            dropActions.add(runes.getDropAction(target));
+//            runesManager.storeActorsRunes(target, 0);
+//
+//        }
 
         // remove actor if not player
         if (target.getDisplayChar() != '@') {
