@@ -77,15 +77,16 @@ public class HeavySkeletalSwordsman extends Enemies {
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
     }
-
-    public int dropRunes() {
+    public int dropRunes(){
         return RandomNumberGenerator.getRandomInt(35, 892);
     }
+
 
 
     public WeaponItem getWeaponItem() {
         return new Grossmesser();
     }
+
 
 
     public void spawnPileOfBones(GameMap map) {
