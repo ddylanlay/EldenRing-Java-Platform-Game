@@ -38,7 +38,7 @@ public class AttackAction extends Action {
 	 * Weapon used for the attack
 	 */
 	private Weapon weapon;
-	public RunesManager runesManager;
+	RunesManager runesManager = RunesManager.getInstance();
 
 	/**
 	 * Constructor.
@@ -88,14 +88,10 @@ public class AttackAction extends Action {
 		if (!target.isConscious()) {
 			result += new DeathAction(actor).execute(target, map);
 			if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@'){
-				//CASTING USED!
-				Player player = (Player) actor;
-				Enemies enemy = (Enemies) target;
-				int numOfRunes = RunesManager.transferRunes(enemy, player);
+				int numOfRunes = runesManager.transferRunes(target, actor);
 				String string = target + " drops " + numOfRunes + " runes";
-
 				result += System.lineSeparator() + string;
-				System.out.println(player.getNumOfRunes());
+				System.out.println(((Player) actor).getNumOfRunes());
 				return result;
 				}
 

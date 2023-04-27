@@ -13,6 +13,7 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
 
@@ -26,9 +27,11 @@ import java.util.Map;
 public class GiantCrab extends Enemies implements SlamAttack {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+    RunesManager runesManager = RunesManager.getInstance();
     public GiantCrab() {
         super("Giant Crab", 'c', 407);
         this.behaviours.put(999, new WanderBehaviour());
+        runesManager.storeActorsRunes(this,dropRunes());
 
     }
 

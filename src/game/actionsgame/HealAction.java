@@ -3,36 +3,43 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Player;
 
 /**
  *
  */
 public class HealAction extends Action {
 
-    private int healIncrease;
-    private Actor target;
+    final int HEALTH_INCREASE = 250;
+    private Player player;
 
-    /**
-     *
-     * @param target
-     * @param healthIncrease
-     */
-    public HealAction(Actor _target, int _healthIncrease){
-
-        this.target = _target;
-        this.healIncrease = _healthIncrease;
-
+//    /**
+//     *
+//     * @param target
+//     * @param healthIncrease
+//     */
+//    public HealAction(Actor _target, int _healthIncrease){
+//
+//        this.target = _target;
+//        this.healIncrease = _healthIncrease;
+//
+//    }
+    public String heal(Player player){
+        player.heal(HEALTH_INCREASE);
+        player.bottle.consume();
+        return theMenuDescription(player);
     }
-
     @Override
     public String execute(Actor actor, GameMap map) {
-
-        String result = "Replenished " + actor.toString() + " by " + this.healIncrease + " health.";
-        return result;
+       return heal(player);
     }
 
+    public String theMenuDescription(Player player){
+        String result = player + " consumes " + player.bottle.toString() + " (" + player.bottle.remainingUses + "/" + player.bottle.MAX_USES + ").";
+        return result;
+    }
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+        return theMenuDescription(player);
     }
 }
