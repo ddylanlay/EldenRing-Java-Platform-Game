@@ -1,37 +1,38 @@
 package game.trading;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import game.Player;
-import game.enemies.Enemies;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class RunesManager{
-    Actor actor;
-    static Enemies enemy;
-    private Map<Integer, Actor> runesList;
+public class RunesManager {
+    private HashMap<Actor, Integer> runesList;
     private static RunesManager instance;
-
-    public RunesManager(){
-        this.runesList = new HashMap<>();
+    private RunesManager() {
+        this.runesList= new HashMap<Actor, Integer>();
     }
 
-    public static RunesManager getInstance(){
-        if(instance == null) {
+    public static RunesManager getInstance() {
+        if (instance == null) {
             instance = new RunesManager();
         }
         return instance;
     }
-    public static int transferRunes(Enemies dead, Player player){
-        // CASTING USED!
-        int numOfRunes = dead.dropRunes(dead.getDisplayChar());
-        player.addRunes(numOfRunes);
-        return numOfRunes;
-
+    public void storeActorsRunes(Actor actor, int runes) {
+        runesList.put(actor, runes);
     }
 
+    public int retrieveActorsRunes(Actor actor) {
+        return runesList.get(actor);
+    }
+    public int transferRunes (Actor loser, Actor gainer){
+        int enemyRunes = retrieveActorsRunes(loser);
+        int playerRunes = retrieveActorsRunes(gainer);
+        playerRunes += enemyRunes;
+        storeActorsRunes(gainer, playerRunes);
+        return enemyRunes;
+    }
 
+}
 
 
 //    public void dropRunes(Actor actor, GameMap map){
@@ -42,4 +43,4 @@ public class RunesManager{
 //        }
 //    }
 
-}
+

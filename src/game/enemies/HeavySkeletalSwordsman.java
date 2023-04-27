@@ -13,6 +13,7 @@ import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 
@@ -24,11 +25,13 @@ import java.util.Map;
  */
 public class HeavySkeletalSwordsman extends Enemies {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    RunesManager runesManager = RunesManager.getInstance();
 
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
+        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     /**
@@ -74,16 +77,17 @@ public class HeavySkeletalSwordsman extends Enemies {
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
     }
-
-    public int dropRunes() {
+    public int dropRunes(){
         return RandomNumberGenerator.getRandomInt(35, 892);
     }
+
 
 
     public WeaponItem getWeaponItem() {
         return new Grossmesser();
     }
 
+}
 
     public void spawnPileOfBones(GameMap map) {
         Location currentLocation = map.locationOf(this);
