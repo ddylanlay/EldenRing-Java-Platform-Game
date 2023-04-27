@@ -9,15 +9,15 @@ import game.utils.RandomNumberGenerator;
 /**
  * @author Jamie Tran
  */
-public class Graveyard extends Ground {
+public class PuddleOfWater extends Ground {
     private EnemiesFactory enemiesFactory;
-    public Graveyard(EnemiesFactory enemiesFactory){
-        super('n');
+    public PuddleOfWater(EnemiesFactory enemiesFactory){
+        super('~');
         this.enemiesFactory = enemiesFactory;
     }
     public void tick(Location spawnLocation){
         if(!spawnLocation.containsAnActor()){
-            this.enemiesFactory.spawnSkeleton(spawnLocation);
+            this.enemiesFactory.spawnCrustacean(spawnLocation);
         }
     }
 

@@ -9,9 +9,9 @@ import game.utils.RandomNumberGenerator;
 /**
  * @author Jamie Tran
  */
-public class EastGustOfWind extends Ground implements CanisFactory {
+public class GustOfWind extends Ground {
 
-    public EastGustOfWind(){
+    public GustOfWind(){
         super('&');
     }
     public void tick(Location spawnLocation){
