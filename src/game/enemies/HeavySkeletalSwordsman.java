@@ -7,22 +7,27 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Status;
-import game.actions.AttackAction;
+import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
+import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HeavySkeletalSwordsman extends Actor{
+public class HeavySkeletalSwordsman extends Enemies {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    RunesManager runesManager = RunesManager.getInstance();
 
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
+        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     /**
@@ -38,7 +43,7 @@ public class HeavySkeletalSwordsman extends Actor{
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
-            if(action != null)
+            if (action != null)
                 return action;
         }
         return new DoNothingAction();
@@ -55,7 +60,7 @@ public class HeavySkeletalSwordsman extends Actor{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
@@ -68,6 +73,13 @@ public class HeavySkeletalSwordsman extends Actor{
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
     }
+    public int dropRunes(){
+        return RandomNumberGenerator.getRandomInt(35, 892);
+    }
+
+
+
+    public WeaponItem getWeaponItem() {
+        return new Grossmesser();
+    }
 }
-
-

@@ -7,34 +7,25 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-import game.trading.RunesManager;
-import game.utils.RandomNumberGenerator;
+import game.weapons.Club;
+import game.weapons.Grossmesser;
+import game.weapons.Scimitar;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * BEHOLD, DOG!
- *
- * Created by:
- * @author Adrian Kristanto
- * Modified by:
- *
- */
-public class LoneWolf extends Enemies{
+public class SkeletalBandit extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-    RunesManager runesManager = RunesManager.getInstance();
 
-
-    public LoneWolf() {
-        super("Lone Wolf", 'h', 1); //102
+    public SkeletalBandit() {
+        super("Skeletal Bandit", 'b', 184);
         this.behaviours.put(999, new WanderBehaviour());
-        runesManager.storeActorsRunes(this, dropRunes());
-
+        addWeaponToInventory(new Scimitar());
     }
 
     /**
@@ -76,12 +67,11 @@ public class LoneWolf extends Enemies{
     }
 
 
-    @Override
-    public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
-    }
-    public int dropRunes(){
-        return RandomNumberGenerator.getRandomInt(55, 1470);
+
+
+    public WeaponItem getWeaponItem(){
+        return new Scimitar();
     }
 
 }
+

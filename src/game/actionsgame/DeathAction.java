@@ -1,4 +1,4 @@
-package game.actions;
+package game.actionsgame;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.trading.RunesManager;
 
 /**
  * An action executed if an actor is killed.
@@ -16,6 +17,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
  */
 public class DeathAction extends Action {
     private Actor attacker;
+    RunesManager runesManager = RunesManager.getInstance();
 
     public DeathAction(Actor actor) {
         this.attacker = actor;
@@ -32,17 +34,25 @@ public class DeathAction extends Action {
     @Override
     public String execute(Actor target, GameMap map) {
         String result = "";
-
         ActionList dropActions = new ActionList();
         // drop all items
-        for (Item item : target.getItemInventory())
-            dropActions.add(item.getDropAction(target));
-        for (WeaponItem weapon : target.getWeaponInventory())
-            dropActions.add(weapon.getDropAction(target));
-        for (Action drop : dropActions)
-            drop.execute(target, map);
-        // remove actor
-        map.removeActor(target);
+            for (Item item : target.getItemInventory())
+                dropActions.add(item.getDropAction(target));
+            for (WeaponItem weapon : target.getWeaponInventory())
+                dropActions.add(weapon.getDropAction(target));
+            for (Action drop : dropActions)
+                drop.execute(target, map);
+        if (target.getDisplayChar() == '@'){
+            int runesDropped = runesManager.retrieveActorsRunes(target);
+//            dropActions.add(
+            runesManager.storeActorsRunes(target, 0);
+
+        }
+
+        // remove actor if not player
+        if (target.getDisplayChar() != '@') {
+            map.removeActor(target);
+        }
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }

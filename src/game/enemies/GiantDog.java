@@ -6,35 +6,26 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * BEHOLD, DOG!
- *
- * Created by:
- * @author Adrian Kristanto
- * Modified by:
- *
- */
-public class LoneWolf extends Enemies{
+public class GiantDog extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-    RunesManager runesManager = RunesManager.getInstance();
+    private ArrayList<Actor> actorInRange = new ArrayList<>();
 
-
-    public LoneWolf() {
-        super("Lone Wolf", 'h', 1); //102
+    public GiantDog() {
+        super("Giant Dog", 'G', 693);
         this.behaviours.put(999, new WanderBehaviour());
-        runesManager.storeActorsRunes(this, dropRunes());
-
     }
 
     /**
@@ -78,10 +69,48 @@ public class LoneWolf extends Enemies{
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
-    }
-    public int dropRunes(){
-        return RandomNumberGenerator.getRandomInt(55, 1470);
+        return new IntrinsicWeapon(314, "slam", 90);
+
+
     }
 
+    public void SlamAttack(GameMap map) {
+        scanAround(map);
+        for(Actor actor: actorInRange){
+            if(RandomNumberGenerator.getRandomInt(100)<=90){
+                actor.hurt(314);
+                System.out.println(actor + " is slammed for 314 damage.");
+                if(actor.isConscious() == false){
+                    map.removeActor(actor);
+                    System.out.println(actor + " has been killed.");
+                }
+            }
+        }
+        actorInRange.clear();
+
+
+
+
+    }
+
+    public void scanAround(GameMap map){
+        Location crabLocation = map.locationOf(this);
+        int xLocation = crabLocation.x();
+        int yLocation = crabLocation.y();
+
+        for(int x = xLocation - 1; x <= xLocation + 1; x++){
+            for(int y = yLocation - 1; y <= yLocation + 1; y++){
+                Location tempLocation = new Location(map, x, y);
+                if(map.isAnActorAt(tempLocation)){
+                    if(xLocation != x && yLocation != y){
+                        actorInRange.add(map.getActorAt(tempLocation));
+                    }
+                }
+            }
+        }
+    }
+
+
 }
+
+
