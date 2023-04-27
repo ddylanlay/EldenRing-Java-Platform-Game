@@ -87,7 +87,7 @@ public class HeavySkeletalSwordsman extends Enemies {
         return new Grossmesser();
     }
 
-}
+
 
     public void spawnPileOfBones(GameMap map) {
         Location currentLocation = map.locationOf(this);
