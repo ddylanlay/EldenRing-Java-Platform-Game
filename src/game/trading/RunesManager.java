@@ -31,6 +31,18 @@ public class RunesManager {
         storeActorsRunes(gainer, playerRunes);
         return enemyRunes;
     }
+    public void addRunes(Actor actor, int runes){
+        int newTotalRunes = retrieveActorsRunes(actor);
+        newTotalRunes += runes;
+        storeActorsRunes(actor, newTotalRunes);
+
+    }
+    public void removeRunes(Actor actor, int runes){
+        int newTotalRunes = retrieveActorsRunes(actor);
+        newTotalRunes -= runes;
+        storeActorsRunes(actor, newTotalRunes);
+
+    }
 
 }
 

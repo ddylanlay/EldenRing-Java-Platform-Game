@@ -21,7 +21,7 @@ import java.util.List;
  *
  */
 public class GreatKnife extends WeaponItem implements PurchasableItem, SellableItem {
-    Actor actor;
+    private Actor actor;
     /**
      * Constructor
      */
@@ -31,7 +31,7 @@ public class GreatKnife extends WeaponItem implements PurchasableItem, SellableI
     @Override
     public List<Action> getAllowableActions() {
         ActionList actions = new ActionList();
-        actions.add(new SellAction(actor, new Club()));
+        actions.add(new SellAction(actor, this, this));
         this.addCapability(WeaponType.SELLABLE);
         return super.getAllowableActions();
     }

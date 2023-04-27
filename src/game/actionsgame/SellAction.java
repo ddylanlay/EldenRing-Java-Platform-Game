@@ -15,12 +15,14 @@ public class SellAction extends Action {
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     private Player player;
     WeaponItem weapon;
+    SellableItem sellWeapon;
     private Actor actor;
     RunesManager runesManager = RunesManager.getInstance();
 
-    public SellAction(Actor target, WeaponItem weapon) {
+    public SellAction(Actor target, WeaponItem weapon, SellableItem sellWeapon) {
         this.actor = target;
         this.weapon = weapon;
+        this.sellWeapon = sellWeapon;
     }
 
     public void scanAround(Actor actor, GameMap map){
@@ -48,17 +50,17 @@ public class SellAction extends Action {
         }
         actorInRange.clear();
     }
-    public String sell(SellableItem weapon, Player player) {
+    public String sell( Actor actor, SellableItem sellWeapon, WeaponItem weapon) {
 
-        player.addRunes(weapon.getSellingPrice());
-        player.removeWeaponFromInventory((WeaponItem) weapon);
-        return theMenuDescription(weapon, player);
+        runesManager.addRunes(actor, sellWeapon.getSellingPrice());
+        player.removeWeaponFromInventory(weapon);
+        return menuDescription(actor);
 
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return sell((SellableItem) weapon, (Player) actor);
+        return sell(actor, sellWeapon, weapon);
     }
 
     public String theMenuDescription(SellableItem weapon, Player player) {
@@ -67,6 +69,6 @@ public class SellAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return theMenuDescription((SellableItem) weapon, (Player) actor);
+        return actor + " sells " + sellWeapon + " for " + sellWeapon.getSellingPrice();
     }
 }
