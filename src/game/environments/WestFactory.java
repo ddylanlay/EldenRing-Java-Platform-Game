@@ -4,18 +4,28 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.enemies.GiantCrayfish;
 import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
+import game.utils.RandomNumberGenerator;
 
-public class WestFactory implements EnemiesFactory{
+public class WestFactory implements EnemiesFactory {
     @Override
-    public void spawnCanis(Location location){
-        location.addActor(new GiantDog());
+    public void spawnCanis(Location location) {
+        if (RandomNumberGenerator.getRandomInt(100) <= 33) {
+            location.addActor(new GiantDog());
+        }
     }
+
     @Override
-    public void spawnSkeleton(Location location){
-        location.addActor(new SkeletalBandit());
+    public void spawnSkeleton(Location location) {
+        if (RandomNumberGenerator.getRandomInt(100) <= 27) {
+            location.addActor(new SkeletalBandit());
+        }
     }
+
     @Override
-    public void spawnCrustacean(Location location){
-        location.addActor(new GiantCrayfish());
+    public void spawnCrustacean(Location location) {
+        if (RandomNumberGenerator.getRandomInt(100) <= 2) {
+            location.addActor(new GiantCrayfish());
+
+        }
     }
 }
