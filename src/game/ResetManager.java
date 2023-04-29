@@ -1,5 +1,8 @@
 package game;
 
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.FlaskOfCrimsonTears;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +17,13 @@ public class ResetManager {
     private List<Resettable> resettables;
     private static ResetManager instance;
 
+
     /**
      * HINT 1: where have we seen a private constructor before?  [WHEN WE WANT ONLY ONE INSTANCE OF A CLASS]
      * HINT 2: see the instance attribute above.
      */
-    private ResetManager() {
-        this.resettables = new ArrayList<>();
-    }
+    private ResetManager() { this.resettables = new ArrayList<>(); }
+
 
     public static ResetManager getInstance(){
         if(instance == null) {
@@ -32,7 +35,15 @@ public class ResetManager {
     /**
      *
      */
-    public void run() {}
+    public void run(GameMap gameMap) {
+
+        for (Resettable resettable : resettables){
+            resettable.reset(gameMap);
+        }
+
+        FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
+        bottle.reset(gameMap);
+    }
 
     /**
      *
