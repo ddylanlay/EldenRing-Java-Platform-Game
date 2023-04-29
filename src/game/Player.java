@@ -63,7 +63,7 @@ public class Player extends Actor implements Resettable {
 		return actions;
 	}
 	@Override
-	public void reset() {
+	public void reset(GameMap gameMap) {
 	}
 
 
