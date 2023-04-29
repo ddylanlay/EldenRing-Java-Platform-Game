@@ -28,9 +28,22 @@ public class ResetManager {
         }
         return instance;
     }
+
+    /**
+     *
+     */
     public void run() {}
 
-    public void registerResettable(Resettable resettable) {}
+    /**
+     *
+     * @param resettable
+     */
+    public void registerResettable(Resettable resettable) { resettables.add(resettable); }
 
-    public void removeResettable(Resettable resettable) {}
+    /**
+     *
+     * @param resettable
+     */
+    public void removeResettable(Resettable resettable) { resettables.remove(resettable); }
+
 }
