@@ -103,34 +103,42 @@ public class Application {
 			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
 		}
 
-		int xxRand = RandomNumberGenerator.getRandomInt(1, 75);
-		int yyRand = RandomNumberGenerator.getRandomInt(1, 23);
-		if(xRand < 75/2){
-			gameMap.at(xxRand, yyRand).setGround(new Graveyard(westFactory));
-			gameMap.at(xxRand + 1, yyRand).setGround(new Graveyard(westFactory));
-			gameMap.at(xxRand, yyRand + 1).setGround(new Graveyard(westFactory));
-			gameMap.at(xxRand + 1, yyRand + 1).setGround(new Graveyard(westFactory));
+		int xxRand = RandomNumberGenerator.getRandomInt(1, 72);
+		int yyRand = RandomNumberGenerator.getRandomInt(1, 20);
+		if(xRand < 72/2){
+
+			for(int i = 0; i < 5; i++) {
+				for (int j = 3; j > -1; j--) {
+					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
+				}
+			}
 		}
 		else{
-			gameMap.at(xxRand, yyRand).setGround(new Graveyard(eastFactory));
-			gameMap.at(xxRand + 1, yyRand).setGround(new Graveyard(eastFactory));
-			gameMap.at(xxRand, yyRand + 1).setGround(new Graveyard(eastFactory));
-			gameMap.at(xxRand + 1, yyRand + 1).setGround(new Graveyard(eastFactory));
+			for(int i = 0; i < 5; i++){
+				for(int j = 3; i > -1; i--){
+					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
+				}
+			}
 		}
 
-		int x_Rand = RandomNumberGenerator.getRandomInt(1, 75);
-		int y_Rand = RandomNumberGenerator.getRandomInt(1, 23);
-		if(xRand < 75/2){
-			gameMap.at(x_Rand, y_Rand).setGround(new Graveyard(westFactory));
-			gameMap.at(x_Rand + 1, y_Rand).setGround(new Graveyard(westFactory));
-			gameMap.at(x_Rand, y_Rand + 1).setGround(new Graveyard(westFactory));
-			gameMap.at(x_Rand + 1, y_Rand + 1).setGround(new Graveyard(westFactory));
+
+		int x_Rand = RandomNumberGenerator.getRandomInt(1, 68);
+
+		int y_Rand = RandomNumberGenerator.getRandomInt(1, 19);
+		if(xRand < 68/2){
+
+			for(int i = 0; i < 3; i++) {
+				for (int j = 3; j > -1; j--) {
+					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
+				}
+			}
 		}
 		else{
-			gameMap.at(x_Rand, y_Rand).setGround(new Graveyard(eastFactory));
-			gameMap.at(x_Rand + 1, y_Rand).setGround(new Graveyard(eastFactory));
-			gameMap.at(x_Rand, y_Rand + 1).setGround(new Graveyard(eastFactory));
-			gameMap.at(x_Rand + 1, y_Rand + 1).setGround(new Graveyard(eastFactory));
+			for(int i = 0; i < 5; i++){
+				for(int j = 3; i > -1; i--){
+					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
+				}
+			}
 		}
 
 		// BEHOLD, ELDEN RING
