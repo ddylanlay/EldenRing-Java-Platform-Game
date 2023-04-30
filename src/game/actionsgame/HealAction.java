@@ -14,13 +14,7 @@ public class HealAction extends Action {
     public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
     public String heal(Actor actor, FlaskOfCrimsonTears bottle){
 
-        if (bottle.remainingUses > 0) {
-            actor.heal(HEALTH_INCREASE);
-
-        }
-
-        bottle.consume();
-        return menuDescription(actor);
+        return bottle.consume(actor, HEALTH_INCREASE);
     }
     @Override
     public String execute(Actor actor, GameMap map) {
