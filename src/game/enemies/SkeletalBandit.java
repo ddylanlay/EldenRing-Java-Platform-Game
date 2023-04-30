@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -20,9 +21,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Skeletal Bandit Enemy.
+ *
+ * Creatd by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
  */
-public class SkeletalBandit extends Actor {
+public class SkeletalBandit extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public SkeletalBandit() {
@@ -76,5 +84,20 @@ public class SkeletalBandit extends Actor {
         return new Scimitar();
     }
 
+    /**
+     * Reset method for Skeletal Bandit, removes it from player map.
+     *
+     * @param gameMap map the player is on, class GameMap.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
+
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }
 

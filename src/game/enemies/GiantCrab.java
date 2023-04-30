@@ -23,7 +23,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Giant Crab Enemy.
+ *
+ * Created by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
  */
 public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
