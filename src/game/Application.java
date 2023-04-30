@@ -106,19 +106,31 @@ public class Application {
 		int xxRand = RandomNumberGenerator.getRandomInt(1, 75);
 		int yyRand = RandomNumberGenerator.getRandomInt(1, 23);
 		if(xRand < 75/2){
-			gameMap.at(xxRand, yyRand).setGround(new PuddleOfWater(westFactory));
+			gameMap.at(xxRand, yyRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xxRand + 1, yyRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xxRand, yyRand + 1).setGround(new Graveyard(westFactory));
+			gameMap.at(xxRand + 1, yyRand + 1).setGround(new Graveyard(westFactory));
 		}
 		else{
-			gameMap.at(xxRand, yyRand).setGround(new PuddleOfWater(eastFactory));
+			gameMap.at(xxRand, yyRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xxRand + 1, yyRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xxRand, yyRand + 1).setGround(new Graveyard(eastFactory));
+			gameMap.at(xxRand + 1, yyRand + 1).setGround(new Graveyard(eastFactory));
 		}
 
 		int x_Rand = RandomNumberGenerator.getRandomInt(1, 75);
 		int y_Rand = RandomNumberGenerator.getRandomInt(1, 23);
 		if(xRand < 75/2){
-			gameMap.at(x_Rand, y_Rand).setGround(new GustOfWind(westFactory));
+			gameMap.at(x_Rand, y_Rand).setGround(new Graveyard(westFactory));
+			gameMap.at(x_Rand + 1, y_Rand).setGround(new Graveyard(westFactory));
+			gameMap.at(x_Rand, y_Rand + 1).setGround(new Graveyard(westFactory));
+			gameMap.at(x_Rand + 1, y_Rand + 1).setGround(new Graveyard(westFactory));
 		}
 		else{
-			gameMap.at(x_Rand, y_Rand).setGround(new GustOfWind(eastFactory));
+			gameMap.at(x_Rand, y_Rand).setGround(new Graveyard(eastFactory));
+			gameMap.at(x_Rand + 1, y_Rand).setGround(new Graveyard(eastFactory));
+			gameMap.at(x_Rand, y_Rand + 1).setGround(new Graveyard(eastFactory));
+			gameMap.at(x_Rand + 1, y_Rand + 1).setGround(new Graveyard(eastFactory));
 		}
 
 		// BEHOLD, ELDEN RING
