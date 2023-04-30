@@ -1,10 +1,13 @@
 package game;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.FlaskOfCrimsonTears;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A reset manager class that manages a list of resettables.
@@ -14,7 +17,7 @@ import java.util.List;
  *
  */
 public class ResetManager {
-    private List<Resettable> resettables;
+    private Map<Actor, Resettable> resettables;
     private static ResetManager instance;
 
 
@@ -22,7 +25,7 @@ public class ResetManager {
      * HINT 1: where have we seen a private constructor before?  [WHEN WE WANT ONLY ONE INSTANCE OF A CLASS]
      * HINT 2: see the instance attribute above.
      */
-    private ResetManager() { this.resettables = new ArrayList<>(); }
+    private ResetManager() { this.resettables = new HashMap<>(); }
 
 
     public static ResetManager getInstance(){
@@ -37,13 +40,21 @@ public class ResetManager {
      */
     public void run(GameMap gameMap) {
 
-        for (Resettable resettable : resettables){
-            resettable.reset(gameMap);
+        for (Map.Entry<Actor, Resettable> item : resettables.entrySet()){
 
-            //If not the player remove from the resettable list
+            //Get the actor and resettable objects
+            Actor actor = item.getKey();
+            Resettable resettable = item.getValue();
+
+            //If not the player
             if (!resettable.isPlayer()) {
-                removeResettable(resettable);
+
+                //Remove them from the resettables list
+                removeResettable(actor);
             }
+
+            //Do the reset for resettable instance
+            resettable.reset(gameMap);
         }
 
         FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
@@ -52,14 +63,15 @@ public class ResetManager {
 
     /**
      *
+     * @param actor
      * @param resettable
      */
-    public void registerResettable(Resettable resettable) { resettables.add(resettable); }
+    public void registerResettable(Actor actor, Resettable resettable) { resettables.put(actor, resettable); }
 
     /**
      *
-     * @param resettable
+     * @param actor
      */
-    public void removeResettable(Resettable resettable) { resettables.remove(resettable); }
+    public void removeResettable(Actor actor) { resettables.remove(actor); }
 
 }
