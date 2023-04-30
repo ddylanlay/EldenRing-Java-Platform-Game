@@ -25,7 +25,7 @@ public class EastFactory implements EnemiesFactory {
         if (RandomNumberGenerator.getRandomInt(100) <= 33) {
 
             GiantDog giantDog = new GiantDog();
-            resetManager.registerResettable(giantDog);
+            resetManager.registerResettable(giantDog, giantDog);
 
             location.addActor(giantDog);
         }
@@ -36,7 +36,7 @@ public class EastFactory implements EnemiesFactory {
         if (RandomNumberGenerator.getRandomInt(100) <= 27) {
 
             SkeletalBandit skeletalBandit = new SkeletalBandit();
-            resetManager.registerResettable(skeletalBandit);
+            resetManager.registerResettable(skeletalBandit, skeletalBandit);
 
             location.addActor(skeletalBandit);
         }
@@ -47,7 +47,7 @@ public class EastFactory implements EnemiesFactory {
         if (RandomNumberGenerator.getRandomInt(100) <= 2) {
 
             GiantCrayfish giantCrayfish = new GiantCrayfish();
-            resetManager.registerResettable(giantCrayfish);
+            resetManager.registerResettable(giantCrayfish, giantCrayfish);
 
             location.addActor(giantCrayfish);
         }

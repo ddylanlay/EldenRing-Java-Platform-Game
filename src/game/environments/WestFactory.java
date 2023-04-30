@@ -24,7 +24,7 @@ public class WestFactory implements EnemiesFactory {
         if (RandomNumberGenerator.getRandomInt(100) <= 33) {
 
             LoneWolf loneWolf = new LoneWolf();
-            resetManager.registerResettable(loneWolf);
+            resetManager.registerResettable(loneWolf, loneWolf);
 
             location.addActor(loneWolf);
         }
@@ -35,7 +35,7 @@ public class WestFactory implements EnemiesFactory {
         if (RandomNumberGenerator.getRandomInt(100) <= 27) {
 
             HeavySkeletalSwordsman heavySkeletalSwordsman = new HeavySkeletalSwordsman();
-            resetManager.registerResettable(heavySkeletalSwordsman);
+            resetManager.registerResettable(heavySkeletalSwordsman, heavySkeletalSwordsman);
 
             location.addActor(heavySkeletalSwordsman);
         }
@@ -46,7 +46,7 @@ public class WestFactory implements EnemiesFactory {
         if (RandomNumberGenerator.getRandomInt(100) <= 2) {
 
             GiantCrab giantCrab = new GiantCrab();
-            resetManager.registerResettable(giantCrab);
+            resetManager.registerResettable(giantCrab, giantCrab);
 
             location.addActor(giantCrab);
         }
