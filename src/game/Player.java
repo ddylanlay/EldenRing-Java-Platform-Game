@@ -62,9 +62,24 @@ public class Player extends Actor implements Resettable {
 		ActionList actions = new ActionList();
 		return actions;
 	}
+
+	/**
+	 * Reset method for the player, restores health and moves to Site of Lost Grace.
+	 *
+	 * @param gameMap map the player is on, class GameMap.
+	 */
 	@Override
 	public void reset(GameMap gameMap) {
+
+		//Restore health
+		hitPoints = maxHitPoints;
+
+		//Move to correct position in game map
+		//gameMap.moveActor(this, );
 	}
+
+	@Override
+	public boolean isPlayer() { return true; }
 
 
 	/**
