@@ -57,6 +57,7 @@ public class LoneWolf extends Enemies implements Resettable {
             Action action = behaviour.getAction(this, map);
             if(action != null)
                 return action;
+
         }
         return new DoNothingAction();
     }
