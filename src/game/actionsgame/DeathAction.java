@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.ResetManager;
+import game.trading.Runes;
 import game.trading.RunesManager;
 
 /**
@@ -22,6 +22,7 @@ import game.trading.RunesManager;
  */
 public class DeathAction extends Action {
     private Actor attacker;
+    Runes runes;
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 
@@ -50,7 +51,7 @@ public class DeathAction extends Action {
                 drop.execute(target, map);
         if (target.getDisplayChar() == '@'){
             int runesDropped = runesManager.retrieveActorsRunes(target);
-//            dropActions.add(
+            dropActions.add(runes.getDropAction(target));
             runesManager.storeActorsRunes(target, 0);
 
         }

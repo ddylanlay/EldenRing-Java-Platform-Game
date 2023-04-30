@@ -12,6 +12,8 @@ import game.actionsgame.PurchaseAction;
 import game.weapons.Club;
 import game.weapons.GreatKnife;
 import game.weapons.Uchigatana;
+import game.actionsgame.SellAction;
+import game.weapons.*;
 
 import java.util.List;
 
@@ -29,9 +31,14 @@ public class MerchantKale extends Actor {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         List<WeaponItem> weaponInventory = otherActor.getWeaponInventory();
-        actions.add(new PurchaseAction(otherActor, new Uchigatana()));
-        actions.add(new PurchaseAction(otherActor, new Club()));
-        actions.add(new PurchaseAction(otherActor, new GreatKnife()));
+        actions.add(new PurchaseAction(otherActor, new Uchigatana(), new Uchigatana()));
+        actions.add(new PurchaseAction(otherActor, new Club(), new Club()));
+        actions.add(new PurchaseAction(otherActor, new GreatKnife(), new GreatKnife()));
+        for (WeaponItem weapon : weaponInventory) {
+            if (weapon.hasCapability(WeaponType.SELLABLE)) {
+                actions.add(new SellAction(otherActor, weapon, (SellableItem) weapon));
+            }
+        }
 
         return actions;
     }
