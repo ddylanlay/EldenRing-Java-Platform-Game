@@ -8,22 +8,23 @@ import game.ResetManager;
 import static game.FancyMessage.YOU_DIED;
 
 public class ResetAction extends Action {
-    private Location location;
+
+    private String siteName;
     ResetManager resetManager = ResetManager.getInstance();
 
-    public ResetAction(Location location){
-        this.location = location;
+    public ResetAction(String siteName){
+        this.siteName = siteName;
     }
 
     @Override
     public String execute(Actor actor, GameMap map){
-        map.moveActor(actor, location);
         resetManager.run(map);
-        return YOU_DIED;
+        return menuDescription(actor);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+
+        return actor.toString() + " rests at the " + siteName + "Site of Lost Grace";
     }
 }
