@@ -1,5 +1,6 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 
 /**
@@ -27,5 +28,7 @@ public abstract class ConsumeableItem extends Item {
     }
 
    public abstract void consume();
+
+    public abstract String consume(Actor actor, int healthAmount);
 
 }

@@ -47,13 +47,16 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
         // drop all items
-        if (target.getDisplayChar() != '@') {
             for (Item item : target.getItemInventory())
                 dropActions.add(item.getDropAction(target));
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
+        if (target.getDisplayChar() == '@'){
+            int runesDropped = runesManager.retrieveActorsRunes(target);
+            //dropActions.add(runes.getDropAction(target));
+            runesManager.storeActorsRunes(target, 0);
         }
         else {
             // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
@@ -64,6 +67,13 @@ public class DeathAction extends Action {
         }
 
         // remove actor if not player
+        if (target.getDisplayChar() != '@') {
+            resetManager.removeResettable(target);
+            map.removeActor(target);
+        }
+        else {
+            resetManager.run(map);
+        }
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }
