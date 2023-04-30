@@ -39,6 +39,11 @@ public class ResetManager {
 
         for (Resettable resettable : resettables){
             resettable.reset(gameMap);
+
+            //If not the player remove from the resettable list
+            if (!resettable.isPlayer()) {
+                removeResettable(resettable);
+            }
         }
 
         FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();

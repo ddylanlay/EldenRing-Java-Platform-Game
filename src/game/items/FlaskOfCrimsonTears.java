@@ -83,5 +83,8 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
     @Override
     public void reset(GameMap gameMap) { remainingUses = MAX_USES; }
 
+    @Override
+    public boolean isPlayer() { return false; }
+
 
 }
