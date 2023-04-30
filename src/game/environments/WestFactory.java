@@ -2,9 +2,7 @@ package game.environments;
 
 import edu.monash.fit2099.engine.positions.Location;
 import game.ResetManager;
-import game.enemies.GiantCrayfish;
-import game.enemies.GiantDog;
-import game.enemies.SkeletalBandit;
+import game.enemies.*;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -25,10 +23,10 @@ public class WestFactory implements EnemiesFactory {
     public void spawnCanis(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 33) {
 
-            GiantDog giantDog = new GiantDog();
-            resetManager.registerResettable(giantDog);
+            LoneWolf loneWolf = new LoneWolf();
+            resetManager.registerResettable(loneWolf);
 
-            location.addActor(giantDog);
+            location.addActor(loneWolf);
         }
     }
 
@@ -36,10 +34,10 @@ public class WestFactory implements EnemiesFactory {
     public void spawnSkeleton(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 27) {
 
-            SkeletalBandit skeletalBandit = new SkeletalBandit();
-            resetManager.registerResettable(skeletalBandit);
+            HeavySkeletalSwordsman heavySkeletalSwordsman = new HeavySkeletalSwordsman();
+            resetManager.registerResettable(heavySkeletalSwordsman);
 
-            location.addActor(skeletalBandit);
+            location.addActor(heavySkeletalSwordsman);
         }
     }
 
@@ -47,10 +45,10 @@ public class WestFactory implements EnemiesFactory {
     public void spawnCrustacean(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 2) {
 
-            GiantCrayfish giantCrayfish = new GiantCrayfish();
-            resetManager.registerResettable(giantCrayfish);
+            GiantCrab giantCrab = new GiantCrab();
+            resetManager.registerResettable(giantCrab);
 
-            location.addActor(giantCrayfish);
+            location.addActor(giantCrab);
         }
     }
 }
