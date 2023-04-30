@@ -50,9 +50,11 @@ public class LoneWolf extends Enemies{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(behaviours.get(999) instanceof WanderBehaviour == true){
+        if(wanderContained()){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 map.removeActor(this);
+                System.out.println("despawned");
+                return new DoNothingAction();
             }
         }
         for (Behaviour behaviour : behaviours.values()) {
@@ -92,6 +94,15 @@ public class LoneWolf extends Enemies{
     public boolean followContained(FollowBehaviour behaviourContained){
         for(int i : behaviours.keySet()){
             if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean wanderContained(){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) instanceof WanderBehaviour){
                 return true;
             }
         }

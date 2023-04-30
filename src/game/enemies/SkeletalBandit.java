@@ -48,6 +48,7 @@ public class SkeletalBandit extends Actor {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 map.removeActor(this);
+                return new DoNothingAction();
             }
         }
         for (Behaviour behaviour : behaviours.values()) {
