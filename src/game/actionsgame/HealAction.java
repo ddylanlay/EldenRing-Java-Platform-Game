@@ -13,7 +13,12 @@ public class HealAction extends Action {
     final int HEALTH_INCREASE = 250;
     public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
     public String heal(Actor actor, FlaskOfCrimsonTears bottle){
-        actor.heal(HEALTH_INCREASE);
+
+        if (bottle.remainingUses > 0) {
+            actor.heal(HEALTH_INCREASE);
+
+        }
+
         bottle.consume();
         return menuDescription(actor);
     }

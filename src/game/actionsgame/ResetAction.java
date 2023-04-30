@@ -25,6 +25,6 @@ public class ResetAction extends Action {
     @Override
     public String menuDescription(Actor actor) {
 
-        return actor.toString() + " rests at the " + siteName + "Site of Lost Grace";
+        return actor.toString() + " rests at the " + siteName + " Site of Lost Grace";
     }
 }

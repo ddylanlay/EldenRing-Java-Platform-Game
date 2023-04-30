@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Resettable;
 import game.actionsgame.HealAction;
@@ -57,7 +58,7 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
 //            currentUses -= 1;
 //        }
 //    }
-    public void consume(){
+    public String consume(Actor actor){
         if (remainingUses != 0) {
             remainingUses -= 1;
         }
