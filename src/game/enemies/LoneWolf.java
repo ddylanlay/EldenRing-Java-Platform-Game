@@ -106,4 +106,7 @@ public class LoneWolf extends Enemies{
         return RandomNumberGenerator.getRandomInt(55, 1470);
     }
 
+
+
+
 }

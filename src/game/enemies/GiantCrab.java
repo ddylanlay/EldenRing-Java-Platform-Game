@@ -130,7 +130,14 @@ public class GiantCrab extends Enemies implements SlamAttack {
             }
         }
     }
-
+    public boolean followContained(FollowBehaviour behaviourContained){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public int dropRunes()
     {

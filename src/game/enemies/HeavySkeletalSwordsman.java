@@ -110,4 +110,12 @@ public class HeavySkeletalSwordsman extends Enemies {
             map.addActor(new PilesOfBonesHSS(), currentLocation);
         }
     }
+    public boolean followContained(FollowBehaviour behaviourContained){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
+    }
 }

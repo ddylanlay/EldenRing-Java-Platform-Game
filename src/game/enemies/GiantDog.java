@@ -126,6 +126,14 @@ public class GiantDog extends Actor {
             }
         }
     }
+    public boolean followContained(FollowBehaviour behaviourContained){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

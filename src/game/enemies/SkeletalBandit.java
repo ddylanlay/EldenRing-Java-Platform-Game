@@ -90,6 +90,14 @@ public class SkeletalBandit extends Actor {
     public WeaponItem getWeaponItem(){
         return new Scimitar();
     }
+    public boolean followContained(FollowBehaviour behaviourContained){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
 
