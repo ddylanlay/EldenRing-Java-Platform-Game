@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.Resettable;
 import game.actionsgame.HealAction;
 
@@ -77,12 +78,13 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
     }
 
     /**
-     *
+     * For game reset, will set remaining uses to the max uses.
      */
     @Override
-    public void reset() {
+    public void reset(GameMap gameMap) { remainingUses = MAX_USES; }
 
-    }
+    @Override
+    public boolean isPlayer() { return false; }
 
 
 }

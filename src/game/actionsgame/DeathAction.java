@@ -6,18 +6,24 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.ResetManager;
 import game.trading.RunesManager;
 
 /**
  * An action executed if an actor is killed.
+ *
  * Created by:
  * @author Adrian Kristanto
+ *
  * Modified by:
+ * @author Arosh Heenkenda
+ * @author Dylan Lay
  *
  */
 public class DeathAction extends Action {
     private Actor attacker;
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
 
     public DeathAction(Actor actor) {
         this.attacker = actor;
@@ -51,6 +57,7 @@ public class DeathAction extends Action {
 
         // remove actor if not player
         if (target.getDisplayChar() != '@') {
+            resetManager.removeResettable(target);
             map.removeActor(target);
         }
         result += System.lineSeparator() + menuDescription(target);

@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -21,9 +22,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Giant Crayfish Enemy
+ *
+ * Created by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
  */
-public class GiantCrayfish extends Actor implements SlamAttack {
+public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     public GiantCrayfish() {
@@ -114,5 +122,19 @@ public class GiantCrayfish extends Actor implements SlamAttack {
         }
     }
 
+    /**
+     * The reset action for Giant Crayfish, removes them from map.
+     *
+     * @param gameMap The Game Map the player is on.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
 
+    /**
+     * Tells us if this is the player.
+     *
+     * @return false, this is not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }
