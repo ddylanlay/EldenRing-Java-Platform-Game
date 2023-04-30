@@ -77,6 +77,7 @@ public class AttackAction extends Action {
 		if (weapon == null) {
 			weapon = actor.getIntrinsicWeapon();
 		}
+		if(actor.hasCapability(slam))
 
 		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
 			return actor + " misses " + target + ".";

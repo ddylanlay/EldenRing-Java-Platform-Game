@@ -50,6 +50,11 @@ public class LoneWolf extends Enemies{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if(behaviours.get(999) instanceof WanderBehaviour == true){
+            if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                map.removeActor(this);
+            }
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)

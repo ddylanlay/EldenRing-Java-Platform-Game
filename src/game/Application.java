@@ -6,13 +6,16 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.combatclass.CombatClassMenu;
+import game.enemies.GiantCrab;
+import game.enemies.GiantCrayfish;
 import game.enemies.LoneWolf;
 import game.environments.*;
 import game.trading.MerchantKale;
+import game.utils.RandomNumberGenerator;
 
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Random;
 
 
 /**
@@ -23,7 +26,8 @@ import java.util.List;
  *
  */
 public class Application {
-
+	private static EastFactory eastFactory = new EastFactory();
+	private static WestFactory westFactory = new WestFactory();
 	public static void main(String[] args) {
 
 		World world = new World(new Display());
@@ -84,6 +88,38 @@ public class Application {
 //		);
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
+		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
+		if(xRand < 75/2){
+			gameMap.at(xRand, yRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
+		}
+		else{
+			gameMap.at(xRand, yRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
+		}
+
+		int xxRand = RandomNumberGenerator.getRandomInt(1, 75);
+		int yyRand = RandomNumberGenerator.getRandomInt(1, 23);
+		if(xRand < 75/2){
+			gameMap.at(xxRand, yyRand).setGround(new PuddleOfWater(westFactory));
+		}
+		else{
+			gameMap.at(xxRand, yyRand).setGround(new PuddleOfWater(eastFactory));
+		}
+
+		int x_Rand = RandomNumberGenerator.getRandomInt(1, 75);
+		int y_Rand = RandomNumberGenerator.getRandomInt(1, 23);
+		if(xRand < 75/2){
+			gameMap.at(x_Rand, y_Rand).setGround(new GustOfWind(westFactory));
+		}
+		else{
+			gameMap.at(x_Rand, y_Rand).setGround(new GustOfWind(eastFactory));
+		}
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -97,7 +133,7 @@ public class Application {
 
 
 
-		gameMap.at(23, 17).addActor(new LoneWolf());
+		gameMap.at(23, 17).addActor(new GiantCrayfish());
 		//tester below
 		gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
