@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.AttackBehaviour;
@@ -24,10 +25,12 @@ import java.util.Map;
  *
  * Created by:
  * @author Adrian Kristanto
+ *
  * Modified by:
+ * @author Arosh Heenkenda
  *
  */
-public class LoneWolf extends Enemies{
+public class LoneWolf extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
 
@@ -101,4 +104,19 @@ public class LoneWolf extends Enemies{
         return RandomNumberGenerator.getRandomInt(55, 1470);
     }
 
+    /**
+     * Reset method for Lone Wolf, removes them from player map.
+     *
+     * @param gameMap map the player is on, class GameMap.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
+
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }
