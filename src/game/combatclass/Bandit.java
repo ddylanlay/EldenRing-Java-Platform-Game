@@ -17,7 +17,7 @@ public class Bandit extends CombatClass {
      * Constructor
      */
     public Bandit(){
-        super("Bandit", 'b', 414, new GreatKnife(), new GreatKnife());
+        super("Bandit", 'b', 414, new GreatKnife());
 
     }
 

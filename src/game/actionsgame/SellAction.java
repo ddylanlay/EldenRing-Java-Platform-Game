@@ -7,14 +7,12 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.trading.RunesManager;
 import game.trading.SellableItem;
-import game.weapons.SellableWeaponInventory;
 
 public class SellAction extends Action {
 
     private WeaponItem weapon;
     private Actor actor;
     private SellableItem weapon1;
-    private SellableWeaponInventory sellableWeaponInventory = SellableWeaponInventory.getInstance();
     RunesManager runesManager = RunesManager.getInstance();
     private Player player;
     public SellAction(Actor target, WeaponItem weapon, SellableItem weapon1){
@@ -22,27 +20,23 @@ public class SellAction extends Action {
         this.weapon = weapon;
         this.weapon1 = weapon1;
     }
-    public String sell(Player player){
-        player.addRunes(weapon1.getSellingPrice());
-        player.removeWeaponFromInventory(weapon);
-        sellableWeaponInventory.removeWeaponFromInventory(weapon1);
-        return theMenuDescription(weapon1, player);
+    public String sell(Actor actor){
+        Player player1 = (Player) actor;
+        player1.addRunes(weapon1.getSellingPrice());
+        player1.removeWeaponFromInventory(weapon);
+        return menuDescription(actor);
 
     }
 
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return sell((Player) actor);
-    }
-
-    public String theMenuDescription(SellableItem weapon, Player player){
-        return player + " sells " + weapon + " for " + weapon.getSellingPrice();
+        return sell(actor);
     }
 
 
     @Override
     public String menuDescription(Actor actor){
-        return theMenuDescription(weapon1, (Player) actor);
+        return actor + " sells " + weapon + " for " + weapon1.getSellingPrice();
     }
 }

@@ -47,13 +47,12 @@ public abstract class CombatClass {
      * @param _className the name of the combat class.
      * @param _displayChar the displayCharacter for printing the combat class.
      */
-    public CombatClass(String _className, char _displayChar, int _maxHitPoints, WeaponItem _classWeapon, SellableItem _classWeapon1){
+    public CombatClass(String _className, char _displayChar, int _maxHitPoints, WeaponItem _classWeapon){
 
         this.maxHitPoints = _maxHitPoints;
         this.classWeapon = _classWeapon;
         this.className = _className;
         this.displayChar = _displayChar;
-        this.classWeapon1 = _classWeapon1;
     }
 
     /**

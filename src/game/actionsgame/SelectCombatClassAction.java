@@ -7,13 +7,11 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.combatclass.CombatClass;
 import game.trading.SellableItem;
-import game.weapons.SellableWeaponInventory;
 
 public class SelectCombatClassAction extends Action {
 
     private CombatClass combatClass;
     private Player player;
-    private SellableWeaponInventory sellableWeaponInventory = SellableWeaponInventory.getInstance();
 
     public CombatClass getCombatClass() { return combatClass; }
 
@@ -29,7 +27,6 @@ public class SelectCombatClassAction extends Action {
         SellableItem newWeapon1 = combatClass.getClassWeapon1();
         int maxHealth = combatClass.getMaxHitPoints();
         actor.addWeaponToInventory(newWeapon);
-        sellableWeaponInventory.addWeaponToInventory(newWeapon1);
         actor.resetMaxHp(maxHealth);
         player.setCombatClass(combatClass);
         return menuDescription(actor);

@@ -15,7 +15,6 @@ import game.weapons.*;
 import java.util.List;
 
 public class MerchantKale extends Actor {
-    private SellableWeaponInventory sellableWeaponInventory = SellableWeaponInventory.getInstance();
     private Player player;
     public MerchantKale(){
         super("MerchantKale", 'K', 1000);
@@ -34,7 +33,6 @@ public class MerchantKale extends Actor {
         actions.add(new PurchaseAction(otherActor, new GreatKnife()));
         for (WeaponItem weapon : weaponInventory) {
             if (weapon.hasCapability(WeaponType.SELLABLE)) {
-                sellableWeaponInventory.addWeaponToInventory((SellableItem) weapon);
                 actions.add(new SellAction(otherActor, weapon, (SellableItem) weapon));
             }
         }

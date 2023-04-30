@@ -17,7 +17,7 @@ public class Samurai extends CombatClass {
      * Constructor
      */
     public Samurai(){
-        super("Samurai", 's', 455, new Uchigatana(), new Uchigatana());
+        super("Samurai", 's', 455, new Uchigatana());
     }
 
 }
