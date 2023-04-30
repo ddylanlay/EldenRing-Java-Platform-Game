@@ -1,31 +1,56 @@
 package game.environments;
 
 import edu.monash.fit2099.engine.positions.Location;
+import game.ResetManager;
 import game.enemies.GiantCrayfish;
 import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
 import game.utils.RandomNumberGenerator;
 
+/**
+ * Spawn enemies unique to west side of the map.
+ *
+ * Created by:
+ * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
+ */
 public class WestFactory implements EnemiesFactory {
+
+    private ResetManager resetManager = ResetManager.getInstance();
+
     @Override
     public void spawnCanis(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 33) {
-            location.addActor(new GiantDog());
+
+            GiantDog giantDog = new GiantDog();
+            resetManager.registerResettable(giantDog);
+
+            location.addActor(giantDog);
         }
     }
 
     @Override
     public void spawnSkeleton(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 27) {
-            location.addActor(new SkeletalBandit());
+
+            SkeletalBandit skeletalBandit = new SkeletalBandit();
+            resetManager.registerResettable(skeletalBandit);
+
+            location.addActor(skeletalBandit);
         }
     }
 
     @Override
     public void spawnCrustacean(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 2) {
-            location.addActor(new GiantCrayfish());
 
+            GiantCrayfish giantCrayfish = new GiantCrayfish();
+            resetManager.registerResettable(giantCrayfish);
+
+            location.addActor(giantCrayfish);
         }
     }
 }
