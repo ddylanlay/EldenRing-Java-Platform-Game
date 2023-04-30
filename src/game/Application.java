@@ -104,13 +104,13 @@ public class Application {
 
 		gameMap.at(37,10).addActor(new MerchantKale());
 		// HINT: what does it mean to prefer composition to inheritance?
-		Player player = new Player("Tarnished", '@', 300);
+		Player player = new Player("Tarnished", '@', 300, gameMap.at(32,10));
 
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
 
-		world.addPlayer(player, gameMap.at(36, 10));
+		world.addPlayer(player, gameMap.at(23, 16));
 		world.run();
 	}
 }

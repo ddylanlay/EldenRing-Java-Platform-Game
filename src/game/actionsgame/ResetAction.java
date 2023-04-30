@@ -18,7 +18,7 @@ public class ResetAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map){
         map.moveActor(actor, location);
-        resetManager.run();
+        resetManager.run(map);
         return YOU_DIED;
     }
 
