@@ -26,6 +26,7 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
      *
      */
     public int remainingUses = MAX_USES;
+    private static FlaskOfCrimsonTears instance;
 
     /**
      * Constructor.
@@ -33,6 +34,12 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
     public FlaskOfCrimsonTears() {
         super("Flask of Crimson Tears", 'c', false);
 
+    }
+    public static FlaskOfCrimsonTears getInstance() {
+        if (instance == null) {
+            instance = new FlaskOfCrimsonTears();
+        }
+        return instance;
     }
 
 //    @Override

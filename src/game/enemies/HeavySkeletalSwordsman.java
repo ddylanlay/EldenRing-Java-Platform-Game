@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Status;
@@ -19,6 +20,9 @@ import game.weapons.Grossmesser;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Jamie Tran
+ */
 public class HeavySkeletalSwordsman extends Enemies {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
@@ -81,5 +85,15 @@ public class HeavySkeletalSwordsman extends Enemies {
 
     public WeaponItem getWeaponItem() {
         return new Grossmesser();
+    }
+
+
+
+    public void spawnPileOfBones(GameMap map) {
+        Location currentLocation = map.locationOf(this);
+        if(isConscious() == false){
+            map.removeActor(this);
+            map.addActor(new PilesOfBonesHSS(), currentLocation);
+        }
     }
 }

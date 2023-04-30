@@ -1,9 +1,10 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Player;
+import game.actionsgame.SellAction;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
 
@@ -20,7 +21,6 @@ import java.util.List;
  *
  */
 public class GreatKnife extends WeaponItem implements PurchasableItem, SellableItem {
-    private Player player;
     private Actor actor;
     /**
      * Constructor
@@ -30,6 +30,8 @@ public class GreatKnife extends WeaponItem implements PurchasableItem, SellableI
 
     @Override
     public List<Action> getAllowableActions() {
+        ActionList actions = new ActionList();
+        actions.add(new SellAction(actor, this, this));
         this.addCapability(WeaponType.SELLABLE);
         return super.getAllowableActions();
     }

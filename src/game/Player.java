@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
-import game.trading.RunesDoing;
 import game.trading.RunesManager;
 
 /**
@@ -21,7 +20,7 @@ import game.trading.RunesManager;
  * Modified by:
  * @author Arosh Heenkenda
  */
-public class Player extends Actor implements Resettable, RunesDoing {
+public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	//	int runesInInventory = 99999;
@@ -29,7 +28,7 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	RunesManager runesManager = RunesManager.getInstance();
 
 	//every time a new player is made, a new instance of flask of crimson tears comes with it
-	public FlaskOfCrimsonTears bottle = new FlaskOfCrimsonTears();
+	public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
 
 	/**
 	 * Constructor.
@@ -58,7 +57,11 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		return menu.showMenu(this, actions, display);
 	}
 
-
+	@Override
+	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+		ActionList actions = new ActionList();
+		return actions;
+	}
 	@Override
 	public void reset() {
 	}
@@ -86,20 +89,20 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		System.out.println(name + " (" + hitPoints + "/" + maxHitPoints + "), runes: " + getNumOfRunes());
 	}
 
-	public void addRunes(int runes) {
-		int storedRunes = runesManager.retrieveActorsRunes(this);
-		storedRunes += runes;
-		runesManager.storeActorsRunes(this, storedRunes);
-//		runesInInventory = runesInInventory + runes;
-	}
-
-
-	public void removeRunes(int runes) {
-		int storedRunes = runesManager.retrieveActorsRunes(this);
-		storedRunes -= runes;
-		runesManager.storeActorsRunes(this, storedRunes);
-//		runesInInventory = runesInInventory - runes;
-	}
+//	public void addRunes(int runes) {
+//		int storedRunes = runesManager.retrieveActorsRunes(this);
+//		storedRunes += runes;
+//		runesManager.storeActorsRunes(this, storedRunes);
+////		runesInInventory = runesInInventory + runes;
+//	}
+//
+//
+//	public void removeRunes(int runes) {
+//		int storedRunes = runesManager.retrieveActorsRunes(this);
+//		storedRunes -= runes;
+//		runesManager.storeActorsRunes(this, storedRunes);
+////		runesInInventory = runesInInventory - runes;
+//	}
 
 	/**
 	 * @return
