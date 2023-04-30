@@ -2,9 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.FancyGroundFactory;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.World;
+import edu.monash.fit2099.engine.positions.*;
 import game.combatclass.CombatClassMenu;
 import game.enemies.GiantCrab;
 import game.enemies.GiantCrayfish;
@@ -151,16 +149,24 @@ public class Application {
 			}
 		}
 
+		LoneWolf testWolf = new LoneWolf();
 
+		gameMap.at(23, 17).addActor(testWolf);
 
-		gameMap.at(23, 17).addActor(new GiantCrayfish());
+		ResetManager resetManager = ResetManager.getInstance();
+		resetManager.registerResettable(testWolf, testWolf);
+
 		//tester below
-		gameMap.at(35, 10).addActor(new LoneWolf());
+		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
 		gameMap.at(37,10).addActor(new MerchantKale());
+
+		Location LostGrace = gameMap.at(25, 20);
+		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step"));
+
 		// HINT: what does it mean to prefer composition to inheritance?
-		Player player = new Player("Tarnished", '@', 300, gameMap.at(32,10));
+		Player player = new Player("Tarnished", '@', 300, LostGrace);
 
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
