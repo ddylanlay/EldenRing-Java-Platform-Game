@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -15,9 +16,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * SB Pile of Bones Enemy.
+ *
+ * Created by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
  */
-public class PilesOfBonesSB extends Enemies{
+public class PilesOfBonesSB extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private int Counter = 0;
 
@@ -55,5 +62,21 @@ public class PilesOfBonesSB extends Enemies{
         }
         return actions;
     }
+
+    /**
+     * Reset method for SB Pile of Bones, removes from player map.
+     *
+     * @param gameMap, game map the player is on, class GameMap.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
+
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }
 

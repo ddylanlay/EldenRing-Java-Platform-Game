@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -21,9 +22,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Heavy Skeletal Swordsman Enemy.
+ *
+ * Created by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
  */
-public class HeavySkeletalSwordsman extends Enemies {
+public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
 
@@ -96,4 +103,20 @@ public class HeavySkeletalSwordsman extends Enemies {
             map.addActor(new PilesOfBonesHSS(), currentLocation);
         }
     }
+
+    /**
+     * Reset method for the Heavy Skeletal Swordsman, removes them from player map.
+     *
+     * @param gameMap game map the player is on, class GameMap.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
+
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, this is not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }

@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
@@ -20,9 +21,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Giant Dog Enemy.
+ *
+ * Created by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
  */
-public class GiantDog extends Actor {
+public class GiantDog extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
 
@@ -113,7 +121,21 @@ public class GiantDog extends Actor {
         }
     }
 
+    /**
+     * Reset method for Giant Dog, removes them from player game map.
+     *
+     * @param gameMap the game map the player is on, class GameMap.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
 
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }
 
 

@@ -11,15 +11,20 @@ import game.trading.RunesManager;
 
 /**
  * An action executed if an actor is killed.
+ *
  * Created by:
  * @author Adrian Kristanto
+ *
  * Modified by:
+ * @author Arosh Heenkenda
+ * @author Dylan Lay
  *
  */
 public class DeathAction extends Action {
     private Actor attacker;
     Runes runes;
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
 
     public DeathAction(Actor actor) {
         this.attacker = actor;
@@ -53,6 +58,7 @@ public class DeathAction extends Action {
 
         // remove actor if not player
         if (target.getDisplayChar() != '@') {
+            resetManager.removeResettable(target);
             map.removeActor(target);
         }
         result += System.lineSeparator() + menuDescription(target);
