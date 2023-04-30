@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Resettable;
 import game.actionsgame.HealAction;
@@ -43,7 +44,10 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
         return instance;
     }
 
-//    @Override
+    @Override
+    public void consume() { }
+
+    //    @Override
 //    public HealAction consume(Actor actor) {
 //
 //        if (currentUses == 0){
@@ -57,12 +61,15 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
 //            currentUses -= 1;
 //        }
 //    }
-    public void consume(){
+    public String consume(Actor actor, int healAmount){
+
         if (remainingUses != 0) {
             remainingUses -= 1;
+            actor.heal(healAmount);
+            return actor + " consumes " + this + " (" + remainingUses + "/" + MAX_USES + ")";
         }
         else{
-            System.out.println(this + " (" + remainingUses + "/" + MAX_USES + ") is empty. It cannot be used until it is refilled.");
+            return this + " (" + remainingUses + "/" + MAX_USES + ") is empty.";
         }
 
     }

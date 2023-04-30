@@ -1,6 +1,11 @@
 package game.environments;
 
+import edu.monash.fit2099.demo.mars.actions.WindowSmashAction;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actionsgame.ResetAction;
 
 /**
  * Site Of Lost Grace, allows players to heal and resets world.
@@ -14,10 +19,22 @@ import edu.monash.fit2099.engine.positions.Ground;
 public class SiteOfLostGrace extends Ground {
 
     /**
+     * Name of the Site of Lost Grace
+     */
+    private String siteName;
+
+    /**
      * Constructor.
      *
      */
-    public SiteOfLostGrace() {
+    public SiteOfLostGrace(String siteName) {
+
         super('U');
+        this.siteName = siteName;
+    }
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String directionA){
+        return new ActionList(new ResetAction(siteName));
     }
 }

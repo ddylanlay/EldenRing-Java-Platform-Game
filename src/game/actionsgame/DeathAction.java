@@ -52,7 +52,7 @@ public class DeathAction extends Action {
                 drop.execute(target, map);
         if (target.getDisplayChar() == '@'){
             int runesDropped = runesManager.retrieveActorsRunes(target);
-            dropActions.add(runes.getDropAction(target));
+            //dropActions.add(runes.getDropAction(target));
             runesManager.storeActorsRunes(target, 0);
 
         }
@@ -61,6 +61,9 @@ public class DeathAction extends Action {
         if (target.getDisplayChar() != '@') {
             resetManager.removeResettable(target);
             map.removeActor(target);
+        }
+        else {
+            resetManager.run(map);
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;
