@@ -53,6 +53,13 @@ public class LoneWolf extends Enemies implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if(wanderContained()){
+            if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                map.removeActor(this);
+                System.out.println("despawned");
+                return new DoNothingAction();
+            }
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
@@ -97,6 +104,15 @@ public class LoneWolf extends Enemies implements Resettable {
         return false;
     }
 
+    public boolean wanderContained(){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) instanceof WanderBehaviour){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
@@ -120,4 +136,7 @@ public class LoneWolf extends Enemies implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+
+
+
 }

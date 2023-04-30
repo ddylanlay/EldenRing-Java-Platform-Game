@@ -11,8 +11,11 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
 import game.weapons.Grossmesser;
 import game.weapons.Scimitar;
@@ -50,6 +53,12 @@ public class SkeletalBandit extends Actor implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if(behaviours.get(999) instanceof WanderBehaviour == true){
+            if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                map.removeActor(this);
+                return new DoNothingAction();
+            }
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
@@ -69,11 +78,18 @@ public class SkeletalBandit extends Actor implements Resettable {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
+            if(followContained(followBehaviour) == false){
+                behaviours.clear();
+                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(500, followBehaviour);
+            }
         }
+
         return actions;
     }
 
@@ -82,6 +98,14 @@ public class SkeletalBandit extends Actor implements Resettable {
 
     public WeaponItem getWeaponItem(){
         return new Scimitar();
+    }
+    public boolean followContained(FollowBehaviour behaviourContained){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
