@@ -8,25 +8,61 @@ import game.Player;
 import game.trading.RunesManager;
 import game.trading.SellableItem;
 
-public class SellAction extends Action {
+import java.util.ArrayList;
 
-    private WeaponItem weapon;
+public class SellAction extends Action {
+    private ArrayList<Actor> actorInRange = new ArrayList<>();
+    WeaponItem weapon;
+    SellableItem sellWeapon;
     private Actor actor;
     RunesManager runesManager = RunesManager.getInstance();
-    private Player player;
-    public SellAction(Actor target, WeaponItem weapon){
+
+    public SellAction(Actor target, WeaponItem weapon, SellableItem sellWeapon) {
         this.actor = target;
         this.weapon = weapon;
+        this.sellWeapon = sellWeapon;
+    }
+//    public void scanAround(Actor actor, GameMap map){
+//        Location actorLocation = map.locationOf(actor);
+//        int xLocation = actorLocation.x();
+//        int yLocation = actorLocation.y();
+//
+//        for(int x = xLocation - 1; x <= xLocation + 1; x++){
+//            for(int y = yLocation - 1; y <= yLocation + 1; y++){
+//                Location tempLocation = new Location(map, x, y);
+//                if(map.isAnActorAt(tempLocation)){
+//                    if(xLocation != x && yLocation != y){
+//                        actorInRange.add(map.getActorAt(tempLocation));
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+//    public void findMerchant(Actor actor, GameMap map) {
+//        for (Actor target : actorInRange) {
+//            if (target.toString() == "Merchant Kale") {
+//
+//            }
+//        }
+//        actorInRange.clear();
+//    }
+    public String sell(Actor actor, SellableItem sellWeapon, WeaponItem weapon) {
+        Player player1 = (Player) actor;
+        runesManager.addRunes(actor, sellWeapon.getSellingPrice());
+        player1.removeWeaponFromInventory(weapon);
+        return menuDescription(actor);
+
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        player.addRunes(((SellableItem) weapon).getSellingPrice());
-        player.removeWeaponFromInventory(weapon);
-        return menuDescription(player);
+        return sell(actor, sellWeapon, weapon);
     }
+
+
     @Override
-    public String menuDescription(Actor actor){
-        return actor + " sells " + weapon + " for " + ((SellableItem) weapon).getSellingPrice();
+    public String menuDescription(Actor actor) {
+        return actor + " sells " + sellWeapon + " for " + sellWeapon.getSellingPrice();
     }
 }

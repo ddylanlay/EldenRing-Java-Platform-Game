@@ -6,9 +6,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
-import game.trading.RunesDoing;
 import game.trading.RunesManager;
 
 /**
@@ -21,15 +21,18 @@ import game.trading.RunesManager;
  * Modified by:
  * @author Arosh Heenkenda
  */
-public class Player extends Actor implements Resettable, RunesDoing {
+public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	//	int runesInInventory = 99999;
 	private CombatClass combatClass;
 	RunesManager runesManager = RunesManager.getInstance();
 
+	private Location lastGraceSite;
+
 	//every time a new player is made, a new instance of flask of crimson tears comes with it
-	public FlaskOfCrimsonTears bottle = new FlaskOfCrimsonTears();
+	public FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
+	public ResetManager resetManager = ResetManager.getInstance();
 
 	/**
 	 * Constructor.
@@ -38,12 +41,14 @@ public class Player extends Actor implements Resettable, RunesDoing {
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
+	public Player(String name, char displayChar, int hitPoints, Location lastGraceSite) {
 		// name and displayChar are altered in the Application class
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addItemToInventory(bottle);
+		this.lastGraceSite = lastGraceSite;
 		runesManager.storeActorsRunes(this, 9999);
+		resetManager.registerResettable(this, this);
 	}
 
 	@Override
@@ -58,10 +63,29 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		return menu.showMenu(this, actions, display);
 	}
 
+	@Override
+	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+		ActionList actions = new ActionList();
+		return actions;
+	}
+
+	/**
+	 * Reset method for the player, restores health and moves to Site of Lost Grace.
+	 *
+	 * @param gameMap map the player is on, class GameMap.
+	 */
+	@Override
+	public void reset(GameMap gameMap) {
+
+		//Restore health
+		hitPoints = maxHitPoints;
+
+		//Move to correct position in game map
+		gameMap.moveActor(this, lastGraceSite);
+	}
 
 	@Override
-	public void reset() {
-	}
+	public boolean isPlayer() { return true; }
 
 
 	/**
@@ -86,20 +110,20 @@ public class Player extends Actor implements Resettable, RunesDoing {
 		System.out.println(name + " (" + hitPoints + "/" + maxHitPoints + "), runes: " + getNumOfRunes());
 	}
 
-	public void addRunes(int runes) {
-		int storedRunes = runesManager.retrieveActorsRunes(this);
-		int newRunes = storedRunes + runes;
-		runesManager.storeActorsRunes(this, newRunes);
-//		runesInInventory = runesInInventory + runes;
-	}
-
-
-	public void removeRunes(int runes) {
-		int storedRunes = runesManager.retrieveActorsRunes(this);
-		int newRunes = storedRunes + runes;
-		runesManager.storeActorsRunes(this, newRunes);
-//		runesInInventory = runesInInventory - runes;
-	}
+//	public void addRunes(int runes) {
+//		int storedRunes = runesManager.retrieveActorsRunes(this);
+//		storedRunes += runes;
+//		runesManager.storeActorsRunes(this, storedRunes);
+////		runesInInventory = runesInInventory + runes;
+//	}
+//
+//
+//	public void removeRunes(int runes) {
+//		int storedRunes = runesManager.retrieveActorsRunes(this);
+//		storedRunes -= runes;
+//		runesManager.storeActorsRunes(this, storedRunes);
+////		runesInInventory = runesInInventory - runes;
+//	}
 
 	/**
 	 * @return
@@ -112,5 +136,12 @@ public class Player extends Actor implements Resettable, RunesDoing {
 //	public void inputRunes(RunesManager runesManager){
 //		runesManager.storeActorsRunes(this, 0);
 //	}
+
+	/**
+	 * Setter for lastGraceSite attribute.
+	 *
+	 * @param lastGraceSite the last Site of Lost Grace visited, as a Location.
+	 */
+	public void setLastGraceSite(Location lastGraceSite) { this.lastGraceSite = lastGraceSite; }
 
 }

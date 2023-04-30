@@ -1,6 +1,7 @@
 package game.combatclass;
 
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.trading.SellableItem;
 
 /**
  * An abstract combat class used to initialise concrete combat classes
@@ -34,6 +35,9 @@ public abstract class CombatClass {
      * The display character for the combat class.
      */
     private char displayChar;
+
+    private SellableItem classWeapon1;
+
 
     /**
      * Constructor
@@ -78,6 +82,11 @@ public abstract class CombatClass {
      * @return Char representing character name.
      */
     public char getDisplayChar() { return displayChar; }
+    public SellableItem getClassWeapon1() {
+        return classWeapon1;
+    }
+
+
 
     /**
      * To String method

@@ -1,9 +1,11 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actionsgame.SellAction;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
 
@@ -20,7 +22,7 @@ import java.util.List;
  * @author Arosh Heenkenda
  */
 public class Club extends WeaponItem implements PurchasableItem, SellableItem {
-
+    private Actor actor;
     /**
      * Constructor
      */
@@ -42,6 +44,8 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
     public void tick(Location currentLocation, Actor actor) {}
     @Override
     public List<Action> getAllowableActions() {
+        ActionList actions = new ActionList();
+        actions.add(new SellAction(actor, this, this));
         this.addCapability(WeaponType.SELLABLE);
         return super.getAllowableActions();
     }

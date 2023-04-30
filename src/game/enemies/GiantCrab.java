@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.AttackBehaviour;
@@ -24,9 +25,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Giant Crab Enemy.
+ *
+ * Created by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
+ *
  */
-public class GiantCrab extends Enemies implements SlamAttack {
+public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     RunesManager runesManager = RunesManager.getInstance();
@@ -145,4 +153,20 @@ public class GiantCrab extends Enemies implements SlamAttack {
         return RandomNumberGenerator.getRandomInt(318, 4961);
     }
 
+    /**
+     * Part of the resetting, when Site of Lost Grace or Death of player occurs
+     */
+    @Override
+    public void reset(GameMap gameMap) {
+
+        gameMap.removeActor(this);
+    }
+
+    /**
+     * Tells us whether this is the player or not
+     *
+     * @return false, this is not player
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }
