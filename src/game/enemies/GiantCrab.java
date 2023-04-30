@@ -125,11 +125,19 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     }
 
     /**
-     * Part of the resetting, when Site of Lost Grace or
+     * Part of the resetting, when Site of Lost Grace or Death of player occurs
      */
     @Override
     public void reset(GameMap gameMap) {
 
         gameMap.removeActor(this);
     }
+
+    /**
+     * Tells us whether this is the player or not
+     *
+     * @return false, this is not player
+     */
+    @Override
+    public boolean isPlayer() { return false; }
 }
