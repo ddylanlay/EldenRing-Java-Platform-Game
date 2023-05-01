@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.ResetManager;
@@ -127,5 +128,13 @@ public class SkeletalBandit extends Actor implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
 }
 

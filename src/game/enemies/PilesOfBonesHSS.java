@@ -79,4 +79,12 @@ public class PilesOfBonesHSS extends Enemies implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
 }
