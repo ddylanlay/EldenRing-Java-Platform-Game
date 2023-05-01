@@ -22,6 +22,7 @@ import java.util.List;
  *
  */
 public class Grossmesser extends WeaponItem implements SellableItem {
+    ActionList actions = new ActionList();
     /**
      * Constructor
      */
