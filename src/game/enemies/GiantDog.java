@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -16,6 +15,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
@@ -35,10 +35,12 @@ import java.util.Map;
 public class GiantDog extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+    RunesManager runesManager = RunesManager.getInstance();
 
     public GiantDog() {
         super("Giant Dog", 'G', 693);
         this.behaviours.put(999, new WanderBehaviour());
+        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     /**
@@ -159,6 +161,11 @@ public class GiantDog extends Actor implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(313, 1808);
+    }
 }
 
 
