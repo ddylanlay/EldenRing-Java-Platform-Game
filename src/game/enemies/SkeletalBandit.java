@@ -42,6 +42,7 @@ public class SkeletalBandit extends Actor implements Resettable {
         super("Skeletal Bandit", 'b', 184);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Scimitar());
+        resetManager.registerResettable(this, this);
     }
 
     /**

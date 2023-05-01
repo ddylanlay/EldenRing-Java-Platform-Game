@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -27,18 +28,18 @@ import java.util.Map;
 public class PilesOfBonesSB extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private int Counter = 0;
+    ResetManager resetManager = ResetManager.getInstance();
 
     public PilesOfBonesSB(){
         super("Piles of Bones", 'X', 1);
-
-
+        resetManager.registerResettable(this, this);
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(!this.isConscious() && Counter >= 3){
             Location currentLocation = map.locationOf(this);
+            resetManager.removeResettable(this);
             map.removeActor(this);
-
             map.addActor(new SkeletalBandit(), currentLocation);
         }
         for (Behaviour behaviour : behaviours.values()) {

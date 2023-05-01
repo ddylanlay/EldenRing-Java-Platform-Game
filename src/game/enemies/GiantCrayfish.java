@@ -1,6 +1,5 @@
 package game.enemies;
 
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -19,11 +18,9 @@ import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Giant Crayfish Enemy
@@ -43,7 +40,7 @@ public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
         this.behaviours.put(999, new WanderBehaviour());
-
+        resetManager.registerResettable(this, this);
     }
 
     /**

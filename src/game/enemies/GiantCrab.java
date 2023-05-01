@@ -1,6 +1,5 @@
 package game.enemies;
 
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -20,7 +19,6 @@ import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +43,7 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
         super("Giant Crab", 'c', 407);
         this.behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this,dropRunes());
-
+        resetManager.registerResettable(this, this);
     }
 
     /**

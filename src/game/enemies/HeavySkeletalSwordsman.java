@@ -20,7 +20,6 @@ import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +42,7 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
         runesManager.storeActorsRunes(this,dropRunes());
+        resetManager.registerResettable(this, this);
     }
 
     /**
@@ -119,11 +119,7 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
         if(isConscious() == false){
 
             //Double check about registering resettables
-            PilesOfBonesSB PoBSB = new PilesOfBonesSB();
-
-//            resetManager.removeResettable(this); //Remove reference to
-//            resetManager.registerResettable(PoBSB, PoBSB); //Register SB Pile of Bones for resetting
-
+            resetManager.removeResettable(this); //Remove reference to HSS
             map.removeActor(this);
             map.addActor(new PilesOfBonesHSS(), currentLocation);
         }

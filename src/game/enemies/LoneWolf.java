@@ -17,7 +17,6 @@ import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +40,7 @@ public class LoneWolf extends Enemies implements Resettable {
         super("Lone Wolf", 'h', 102); //102
         this.behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this, dropRunes());
-
+        resetManager.registerResettable(this, this);
     }
 
     /**
