@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class GiantDog extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+    ResetManager resetManager = ResetManager.getInstance();
 
     public GiantDog() {
         super("Giant Dog", 'G', 693);
@@ -54,6 +56,7 @@ public class GiantDog extends Actor implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
                 map.removeActor(this);
                 return new DoNothingAction();
             }
