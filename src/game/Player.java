@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actionsgame.AttackAction;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
+import game.trading.Runes;
 import game.trading.RunesManager;
 
 /**
@@ -23,9 +24,9 @@ import game.trading.RunesManager;
  * @author Arosh Heenkenda
  */
 public class Player extends Actor implements Resettable {
+	private Location previousLocation;
 
 	private final Menu menu = new Menu();
-	//	int runesInInventory = 99999;
 	private CombatClass combatClass;
 	RunesManager runesManager = RunesManager.getInstance();
 
@@ -57,6 +58,10 @@ public class Player extends Actor implements Resettable {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+		if(hitPoints <= 0)
+		{
+			Location location = map.locationOf(this);
+			location.setGround(new Runes(this, location.getGround()));
 
 		playerDescription();
 		// return/print the console menu
@@ -110,32 +115,14 @@ public class Player extends Actor implements Resettable {
 		System.out.println(name + " (" + hitPoints + "/" + maxHitPoints + "), runes: " + getNumOfRunes());
 	}
 
-//	public void addRunes(int runes) {
-//		int storedRunes = runesManager.retrieveActorsRunes(this);
-//		storedRunes += runes;
-//		runesManager.storeActorsRunes(this, storedRunes);
-////		runesInInventory = runesInInventory + runes;
-//	}
-//
-//
-//	public void removeRunes(int runes) {
-//		int storedRunes = runesManager.retrieveActorsRunes(this);
-//		storedRunes -= runes;
-//		runesManager.storeActorsRunes(this, storedRunes);
-////		runesInInventory = runesInInventory - runes;
-//	}
 
 	/**
 	 * @return
 	 */
 	public int getNumOfRunes() {
 		return runesManager.retrieveActorsRunes(this);
-//		return runesInInventory;
 	}
 
-//	public void inputRunes(RunesManager runesManager){
-//		runesManager.storeActorsRunes(this, 0);
-//	}
 
 	/**
 	 * Setter for lastGraceSite attribute.
@@ -143,5 +130,7 @@ public class Player extends Actor implements Resettable {
 	 * @param lastGraceSite the last Site of Lost Grace visited, as a Location.
 	 */
 	public void setLastGraceSite(Location lastGraceSite) { this.lastGraceSite = lastGraceSite; }
+
+	public void setPreviousLocation(Location previousLocation) { this.previousLocation = previousLocation; }
 
 }
