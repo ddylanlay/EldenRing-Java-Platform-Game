@@ -151,7 +151,7 @@ public class Application {
 			}
 		}
 
-		GiantCrab testWolf = new GiantCrab();
+		SkeletalBandit testWolf = new SkeletalBandit();
 
 		gameMap.at(23, 17).addActor(testWolf);
 

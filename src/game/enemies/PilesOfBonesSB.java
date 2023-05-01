@@ -36,7 +36,7 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(!this.isConscious() && Counter >= 3){
+        if(this.isConscious() && Counter >= 3){
             Location currentLocation = map.locationOf(this);
             map.removeActor(this);
 
