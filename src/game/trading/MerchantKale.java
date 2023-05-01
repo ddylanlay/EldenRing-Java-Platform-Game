@@ -9,11 +9,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.actionsgame.PurchaseAction;
+import game.actionsgame.SellAction;
 import game.weapons.Club;
 import game.weapons.GreatKnife;
 import game.weapons.Uchigatana;
-import game.actionsgame.SellAction;
-import game.weapons.*;
+import game.weapons.WeaponType;
 
 import java.util.List;
 

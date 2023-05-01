@@ -1,7 +1,12 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actionsgame.SellAction;
 import game.trading.SellableItem;
 
 import java.util.List;
@@ -33,5 +38,15 @@ public class Grossmesser extends WeaponItem implements SellableItem {
     public List<Action> getAllowableActions() {
         this.addCapability(WeaponType.SELLABLE);
         return super.getAllowableActions();
+    }
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        ActionList actions = new ActionList();
+        for (Exit exit : currentLocation.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.getDisplayChar() == 'K') {
+                actions.add(new SellAction(actor, this, this));
+            }
+        }
     }
 }

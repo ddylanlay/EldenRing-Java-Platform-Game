@@ -40,7 +40,6 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
-        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     /**
@@ -98,9 +97,6 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
-    }
-    public int dropRunes(){
-        return RandomNumberGenerator.getRandomInt(35, 892);
     }
 
 

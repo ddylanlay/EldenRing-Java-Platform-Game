@@ -3,13 +3,17 @@ package game.weapons;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Player;
 import game.actionsgame.SellAction;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple weapon that can be used to attack the enemy.
@@ -22,7 +26,11 @@ import java.util.List;
  * @author Arosh Heenkenda
  */
 public class Club extends WeaponItem implements PurchasableItem, SellableItem {
+    private ArrayList<Actor> actorInRange = new ArrayList<>();
     private Actor actor;
+    private Player player;
+    ActionList actions = new ActionList();
+    Map map;
     /**
      * Constructor
      */
@@ -41,12 +49,19 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
     }
 
     @Override
-    public void tick(Location currentLocation, Actor actor) {}
+    public void tick(Location currentLocation, Actor actor) {
+        for (Exit exit : currentLocation.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.getDisplayChar() == 'K') {
+                actions.add(new SellAction(actor, this, this));
+            }
+        }
+    }
     @Override
     public List<Action> getAllowableActions() {
-        ActionList actions = new ActionList();
-        actions.add(new SellAction(actor, this, this));
         this.addCapability(WeaponType.SELLABLE);
         return super.getAllowableActions();
     }
+
+
 }
