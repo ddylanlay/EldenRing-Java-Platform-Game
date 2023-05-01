@@ -10,14 +10,17 @@ import static game.FancyMessage.YOU_DIED;
 public class ResetAction extends Action {
 
     private String siteName;
+    private Location locationOfSite;
     ResetManager resetManager = ResetManager.getInstance();
 
-    public ResetAction(String siteName){
+    public ResetAction(String siteName, Location locationOfSite){
         this.siteName = siteName;
+        this.locationOfSite = locationOfSite;
     }
 
     @Override
     public String execute(Actor actor, GameMap map){
+        resetManager.updatePlayerSiteLocation(actor, locationOfSite);
         resetManager.run(map);
         return menuDescription(actor);
     }

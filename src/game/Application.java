@@ -165,7 +165,7 @@ public class Application {
 		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(25, 20);
-		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step"));
+		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
