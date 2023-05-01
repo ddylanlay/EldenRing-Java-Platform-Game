@@ -36,7 +36,6 @@ public class Runes extends Ground{
 
     public void retrievedByPlayer(Actor actor){
         runesManager.addRunes(actor, numOfRunes);
-        numOfRunes = 0;
     }
 
 
