@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actionsgame.AttackAction;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.RunesManager;
@@ -56,7 +57,6 @@ public class Player extends Actor implements Resettable {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-
 
 		playerDescription();
 		// return/print the console menu

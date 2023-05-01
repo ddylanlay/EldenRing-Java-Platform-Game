@@ -80,7 +80,7 @@ public class SkeletalBandit extends Actor implements Resettable {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new AttackAction(this, direction));
+            actions.add(new AttackAction(this, direction, getWeaponItem()));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
