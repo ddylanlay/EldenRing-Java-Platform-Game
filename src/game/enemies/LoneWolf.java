@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -33,6 +34,7 @@ import java.util.Map;
 public class LoneWolf extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
 
 
     public LoneWolf() {
@@ -55,6 +57,7 @@ public class LoneWolf extends Enemies implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(wanderContained()){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove reference to LoneWolf when they despawn
                 map.removeActor(this);
                 System.out.println("despawned");
                 return new DoNothingAction();
