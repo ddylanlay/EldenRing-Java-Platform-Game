@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -35,6 +36,7 @@ import java.util.Map;
  */
 public class SkeletalBandit extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    ResetManager resetManager = ResetManager.getInstance();
 
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 184);
@@ -55,6 +57,7 @@ public class SkeletalBandit extends Actor implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove instance of SB when they despawn
                 map.removeActor(this);
                 return new DoNothingAction();
             }
