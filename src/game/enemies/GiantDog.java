@@ -79,7 +79,7 @@ public class GiantDog extends Actor implements Resettable {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new AttackAction(this, direction));
+            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
@@ -159,6 +159,19 @@ public class GiantDog extends Actor implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+    public Weapon equipWeapon(Actor actor){
+        for(Weapon weapon : actor.getWeaponInventory()){
+            System.out.println(asWeapon(weapon));
+            if(asWeapon(weapon) != null){
+
+                return weapon;
+            }
+        }
+        return actor.getIntrinsicWeapon();
+    }
+    public Weapon asWeapon(Weapon weapon){
+        return weapon instanceof Weapon ? weapon : null;
+    }
 }
 
 

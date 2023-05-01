@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Player;
 import game.enemies.Enemies;
+import game.enemies.EnemyType;
 import game.trading.RunesManager;
 
 import java.util.Random;

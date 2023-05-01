@@ -6,10 +6,7 @@ import edu.monash.fit2099.engine.positions.*;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
-import game.enemies.GiantCrab;
-import game.enemies.GiantCrayfish;
-import game.enemies.HeavySkeletalSwordsman;
-import game.enemies.LoneWolf;
+import game.enemies.*;
 import game.environments.*;
 import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
@@ -154,7 +151,7 @@ public class Application {
 			}
 		}
 
-		HeavySkeletalSwordsman testWolf = new HeavySkeletalSwordsman();
+		GiantCrab testWolf = new GiantCrab();
 
 		gameMap.at(23, 17).addActor(testWolf);
 
