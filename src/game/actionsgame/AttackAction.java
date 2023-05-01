@@ -2,10 +2,12 @@ package game.actionsgame;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Player;
 import game.enemies.Enemies;
+import game.enemies.EnemyType;
 import game.trading.RunesManager;
 
 import java.util.Random;
@@ -74,6 +76,8 @@ public class AttackAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
+		System.out.println(weapon);
+		Weapon weapon = equipWeapon(actor);
 		if (weapon == null) {
 			weapon = actor.getIntrinsicWeapon();
 		}
@@ -110,5 +114,20 @@ public class AttackAction extends Action {
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
+	}
+
+	public Weapon equipWeapon(Actor actor){
+		for(Weapon weapon : actor.getWeaponInventory()){
+			System.out.println(asWeapon(weapon));
+			if(asWeapon(weapon) != null){
+
+				return weapon;
+			}
+		}
+		return actor.getIntrinsicWeapon();
+	}
+
+	public Weapon asWeapon(Weapon weapon){
+		return weapon instanceof Weapon ? weapon : null;
 	}
 }

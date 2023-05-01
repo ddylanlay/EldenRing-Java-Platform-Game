@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actionsgame.AttackAction;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.Runes;
@@ -61,8 +62,6 @@ public class Player extends Actor implements Resettable {
 		{
 			Location location = map.locationOf(this);
 			location.setGround(new Runes(this, location.getGround()));
-
-		}
 
 		playerDescription();
 		// return/print the console menu
