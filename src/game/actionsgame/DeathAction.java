@@ -5,9 +5,10 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.trading.Runes;
 import game.ResetManager;
+import game.trading.Runes;
 import game.trading.RunesManager;
 
 /**
@@ -23,6 +24,8 @@ import game.trading.RunesManager;
  */
 public class DeathAction extends Action {
     private Actor attacker;
+    Location location;
+    private Location previousLocation;
     Runes runes;
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
@@ -44,26 +47,21 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
         // drop all items
+        if (target.getDisplayChar() != '@') {
             for (Item item : target.getItemInventory())
                 dropActions.add(item.getDropAction(target));
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
-        if (target.getDisplayChar() == '@'){
-            int runesDropped = runesManager.retrieveActorsRunes(target);
-            //dropActions.add(runes.getDropAction(target));
-            runesManager.storeActorsRunes(target, 0);
-
-        }
-
-        // remove actor if not player
-        if (target.getDisplayChar() != '@') {
-            resetManager.removeResettable(target);
-            map.removeActor(target);
         }
         else {
+            // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
+            location = map.locationOf(target);
+            location.setGround(new Runes(target, location.getGround()));
             resetManager.run(map);
+
+
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;

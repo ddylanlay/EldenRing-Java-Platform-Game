@@ -1,7 +1,9 @@
 package game.trading;
 
-public interface RunesDoing {
-    void addRunes(int runes);
+import edu.monash.fit2099.engine.actors.Actor;
 
-    void removeRunes(int runes);
+public interface RunesDoing {
+    void addRunes(Actor actor);
+
+    void removeRunes(Actor actor);
 }
