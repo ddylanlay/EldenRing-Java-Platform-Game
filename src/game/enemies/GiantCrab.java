@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -38,6 +39,8 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
+
     public GiantCrab() {
         super("Giant Crab", 'c', 407);
         this.behaviours.put(999, new WanderBehaviour());
@@ -58,6 +61,7 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove actor from reset hashmap
                 map.removeActor(this);
                 return new DoNothingAction();
             }
