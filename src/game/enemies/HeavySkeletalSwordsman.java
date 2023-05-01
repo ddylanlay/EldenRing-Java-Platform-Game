@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
 
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
@@ -56,6 +58,7 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove reference to HSS when they despawn
                 map.removeActor(this);
                 return new DoNothingAction();
             }
