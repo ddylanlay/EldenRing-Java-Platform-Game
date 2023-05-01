@@ -117,6 +117,13 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     public void spawnPileOfBones(GameMap map) {
         Location currentLocation = map.locationOf(this);
         if(isConscious() == false){
+
+            //Double check about registering resettables
+            PilesOfBonesSB PoBSB = new PilesOfBonesSB();
+
+//            resetManager.removeResettable(this); //Remove reference to
+//            resetManager.registerResettable(PoBSB, PoBSB); //Register SB Pile of Bones for resetting
+
             map.removeActor(this);
             map.addActor(new PilesOfBonesHSS(), currentLocation);
         }
