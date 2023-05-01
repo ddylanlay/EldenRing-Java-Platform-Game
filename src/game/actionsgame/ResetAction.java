@@ -3,9 +3,7 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.ResetManager;
-import static game.FancyMessage.YOU_DIED;
 
 public class ResetAction extends Action {
 

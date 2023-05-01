@@ -57,9 +57,9 @@ public class DeathAction extends Action {
         }
         else {
             // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
+            resetManager.run(map);
             location = map.locationOf(target);
             location.setGround(new Runes(target, location.getGround()));
-            resetManager.run(map);
 
 
         }

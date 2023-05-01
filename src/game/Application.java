@@ -2,10 +2,11 @@ package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.*;
+import edu.monash.fit2099.engine.positions.FancyGroundFactory;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.World;
 import game.combatclass.CombatClassMenu;
-import game.enemies.GiantCrab;
-import game.enemies.GiantCrayfish;
 import game.enemies.LoneWolf;
 import game.environments.*;
 import game.trading.MerchantKale;
@@ -13,7 +14,6 @@ import game.utils.RandomNumberGenerator;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 
 /**
