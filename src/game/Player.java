@@ -64,13 +64,6 @@ public class Player extends Actor implements Resettable {
 
 			// return/print the console menu
 		}
-
-		if (!this.getWeaponInventory().isEmpty()){
-
-		}
-			return menu.showMenu(this, actions, display);
-		}
-
 		playerDescription();
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
