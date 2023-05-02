@@ -3,13 +3,14 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 public abstract class WeaponAction extends Action {
     private WeaponItem weapon;
 
-    public WeaponAction(WeaponItem weaponItem){
-        this.weapon = weaponItem;
+    public WeaponAction(WeaponItem weapon){
+        this.weapon = weapon;
     }
 
     @Override
