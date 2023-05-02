@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -18,7 +18,6 @@ import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,11 +35,14 @@ import java.util.Map;
 public class GiantDog extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+
+    ResetManager resetManager = ResetManager.getInstance();
     RunesManager runesManager = RunesManager.getInstance();
 
     public GiantDog() {
         super("Giant Dog", 'G', 693);
         this.behaviours.put(999, new WanderBehaviour());
+        resetManager.registerResettable(this, this);
         runesManager.storeActorsRunes(this,dropRunes());
     }
 
@@ -57,7 +59,9 @@ public class GiantDog extends Actor implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
                 map.removeActor(this);
+                System.out.println(this + " removed from map");
                 return new DoNothingAction();
             }
         }
@@ -83,6 +87,7 @@ public class GiantDog extends Actor implements Resettable {
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
+            actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
@@ -162,6 +167,16 @@ public class GiantDog extends Actor implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
+
     public Weapon equipWeapon(Actor actor){
         for(Weapon weapon : actor.getWeaponInventory()){
             System.out.println(asWeapon(weapon));
@@ -180,6 +195,7 @@ public class GiantDog extends Actor implements Resettable {
     {
         return RandomNumberGenerator.getRandomInt(313, 1808);
     }
+
 }
 
 

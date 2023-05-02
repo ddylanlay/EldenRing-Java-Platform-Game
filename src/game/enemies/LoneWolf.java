@@ -6,7 +6,9 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.ResetManager;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
@@ -17,7 +19,6 @@ import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,13 +35,14 @@ import java.util.Map;
 public class LoneWolf extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
 
 
     public LoneWolf() {
         super("Lone Wolf", 'h', 102); //102
         this.behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this, dropRunes());
-
+        resetManager.registerResettable(this, this);
     }
 
     /**
@@ -56,8 +58,9 @@ public class LoneWolf extends Enemies implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(wanderContained()){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove reference to LoneWolf when they despawn
                 map.removeActor(this);
-                System.out.println("despawned");
+                System.out.println(this + " removed from map");
                 return new DoNothingAction();
             }
         }
@@ -84,6 +87,7 @@ public class LoneWolf extends Enemies implements Resettable {
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
+            actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
@@ -151,6 +155,11 @@ public class LoneWolf extends Enemies implements Resettable {
         return weapon instanceof Weapon ? weapon : null;
     }
 
-
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
 
 }
