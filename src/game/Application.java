@@ -2,18 +2,21 @@ package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.*;
+import edu.monash.fit2099.engine.positions.FancyGroundFactory;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.World;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
-import game.enemies.GiantCrab;
-import game.enemies.GiantCrayfish;
 import game.enemies.LoneWolf;
+import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
+import game.weapons.Club;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 
 /**
@@ -26,6 +29,7 @@ import java.util.Random;
 public class Application {
 	private static EastFactory eastFactory = new EastFactory();
 	private static WestFactory westFactory = new WestFactory();
+	private static WeaponItem club = new Club();
 	public static void main(String[] args) {
 
 		World world = new World(new Display());
@@ -151,7 +155,7 @@ public class Application {
 			}
 		}
 
-		LoneWolf testWolf = new LoneWolf();
+		SkeletalBandit testWolf = new SkeletalBandit();
 
 		gameMap.at(40, 17).addActor(testWolf);
 //
@@ -162,6 +166,7 @@ public class Application {
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
+		gameMap.at(34, 10).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(25, 20);
@@ -169,12 +174,13 @@ public class Application {
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
+		player.addWeaponToInventory(club);
 
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
-
-		world.addPlayer(player, gameMap.at(23, 16));
+		System.out.println(player.getWeaponInventory());
+		world.addPlayer(player, gameMap.at(36, 10));
 		world.run();
 	}
 }

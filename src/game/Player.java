@@ -57,11 +57,18 @@ public class Player extends Actor implements Resettable {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-		if(hitPoints <= 0)
-		{
+		playerDescription();
+		if (hitPoints <= 0) {
 			Location location = map.locationOf(this);
 			location.setGround(new Runes(this, location.getGround()));
 
+			// return/print the console menu
+		}
+
+		if (!this.getWeaponInventory().isEmpty()){
+
+
+			return menu.showMenu(this, actions, display);
 		}
 
 		playerDescription();

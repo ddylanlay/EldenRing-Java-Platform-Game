@@ -8,10 +8,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.ResetManager;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
+import game.trading.RunesManager;
+import game.utils.RandomNumberGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,19 +30,22 @@ import java.util.Map;
  */
 public class PilesOfBonesSB extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    RunesManager runesManager = RunesManager.getInstance();
     private int Counter = 0;
     ResetManager resetManager = ResetManager.getInstance();
 
     public PilesOfBonesSB(){
         super("Piles of Bones", 'X', 1);
         resetManager.registerResettable(this, this);
+        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(!this.isConscious() && Counter >= 3){
+        if(this.isConscious() && Counter >= 3){
             Location currentLocation = map.locationOf(this);
             resetManager.removeResettable(this);
             map.removeActor(this);
+            System.out.println("Skeletal Bandit respawned");
             map.addActor(new SkeletalBandit(), currentLocation);
         }
         for (Behaviour behaviour : behaviours.values()) {
@@ -51,12 +57,17 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
 
         return new DoNothingAction();
     }
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(35, 892);
+    }
 
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
@@ -86,6 +97,20 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
      */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
+    public Weapon equipWeapon(Actor actor){
+        for(Weapon weapon : actor.getWeaponInventory()){
+            System.out.println(asWeapon(weapon));
+            if(asWeapon(weapon) != null){
+
+                return weapon;
+            }
+        }
+        return actor.getIntrinsicWeapon();
+    }
+    public Weapon asWeapon(Weapon weapon){
+        return weapon instanceof Weapon ? weapon : null;
+    }
 
 }
 

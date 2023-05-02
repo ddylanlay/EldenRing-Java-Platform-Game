@@ -16,6 +16,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,12 +35,15 @@ import java.util.Map;
 public class GiantDog extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+
     ResetManager resetManager = ResetManager.getInstance();
+    RunesManager runesManager = RunesManager.getInstance();
 
     public GiantDog() {
         super("Giant Dog", 'G', 693);
         this.behaviours.put(999, new WanderBehaviour());
         resetManager.registerResettable(this, this);
+        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     /**
@@ -57,6 +61,7 @@ public class GiantDog extends Actor implements Resettable {
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
                 map.removeActor(this);
+                System.out.println(this + " removed from map");
                 return new DoNothingAction();
             }
         }
@@ -81,6 +86,7 @@ public class GiantDog extends Actor implements Resettable {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
@@ -162,12 +168,33 @@ public class GiantDog extends Actor implements Resettable {
     @Override
     public boolean isPlayer() { return false; }
 
+
     /**
      * Does nothing for an enemy.
      * @param lastSiteOfGrace
      */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
+
+    public Weapon equipWeapon(Actor actor){
+        for(Weapon weapon : actor.getWeaponInventory()){
+            System.out.println(asWeapon(weapon));
+            if(asWeapon(weapon) != null){
+
+                return weapon;
+            }
+        }
+        return actor.getIntrinsicWeapon();
+    }
+    public Weapon asWeapon(Weapon weapon){
+        return weapon instanceof Weapon ? weapon : null;
+    }
+
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(313, 1808);
+    }
 
 }
 

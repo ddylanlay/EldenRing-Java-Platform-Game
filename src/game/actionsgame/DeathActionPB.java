@@ -7,9 +7,11 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.FancyMessage;
-import game.ResetManager;
+import game.enemies.HeavySkeletalSwordsman;
+import game.enemies.PilesOfBonesHSS;
+import game.enemies.PilesOfBonesSB;
 import game.trading.Runes;
+import game.ResetManager;
 import game.trading.RunesManager;
 
 /**
@@ -23,15 +25,13 @@ import game.trading.RunesManager;
  * @author Dylan Lay
  *
  */
-public class DeathAction extends Action {
+public class DeathActionPB extends Action {
     private Actor attacker;
-    Location location;
-    private Location previousLocation;
     Runes runes;
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 
-    public DeathAction(Actor actor) {
+    public DeathActionPB(Actor actor) {
         this.attacker = actor;
     }
 
@@ -48,22 +48,25 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
         // drop all items
+        spawnPileOfBones(target, map);
+        for (Item item : target.getItemInventory())
+            dropActions.add(item.getDropAction(target));
+        for (Action drop : dropActions)
+            drop.execute(target, map);
+        if (target.getDisplayChar() == '@'){
+            int runesDropped = runesManager.retrieveActorsRunes(target);
+            //dropActions.add(runes.getDropAction(target));
+            runesManager.storeActorsRunes(target, 0);
+
+        }
+
+        // remove actor if not player
         if (target.getDisplayChar() != '@') {
-            for (Item item : target.getItemInventory())
-                dropActions.add(item.getDropAction(target));
-            for (WeaponItem weapon : target.getWeaponInventory())
-                dropActions.add(weapon.getDropAction(target));
-            for (Action drop : dropActions)
-                drop.execute(target, map);
+            resetManager.removeResettable(target);
+            map.removeActor(target);
         }
         else {
-            // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
             resetManager.run(map);
-            System.out.println(FancyMessage.YOU_DIED);
-            location = map.locationOf(target);
-            location.setGround(new Runes(target, location.getGround()));
-
-
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;
@@ -72,5 +75,19 @@ public class DeathAction extends Action {
     @Override
     public String menuDescription(Actor actor) {
         return actor + " is killed.";
+    }
+    public void spawnPileOfBones(Actor target, GameMap map) {
+        Location currentLocation = map.locationOf(target);
+        if(target.isConscious() == false){
+            if(target instanceof HeavySkeletalSwordsman) {
+                map.removeActor(target);
+                map.addActor(new PilesOfBonesHSS(), currentLocation);
+            }
+            else{
+                map.removeActor(target);
+                map.addActor(new PilesOfBonesSB(), currentLocation);
+            }
+
+        }
     }
 }
