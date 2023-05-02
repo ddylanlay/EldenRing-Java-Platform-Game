@@ -2,11 +2,13 @@ package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.*;
-import edu.monash.fit2099.engine.weapons.Weapon;
+import edu.monash.fit2099.engine.positions.FancyGroundFactory;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
-import game.enemies.*;
+import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
@@ -14,7 +16,6 @@ import game.weapons.Club;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 
 /**

@@ -9,9 +9,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.actionsgame.PurchaseAction;
-import game.weapons.Club;
-import game.weapons.GreatKnife;
-import game.weapons.Uchigatana;
 import game.actionsgame.SellAction;
 import game.weapons.*;
 
@@ -34,6 +31,7 @@ public class MerchantKale extends Actor {
         actions.add(new PurchaseAction(otherActor, new Uchigatana(), new Uchigatana()));
         actions.add(new PurchaseAction(otherActor, new Club(), new Club()));
         actions.add(new PurchaseAction(otherActor, new GreatKnife(), new GreatKnife()));
+        actions.add(new PurchaseAction(otherActor, new Scimitar(), new Scimitar()));
         for (WeaponItem weapon : weaponInventory) {
             if (weapon.hasCapability(WeaponType.SELLABLE)) {
                 actions.add(new SellAction(otherActor, weapon, (SellableItem) weapon));

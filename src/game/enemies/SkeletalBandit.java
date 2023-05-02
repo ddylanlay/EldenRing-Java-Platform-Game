@@ -18,8 +18,6 @@ import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.utils.RandomNumberGenerator;
-import game.weapons.Club;
-import game.weapons.Grossmesser;
 import game.weapons.Scimitar;
 
 import java.util.HashMap;
@@ -117,6 +115,7 @@ public class SkeletalBandit extends Actor implements Resettable {
      */
     @Override
     public void reset(GameMap gameMap) { gameMap.removeActor(this); }
+
 
     /**
      * Tells us whether this is the player or not.

@@ -16,6 +16,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
@@ -35,10 +36,12 @@ import java.util.Map;
 public class GiantDog extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+    RunesManager runesManager = RunesManager.getInstance();
 
     public GiantDog() {
         super("Giant Dog", 'G', 693);
         this.behaviours.put(999, new WanderBehaviour());
+        runesManager.storeActorsRunes(this,dropRunes());
     }
 
     /**
@@ -171,6 +174,11 @@ public class GiantDog extends Actor implements Resettable {
     }
     public Weapon asWeapon(Weapon weapon){
         return weapon instanceof Weapon ? weapon : null;
+    }
+
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(313, 1808);
     }
 }
 

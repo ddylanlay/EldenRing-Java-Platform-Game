@@ -12,6 +12,8 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.behaviours.Behaviour;
+import game.trading.RunesManager;
+import game.utils.RandomNumberGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +29,12 @@ import java.util.Map;
  */
 public class PilesOfBonesSB extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    RunesManager runesManager = RunesManager.getInstance();
     private int Counter = 0;
 
     public PilesOfBonesSB(){
         super("Piles of Bones", 'X', 1);
+        runesManager.storeActorsRunes(this,dropRunes());
 
 
     }
@@ -50,6 +54,10 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
         Counter += 1;
 
         return new DoNothingAction();
+    }
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(35, 892);
     }
 
 

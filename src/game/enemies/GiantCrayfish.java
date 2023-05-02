@@ -17,13 +17,13 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Giant Crayfish Enemy
@@ -38,9 +38,11 @@ import java.util.Random;
 public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+    RunesManager runesManager = RunesManager.getInstance();
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
         this.behaviours.put(999, new WanderBehaviour());
+        runesManager.storeActorsRunes(this,dropRunes());
 
     }
 
@@ -147,6 +149,10 @@ public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
         }
     }
 
+    public int dropRunes()
+    {
+        return RandomNumberGenerator.getRandomInt(500, 2374);
+    }
     /**
      * The reset action for Giant Crayfish, removes them from map.
      *
