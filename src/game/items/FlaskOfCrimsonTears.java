@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Resettable;
 import game.actionsgame.HealAction;
 
@@ -92,6 +93,11 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
 
     @Override
     public boolean isPlayer() { return false; }
+
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) {
+
+    }
 
 
 }
