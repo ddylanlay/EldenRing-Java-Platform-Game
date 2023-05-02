@@ -91,13 +91,21 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
     @Override
     public void reset(GameMap gameMap) { remainingUses = MAX_USES; }
 
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, not the player.
+     */
     @Override
     public boolean isPlayer() { return false; }
 
+    /**
+     * Will do nothing, as its not the player
+     *
+     * @param lastSiteOfGrace
+     */
     @Override
-    public void setLastSiteOfGrace(Location lastSiteOfGrace) {
-
-    }
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) {  }
 
 
 }
