@@ -12,7 +12,6 @@ import game.enemies.LoneWolf;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
-import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
 
 import java.util.Arrays;
@@ -166,7 +165,7 @@ public class Application {
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
-		gameMap.at(34, 10).addActor(new LoneWolf());
+		gameMap.at(35, 10).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(25, 20);
@@ -174,7 +173,6 @@ public class Application {
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
-		player.addWeaponToInventory(club);
 
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();

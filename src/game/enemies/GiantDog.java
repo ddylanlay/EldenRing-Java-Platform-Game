@@ -19,6 +19,7 @@ import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
