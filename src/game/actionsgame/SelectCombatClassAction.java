@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Player;
 import game.combatclass.CombatClass;
-import game.trading.SellableItem;
 
 public class SelectCombatClassAction extends Action {
 
@@ -24,7 +23,7 @@ public class SelectCombatClassAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         WeaponItem newWeapon = combatClass.getClassWeapon();
-        SellableItem newWeapon1 = combatClass.getClassWeapon1();
+
         int maxHealth = combatClass.getMaxHitPoints();
         actor.addWeaponToInventory(newWeapon);
         actor.resetMaxHp(maxHealth);

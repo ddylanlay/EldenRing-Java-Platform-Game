@@ -6,7 +6,6 @@ public enum WeaponType {
     DAGGER,
     HAMMER,
     CURVED_SWORD,
-    PURCHASEABLE,
     SELLABLE
 
 }
