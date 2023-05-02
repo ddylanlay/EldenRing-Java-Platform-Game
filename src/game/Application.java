@@ -14,6 +14,7 @@ import game.environments.*;
 import game.trading.MerchantKale;
 import game.weapons.Club;
 import game.weapons.Grossmesser;
+import game.weapons.Scimitar;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
 public class Application {
 	private static EastFactory eastFactory = new EastFactory();
 	private static WestFactory westFactory = new WestFactory();
-	private static WeaponItem club = new Grossmesser();
+	private static WeaponItem club = new Scimitar();
 	public static void main(String[] args) {
 
 		World world = new World(new Display());
@@ -178,7 +179,7 @@ public class Application {
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
-
+		player.addWeaponToInventory(club);
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));

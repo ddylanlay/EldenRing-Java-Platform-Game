@@ -6,28 +6,31 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.utils.RandomNumberGenerator;
+import game.weapons.Grossmesser;
 
 import java.util.ArrayList;
 
-public class SpinAttackAction extends WeaponAction{
+public class SpinAttackActionScimitar extends WeaponAction{
     private ArrayList<Actor> actorInRange = new ArrayList<>();
 
-    public SpinAttackAction(WeaponItem weapon) {
+    public SpinAttackActionScimitar(WeaponItem weapon) {
         super(weapon);
-
     }
     @Override
     public String execute(Actor actor, GameMap map) {
         scanAround(actor, map);
         String result = "";
         for(Actor target: actorInRange){
-            if(RandomNumberGenerator.getRandomInt(100)<=100){
+            if(RandomNumberGenerator.getRandomInt(100)<=88){
                 actor.hurt(118);
                 System.out.println(target + " is sliced for 118 damage.");
                 if(actor.isConscious() == false){
                     map.removeActor(target);
                     System.out.println(target + " has been killed.");
                 }
+            }
+            else{
+                System.out.println(actor + " missed the " + target);
             }
         }
         System.out.println(actorInRange);
@@ -53,6 +56,7 @@ public class SpinAttackAction extends WeaponAction{
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks anything in the surrounding with Grossmesser";
+        return actor + " attacks anything in the surrounding with Scimitar";
     }
 }
+

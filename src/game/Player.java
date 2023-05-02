@@ -7,14 +7,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.Weapon;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actionsgame.SpinAttackAction;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.Runes;
 import game.trading.RunesManager;
-import game.weapons.Grossmesser;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
