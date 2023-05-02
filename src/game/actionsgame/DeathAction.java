@@ -55,6 +55,8 @@ public class DeathAction extends Action {
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
+            resetManager.removeResettable(target);
+            map.removeActor(target);
         }
         else {
             // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
