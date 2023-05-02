@@ -43,7 +43,7 @@ public class PilesOfBonesHSS extends Enemies implements Resettable {
         if(this.isConscious() && Counter >= 3){
             Location currentLocation = map.locationOf(this);
             map.removeActor(this);
-
+            System.out.println("Heavy Skeletal Swordsman respawned");
             map.addActor(new HeavySkeletalSwordsman(), currentLocation);
         }
         for (Behaviour behaviour : behaviours.values()) {

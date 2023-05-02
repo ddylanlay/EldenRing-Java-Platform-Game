@@ -57,7 +57,7 @@ public class LoneWolf extends Enemies implements Resettable {
         if(wanderContained()){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 map.removeActor(this);
-                System.out.println("despawned");
+                System.out.println(this + " removed from map");
                 return new DoNothingAction();
             }
         }

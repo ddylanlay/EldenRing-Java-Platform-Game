@@ -43,7 +43,7 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
         if(this.isConscious() && Counter >= 3){
             Location currentLocation = map.locationOf(this);
             map.removeActor(this);
-
+            System.out.println("Skeletal Bandit respawned");
             map.addActor(new SkeletalBandit(), currentLocation);
         }
         for (Behaviour behaviour : behaviours.values()) {

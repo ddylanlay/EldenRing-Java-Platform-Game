@@ -56,6 +56,7 @@ public class SkeletalBandit extends Actor implements Resettable {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 map.removeActor(this);
+                System.out.println(this + " removed from map");
                 return new DoNothingAction();
             }
         }
