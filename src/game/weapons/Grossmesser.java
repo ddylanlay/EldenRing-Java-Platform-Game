@@ -22,12 +22,14 @@ import java.util.List;
  *
  */
 public class Grossmesser extends WeaponItem implements SellableItem {
+    private ActionList allowableActions;
     ActionList actions = new ActionList();
     /**
      * Constructor
      */
     public Grossmesser(){
         super("Grossmesser", '?', 115, "slashes", 85);
+        this.allowableActions = new ActionList();
 
 
     }
@@ -37,16 +39,22 @@ public class Grossmesser extends WeaponItem implements SellableItem {
     }
     @Override
     public List<Action> getAllowableActions() {
-        this.addCapability(WeaponType.SELLABLE);
-        return super.getAllowableActions();
+        return this.allowableActions.getUnmodifiableActionList();
     }
     @Override
     public void tick(Location currentLocation, Actor actor) {
+        int counter = 0;
         ActionList actions = new ActionList();
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
-            if (destination.getDisplayChar() == 'K') {
-                actions.add(new SellAction(actor, this, this));
+            if (destination.getDisplayChar() == 'K'&& this.allowableActions.size() == 0) {
+                this.allowableActions.add(new SellAction(actor, this, this));
+                counter++;
+
+            }
+            else if(this.allowableActions.size() != 0 && counter == 0){
+                this.allowableActions.clear();
+
             }
         }
     }

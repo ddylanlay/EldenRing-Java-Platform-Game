@@ -29,13 +29,14 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     private Actor actor;
     private Player player;
-    ActionList actions = new ActionList();
+    private ActionList allowableActions;
     Map map;
     /**
      * Constructor
      */
     public Club() {
         super("Club", '!', 103, "bonks", 80);
+        this.allowableActions = new ActionList();
     }
 
     public int getPurchasePrice(){
@@ -50,17 +51,25 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
 
     @Override
     public void tick(Location currentLocation, Actor actor) {
+        int counter = 0;
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
-            if (destination.getDisplayChar() == 'K') {
-                actions.add(new SellAction(actor, this, this));
+            if (destination.getDisplayChar() == 'K' && this.allowableActions.size() == 0) {
+                this.allowableActions.add(new SellAction(actor, this, this));
+                counter ++;
+            }
+            else if(this.allowableActions.size() != 0 && counter == 0){
+                this.allowableActions.clear();
+
             }
         }
+//        if(counter == 0 && this.allowableActions.size() != 0){
+//            this.allowableActions.clear();
+//        }
     }
     @Override
     public List<Action> getAllowableActions() {
-        this.addCapability(WeaponType.SELLABLE);
-        return super.getAllowableActions();
+        return this.allowableActions.getUnmodifiableActionList();
     }
 
 
