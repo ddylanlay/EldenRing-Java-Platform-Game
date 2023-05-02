@@ -69,6 +69,11 @@ public class Player extends Actor implements Resettable {
 
 		}
 			return menu.showMenu(this, actions, display);
+		}
+
+		playerDescription();
+		// return/print the console menu
+		return menu.showMenu(this, actions, display);
 	}
 
 	@Override
