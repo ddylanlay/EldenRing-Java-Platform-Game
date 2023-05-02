@@ -56,9 +56,9 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
         return newDamage;
 
     }
-    public Action getSkill(Actor holder) {
-        return
-    }
+//    public Action getSkill(Actor holder) {
+//        return
+//    }
 
 
     @Override
