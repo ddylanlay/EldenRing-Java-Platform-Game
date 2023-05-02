@@ -1,29 +1,41 @@
 package game.trading;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.*;
+import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actionsgame.RetrieveAction;
 
-public class Runes extends Item {
+public class Runes extends Ground{
 
-    private final int value;
+    private int numOfRunes;
+    private Ground originalGround;
+    RunesManager runesManager = RunesManager.getInstance();
 
-    public Runes(int value) {
-        super("Runes", '$', true);
-        this.value = value;
+    public Runes(Actor actor, Ground originalGround) {
+        super('$');
+        this.originalGround = originalGround;
+        numOfRunes = runesManager.retrieveActorsRunes(actor);
+        runesManager.storeActorsRunes(actor, 0);
     }
 
-    @Override
-    public PickUpAction getPickUpAction(Actor actor) {
-        if(portable)
-            return new PickUpItemAction(this);
-        return null;
-    }
 
     @Override
-    public DropAction getDropAction(Actor actor) {
-        if(portable)
-            return new DropItemAction(this);
-        return null;
+    public ActionList allowableActions(Actor actor, Location location, String direction){
+            ActionList actions = new ActionList();
+            actions.add(new RetrieveAction(this));
+            return actions;
+        }
+    public Ground getOriginalGround() {
+        return originalGround;
+    }
+
+    public int getNumOfRunes(){
+        return numOfRunes;
+    }
+
+    public void retrievedByPlayer(Actor actor){
+        runesManager.addRunes(actor, numOfRunes);
     }
 
 

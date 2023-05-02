@@ -6,17 +6,25 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.ResetManager;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
+import game.actionsgame.UnsheatheAttackAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
+import game.weapons.WeaponType;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,19 +32,22 @@ import java.util.Map;
  *
  * Created by:
  * @author Adrian Kristanto
+ *
  * Modified by:
+ * @author Arosh Heenkenda
  *
  */
-public class LoneWolf extends Enemies{
+public class LoneWolf extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
 
 
     public LoneWolf() {
         super("Lone Wolf", 'h', 102); //102
         this.behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this, dropRunes());
-
+        resetManager.registerResettable(this, this);
     }
 
     /**
@@ -50,10 +61,19 @@ public class LoneWolf extends Enemies{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if(wanderContained()){
+            if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove reference to LoneWolf when they despawn
+                map.removeActor(this);
+                System.out.println(this + " removed from map");
+                return new DoNothingAction();
+            }
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
                 return action;
+
         }
         return new DoNothingAction();
     }
@@ -70,8 +90,17 @@ public class LoneWolf extends Enemies{
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+        List<WeaponItem> weaponInventory = otherActor.getWeaponInventory();
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            for (WeaponItem weapon : weaponInventory) {
+                if (weapon.hasCapability(WeaponType.KATANA)) {
+                    actions.add(new UnsheatheAttackAction(this, direction, weapon));
+                }
+            }
+
+            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackAction(this, direction));
+
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
@@ -93,6 +122,15 @@ public class LoneWolf extends Enemies{
         return false;
     }
 
+    public boolean wanderContained(){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) instanceof WanderBehaviour){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
@@ -100,5 +138,41 @@ public class LoneWolf extends Enemies{
     public int dropRunes(){
         return RandomNumberGenerator.getRandomInt(55, 1470);
     }
+
+    /**
+     * Reset method for Lone Wolf, removes them from player map.
+     *
+     * @param gameMap map the player is on, class GameMap.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
+
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
+    public Weapon equipWeapon(Actor actor){
+        for(Weapon weapon : actor.getWeaponInventory()){
+            System.out.println(asWeapon(weapon));
+            if(asWeapon(weapon) != null){
+
+                return weapon;
+            }
+        }
+        return actor.getIntrinsicWeapon();
+    }
+    public Weapon asWeapon(Weapon weapon){
+        return weapon instanceof Weapon ? weapon : null;
+    }
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
 
 }

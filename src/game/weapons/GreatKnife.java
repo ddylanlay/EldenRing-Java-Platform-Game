@@ -3,6 +3,7 @@ package game.weapons;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
@@ -33,17 +34,26 @@ public class GreatKnife extends WeaponItem implements PurchasableItem, SellableI
     }
 
 
+    @Override
     public void tick(Location currentLocation, Actor actor) {
-        this.allowableActions.add(new SellAction(actor, this, this));
+        int counter = 0;
+        for (Exit exit : currentLocation.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.getDisplayChar() == 'K'&& this.allowableActions.size() == 0) {
+                this.allowableActions.add(new SellAction(actor, this, this));
+                counter ++;
+            }
+            else if(this.allowableActions.size() != 0 && counter == 0){
+                this.allowableActions.clear();
+
+            }
+        }
     }
     @Override
     public List<Action> getAllowableActions() {
-        ActionList actions = new ActionList();
-        actions.add(new SellAction(actor, this, this));
-        this.addCapability(WeaponType.SELLABLE);
-        return super.getAllowableActions();
+        this.addCapability(WeaponType.DAGGER);
+        return this.allowableActions.getUnmodifiableActionList();
     }
-
     public int getPurchasePrice(){
         int purchasePrice = 3500;
         return purchasePrice;

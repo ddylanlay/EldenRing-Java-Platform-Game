@@ -8,12 +8,17 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.ResetManager;
+import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
+import game.actionsgame.AttackActionPilesOfBones;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
-import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 
@@ -21,17 +26,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Heavy Skeletal Swordsman Enemy.
+ *
+ * Created by:
  * @author Jamie Tran
+ *
+ * Modified by:
+ * @author Arosh Heenkenda
  */
-public class HeavySkeletalSwordsman extends Enemies {
+public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-    RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
+
+    private Weapon weapon;
 
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
-        runesManager.storeActorsRunes(this,dropRunes());
+        resetManager.registerResettable(this, this);
+        this.weapon = new Grossmesser();
     }
 
     /**
@@ -45,6 +59,17 @@ public class HeavySkeletalSwordsman extends Enemies {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if(this.isConscious() == false){
+            spawnPileOfBones(map);
+        }
+        if(behaviours.get(999) instanceof WanderBehaviour == true){
+            if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove reference to HSS when they despawn
+                map.removeActor(this);
+                System.out.println(this + " removed from map");
+                return new DoNothingAction();
+            }
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -64,11 +89,19 @@ public class HeavySkeletalSwordsman extends Enemies {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackAction(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
+            if(followContained(followBehaviour) == false){
+                behaviours.clear();
+                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(500, followBehaviour);
+            }
         }
+
         return actions;
     }
 
@@ -76,9 +109,6 @@ public class HeavySkeletalSwordsman extends Enemies {
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(97, "bites", 95);
-    }
-    public int dropRunes(){
-        return RandomNumberGenerator.getRandomInt(35, 892);
     }
 
 
@@ -92,8 +122,57 @@ public class HeavySkeletalSwordsman extends Enemies {
     public void spawnPileOfBones(GameMap map) {
         Location currentLocation = map.locationOf(this);
         if(isConscious() == false){
+
+            //Double check about registering resettables
+            resetManager.removeResettable(this); //Remove reference to HSS
             map.removeActor(this);
             map.addActor(new PilesOfBonesHSS(), currentLocation);
         }
     }
+    public boolean followContained(FollowBehaviour behaviourContained){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Reset method for the Heavy Skeletal Swordsman, removes them from player map.
+     *
+     * @param gameMap game map the player is on, class GameMap.
+     */
+    @Override
+    public void reset(GameMap gameMap) { gameMap.removeActor(this); }
+
+    /**
+     * Tells us whether this is the player or not.
+     *
+     * @return false, this is not the player.
+     */
+    @Override
+    public boolean isPlayer() { return false; }
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
+    public Weapon equipWeapon(Actor actor){
+        for(Weapon weapon : actor.getWeaponInventory()){
+            System.out.println(asWeapon(weapon));
+            if(asWeapon(weapon) != null){
+
+                return weapon;
+            }
+        }
+        return actor.getIntrinsicWeapon();
+    }
+    public Weapon asWeapon(Weapon weapon){
+        return weapon instanceof Weapon ? weapon : null;
+    }
+
 }

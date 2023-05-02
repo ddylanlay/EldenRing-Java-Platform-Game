@@ -23,6 +23,7 @@ public class SelectCombatClassAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         WeaponItem newWeapon = combatClass.getClassWeapon();
+
         int maxHealth = combatClass.getMaxHitPoints();
         actor.addWeaponToInventory(newWeapon);
         actor.resetMaxHp(maxHealth);
