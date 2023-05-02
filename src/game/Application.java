@@ -90,58 +90,60 @@ public class Application {
 //		);
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
-		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
-		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
-		if(xRand < 75/2){
-			gameMap.at(xRand, yRand).setGround(new Graveyard(westFactory));
-			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
-			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
-			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
-		}
-		else{
-			gameMap.at(xRand, yRand).setGround(new Graveyard(eastFactory));
-			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
-			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
-			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
-		}
-
-		int xxRand = RandomNumberGenerator.getRandomInt(1, 72);
-		int yyRand = RandomNumberGenerator.getRandomInt(1, 20);
-		if(xRand < 72/2){
-
-			for(int i = 0; i < 5; i++) {
-				for (int j = 3; j > -1; j--) {
-					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
-				}
-			}
-		}
-		else{
-			for(int i = 0; i < 5; i++){
-				for(int j = 3; i > -1; i--){
-					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
-				}
-			}
-		}
 
 
-		int x_Rand = RandomNumberGenerator.getRandomInt(1, 68);
-
-		int y_Rand = RandomNumberGenerator.getRandomInt(1, 19);
-		if(xRand < 68/2){
-
-			for(int i = 0; i < 3; i++) {
-				for (int j = 3; j > -1; j--) {
-					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
-				}
-			}
-		}
-		else{
-			for(int i = 0; i < 5; i++){
-				for(int j = 3; i > -1; i--){
-					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
-				}
-			}
-		}
+//		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
+//		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
+//		if(xRand < 75/2){
+//			gameMap.at(xRand, yRand).setGround(new Graveyard(westFactory));
+//			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
+//			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
+//			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
+//		}
+//		else{
+//			gameMap.at(xRand, yRand).setGround(new Graveyard(eastFactory));
+//			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
+//			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
+//			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
+//		}
+//
+//		int xxRand = RandomNumberGenerator.getRandomInt(1, 72);
+//		int yyRand = RandomNumberGenerator.getRandomInt(1, 20);
+//		if(xRand < 72/2){
+//
+//			for(int i = 0; i < 5; i++) {
+//				for (int j = 3; j > -1; j--) {
+//					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
+//				}
+//			}
+//		}
+//		else{
+//			for(int i = 0; i < 5; i++){
+//				for(int j = 3; i > -1; i--){
+//					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
+//				}
+//			}
+//		}
+//
+//
+//		int x_Rand = RandomNumberGenerator.getRandomInt(1, 68);
+//
+//		int y_Rand = RandomNumberGenerator.getRandomInt(1, 19);
+//		if(xRand < 68/2){
+//
+//			for(int i = 0; i < 3; i++) {
+//				for (int j = 3; j > -1; j--) {
+//					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
+//				}
+//			}
+//		}
+//		else{
+//			for(int i = 0; i < 5; i++){
+//				for(int j = 3; i > -1; i--){
+//					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
+//				}
+//			}
+//		}
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -155,10 +157,10 @@ public class Application {
 
 		SkeletalBandit testWolf = new SkeletalBandit();
 
-		gameMap.at(23, 17).addActor(testWolf);
-
-		ResetManager resetManager = ResetManager.getInstance();
-		resetManager.registerResettable(testWolf, testWolf);
+		gameMap.at(40, 17).addActor(testWolf);
+//
+//		ResetManager resetManager = ResetManager.getInstance();
+//		resetManager.registerResettable(testWolf, testWolf);
 
 		//tester below
 		//gameMap.at(35, 10).addActor(new LoneWolf());
@@ -168,7 +170,7 @@ public class Application {
 		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(25, 20);
-		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step"));
+		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);

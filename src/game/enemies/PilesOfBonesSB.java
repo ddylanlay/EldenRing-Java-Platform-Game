@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ResetManager;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
@@ -31,17 +32,18 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
     private int Counter = 0;
+    ResetManager resetManager = ResetManager.getInstance();
 
     public PilesOfBonesSB(){
         super("Piles of Bones", 'X', 1);
+        resetManager.registerResettable(this, this);
         runesManager.storeActorsRunes(this,dropRunes());
-
-
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(this.isConscious() && Counter >= 3){
             Location currentLocation = map.locationOf(this);
+            resetManager.removeResettable(this);
             map.removeActor(this);
             System.out.println("Skeletal Bandit respawned");
             map.addActor(new SkeletalBandit(), currentLocation);
@@ -88,6 +90,14 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
     public Weapon equipWeapon(Actor actor){
         for(Weapon weapon : actor.getWeaponInventory()){
             System.out.println(asWeapon(weapon));
@@ -101,5 +111,6 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
     public Weapon asWeapon(Weapon weapon){
         return weapon instanceof Weapon ? weapon : null;
     }
+
 }
 

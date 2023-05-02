@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.ResetManager;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
@@ -22,7 +23,6 @@ import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 import game.weapons.Scimitar;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,12 +37,18 @@ import java.util.Map;
  */
 public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+
     RunesManager runesManager = RunesManager.getInstance();
+    ResetManager resetManager = ResetManager.getInstance();
+
     private Weapon weapon;
+
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
+        runesManager.storeActorsRunes(this,dropRunes());
+        resetManager.registerResettable(this, this);
         this.weapon = new Grossmesser();
     }
 
@@ -62,6 +68,7 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
         }
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove reference to HSS when they despawn
                 map.removeActor(this);
                 System.out.println(this + " removed from map");
                 return new DoNothingAction();
@@ -119,6 +126,9 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     public void spawnPileOfBones(GameMap map) {
         Location currentLocation = map.locationOf(this);
         if(isConscious() == false){
+
+            //Double check about registering resettables
+            resetManager.removeResettable(this); //Remove reference to HSS
             map.removeActor(this);
             map.addActor(new PilesOfBonesHSS(), currentLocation);
         }
@@ -147,6 +157,14 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
+
     public Weapon equipWeapon(Actor actor){
         for(Weapon weapon : actor.getWeaponInventory()){
             System.out.println(asWeapon(weapon));
@@ -160,4 +178,5 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     public Weapon asWeapon(Weapon weapon){
         return weapon instanceof Weapon ? weapon : null;
     }
+
 }

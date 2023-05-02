@@ -2,6 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.items.FlaskOfCrimsonTears;
 
 import java.util.ArrayList;
@@ -73,5 +74,16 @@ public class ResetManager {
      * @param actor
      */
     public void removeResettable(Actor actor) { resettables.remove(actor); }
+
+    /**
+     *
+     * @param actor
+     * @param locationOfSite
+     */
+    public void updatePlayerSiteLocation(Actor actor, Location locationOfSite){
+
+        Resettable player = resettables.get(actor);
+        player.setLastSiteOfGrace(locationOfSite);
+    }
 
 }
