@@ -48,9 +48,6 @@ public class GreatKnife extends WeaponItem implements PurchasableItem, SellableI
 
             }
         }
-//        if(counter == 0 && this.allowableActions.size() != 0){
-//            this.allowableActions.clear();
-//        }
     }
     @Override
     public List<Action> getAllowableActions() {

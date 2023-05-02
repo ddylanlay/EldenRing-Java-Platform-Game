@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
+import game.enemies.LoneWolf;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
@@ -141,15 +142,15 @@ public class Application {
 //			}
 //		}
 //
-//		// BEHOLD, ELDEN RING
-//		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
-//			new Display().println(line);
-//			try {
-//				Thread.sleep(200);
-//			} catch (Exception exception) {
-//				exception.printStackTrace();
-//			}
-//		}
+		// BEHOLD, ELDEN RING
+		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
+			new Display().println(line);
+			try {
+				Thread.sleep(200);
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
+		}
 
 		SkeletalBandit testWolf = new SkeletalBandit();
 
@@ -162,6 +163,7 @@ public class Application {
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
+		gameMap.at(34, 10).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(25, 20);

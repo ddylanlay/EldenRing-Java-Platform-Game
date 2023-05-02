@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.FancyMessage;
 import game.ResetManager;
 import game.trading.Runes;
 import game.trading.RunesManager;
@@ -58,6 +59,7 @@ public class DeathAction extends Action {
         else {
             // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
             resetManager.run(map);
+            System.out.println(FancyMessage.YOU_DIED);
             location = map.locationOf(target);
             location.setGround(new Runes(target, location.getGround()));
 
