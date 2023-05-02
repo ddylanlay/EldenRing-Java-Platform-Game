@@ -19,7 +19,6 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
-import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 
@@ -37,8 +36,6 @@ import java.util.Map;
  */
 public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-
-    RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 
     private Weapon weapon;
