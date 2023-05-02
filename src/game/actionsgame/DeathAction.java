@@ -55,15 +55,16 @@ public class DeathAction extends Action {
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
+            resetManager.removeResettable(target);
+            map.removeActor(target);
         }
         else {
             // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
-            resetManager.run(map);
+
             System.out.println(FancyMessage.YOU_DIED);
             location = map.locationOf(target);
             location.setGround(new Runes(target, location.getGround()));
-
-
+            resetManager.run(map);
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;

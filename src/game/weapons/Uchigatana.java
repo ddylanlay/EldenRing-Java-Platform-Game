@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
+import game.utils.RandomNumberGenerator;
+import game.weaponabilities.Unsheathe;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ import java.util.List;
  * Modified by:
  *
  */
-public class Uchigatana extends WeaponItem implements PurchasableItem, SellableItem {
+public class Uchigatana extends WeaponItem implements PurchasableItem, SellableItem, Unsheathe {
     private Actor actor;
     private ActionList allowableActions;
 
@@ -45,9 +47,23 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
         int sellingPrice = 500;
         return sellingPrice;
     }
+    public int unsheathe(){
+        int newDamage = super.damage();
+
+        if(RandomNumberGenerator.getRandomInt(100) <= 60){
+            newDamage = newDamage*2;
+        }
+        return newDamage;
+
+    }
+    public Action getSkill(Actor holder) {
+        return
+    }
+
 
     @Override
     public List<Action> getAllowableActions() {
+        this.addCapability(WeaponType.KATANA);
         return this.allowableActions.getUnmodifiableActionList();
     }
 

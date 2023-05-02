@@ -73,7 +73,6 @@ public class AttackAction extends Action {
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		System.out.println(weapon);
 		Weapon weapon = equipWeapon(actor);
 		if (weapon == null) {
 			weapon = actor.getIntrinsicWeapon();
@@ -83,7 +82,6 @@ public class AttackAction extends Action {
 		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
 			return actor + " misses " + target + ".";
 		}
-
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
