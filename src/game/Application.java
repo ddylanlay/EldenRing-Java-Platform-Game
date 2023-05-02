@@ -89,6 +89,8 @@ public class Application {
 //		);
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
+
+
 //		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
 //		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
 //		if(xRand < 75/2){
@@ -141,7 +143,7 @@ public class Application {
 //				}
 //			}
 //		}
-//
+
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
 			new Display().println(line);
@@ -154,10 +156,10 @@ public class Application {
 
 		SkeletalBandit testWolf = new SkeletalBandit();
 
-		gameMap.at(23, 17).addActor(testWolf);
-
-		ResetManager resetManager = ResetManager.getInstance();
-		resetManager.registerResettable(testWolf, testWolf);
+		gameMap.at(40, 17).addActor(testWolf);
+//
+//		ResetManager resetManager = ResetManager.getInstance();
+//		resetManager.registerResettable(testWolf, testWolf);
 
 		//tester below
 		//gameMap.at(35, 10).addActor(new LoneWolf());
@@ -167,7 +169,7 @@ public class Application {
 		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(25, 20);
-		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step"));
+		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);

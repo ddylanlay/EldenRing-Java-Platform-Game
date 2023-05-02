@@ -22,19 +22,21 @@ public class SiteOfLostGrace extends Ground {
      * Name of the Site of Lost Grace
      */
     private String siteName;
+    private Location locationOfSite;
 
     /**
      * Constructor.
      *
      */
-    public SiteOfLostGrace(String siteName) {
+    public SiteOfLostGrace(String siteName, Location locationOfSite) {
 
         super('U');
         this.siteName = siteName;
+        this.locationOfSite = locationOfSite;
     }
 
     @Override
     public ActionList allowableActions(Actor actor, Location location, String directionA){
-        return new ActionList(new ResetAction(siteName));
+        return new ActionList(new ResetAction(siteName, locationOfSite));
     }
 }

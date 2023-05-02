@@ -1,6 +1,5 @@
 package game.enemies;
 
-
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -9,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.ResetManager;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
@@ -20,7 +20,6 @@ import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,11 +37,15 @@ import java.util.Map;
 public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+
+    ResetManager resetManager = ResetManager.getInstance();
     RunesManager runesManager = RunesManager.getInstance();
+    
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
         this.behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this,dropRunes());
+        resetManager.registerResettable(this, this);
 
     }
 
@@ -59,7 +62,9 @@ public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if(behaviours.get(999) instanceof WanderBehaviour == true){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove instance of GiantCrayfish when despawn
                 map.removeActor(this);
+                System.out.println(this + " removed from map");
                 return new DoNothingAction();
             }
         }
@@ -182,5 +187,12 @@ public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
     public Weapon asWeapon(Weapon weapon){
         return weapon instanceof Weapon ? weapon : null;
     }
+
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
+    @Override
+    public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
 
 }
