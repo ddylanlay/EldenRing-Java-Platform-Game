@@ -93,8 +93,11 @@ public class Player extends Actor implements Resettable {
 		//Restore health
 		hitPoints = maxHitPoints;
 
-		//Move to correct position in game map
-		gameMap.moveActor(this, lastGraceSite);
+		if (!(gameMap.locationOf(this) == lastGraceSite)){
+			//Move to correct position in game map
+			gameMap.moveActor(this, lastGraceSite);
+		}
+
 	}
 
 	/**
