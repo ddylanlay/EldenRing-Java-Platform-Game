@@ -5,7 +5,6 @@ public enum WeaponType {
     KATANA,
     DAGGER,
     HAMMER,
-    CURVED_SWORD,
-    SELLABLE
+    CURVED_SWORD
 
 }

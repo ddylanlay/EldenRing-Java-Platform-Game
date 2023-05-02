@@ -54,7 +54,6 @@ public class GreatKnife extends WeaponItem implements PurchasableItem, SellableI
     }
     @Override
     public List<Action> getAllowableActions() {
-        this.addCapability(WeaponType.SELLABLE);
         return this.allowableActions.getUnmodifiableActionList();
     }
     public int getPurchasePrice(){

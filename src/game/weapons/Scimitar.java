@@ -58,7 +58,6 @@ public class Scimitar extends WeaponItem implements SpinAttack, PurchasableItem,
     }
     @Override
     public List<Action> getAllowableActions() {
-        this.addCapability(WeaponType.SELLABLE);
         return this.allowableActions.getUnmodifiableActionList();
     }
     @Override

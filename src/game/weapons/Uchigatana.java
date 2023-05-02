@@ -48,7 +48,6 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
 
     @Override
     public List<Action> getAllowableActions() {
-        this.addCapability(WeaponType.SELLABLE);
         return this.allowableActions.getUnmodifiableActionList();
     }
 

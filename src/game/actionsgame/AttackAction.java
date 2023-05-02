@@ -2,12 +2,9 @@ package game.actionsgame;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.Player;
 import game.enemies.Enemies;
-import game.enemies.EnemyType;
 import game.trading.RunesManager;
 
 import java.util.Random;
@@ -96,7 +93,6 @@ public class AttackAction extends Action {
 				int numOfRunes = runesManager.transferRunes(target, actor);
 				String string = target + " drops " + numOfRunes + " runes";
 				result += System.lineSeparator() + string;
-				System.out.println(((Player) actor).getNumOfRunes());
 				return result;
 				}
 
