@@ -47,7 +47,6 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
-        runesManager.storeActorsRunes(this,dropRunes());
         resetManager.registerResettable(this, this);
         this.weapon = new Grossmesser();
     }
