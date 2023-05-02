@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class Grossmesser extends WeaponItem implements SellableItem {
     private ActionList allowableActions;
-    ActionList actions = new ActionList();
     /**
      * Constructor
      */
@@ -48,7 +47,6 @@ public class Grossmesser extends WeaponItem implements SellableItem {
     @Override
     public void tick(Location currentLocation, Actor actor) {
         int counter = 0;
-        ActionList actions = new ActionList();
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
             if (destination.getDisplayChar() == 'K'&& this.allowableActions.size() == 0) {
