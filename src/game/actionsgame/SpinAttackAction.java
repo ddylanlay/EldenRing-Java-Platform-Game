@@ -3,6 +3,7 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.utils.RandomNumberGenerator;
 
@@ -11,10 +12,11 @@ import java.util.ArrayList;
 public class SpinAttackAction extends WeaponAction{
     private ArrayList<Actor> actorInRange = new ArrayList<>();
 
-    public SpinAttackAction(WeaponItem weaponItem) {
-        super(weaponItem);
-    }
+    public SpinAttackAction(WeaponItem weapon) {
+        super(weapon);
 
+    }
+    @Override
     public String execute(Actor actor, GameMap map) {
         scanAround(actor, map);
         String result = "";
@@ -28,6 +30,7 @@ public class SpinAttackAction extends WeaponAction{
                 }
             }
         }
+        System.out.println(actorInRange);
         actorInRange.clear();
         return result;
     }
@@ -40,10 +43,9 @@ public class SpinAttackAction extends WeaponAction{
         for(int x = xLocation - 1; x <= xLocation + 1; x++){
             for(int y = yLocation - 1; y <= yLocation + 1; y++){
                 Location tempLocation = new Location(map, x, y);
-                if(map.isAnActorAt(tempLocation)){
-                    if(xLocation != x && yLocation != y){
-                        actorInRange.add(map.getActorAt(tempLocation));
-                    }
+                if(map.isAnActorAt(tempLocation) && map.getActorAt(tempLocation) != actor){
+                    actorInRange.add(map.getActorAt(tempLocation));
+
                 }
             }
         }
@@ -51,6 +53,6 @@ public class SpinAttackAction extends WeaponAction{
 
     @Override
     public String menuDescription(Actor actor) {
-        return "Spin Attack";
+        return actor + " attacks anything in the surrounding with Grossmesser";
     }
 }

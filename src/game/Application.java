@@ -13,6 +13,7 @@ import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
 import game.weapons.Club;
+import game.weapons.Grossmesser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.List;
 public class Application {
 	private static EastFactory eastFactory = new EastFactory();
 	private static WestFactory westFactory = new WestFactory();
-	private static WeaponItem club = new Club();
+	private static WeaponItem club = new Grossmesser();
 	public static void main(String[] args) {
 
 		World world = new World(new Display());
@@ -166,6 +167,10 @@ public class Application {
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
 		gameMap.at(35, 10).addActor(new LoneWolf());
+		gameMap.at(34, 10).addActor(new LoneWolf());
+		gameMap.at(25, 23).addActor(new LoneWolf());
+		gameMap.at(24, 22).addActor(new LoneWolf());
+		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(25, 20);
@@ -178,7 +183,7 @@ public class Application {
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
 		System.out.println(player.getWeaponInventory());
-		world.addPlayer(player, gameMap.at(36, 10));
+		world.addPlayer(player, gameMap.at(25, 22));
 		world.run();
 	}
 }
