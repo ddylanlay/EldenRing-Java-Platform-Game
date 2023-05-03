@@ -58,7 +58,6 @@ public class Player extends Actor implements Resettable {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
-		List<WeaponItem> weaponInventory = this.getWeaponInventory();
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		if (hitPoints <= 0) {
@@ -67,7 +66,6 @@ public class Player extends Actor implements Resettable {
 
 			// return/print the console menu
 		}
-
 		playerDescription();
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -99,8 +97,11 @@ public class Player extends Actor implements Resettable {
 		//Restore health
 		hitPoints = maxHitPoints;
 
-		//Move to correct position in game map
-		gameMap.moveActor(this, lastGraceSite);
+		if (!(gameMap.locationOf(this) == lastGraceSite)){
+			//Move to correct position in game map
+			gameMap.moveActor(this, lastGraceSite);
+		}
+
 	}
 
 	/**

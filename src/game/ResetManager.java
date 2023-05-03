@@ -55,7 +55,7 @@ public class ResetManager {
             resettable.reset(gameMap);
 
             //If not the player
-            if (resettable.isPlayer()) {
+            if (!resettable.isPlayer()) {
 
                 //Remove them from the resettables list
                 iter.remove();

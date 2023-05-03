@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
-import game.actionsgame.SpinAttackAction;
+import game.actionsgame.SpinAttackActionGrossmesser;
 import game.trading.SellableItem;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class Grossmesser extends WeaponItem implements SellableItem {
     @Override
     public List<Action> getAllowableActions() {
 
-        this.allowableActions.add(new SpinAttackAction(this));
+        this.allowableActions.add(new SpinAttackActionGrossmesser(this));
         return this.allowableActions.getUnmodifiableActionList();
     }
     @Override

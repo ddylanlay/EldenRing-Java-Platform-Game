@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
+import game.actionsgame.SpinAttackActionScimitar;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
 import game.weaponabilities.SpinAttack;
@@ -58,6 +59,7 @@ public class Scimitar extends WeaponItem implements SpinAttack, PurchasableItem,
     }
     @Override
     public List<Action> getAllowableActions() {
+        this.allowableActions.add(new SpinAttackActionScimitar(this));
         return this.allowableActions.getUnmodifiableActionList();
     }
     @Override
