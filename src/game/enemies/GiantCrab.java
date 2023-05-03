@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.ResetManager;
 import game.Resettable;
 import game.behaviours.Behaviour;
@@ -21,6 +22,8 @@ import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Giant Crab Enemy.
@@ -34,6 +37,7 @@ import java.util.ArrayList;
  */
 public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+    private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 

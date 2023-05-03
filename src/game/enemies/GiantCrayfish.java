@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.ResetManager;
 import game.Resettable;
 import game.behaviours.Behaviour;
@@ -36,7 +37,7 @@ import java.util.Map;
  */
 public class GiantCrayfish extends Enemies implements SlamAttack, Resettable {
     private ArrayList<Actor> actorInRange = new ArrayList<>();
-
+    private Map<Integer, Behaviour> behaviours = new HashMap<>();
     ResetManager resetManager = ResetManager.getInstance();
     RunesManager runesManager = RunesManager.getInstance();
     

@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.ResetManager;
 import game.Resettable;
 import game.behaviours.Behaviour;
@@ -20,6 +21,8 @@ import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Giant Dog Enemy.
