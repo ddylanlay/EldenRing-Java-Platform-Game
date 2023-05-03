@@ -7,13 +7,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.Runes;
 import game.trading.RunesManager;
-
-import java.util.List;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -51,7 +48,7 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addItemToInventory(bottle);
 		this.lastGraceSite = lastGraceSite;
-		runesManager.storeActorsRunes(this, 9999);
+		runesManager.storeActorsRunes(this, 0);
 		resetManager.registerResettable(this, this);
 	}
 
