@@ -68,7 +68,7 @@ public class QuickstepAttackAction extends Action {
         Location here = map.locationOf(actor);
         for (Exit exit : here.getExits()) {
                 Location destination = exit.getDestination();
-                actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
+//                actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
             }
 
 
