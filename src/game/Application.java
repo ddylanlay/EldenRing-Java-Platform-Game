@@ -169,7 +169,7 @@ public class Application {
 		gameMap.at(35, 10).addActor(new GiantCrab());
 		gameMap.at(34, 10).addActor(new LoneWolf());
 //		gameMap.at(25, 23).addActor(new LoneWolf());
-		gameMap.at(24, 22).addActor(new GiantDog());
+		gameMap.at(24, 22).addActor(new LoneWolf());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
