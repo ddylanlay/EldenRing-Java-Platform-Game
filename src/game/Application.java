@@ -206,12 +206,8 @@ public class Application {
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
-		Location LostGrace = gameMap.at(25, 20);
+		Location LostGrace = gameMap.at(38, 9);
 		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step", LostGrace));
-
-		//Testing purposes only
-		Location LostGrace2 = gameMap.at(23, 18);
-		gameMap.at(23, 18).setGround(new SiteOfLostGrace("The Second Step", LostGrace2));
 
 		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
 
