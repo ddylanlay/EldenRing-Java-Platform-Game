@@ -8,9 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
-import game.enemies.GiantCrab;
-import game.enemies.LoneWolf;
-import game.enemies.SkeletalBandit;
+import game.enemies.*;
 import game.environments.*;
 import game.trading.MerchantKale;
 import game.weapons.Club;
@@ -171,7 +169,7 @@ public class Application {
 		gameMap.at(35, 10).addActor(new GiantCrab());
 		gameMap.at(34, 10).addActor(new LoneWolf());
 //		gameMap.at(25, 23).addActor(new LoneWolf());
-		gameMap.at(24, 22).addActor(new GiantCrab());
+		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 

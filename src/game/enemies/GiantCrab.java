@@ -101,7 +101,7 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(208, "slam non-aoe", 90);
+        return new IntrinsicWeapon(208, "slams", 90);
 
 
     }

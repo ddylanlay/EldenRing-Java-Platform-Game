@@ -13,10 +13,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
@@ -95,7 +92,7 @@ public class GiantCrayfish extends Actor implements SlamAttack, Resettable {
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(1, new AttackBehaviourSlam(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }

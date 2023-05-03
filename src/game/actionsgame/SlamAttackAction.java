@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.enemies.Enemies;
 import game.utils.RandomNumberGenerator;
@@ -20,12 +21,13 @@ public class SlamAttackAction extends Action {
     }
 
     public String execute(Actor actor, GameMap map) {
+        Weapon weapon = actor.getIntrinsicWeapon();
         scanAround(actor, map);
         String result = "";
         for(Actor target: actorInRange){
-            if(RandomNumberGenerator.getRandomInt(100)<=90){
-                actor.hurt(208);
-                System.out.println(target + " is slammed for 208 damage.");
+            if(RandomNumberGenerator.getRandomInt(100)<=weapon.chanceToHit()){
+                actor.hurt(weapon.damage());
+                System.out.println(target + " is slammed for " + weapon.damage() + " damage.");
                 if(actor.isConscious() == false){
                     map.removeActor(target);
                     System.out.println(target + " has been killed.");
