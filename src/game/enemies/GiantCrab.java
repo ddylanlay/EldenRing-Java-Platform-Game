@@ -13,10 +13,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
@@ -93,7 +90,7 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(1, new AttackBehaviourSlam(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }
@@ -104,7 +101,7 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
+        return new IntrinsicWeapon(208, "slam non-aoe", 90);
 
 
     }
