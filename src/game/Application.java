@@ -221,7 +221,6 @@ public class Application {
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
-		System.out.println(player.getWeaponInventory());
 		world.addPlayer(player, gameMap.at(25, 22));
 		world.run();
 	}
