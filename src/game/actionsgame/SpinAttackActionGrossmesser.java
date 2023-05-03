@@ -1,38 +1,45 @@
 package game.actionsgame;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
+import edu.monash.fit2099.engine.weapons.Weapon;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
 
-public class SpinAttackActionGrossmesser extends WeaponAction{
+public class SpinAttackActionGrossmesser extends Action {
     private ArrayList<Actor> actorInRange = new ArrayList<>();
-
-    public SpinAttackActionGrossmesser(WeaponItem weapon) {
-        super(weapon);
+    RunesManager runesManager = RunesManager.getInstance();
+    private Weapon weapon;
+    public SpinAttackActionGrossmesser(Weapon weapon) {
+        this.weapon = weapon;
     }
     @Override
     public String execute(Actor actor, GameMap map) {
         scanAround(actor, map);
         String result = "";
-        for(Actor target: actorInRange){
-            if(RandomNumberGenerator.getRandomInt(100)<=85){
-                actor.hurt(115);
-                System.out.println(target + " is sliced for 115 damage.");
-                if(actor.isConscious() == false){
-                    map.removeActor(target);
-                    System.out.println(target + " has been killed.");
+        for (Actor target : actorInRange) {
+            if (RandomNumberGenerator.getRandomInt(100) <= 85) {
+                actor.hurt(weapon.damage());
+                result += target + " is sliced for 115 damage.";
+                if (!actor.isConscious()) {
+                    result += new DeathAction(actor).execute(target, map);
+                    if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@') {
+                        int numOfRunes = runesManager.transferRunes(target, actor);
+                        String string = target + " drops " + numOfRunes + " runes";
+                        result += System.lineSeparator() + string;
+                        return result;
+                    }
+                } else {
+                    result = actor + " missed the " + target;
                 }
             }
-            else{
-                System.out.println(actor + " missed the " + target);
-            }
+            System.out.println(actorInRange);
+            actorInRange.clear();
         }
-        System.out.println(actorInRange);
-        actorInRange.clear();
         return result;
     }
 
@@ -54,6 +61,6 @@ public class SpinAttackActionGrossmesser extends WeaponAction{
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks anything in the surrounding with Grossmesser";
+        return actor + " attacks anything in the surrounding with" + weapon;
     }
 }

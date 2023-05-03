@@ -52,13 +52,13 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
         return sellingPrice;
     }
 //    public int unsheathe(Actor target){
-//        int newDamage = super.damage();
+//        int newDamage = 0;
 //
 //        if(RandomNumberGenerator.getRandomInt(100) <= 60){
-//            newDamage = newDamage*2;
+//            newDamage = super.damage()*2;
+//            return newDamage;
 //        }
 //        return newDamage;
-//
 //    }
 
 //    @Override

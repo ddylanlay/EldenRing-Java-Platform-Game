@@ -10,7 +10,6 @@ import game.actionsgame.SellAction;
 import game.actionsgame.SpinAttackActionScimitar;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
-import game.weaponabilities.SpinAttack;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ import java.util.List;
  * @author Jamie Tran
  *
  */
-public class Scimitar extends WeaponItem implements SpinAttack, PurchasableItem, SellableItem {
+public class Scimitar extends WeaponItem implements PurchasableItem, SellableItem {
     private ActionList allowableActions;
     /**
      * Constructor
@@ -62,9 +61,6 @@ public class Scimitar extends WeaponItem implements SpinAttack, PurchasableItem,
         this.allowableActions.add(new SpinAttackActionScimitar(this));
         return this.allowableActions.getUnmodifiableActionList();
     }
-    @Override
-    public void spinAttack() {
 
-    }
 
 }
