@@ -110,7 +110,6 @@ public class AttackAction extends Action {
 
 	public Weapon equipWeapon(Actor actor){
 		for(Weapon weapon : actor.getWeaponInventory()){
-			System.out.println(asWeapon(weapon));
 			if(asWeapon(weapon) != null){
 
 				return weapon;
