@@ -76,7 +76,6 @@ public class AttackActionPilesOfBones extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        System.out.println(weapon);
         Weapon weapon = equipWeapon(actor);
         if (weapon == null) {
             weapon = actor.getIntrinsicWeapon();
@@ -118,7 +117,6 @@ public class AttackActionPilesOfBones extends Action {
 
     public Weapon equipWeapon(Actor actor){
         for(Weapon weapon : actor.getWeaponInventory()){
-            System.out.println(asWeapon(weapon));
             if(asWeapon(weapon) != null){
 
                 return weapon;

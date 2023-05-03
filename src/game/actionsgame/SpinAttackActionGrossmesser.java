@@ -35,7 +35,7 @@ public class SpinAttackActionGrossmesser extends Action {
                 }
             }
             else{result += actor + " missed the " + target + System.lineSeparator();}
-            System.out.println(actorInRange);
+
         }
         actorInRange.clear();
         return result;

@@ -11,6 +11,7 @@ import game.combatclass.CombatClassMenu;
 import game.enemies.*;
 import game.environments.*;
 import game.trading.MerchantKale;
+import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
 import game.weapons.Grossmesser;
 import game.weapons.Scimitar;
@@ -91,21 +92,53 @@ public class Application {
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
 
+		for(int i = 0; i <= 1; i++){
+		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
+		if(xRand < 75/2){
+			gameMap.at(xRand, yRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
+		}
+		else {
+			gameMap.at(xRand, yRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
+		}
+		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		yRand = RandomNumberGenerator.getRandomInt(1, 22);
+		if(xRand < 75/2){
+			gameMap.at(xRand, yRand).setGround(new PuddleOfWater(westFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new PuddleOfWater(westFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new PuddleOfWater(westFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(westFactory));
+		}
+		else {
+			gameMap.at(xRand, yRand).setGround(new PuddleOfWater(eastFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new PuddleOfWater(eastFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new PuddleOfWater(eastFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(eastFactory));
+		}
+		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		yRand = RandomNumberGenerator.getRandomInt(1, 22);
+		if(xRand < 75/2){
+			gameMap.at(xRand, yRand).setGround(new GustOfWind(westFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new GustOfWind(westFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new GustOfWind(westFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new GustOfWind(westFactory));
+		}
+		else {
+			gameMap.at(xRand, yRand).setGround(new GustOfWind(eastFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new GustOfWind(eastFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new GustOfWind(eastFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new GustOfWind(eastFactory));
+		}
+		}
 
-//		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
-//		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
-//		if(xRand < 75/2){
-//			gameMap.at(xRand, yRand).setGround(new Graveyard(westFactory));
-//			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
-//			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
-//			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
-//		}
-//		else{
-//			gameMap.at(xRand, yRand).setGround(new Graveyard(eastFactory));
-//			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
-//			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
-//			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
-//		}
+
+
 //
 //		int xxRand = RandomNumberGenerator.getRandomInt(1, 72);
 //		int yyRand = RandomNumberGenerator.getRandomInt(1, 20);
