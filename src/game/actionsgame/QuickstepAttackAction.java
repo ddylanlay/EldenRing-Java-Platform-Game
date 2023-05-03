@@ -8,7 +8,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.trading.RunesManager;
+import game.utils.RandomNumberGenerator;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class QuickstepAttackAction extends Action {
@@ -59,6 +62,38 @@ public class QuickstepAttackAction extends Action {
                 return result;
             }
 
+        }
+
+        //Move the actor to a free location
+        Location actorLocation = map.locationOf(actor);
+        int xLocation = actorLocation.x();
+        int yLocation = actorLocation.y();
+
+        //Array list to hold free locations
+        ArrayList<Location> freeLocations = new ArrayList<>();
+
+        //Now we go through and check which locations around the player are free
+        for(int x = xLocation - 1; x <= xLocation + 1; x++){
+            for(int y = yLocation - 1; y <= yLocation + 1; y++){
+                Location tempLocation = new Location(map, x, y);
+                if(map.isAnActorAt(tempLocation)){
+                    freeLocations.add(tempLocation);
+                }
+            }
+        }
+
+        //Only randomly select if the array is not empty
+        if (freeLocations.isEmpty()){
+            result += "\n Player did not move as there were no free spaces to quickstep.";
+        }
+        else{
+            //Randomly generate an index from our list
+            int randNum = RandomNumberGenerator.getRandomInt(0, freeLocations.size()-1);
+            //Get our random location
+            Location newLocation = freeLocations.get(randNum);
+            //Move the actor there
+            map.moveActor(actor, newLocation);
+            result += "\n" + actor.toString() + " moves to " + "(" + newLocation.x() + "," + newLocation.y() + ")";
         }
 
         return result;
