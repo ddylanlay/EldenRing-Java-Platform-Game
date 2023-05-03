@@ -12,18 +12,11 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.ResetManager;
 import game.Resettable;
-import game.Status;
-import game.actionsgame.AttackAction;
-import game.actionsgame.AttackActionPilesOfBones;
-import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Heavy Skeletal Swordsman Enemy.
@@ -35,14 +28,13 @@ import java.util.Map;
  * @author Arosh Heenkenda
  */
 public class HeavySkeletalSwordsman extends Enemies implements Resettable {
-    private Map<Integer, Behaviour> behaviours = new HashMap<>();
     ResetManager resetManager = ResetManager.getInstance();
 
     private Weapon weapon;
 
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
-        this.behaviours.put(999, new WanderBehaviour());
+        behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Grossmesser());
         resetManager.registerResettable(this, this);
         this.weapon = new Grossmesser();
@@ -86,24 +78,25 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
      * @param map        current GameMap
      * @return
      */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
-            actions.add(new AttackAction(this, direction));
-            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-            // HINT 1: How would you attack the enemy with a weapon?
-            if(followContained(followBehaviour) == false){
-                behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
-                behaviours.put(500, followBehaviour);
-            }
-        }
-
-        return actions;
-    }
+//    @Override
+//    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+//        ActionList actions = new ActionList();
+//        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+//        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+//            actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
+//            actions.add(new AttackAction(this, direction));
+//            actions.add(new UnsheatheAttackAction(this, direction, equipWeapon(otherActor)));
+//            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
+//            // HINT 1: How would you attack the enemy with a weapon?
+//            if(followContained(followBehaviour) == false){
+//                behaviours.clear();
+//                behaviours.put(1, new AttackBehaviour(otherActor));
+//                behaviours.put(500, followBehaviour);
+//            }
+//        }
+//
+//        return actions;
+//    }
 
 
     @Override

@@ -12,7 +12,6 @@ import game.enemies.LoneWolf;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
-import game.weapons.Club;
 import game.weapons.Grossmesser;
 
 import java.util.Arrays;
@@ -166,9 +165,9 @@ public class Application {
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
+//		gameMap.at(35, 10).addActor(new LoneWolf());
+//		gameMap.at(34, 10).addActor(new LoneWolf());
 		gameMap.at(35, 10).addActor(new LoneWolf());
-		gameMap.at(34, 10).addActor(new LoneWolf());
-		gameMap.at(25, 23).addActor(new LoneWolf());
 		gameMap.at(24, 22).addActor(new LoneWolf());
 		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
@@ -178,12 +177,16 @@ public class Application {
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
+//		Uchigatana uchigatana = new Uchigatana();
+		Grossmesser grossmesser = new Grossmesser();
+		player.addWeaponToInventory(grossmesser);
+//		player.addWeaponToInventory(uchigatana);
 
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
 		System.out.println(player.getWeaponInventory());
-		world.addPlayer(player, gameMap.at(25, 22));
+		world.addPlayer(player, gameMap.at(23, 22));
 		world.run();
 	}
 }

@@ -9,8 +9,6 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
-import game.utils.RandomNumberGenerator;
-import game.weaponabilities.Unsheathe;
 
 import java.util.List;
 
@@ -24,8 +22,10 @@ import java.util.List;
  * Modified by:
  *
  */
-public class Uchigatana extends WeaponItem implements PurchasableItem, SellableItem, Unsheathe {
+public class Uchigatana extends WeaponItem implements PurchasableItem, SellableItem {
     private Actor actor;
+    private Actor target;
+    private String direction;
     private ActionList allowableActions;
 
     /**
@@ -35,9 +35,13 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
     public Uchigatana() {
         super("Uchigatana", ')', 115, "slashes", 80);
         this.allowableActions = new ActionList();
+        this.actor = actor;
     }
 
-
+    @Override
+    public char getDisplayChar(){
+        return super.getDisplayChar();
+    }
     public int getPurchasePrice() {
         int purchasePrice = 5000;
         return purchasePrice;
@@ -47,18 +51,20 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
         int sellingPrice = 500;
         return sellingPrice;
     }
-    public int unsheathe(){
-        int newDamage = super.damage();
+//    public int unsheathe(Actor target){
+//        int newDamage = super.damage();
+//
+//        if(RandomNumberGenerator.getRandomInt(100) <= 60){
+//            newDamage = newDamage*2;
+//        }
+//        return newDamage;
+//
+//    }
 
-        if(RandomNumberGenerator.getRandomInt(100) <= 60){
-            newDamage = newDamage*2;
-        }
-        return newDamage;
-
-    }
-    public Action getSkill(Actor holder) {
-        return
-    }
+//    @Override
+//    public Action getSkill(Actor target, String direction){
+//         return new UnsheatheAttackAction(target, direction,this);
+//    }
 
 
     @Override
@@ -76,7 +82,7 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
                 this.allowableActions.add(new SellAction(actor, this, this));
                 counter++;
             } else if (this.allowableActions.size() != 0 && counter == 0) {
-                this.allowableActions.clear();
+                this.allowableActions.remove(new SellAction(actor, this, this));
 
             }
 

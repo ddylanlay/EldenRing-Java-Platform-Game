@@ -7,14 +7,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actionsgame.SpinAttackAction;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
 import game.trading.Runes;
 import game.trading.RunesManager;
-import game.weapons.Grossmesser;
+
+import java.util.List;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -59,6 +58,7 @@ public class Player extends Actor implements Resettable {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
+		List<WeaponItem> weaponInventory = this.getWeaponInventory();
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		if (hitPoints <= 0) {
@@ -67,6 +67,7 @@ public class Player extends Actor implements Resettable {
 
 			// return/print the console menu
 		}
+
 		playerDescription();
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -80,6 +81,7 @@ public class Player extends Actor implements Resettable {
 
 		return actions;
 	}
+
 
 
 	/*

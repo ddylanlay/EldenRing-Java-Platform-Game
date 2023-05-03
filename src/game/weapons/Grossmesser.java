@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Player;
 import game.actionsgame.SellAction;
 import game.actionsgame.SpinAttackAction;
 import game.trading.SellableItem;
