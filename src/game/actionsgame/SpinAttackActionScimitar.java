@@ -3,15 +3,15 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
-import game.weapons.Grossmesser;
 
 import java.util.ArrayList;
 
 public class SpinAttackActionScimitar extends WeaponAction{
     private ArrayList<Actor> actorInRange = new ArrayList<>();
+    RunesManager runesManager = RunesManager.getInstance();
 
     public SpinAttackActionScimitar(WeaponItem weapon) {
         super(weapon);
@@ -24,9 +24,11 @@ public class SpinAttackActionScimitar extends WeaponAction{
             if(RandomNumberGenerator.getRandomInt(100)<=88){
                 actor.hurt(118);
                 System.out.println(target + " is sliced for 118 damage.");
-                if(actor.isConscious() == false){
-                    map.removeActor(target);
-                    System.out.println(target + " has been killed.");
+                if (!actor.isConscious()) {
+                    int numOfRunes = runesManager.transferRunes(target, actor);
+                    String string = target + " drops " + numOfRunes + " runes";
+                    result += System.lineSeparator() + string;
+                    return result;
                 }
             }
             else{

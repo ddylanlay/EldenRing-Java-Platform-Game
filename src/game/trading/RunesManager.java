@@ -1,11 +1,16 @@
 package game.trading;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Location;
 
 import java.util.HashMap;
 
 public class RunesManager {
     private HashMap<Actor, Integer> runesList;
+
+    private Runes droppedRunes = null;
+    private Location droppedRunesLocation = null;
+
     private static RunesManager instance;
     private RunesManager() {
         this.runesList= new HashMap<Actor, Integer>();
@@ -42,6 +47,25 @@ public class RunesManager {
         newTotalRunes -= runes;
         storeActorsRunes(actor, newTotalRunes);
 
+    }
+
+
+    public void playerRetrieveDroppedRunes(Actor player){
+        droppedRunes.retrievedByPlayer(player);
+        droppedRunesLocation.setGround(droppedRunes.getOriginalGround());
+        droppedRunesLocation = null;
+        droppedRunes = null;
+    }
+
+    public void playerDied(Runes runes, Location dropLocation){
+
+        if (droppedRunes != null){
+            droppedRunesLocation.setGround(droppedRunes.getOriginalGround());
+        }
+
+        droppedRunes = runes;
+        droppedRunesLocation = dropLocation;
+        droppedRunesLocation.setGround(droppedRunes);
     }
 
 }
