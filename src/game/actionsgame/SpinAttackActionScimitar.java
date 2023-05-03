@@ -51,7 +51,7 @@ public class SpinAttackActionScimitar extends Action {
         for (int x = xLocation - 1; x <= xLocation + 1; x++) {
             for (int y = yLocation - 1; y <= yLocation + 1; y++) {
                 Location tempLocation = new Location(map, x, y);
-                if (map.isAnActorAt(tempLocation) && map.getActorAt(tempLocation) != actor) {
+                if (map.isAnActorAt(tempLocation) && map.getActorAt(tempLocation) != actor && map.getActorAt(tempLocation).getDisplayChar() != 'K') {
                     actorInRange.add(map.getActorAt(tempLocation));
 
                 }
