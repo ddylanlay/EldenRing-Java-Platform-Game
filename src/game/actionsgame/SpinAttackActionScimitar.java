@@ -24,26 +24,23 @@ public class SpinAttackActionScimitar extends Action {
         scanAround(actor, map);
         String result = "";
         for (Actor target : actorInRange) {
-            if (RandomNumberGenerator.getRandomInt(100) <= 88) {
-                actor.hurt(weapon.damage());
-                System.out.println(target + " is sliced for 118 damage.");
-                if (!actor.isConscious()) {
-                    result += new DeathAction(actor).execute(target, map);
-                    if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@') {
-                        int numOfRunes = runesManager.transferRunes(target, actor);
-                        String string = target + " drops " + numOfRunes + " runes";
-                        result += System.lineSeparator() + string;
-                        return result;
+                if (RandomNumberGenerator.getRandomInt(100) <= 88) {
+                    actor.hurt(weapon.damage());
+                    result += target + " is sliced for 118 damage." + System.lineSeparator();
+                    if (!actor.isConscious()) {
+                        result += new DeathAction(actor).execute(target, map);
+                        if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@') {
+                            int numOfRunes = runesManager.transferRunes(target, actor);
+                            String string = target + " drops " + numOfRunes + " runes";
+                            result += System.lineSeparator() + string;
+                        }
                     }
-                } else {
-                    System.out.println(actor + " missed the " + target);
                 }
-            }
+                else{result += actor + " missed the " + target + System.lineSeparator();}
             System.out.println(actorInRange);
-            actorInRange.clear();
-            return result;
         }
-        return menuDescription(actor);
+        actorInRange.clear();
+        return result;
     }
 
     public void scanAround(Actor actor, GameMap map) {

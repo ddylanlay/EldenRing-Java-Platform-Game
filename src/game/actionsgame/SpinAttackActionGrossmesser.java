@@ -22,24 +22,22 @@ public class SpinAttackActionGrossmesser extends Action {
         scanAround(actor, map);
         String result = "";
         for (Actor target : actorInRange) {
-            if (RandomNumberGenerator.getRandomInt(100) <= 85) {
+            if (RandomNumberGenerator.getRandomInt(100) <= 100) {
                 actor.hurt(weapon.damage());
-                result += target + " is sliced for 115 damage.";
+                result += target + " is sliced for 115 damage." + System.lineSeparator();
                 if (!actor.isConscious()) {
                     result += new DeathAction(actor).execute(target, map);
                     if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@') {
                         int numOfRunes = runesManager.transferRunes(target, actor);
                         String string = target + " drops " + numOfRunes + " runes";
                         result += System.lineSeparator() + string;
-                        return result;
                     }
-                } else {
-                    result = actor + " missed the " + target;
                 }
             }
+            else{result += actor + " missed the " + target + System.lineSeparator();}
             System.out.println(actorInRange);
-            actorInRange.clear();
         }
+        actorInRange.clear();
         return result;
     }
 
@@ -51,9 +49,8 @@ public class SpinAttackActionGrossmesser extends Action {
         for(int x = xLocation - 1; x <= xLocation + 1; x++){
             for(int y = yLocation - 1; y <= yLocation + 1; y++){
                 Location tempLocation = new Location(map, x, y);
-                if(map.isAnActorAt(tempLocation) && map.getActorAt(tempLocation) != actor){
+                if(map.isAnActorAt(tempLocation) && map.getActorAt(tempLocation) != actor && map.getActorAt(tempLocation).getDisplayChar() != 'K'){
                     actorInRange.add(map.getActorAt(tempLocation));
-
                 }
             }
         }
