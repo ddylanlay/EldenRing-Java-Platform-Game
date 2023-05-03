@@ -177,6 +177,12 @@ public class Application {
 		Location LostGrace = gameMap.at(25, 20);
 		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
+		//Testing purposes only
+		Location LostGrace2 = gameMap.at(23, 18);
+		gameMap.at(23, 18).setGround(new SiteOfLostGrace("The Second Step", LostGrace2));
+
+		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
+
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
 		player.addWeaponToInventory(club);
