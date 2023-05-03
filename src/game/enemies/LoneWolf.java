@@ -11,11 +11,17 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.ResetManager;
 import game.Resettable;
+import game.Status;
+import game.actionsgame.AttackAction;
+import game.actionsgame.AttackActionIntrinsic;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * BEHOLD, DOG!
@@ -28,14 +34,14 @@ import game.utils.RandomNumberGenerator;
  *
  */
 public class LoneWolf extends Enemies implements Resettable {
-//    private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 
 
     public LoneWolf() {
         super("Lone Wolf", 'h', 102); //102
-        behaviours.put(999, new WanderBehaviour());
+        this.behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this, dropRunes());
         resetManager.registerResettable(this, this);
     }
@@ -76,32 +82,24 @@ public class LoneWolf extends Enemies implements Resettable {
      * @param map        current GameMap
      * @return
      */
-//    @Override
-//    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-//        ActionList actions = new ActionList();
-//        List<WeaponItem> weaponInventory = otherActor.getWeaponInventory();
-//        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-//        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-//            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
-//            actions.add(new AttackAction(this, direction));
-////            for (WeaponItem weapon : weaponInventory) {
-////                if (weapon.hasCapability(WeaponType.KATANA)) {
-////                    actions.add(new UnsheatheAttackAction(this, direction, equipWeapon(otherActor)));
-////                } else if (weapon.hasCapability(WeaponType.DAGGER)) {
-////                }
-////            }
-//        }
-//
-////             HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-////             HINT 1: How would you attack the enemy with a weapon?
-//            if(!followContained(followBehaviour)){
-//                behaviours.clear();
-//                behaviours.put(1, new AttackBehaviour(otherActor));
-//                behaviours.put(500, followBehaviour);
-//            }
-//
-//        return actions;
-//    }
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
+            actions.add(new AttackActionIntrinsic(this, direction));
+            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
+            // HINT 1: How would you attack the enemy with a weapon?
+            if(followContained(followBehaviour) == false){
+                behaviours.clear();
+                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(500, followBehaviour);
+            }
+        }
+
+        return actions;
+    }
 
     public boolean followContained(FollowBehaviour behaviourContained){
         for(int i : behaviours.keySet()){

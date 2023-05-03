@@ -65,6 +65,15 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
 //    public Action getSkill(Actor target, String direction){
 //         return new UnsheatheAttackAction(target, direction,this);
 //    }
+        if(RandomNumberGenerator.getRandomInt(100) <= 60){
+            newDamage = newDamage*2;
+        }
+        return newDamage;
+
+    }
+//    public Action getSkill(Actor holder) {
+//        return
+//    }
 
 
     @Override
@@ -82,7 +91,7 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
                 this.allowableActions.add(new SellAction(actor, this, this));
                 counter++;
             } else if (this.allowableActions.size() != 0 && counter == 0) {
-                this.allowableActions.remove(new SellAction(actor, this, this));
+                this.allowableActions.clear();
 
             }
 
