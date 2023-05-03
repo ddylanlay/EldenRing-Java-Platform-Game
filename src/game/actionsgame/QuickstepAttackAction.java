@@ -8,7 +8,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.trading.RunesManager;
+import game.utils.RandomNumberGenerator;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class QuickstepAttackAction extends Action {
@@ -22,7 +25,6 @@ public class QuickstepAttackAction extends Action {
      * Random number generator
      */
     private Random rand = new Random();
-    private final Menu menu = new Menu();
 
     /**
      * Weapon used for the attack
@@ -61,18 +63,36 @@ public class QuickstepAttackAction extends Action {
 
         }
 
+        Location here = map.locationOf(actor);
+        //Array list to hold free locations
+        ArrayList<Location> freeLocations = new ArrayList<>();
+
+        //Get our free locations
+        for (Exit exit : here.getExits()) {
+            Location destination = exit.getDestination();
+
+           if (!destination.containsAnActor()){
+               freeLocations.add(destination);
+           }
+        }
+
+        //Only randomly select if the array is not empty
+        if (freeLocations.isEmpty()){
+            result += "\nPlayer did not move as there were no free spaces to quickstep.";
+        }
+        else{
+            //Randomly generate an index from our list
+            int randNum = RandomNumberGenerator.getRandomInt(0, freeLocations.size()-1);
+            //Get our random location
+            Location newLocation = freeLocations.get(randNum);
+            //Move the actor there
+            map.moveActor(actor, newLocation);
+            result += "\n" + actor.toString() + " moves to " + "(" + newLocation.x() + "," + newLocation.y() + ")";
+        }
+
         return result;
     }
 
-    public void getMenu(Actor actor, GameMap map){
-        Location here = map.locationOf(actor);
-        for (Exit exit : here.getExits()) {
-                Location destination = exit.getDestination();
-//                actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
-            }
-
-
-    }
 
     /**
      * Describes which target the actor is attacking with which weapon
