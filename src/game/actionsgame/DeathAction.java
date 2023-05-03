@@ -63,7 +63,9 @@ public class DeathAction extends Action {
 
             System.out.println(FancyMessage.YOU_DIED);
             location = map.locationOf(target);
-            location.setGround(new Runes(target, location.getGround()));
+
+            Runes runesToDrop = new Runes(target, location.getGround());
+            runesManager.playerDied(runesToDrop, location);
             resetManager.run(map);
         }
         result += System.lineSeparator() + menuDescription(target);
