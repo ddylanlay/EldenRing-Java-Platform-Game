@@ -34,7 +34,7 @@ public class SlamAttackAction extends Action {
                 }
             }
         }
-        System.out.println(actorInRange);
+
         actorInRange.clear();
         return result;
     }
