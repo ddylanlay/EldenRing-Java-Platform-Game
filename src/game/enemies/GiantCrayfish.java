@@ -10,7 +10,12 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.ResetManager;
 import game.Resettable;
+import game.Status;
+import game.actionsgame.AttackAction;
+import game.actionsgame.AttackActionIntrinsic;
+import game.behaviours.AttackBehaviourSlam;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
@@ -30,7 +35,6 @@ import java.util.ArrayList;
  */
 public class GiantCrayfish extends Enemies implements SlamAttack, Resettable {
     private ArrayList<Actor> actorInRange = new ArrayList<>();
-
     ResetManager resetManager = ResetManager.getInstance();
     RunesManager runesManager = RunesManager.getInstance();
     
@@ -68,42 +72,42 @@ public class GiantCrayfish extends Enemies implements SlamAttack, Resettable {
         }
         return new DoNothingAction();
     }
-
-    /**
-     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return
-     */
-//    @Override
-//    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-//        ActionList actions = new ActionList();
-//        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-//        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-//            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
-//            actions.add(new AttackAction(this, direction));
-//            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-//            // HINT 1: How would you attack the enemy with a weapon?
-//            if(!followContained(followBehaviour)){
-//                behaviours.clear();
-//                behaviours.put(1, new AttackBehaviour(otherActor));
-//                behaviours.put(500, followBehaviour);
-//            }
-//        }
 //
-//        return actions;
-//    }
+//    /**
+//     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+//     *
+//     * @param otherActor the Actor that might be performing attack
+//     * @param direction  String representing the direction of the other Actor
+//     * @param map        current GameMap
+//     * @return
+//     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
+            actions.add(new AttackActionIntrinsic(this, direction));
+            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
+            // HINT 1: How would you attack the enemy with a weapon?
+            if(followContained(followBehaviour) == false){
+                behaviours.clear();
+                behaviours.put(1, new AttackBehaviourSlam(otherActor));
+                behaviours.put(500, followBehaviour);
+            }
+        }
 
-//    public boolean followContained(FollowBehaviour behaviourContained){
-//        for(int i : behaviours.keySet()){
-//            if(behaviours.get(i) == behaviourContained){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+        return actions;
+    }
+
+    public boolean followContained(FollowBehaviour behaviourContained){
+        for(int i : behaviours.keySet()){
+            if(behaviours.get(i) == behaviourContained){
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {

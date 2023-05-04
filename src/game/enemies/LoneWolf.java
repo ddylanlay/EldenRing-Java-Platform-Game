@@ -3,16 +3,13 @@ package game.enemies;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.ResetManager;
 import game.Resettable;
 import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
@@ -28,7 +25,6 @@ import game.utils.RandomNumberGenerator;
  *
  */
 public class LoneWolf extends Enemies implements Resettable {
-//    private Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 
@@ -67,59 +63,51 @@ public class LoneWolf extends Enemies implements Resettable {
         }
         return new DoNothingAction();
     }
-
-    /**
-     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return
-     */
+//
+//    /**
+//     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+//     *
+//     * @param otherActor the Actor that might be performing attack
+//     * @param direction  String representing the direction of the other Actor
+//     * @param map        current GameMap
+//     * @return
+//     */
 //    @Override
 //    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 //        ActionList actions = new ActionList();
-//        List<WeaponItem> weaponInventory = otherActor.getWeaponInventory();
 //        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-//        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+//        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
 //            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
-//            actions.add(new AttackAction(this, direction));
-////            for (WeaponItem weapon : weaponInventory) {
-////                if (weapon.hasCapability(WeaponType.KATANA)) {
-////                    actions.add(new UnsheatheAttackAction(this, direction, equipWeapon(otherActor)));
-////                } else if (weapon.hasCapability(WeaponType.DAGGER)) {
-////                }
-////            }
-//        }
-//
-////             HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-////             HINT 1: How would you attack the enemy with a weapon?
-//            if(!followContained(followBehaviour)){
+//            actions.add(new AttackActionIntrinsic(this, direction));
+//            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
+//            // HINT 1: How would you attack the enemy with a weapon?
+//            if(followContained(followBehaviour) == false){
 //                behaviours.clear();
 //                behaviours.put(1, new AttackBehaviour(otherActor));
 //                behaviours.put(500, followBehaviour);
 //            }
+//        }
 //
 //        return actions;
 //    }
-
-    public boolean followContained(FollowBehaviour behaviourContained){
-        for(int i : behaviours.keySet()){
-            if(behaviours.get(i) == behaviourContained){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean wanderContained(){
-        for(int i : behaviours.keySet()){
-            if(behaviours.get(i) instanceof WanderBehaviour){
-                return true;
-            }
-        }
-        return false;
-    }
+//
+//    public boolean followContained(FollowBehaviour behaviourContained){
+//        for(int i : behaviours.keySet()){
+//            if(behaviours.get(i) == behaviourContained){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public boolean wanderContained(){
+//        for(int i : behaviours.keySet()){
+//            if(behaviours.get(i) instanceof WanderBehaviour){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
@@ -144,19 +132,19 @@ public class LoneWolf extends Enemies implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
-    public Weapon equipWeapon(Actor actor){
-        for(Weapon weapon : actor.getWeaponInventory()){
-            System.out.println(asWeapon(weapon));
-            if(asWeapon(weapon) != null){
-
-                return weapon;
-            }
-        }
-        return actor.getIntrinsicWeapon();
-    }
-    public Weapon asWeapon(Weapon weapon){
-        return weapon instanceof Weapon ? weapon : null;
-    }
+//    public Weapon equipWeapon(Actor actor){
+//        for(Weapon weapon : actor.getWeaponInventory()){
+//            System.out.println(asWeapon(weapon));
+//            if(asWeapon(weapon) != null){
+//
+//                return weapon;
+//            }
+//        }
+//        return actor.getIntrinsicWeapon();
+//    }
+//    public Weapon asWeapon(Weapon weapon){
+//        return weapon instanceof Weapon ? weapon : null;
+//    }
 
     /**
      * Does nothing for an enemy.

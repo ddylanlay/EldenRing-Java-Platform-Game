@@ -5,14 +5,17 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.trading.RunesManager;
-
 import java.util.Random;
 
 /**
  * An Action to attack another Actor.
+ *
  * Created by:
  * @author Adrian Kristanto
+ *
  * Modified by:
+ * @author Dylan Lay
+ * @author Jamie Tran
  *
  */
 public class AttackAction extends Action {
@@ -21,6 +24,7 @@ public class AttackAction extends Action {
 	 * The Actor that is to be attacked
 	 */
 	private Actor target;
+
 	/**
 	 * The direction of incoming attack.
 	 */
@@ -35,6 +39,10 @@ public class AttackAction extends Action {
 	 * Weapon used for the attack
 	 */
 	private Weapon weapon;
+
+	/**
+	 * The Runes Manager
+	 */
 	RunesManager runesManager = RunesManager.getInstance();
 
 	/**
@@ -108,9 +116,14 @@ public class AttackAction extends Action {
 		return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
 	}
 
+	/**
+	 * Equips an actor with a weapon, either from inventory or intrinsic.
+	 *
+	 * @param actor actor to have weapon equiped
+	 * @return the weapon equiped.
+	 */
 	public Weapon equipWeapon(Actor actor){
 		for(Weapon weapon : actor.getWeaponInventory()){
-			System.out.println(asWeapon(weapon));
 			if(asWeapon(weapon) != null){
 
 				return weapon;
@@ -119,6 +132,12 @@ public class AttackAction extends Action {
 		return actor.getIntrinsicWeapon();
 	}
 
+	/**
+	 * Check for instance of a weapon.
+	 *
+	 * @param weapon the weapon to be checked.
+	 * @return the weapon checked.
+	 */
 	public Weapon asWeapon(Weapon weapon){
 		return weapon instanceof Weapon ? weapon : null;
 	}

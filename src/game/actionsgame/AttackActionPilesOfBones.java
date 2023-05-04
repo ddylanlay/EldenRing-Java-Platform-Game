@@ -9,13 +9,14 @@ import game.Player;
 import game.enemies.Enemies;
 import game.enemies.EnemyType;
 import game.trading.RunesManager;
-
 import java.util.Random;
 
 /**
- * An Action to attack another Actor.
+ * An Action to attack a Pile of Bones instance.
+ *
  * Created by:
- * @author Adrian Kristanto
+ * @author Jamie Tran
+ *
  * Modified by:
  *
  */
@@ -25,7 +26,12 @@ public class AttackActionPilesOfBones extends Action {
      * The Actor that is to be attacked
      */
     private Actor target;
+
+    /**
+     * Enemy to be attacked.
+     */
     private Enemies enemyTarget;
+
     /**
      * The direction of incoming attack.
      */
@@ -40,6 +46,10 @@ public class AttackActionPilesOfBones extends Action {
      * Weapon used for the attack
      */
     private Weapon weapon;
+
+    /**
+     * Runes Manager to deal with runes exchange.
+     */
     RunesManager runesManager = RunesManager.getInstance();
 
     /**
@@ -76,7 +86,6 @@ public class AttackActionPilesOfBones extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        System.out.println(weapon);
         Weapon weapon = equipWeapon(actor);
         if (weapon == null) {
             weapon = actor.getIntrinsicWeapon();
@@ -116,9 +125,14 @@ public class AttackActionPilesOfBones extends Action {
         return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
     }
 
+    /**
+     * Equips an actor with a weapon, either from inventory or intrinsic.
+     *
+     * @param actor actor to have weapon equiped
+     * @return the weapon equiped.
+     */
     public Weapon equipWeapon(Actor actor){
         for(Weapon weapon : actor.getWeaponInventory()){
-            System.out.println(asWeapon(weapon));
             if(asWeapon(weapon) != null){
 
                 return weapon;
@@ -127,6 +141,12 @@ public class AttackActionPilesOfBones extends Action {
         return actor.getIntrinsicWeapon();
     }
 
+    /**
+     * Check for instance of a weapon.
+     *
+     * @param weapon the weapon to be checked.
+     * @return the weapon checked.
+     */
     public Weapon asWeapon(Weapon weapon){
         return weapon instanceof Weapon ? weapon : null;
     }

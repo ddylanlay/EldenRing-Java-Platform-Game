@@ -54,14 +54,13 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
         return RandomNumberGenerator.getRandomInt(35, 892);
     }
 
-
+//
 //    @Override
 //    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 //        ActionList actions = new ActionList();
 //        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
 //            actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
-//            actions.add(new AttackAction(this, direction));
-//            actions.add(new UnsheatheAttackAction(this, direction, equipWeapon(otherActor)));
+//            actions.add(new AttackActionIntrinsic(this, direction));
 //            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
 //            // HINT 1: How would you attack the enemy with a weapon?
 //        }
@@ -90,7 +89,7 @@ public class PilesOfBonesSB extends Enemies implements Resettable {
      */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
-
+//
 //    public Weapon equipWeapon(Actor actor){
 //        for(Weapon weapon : actor.getWeaponInventory()){
 //            System.out.println(asWeapon(weapon));

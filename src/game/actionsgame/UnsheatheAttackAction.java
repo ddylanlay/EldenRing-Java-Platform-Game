@@ -6,16 +6,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
-import game.weaponabilities.Unsheathe;
 
-import java.util.ArrayList;
-
-public class UnsheatheAttackAction extends Action {
-    private Unsheathe unsheatheWeapon;
+public class UnsheatheAttackAction extends Action{
     private Weapon weapon;
     private Actor target;
     private String direction;
-    private ArrayList<Actor> actorInRange = new ArrayList<>();
     RunesManager runesManager = RunesManager.getInstance();
 
     public UnsheatheAttackAction(Actor target, String direction, Weapon weapon) {
@@ -25,9 +20,7 @@ public class UnsheatheAttackAction extends Action {
     }
 
 
-//    public UnsheatheAttackAction(WeaponItem weapon){
-//        super(weapon);
-//    }
+
 
     @Override
     public String execute(Actor actor, GameMap map) {
