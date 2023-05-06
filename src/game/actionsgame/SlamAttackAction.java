@@ -11,15 +11,30 @@ import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
 
+/**
+ * An action that enables actors to slam in a 8 unit ring around themselves dealing damage equal and accuracy equal
+ * to their intrinsic weapon
+ * @Created Jamie Tran
+ */
 public class SlamAttackAction extends Action {
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     private Actor actor;
 
+    /**
+     * Constructor
+     * @param actor
+     */
     public SlamAttackAction(Actor actor){
         this.actor = actor;
 
     }
 
+    /**
+     * A method that executes the action.
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return A string returning the results of the slam.
+     */
     public String execute(Actor actor, GameMap map) {
         Weapon weapon = actor.getIntrinsicWeapon();
         scanAround(actor, map);
@@ -39,6 +54,11 @@ public class SlamAttackAction extends Action {
         return result;
     }
 
+    /**
+     * A method that scans around the actor.
+     * @param actor The actor conducting the action
+     * @param map The map the actor is located on
+     */
     public void scanAround(Actor actor, GameMap map){
         Location actorLocation = map.locationOf(actor);
         int xLocation = actorLocation.x();
@@ -55,6 +75,11 @@ public class SlamAttackAction extends Action {
         }
     }
 
+    /**
+     * A string describing the action on menu.
+     * @param actor The actor performing the action.
+     * @return
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Slam Attack";

@@ -15,7 +15,7 @@ import game.ResetManager;
 import game.trading.RunesManager;
 
 /**
- * An action executed if an actor is killed.
+ * An action executed if an actor is killed, Pile of Bones actor.
  *
  * Created by:
  * @author Adrian Kristanto
@@ -26,11 +26,32 @@ import game.trading.RunesManager;
  *
  */
 public class DeathActionPB extends Action {
+
+    /**
+     * The attacker actor.
+     */
     private Actor attacker;
+
+    /**
+     * Unused, the runes.
+     */
     Runes runes;
+
+    /**
+     * Runes manager, deals with rune exchange.
+     */
     RunesManager runesManager = RunesManager.getInstance();
+
+    /**
+     * Reset manager, deals with game reset.
+     */
     ResetManager resetManager = ResetManager.getInstance();
 
+    /**
+     * Constructor.
+     *
+     * @param actor the attacker.
+     */
     public DeathActionPB(Actor actor) {
         this.attacker = actor;
     }
@@ -72,10 +93,23 @@ public class DeathActionPB extends Action {
         return result;
     }
 
+    /**
+     * Menu description of action.
+     *
+     * @param actor The actor performing the action.
+     * @return menu description string
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " is killed.";
     }
+
+    /**
+     * Spawns a Pile of Bones
+     *
+     * @param target the HSS to spawn a POB on.
+     * @param map the game map.
+     */
     public void spawnPileOfBones(Actor target, GameMap map) {
         Location currentLocation = map.locationOf(target);
         if(target.isConscious() == false){

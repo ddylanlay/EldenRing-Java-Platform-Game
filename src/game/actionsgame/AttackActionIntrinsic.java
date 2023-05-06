@@ -6,13 +6,14 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.enemies.Enemies;
 import game.trading.RunesManager;
-
 import java.util.Random;
 
 /**
- * An Action to attack another Actor.
+ * An Action to attack another Actor with Intrinsic weapon.
+ *
  * Created by:
- * @author Adrian Kristanto
+ * @author Jamie Tran
+ *
  * Modified by:
  *
  */
@@ -22,7 +23,12 @@ public class AttackActionIntrinsic extends Action {
      * The Actor that is to be attacked
      */
     private Actor target;
+
+    /**
+     * Unused, the enemy target
+     */
     private Enemies enemyTarget;
+
     /**
      * The direction of incoming attack.
      */
@@ -37,14 +43,11 @@ public class AttackActionIntrinsic extends Action {
      * Weapon used for the attack
      */
     private Weapon weapon;
-    RunesManager runesManager = RunesManager.getInstance();
 
     /**
-     * Constructor.
-     *
-     * @param target the Actor to attack
-     * @param direction the direction where the attack should be performed (only used for display purposes)
+     * Runes manager to deal with any runes swapping.
      */
+    RunesManager runesManager = RunesManager.getInstance();
 
 
     /**
@@ -104,6 +107,12 @@ public class AttackActionIntrinsic extends Action {
         return actor + " attacks " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
     }
 
+    /**
+     * Equips an actor with a weapon, either from inventory or intrinsic.
+     *
+     * @param actor actor to have weapon equiped
+     * @return the weapon equiped.
+     */
     public Weapon equipWeapon(Actor actor){
         for(Weapon weapon : actor.getWeaponInventory()){
             if(asWeapon(weapon) != null){
@@ -114,6 +123,12 @@ public class AttackActionIntrinsic extends Action {
         return actor.getIntrinsicWeapon();
     }
 
+    /**
+     * Check for instance of a weapon.
+     *
+     * @param weapon the weapon to be checked.
+     * @return the weapon checked.
+     */
     public Weapon asWeapon(Weapon weapon){
         return weapon instanceof Weapon ? weapon : null;
     }

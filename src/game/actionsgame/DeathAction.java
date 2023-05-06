@@ -24,13 +24,42 @@ import game.trading.RunesManager;
  *
  */
 public class DeathAction extends Action {
+
+    /**
+     * Unused, the actor that did the attacking.
+     */
     private Actor attacker;
+
+    /**
+     * Location of the attack.
+     */
     Location location;
+
+    /**
+     * Unused, previous location of actors.
+     */
     private Location previousLocation;
+
+    /**
+     * Unused, the runes.
+     */
     Runes runes;
+
+    /**
+     * Runes Manager, to deal with runes exchange.
+     */
     RunesManager runesManager = RunesManager.getInstance();
+
+    /**
+     * Reset Manager to deal with resetting map.
+     */
     ResetManager resetManager = ResetManager.getInstance();
 
+    /**
+     * Constructor.
+     *
+     * @param actor the attacker.
+     */
     public DeathAction(Actor actor) {
         this.attacker = actor;
     }
@@ -72,6 +101,12 @@ public class DeathAction extends Action {
         return result;
     }
 
+    /**
+     * Menu Description of what is occuring.
+     *
+     * @param actor The actor performing the action.
+     * @return menu description string
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " is killed.";

@@ -30,7 +30,7 @@ import java.util.List;
 public class Application {
 	private static EastFactory eastFactory = new EastFactory();
 	private static WestFactory westFactory = new WestFactory();
-	private static WeaponItem club = new Scimitar();
+	private static WeaponItem club = new Grossmesser();
 	public static void main(String[] args) {
 
 		World world = new World(new Display());
@@ -199,19 +199,15 @@ public class Application {
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
-		gameMap.at(35, 10).addActor(new GiantCrab());
-		gameMap.at(34, 10).addActor(new LoneWolf());
+//		gameMap.at(35, 10).addActor(new GiantCrab());
+//		gameMap.at(34, 10).addActor(new LoneWolf());
 //		gameMap.at(25, 23).addActor(new LoneWolf());
-		gameMap.at(24, 22).addActor(new LoneWolf());
+		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
-		Location LostGrace = gameMap.at(25, 20);
-		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step", LostGrace));
-
-		//Testing purposes only
-		Location LostGrace2 = gameMap.at(23, 18);
-		gameMap.at(23, 18).setGround(new SiteOfLostGrace("The Second Step", LostGrace2));
+		Location LostGrace = gameMap.at(38, 12);
+		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
 		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
 
@@ -221,7 +217,7 @@ public class Application {
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
-		world.addPlayer(player, gameMap.at(25, 22));
+		world.addPlayer(player, gameMap.at(24, 23));
 		world.run();
 	}
 }
