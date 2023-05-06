@@ -47,7 +47,7 @@ public class Player extends Actor implements Resettable {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addItemToInventory(bottle);
-		setLastGraceSite(lastGraceSite);
+		this.lastGraceSite = lastGraceSite;
 		runesManager.storeActorsRunes(this, 9999);
 		resetManager.registerResettable(this, this);
 	}
@@ -74,6 +74,11 @@ public class Player extends Actor implements Resettable {
 		return actions;
 	}
 
+
+	/*
+	Resettable Interface Methods
+	 */
+
 	/**
 	 * Reset method for the player, restores health and moves to Site of Lost Grace.
 	 *
@@ -89,8 +94,23 @@ public class Player extends Actor implements Resettable {
 		gameMap.moveActor(this, lastGraceSite);
 	}
 
+	/**
+	 * Tells us whether this is the player or not.
+	 *
+	 * @return True, this is the player.
+	 */
 	@Override
 	public boolean isPlayer() { return true; }
+
+	/**
+	 * Sets the last site of grace the player has visited.
+	 *
+	 * @param lastSiteOfGrace Location class, containing last Site of Grace that was interacted with.
+	 */
+	@Override
+	public void setLastSiteOfGrace(Location lastSiteOfGrace) {
+		this.lastGraceSite = lastSiteOfGrace;
+	}
 
 
 	/**
@@ -123,13 +143,6 @@ public class Player extends Actor implements Resettable {
 		return runesManager.retrieveActorsRunes(this);
 	}
 
-
-	/**
-	 * Setter for lastGraceSite attribute.
-	 *
-	 * @param lastGraceSite the last Site of Lost Grace visited, as a Location.
-	 */
-	public void setLastGraceSite(Location lastGraceSite) { this.lastGraceSite = lastGraceSite; }
 
 	public void setPreviousLocation(Location previousLocation) { this.previousLocation = previousLocation; }
 

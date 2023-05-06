@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * A resettable interface
@@ -13,7 +14,21 @@ import edu.monash.fit2099.engine.positions.GameMap;
  *
  */
 public interface Resettable {
+
+    /*
+
+     */
     void reset(GameMap gameMap);
 
+    /**
+     *
+     * @return
+     */
     boolean isPlayer();
+
+    /**
+     *
+     * @param lastSiteOfGrace
+     */
+    void setLastSiteOfGrace(Location lastSiteOfGrace);
 }
