@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actionsgame.DeathAction;
 
 public class Cliff extends Ground {
 
@@ -34,7 +33,6 @@ public class Cliff extends Ground {
         {
             actor.hurt(Integer.MAX_VALUE);
             if(!actor.isConscious()){
-                new DeathAction(actor).execute(actor, location.map());
                 ActionList actions = super.allowableActions(actor, location, direction);
                 return actions;
             }
