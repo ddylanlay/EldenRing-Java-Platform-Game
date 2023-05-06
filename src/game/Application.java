@@ -8,13 +8,12 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
-import game.enemies.GiantCrab;
-import game.enemies.LoneWolf;
+import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
-import game.weapons.Scimitar;
+import game.weapons.Club;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +29,7 @@ import java.util.List;
 public class Application {
 	private static EastFactory eastFactory = new EastFactory();
 	private static WestFactory westFactory = new WestFactory();
-	private static WeaponItem club = new Grossmesser();
+	private static WeaponItem club = new Club();
 	public static void main(String[] args) {
 
 		World world = new World(new Display());

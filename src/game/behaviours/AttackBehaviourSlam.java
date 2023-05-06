@@ -13,7 +13,8 @@ import game.utils.RandomNumberGenerator;
  */
 public class AttackBehaviourSlam extends Action implements Behaviour{
     private Actor target;
-    public AttackBehaviourSlam(){
+    public AttackBehaviourSlam(Actor target){
+        this.target = target;
     }
     @Override
     public Action getAction(Actor actor, GameMap map) {

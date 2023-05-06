@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
 import game.actionsgame.SpinAttackActionGrossmesser;
 import game.trading.SellableItem;
-import game.weaponabilities.SpinAttack;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ import java.util.List;
  * Modified by:
  *
  */
-public class Grossmesser extends WeaponItem implements SellableItem, SpinAttack {
+public class Grossmesser extends WeaponItem implements SellableItem{
     private ActionList allowableActions;
     /**
      * Constructor

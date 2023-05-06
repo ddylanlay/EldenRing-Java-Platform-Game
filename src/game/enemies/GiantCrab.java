@@ -41,7 +41,6 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     public GiantCrab() {
         super("Giant Crab", 'c', 407);
         behaviours.put(999, new WanderBehaviour());
-        behaviours.put(1, new AttackBehaviourSlam());
         runesManager.storeActorsRunes(this,dropRunes());
         resetManager.registerResettable(this, this);
     }
@@ -183,18 +182,18 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
 
 
-    public Weapon equipWeapon(Actor actor){
-        for(Weapon weapon : actor.getWeaponInventory()){
-            System.out.println(asWeapon(weapon));
-            if(asWeapon(weapon) != null){
-
-                return weapon;
-            }
-        }
-        return actor.getIntrinsicWeapon();
-    }
-    public Weapon asWeapon(Weapon weapon){
-        return weapon instanceof Weapon ? weapon : null;
-    }
+//    public Weapon equipWeapon(Actor actor){
+//        for(Weapon weapon : actor.getWeaponInventory()){
+//            System.out.println(asWeapon(weapon));
+//            if(asWeapon(weapon) != null){
+//
+//                return weapon;
+//            }
+//        }
+//        return actor.getIntrinsicWeapon();
+//    }
+//    public Weapon asWeapon(Weapon weapon){
+//        return weapon instanceof Weapon ? weapon : null;
+//    }
 
 }
