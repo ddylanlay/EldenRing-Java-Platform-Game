@@ -11,7 +11,6 @@ import game.ResetManager;
 import game.Resettable;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
-import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Scimitar;
 
@@ -27,12 +26,10 @@ import game.weapons.Scimitar;
  */
 public class SkeletalBandit extends Enemies implements Resettable {
     ResetManager resetManager = ResetManager.getInstance();
-    RunesManager runesManager = RunesManager.getInstance();
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 184);
         behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Scimitar());
-        runesManager.storeActorsRunes(this,0);
         resetManager.registerResettable(this, this);
     }
 

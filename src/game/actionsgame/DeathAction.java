@@ -63,6 +63,11 @@ public class DeathAction extends Action {
     public DeathAction(Actor actor) {
         this.attacker = actor;
     }
+    public DeathAction(Actor actor, Location previousLocation) {
+        this.attacker = actor;
+        this.previousLocation = previousLocation;
+    }
+
 
     /**
      * When the target is killed, the items & weapons carried by target
@@ -92,10 +97,11 @@ public class DeathAction extends Action {
 
             System.out.println(FancyMessage.YOU_DIED);
             location = map.locationOf(target);
-
-            Runes runesToDrop = new Runes(target, location.getGround());
-            runesManager.playerDied(runesToDrop, location);
-            resetManager.run(map);
+            if (runesManager.retrieveActorsRunes(target) != 0) {
+                Runes runesToDrop = new Runes(target, location.getGround());
+                runesManager.playerDied(runesToDrop, location);
+            }
+                resetManager.run(map);
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;

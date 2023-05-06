@@ -9,9 +9,9 @@ import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
 import game.enemies.GiantDog;
+import game.enemies.LoneWolf;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
-import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
 
@@ -34,7 +34,7 @@ public class Application {
 
 		World world = new World(new Display());
 
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Cliff());
 //set ground
 		List<String> map = Arrays.asList(
 				"...........................................................................",
@@ -44,7 +44,7 @@ public class Application {
 				"......................._____........#......................................",
 				"......................#............_#......................................",
 				"......................#...........###......................................",
-				"...........................................................................",
+				".....................................+.....................................",
 				"...........................................................................",
 				"..................................###___###................................",
 				"..................................________#................................",
@@ -196,14 +196,14 @@ public class Application {
 
 		//tester below
 		//gameMap.at(35, 10).addActor(new LoneWolf());
-//		gameMap.at(37, 10).addActor(new LoneWolf());
+		gameMap.at(38, 6).addActor(new LoneWolf());
 
 //		gameMap.at(35, 10).addActor(new GiantCrab());
 //		gameMap.at(34, 10).addActor(new LoneWolf());
 //		gameMap.at(25, 23).addActor(new LoneWolf());
 		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
-		gameMap.at(37,10).addActor(new MerchantKale());
+//		gameMap.at(37,10).addActor(new MerchantKale());
 
 		Location LostGrace = gameMap.at(38, 12);
 		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
@@ -216,7 +216,7 @@ public class Application {
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
-		world.addPlayer(player, gameMap.at(24, 23));
+		world.addPlayer(player, gameMap.at(37, 6));
 		world.run();
 	}
 }

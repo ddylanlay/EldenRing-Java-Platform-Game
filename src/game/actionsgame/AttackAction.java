@@ -93,7 +93,7 @@ public class AttackAction extends Action {
 		target.hurt(damage);
 		if (!target.isConscious()) {
 			result += new DeathAction(actor).execute(target, map);
-			if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@'){
+			if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@' && target.getDisplayChar() != 'q' && target.getDisplayChar() != 'b'){
 				int numOfRunes = runesManager.transferRunes(target, actor);
 				String string = target + " drops " + numOfRunes + " runes";
 				result += System.lineSeparator() + string;
