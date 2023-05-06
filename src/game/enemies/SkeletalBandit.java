@@ -3,27 +3,17 @@ package game.enemies;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.ResetManager;
 import game.Resettable;
-import game.Status;
-import game.actionsgame.AttackAction;
-import game.actionsgame.AttackActionPilesOfBones;
-import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Scimitar;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Skeletal Bandit Enemy.
@@ -35,14 +25,14 @@ import java.util.Map;
  * @author Arosh Heenkenda
  *
  */
-public class SkeletalBandit extends Actor implements Resettable {
-    private Map<Integer, Behaviour> behaviours = new HashMap<>();
+public class SkeletalBandit extends Enemies implements Resettable {
     ResetManager resetManager = ResetManager.getInstance();
-
+    RunesManager runesManager = RunesManager.getInstance();
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 184);
-        this.behaviours.put(999, new WanderBehaviour());
+        behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Scimitar());
+        runesManager.storeActorsRunes(this,0);
         resetManager.registerResettable(this, this);
     }
 
@@ -81,24 +71,24 @@ public class SkeletalBandit extends Actor implements Resettable {
      * @param map        current GameMap
      * @return
      */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
-            actions.add(new AttackAction(this, direction));
-            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-            // HINT 1: How would you attack the enemy with a weapon?
-            if(followContained(followBehaviour) == false){
-                behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
-                behaviours.put(500, followBehaviour);
-            }
-        }
-
-        return actions;
-    }
+//    @Override
+//    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+//        ActionList actions = new ActionList();
+//        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+//        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+//            actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
+//            actions.add(new AttackActionIntrinsic(this, direction));
+//            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
+//            // HINT 1: How would you attack the enemy with a weapon?
+//            if(followContained(followBehaviour) == false){
+//                behaviours.clear();
+//                behaviours.put(1, new AttackBehaviour(otherActor));
+//                behaviours.put(500, followBehaviour);
+//            }
+//        }
+//
+//        return actions;
+//    }
 
 
 
@@ -106,14 +96,14 @@ public class SkeletalBandit extends Actor implements Resettable {
     public WeaponItem getWeaponItem(){
         return new Scimitar();
     }
-    public boolean followContained(FollowBehaviour behaviourContained){
-        for(int i : behaviours.keySet()){
-            if(behaviours.get(i) == behaviourContained){
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean followContained(FollowBehaviour behaviourContained){
+//        for(int i : behaviours.keySet()){
+//            if(behaviours.get(i) == behaviourContained){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Reset method for Skeletal Bandit, removes it from player map.
@@ -138,19 +128,19 @@ public class SkeletalBandit extends Actor implements Resettable {
      */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
-
-    public Weapon equipWeapon(Actor actor){
-        for(Weapon weapon : actor.getWeaponInventory()){
-            System.out.println(asWeapon(weapon));
-            if(asWeapon(weapon) != null){
-
-                return weapon;
-            }
-        }
-        return actor.getIntrinsicWeapon();
-    }
-    public Weapon asWeapon(Weapon weapon){
-        return weapon instanceof Weapon ? weapon : null;
-    }
+//
+//    public Weapon equipWeapon(Actor actor){
+//        for(Weapon weapon : actor.getWeaponInventory()){
+//            System.out.println(asWeapon(weapon));
+//            if(asWeapon(weapon) != null){
+//
+//                return weapon;
+//            }
+//        }
+//        return actor.getIntrinsicWeapon();
+//    }
+//    public Weapon asWeapon(Weapon weapon){
+//        return weapon instanceof Weapon ? weapon : null;
+//    }
 }
 

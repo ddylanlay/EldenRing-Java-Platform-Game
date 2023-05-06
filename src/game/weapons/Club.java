@@ -69,6 +69,7 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
     }
     @Override
     public List<Action> getAllowableActions() {
+        this.addCapability(WeaponType.HAMMER);
         return this.allowableActions.getUnmodifiableActionList();
     }
 

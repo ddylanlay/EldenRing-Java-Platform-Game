@@ -2,17 +2,14 @@ package game.actionsgame;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.Player;
 import game.enemies.Enemies;
-import game.enemies.EnemyType;
 import game.trading.RunesManager;
 import java.util.Random;
 
 /**
- * An Action to attack a Pile of Bones instance.
+ * An Action to attack another Actor with Intrinsic weapon.
  *
  * Created by:
  * @author Jamie Tran
@@ -20,7 +17,7 @@ import java.util.Random;
  * Modified by:
  *
  */
-public class AttackActionPilesOfBones extends Action {
+public class AttackActionIntrinsic extends Action {
 
     /**
      * The Actor that is to be attacked
@@ -28,7 +25,7 @@ public class AttackActionPilesOfBones extends Action {
     private Actor target;
 
     /**
-     * Enemy to be attacked.
+     * Unused, the enemy target
      */
     private Enemies enemyTarget;
 
@@ -48,21 +45,10 @@ public class AttackActionPilesOfBones extends Action {
     private Weapon weapon;
 
     /**
-     * Runes Manager to deal with runes exchange.
+     * Runes manager to deal with any runes swapping.
      */
     RunesManager runesManager = RunesManager.getInstance();
 
-    /**
-     * Constructor.
-     *
-     * @param target the Actor to attack
-     * @param direction the direction where the attack should be performed (only used for display purposes)
-     */
-    public AttackActionPilesOfBones(Actor target, String direction, Weapon weapon) {
-        this.target = target;
-        this.direction = direction;
-        this.weapon = weapon;
-    }
 
     /**
      * Constructor with intrinsic weapon as default
@@ -70,7 +56,7 @@ public class AttackActionPilesOfBones extends Action {
      * @param target the actor to attack
      * @param direction the direction where the attack should be performed (only used for display purposes)
      */
-    public AttackActionPilesOfBones(Actor target, String direction) {
+    public AttackActionIntrinsic(Actor target, String direction) {
         this.target = target;
         this.direction = direction;
     }
@@ -86,26 +72,22 @@ public class AttackActionPilesOfBones extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Weapon weapon = equipWeapon(actor);
-        if (weapon == null) {
-            weapon = actor.getIntrinsicWeapon();
-        }
+        Weapon weapon = actor.getIntrinsicWeapon();
+
 
 
         if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
             return actor + " misses " + target + ".";
         }
-
         int damage = weapon.damage();
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
         target.hurt(damage);
         if (!target.isConscious()) {
-            result += new DeathActionPB(actor).execute(target, map);
+            result += new DeathAction(actor).execute(target, map);
             if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@'){
                 int numOfRunes = runesManager.transferRunes(target, actor);
                 String string = target + " drops " + numOfRunes + " runes";
                 result += System.lineSeparator() + string;
-                System.out.println(((Player) actor).getNumOfRunes());
                 return result;
             }
 

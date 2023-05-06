@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
-import game.enemies.LoneWolf;
+import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.trading.MerchantKale;
@@ -91,21 +91,53 @@ public class Application {
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
 
+		for(int i = 0; i <= 1; i++){
+		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
+		if(xRand < 75/2){
+			gameMap.at(xRand, yRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
+		}
+		else {
+			gameMap.at(xRand, yRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
+		}
+		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		yRand = RandomNumberGenerator.getRandomInt(1, 22);
+		if(xRand < 75/2){
+			gameMap.at(xRand, yRand).setGround(new PuddleOfWater(westFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new PuddleOfWater(westFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new PuddleOfWater(westFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(westFactory));
+		}
+		else {
+			gameMap.at(xRand, yRand).setGround(new PuddleOfWater(eastFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new PuddleOfWater(eastFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new PuddleOfWater(eastFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(eastFactory));
+		}
+		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		yRand = RandomNumberGenerator.getRandomInt(1, 22);
+		if(xRand < 75/2){
+			gameMap.at(xRand, yRand).setGround(new GustOfWind(westFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new GustOfWind(westFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new GustOfWind(westFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new GustOfWind(westFactory));
+		}
+		else {
+			gameMap.at(xRand, yRand).setGround(new GustOfWind(eastFactory));
+			gameMap.at(xRand + 1, yRand).setGround(new GustOfWind(eastFactory));
+			gameMap.at(xRand, yRand + 1).setGround(new GustOfWind(eastFactory));
+			gameMap.at(xRand + 1, yRand + 1).setGround(new GustOfWind(eastFactory));
+		}
+		}
 
-//		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
-//		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
-//		if(xRand < 75/2){
-//			gameMap.at(xRand, yRand).setGround(new Graveyard(westFactory));
-//			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
-//			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
-//			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
-//		}
-//		else{
-//			gameMap.at(xRand, yRand).setGround(new Graveyard(eastFactory));
-//			gameMap.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
-//			gameMap.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
-//			gameMap.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
-//		}
+
+
 //
 //		int xxRand = RandomNumberGenerator.getRandomInt(1, 72);
 //		int yyRand = RandomNumberGenerator.getRandomInt(1, 20);
@@ -166,21 +198,25 @@ public class Application {
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
-		gameMap.at(34, 10).addActor(new LoneWolf());
+//		gameMap.at(35, 10).addActor(new GiantCrab());
+//		gameMap.at(34, 10).addActor(new LoneWolf());
+//		gameMap.at(25, 23).addActor(new LoneWolf());
+		gameMap.at(24, 22).addActor(new GiantDog());
+//		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
-		Location LostGrace = gameMap.at(25, 20);
-		gameMap.at(25, 20).setGround(new SiteOfLostGrace("The First Step", LostGrace));
+		Location LostGrace = gameMap.at(38, 12);
+		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
+
+		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
 		player.addWeaponToInventory(club);
-
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
-		System.out.println(player.getWeaponInventory());
-		world.addPlayer(player, gameMap.at(36, 10));
+		world.addPlayer(player, gameMap.at(24, 23));
 		world.run();
 	}
 }

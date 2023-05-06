@@ -5,10 +5,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.FlaskOfCrimsonTears;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * A reset manager class that manages a list of resettables.
@@ -41,22 +42,46 @@ public class ResetManager {
      */
     public void run(GameMap gameMap) {
 
-        for (Map.Entry<Actor, Resettable> item : resettables.entrySet()){
+        Set<Entry<Actor, Resettable>> entrySet = resettables.entrySet();
+        Iterator<Entry<Actor, Resettable>> iter = entrySet.iterator();
 
-            //Get the actor and resettable objects
-            Actor actor = item.getKey();
-            Resettable resettable = item.getValue();
+        while (iter.hasNext()){
+
+            Entry<Actor, Resettable> entry = iter.next();
+            Actor actor = entry.getKey();
+            Resettable resettable = entry.getValue();
+
+            //Do the reset for resettable instance
+            resettable.reset(gameMap);
 
             //If not the player
             if (!resettable.isPlayer()) {
 
                 //Remove them from the resettables list
-                removeResettable(actor);
+                iter.remove();
             }
 
-            //Do the reset for resettable instance
-            resettable.reset(gameMap);
         }
+
+//        for (Map.Entry<Actor, Resettable> item : resettables.entrySet()){
+//
+//            //Get the actor and resettable objects
+//            Actor actor = item.getKey();
+//            Resettable resettable = item.getValue();
+//
+//            //If not the player
+//            if (resettable.isPlayer()) {
+//
+//                //Remove them from the resettables list
+////                removeResettable(actor);
+//                myPlayerA = actor;
+//                myPlayerR = resettable;
+//            }
+//
+//            //Do the reset for resettable instance
+//            resettable.reset(gameMap);
+//        }
+
 
         FlaskOfCrimsonTears bottle = FlaskOfCrimsonTears.getInstance();
         bottle.reset(gameMap);

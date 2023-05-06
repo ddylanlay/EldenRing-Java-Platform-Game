@@ -9,20 +9,19 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.ResetManager;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
-import game.behaviours.AttackBehaviour;
+import game.actionsgame.AttackActionIntrinsic;
+import game.behaviours.AttackBehaviourSlam;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Giant Crab Enemy.
@@ -35,14 +34,13 @@ import java.util.Map;
  *
  */
 public class GiantCrab extends Enemies implements SlamAttack, Resettable {
-    private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private ArrayList<Actor> actorInRange = new ArrayList<>();
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 
     public GiantCrab() {
         super("Giant Crab", 'c', 407);
-        this.behaviours.put(999, new WanderBehaviour());
+        behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this,dropRunes());
         resetManager.registerResettable(this, this);
     }
@@ -74,26 +72,26 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
         return new DoNothingAction();
     }
 
-    /**
-     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return
-     */
+//    /**
+//     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+//     *
+//     * @param otherActor the Actor that might be performing attack
+//     * @param direction  String representing the direction of the other Actor
+//     * @param map        current GameMap
+//     * @return
+//     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
-            actions.add(new AttackAction(this, direction));
+            actions.add(new AttackActionIntrinsic(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(1, new AttackBehaviourSlam(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }
@@ -104,7 +102,7 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(97, "bites", 95);
+        return new IntrinsicWeapon(208, "slams", 90);
 
 
     }
@@ -144,14 +142,14 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
             }
         }
     }
-    public boolean followContained(FollowBehaviour behaviourContained){
-        for(int i : behaviours.keySet()){
-            if(behaviours.get(i) == behaviourContained){
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean followContained(FollowBehaviour behaviourContained){
+//        for(int i : behaviours.keySet()){
+//            if(behaviours.get(i) == behaviourContained){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public int dropRunes()
     {
@@ -184,18 +182,18 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
 
 
-    public Weapon equipWeapon(Actor actor){
-        for(Weapon weapon : actor.getWeaponInventory()){
-            System.out.println(asWeapon(weapon));
-            if(asWeapon(weapon) != null){
-
-                return weapon;
-            }
-        }
-        return actor.getIntrinsicWeapon();
-    }
-    public Weapon asWeapon(Weapon weapon){
-        return weapon instanceof Weapon ? weapon : null;
-    }
+//    public Weapon equipWeapon(Actor actor){
+//        for(Weapon weapon : actor.getWeaponInventory()){
+//            System.out.println(asWeapon(weapon));
+//            if(asWeapon(weapon) != null){
+//
+//                return weapon;
+//            }
+//        }
+//        return actor.getIntrinsicWeapon();
+//    }
+//    public Weapon asWeapon(Weapon weapon){
+//        return weapon instanceof Weapon ? weapon : null;
+//    }
 
 }

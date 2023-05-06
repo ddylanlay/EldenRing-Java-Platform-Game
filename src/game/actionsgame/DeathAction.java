@@ -24,13 +24,42 @@ import game.trading.RunesManager;
  *
  */
 public class DeathAction extends Action {
+
+    /**
+     * Unused, the actor that did the attacking.
+     */
     private Actor attacker;
+
+    /**
+     * Location of the attack.
+     */
     Location location;
+
+    /**
+     * Unused, previous location of actors.
+     */
     private Location previousLocation;
+
+    /**
+     * Unused, the runes.
+     */
     Runes runes;
+
+    /**
+     * Runes Manager, to deal with runes exchange.
+     */
     RunesManager runesManager = RunesManager.getInstance();
+
+    /**
+     * Reset Manager to deal with resetting map.
+     */
     ResetManager resetManager = ResetManager.getInstance();
 
+    /**
+     * Constructor.
+     *
+     * @param actor the attacker.
+     */
     public DeathAction(Actor actor) {
         this.attacker = actor;
     }
@@ -55,20 +84,29 @@ public class DeathAction extends Action {
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
+            resetManager.removeResettable(target);
+            map.removeActor(target);
         }
         else {
             // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
-            resetManager.run(map);
+
             System.out.println(FancyMessage.YOU_DIED);
             location = map.locationOf(target);
-            location.setGround(new Runes(target, location.getGround()));
 
-
+            Runes runesToDrop = new Runes(target, location.getGround());
+            runesManager.playerDied(runesToDrop, location);
+            resetManager.run(map);
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }
 
+    /**
+     * Menu Description of what is occuring.
+     *
+     * @param actor The actor performing the action.
+     * @return menu description string
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " is killed.";

@@ -48,7 +48,7 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addItemToInventory(bottle);
 		this.lastGraceSite = lastGraceSite;
-		runesManager.storeActorsRunes(this, 9999);
+		runesManager.storeActorsRunes(this, 300);
 		resetManager.registerResettable(this, this);
 	}
 
@@ -68,11 +68,15 @@ public class Player extends Actor implements Resettable {
 		return menu.showMenu(this, actions, display);
 	}
 
+
+
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		ActionList actions = new ActionList();
+
 		return actions;
 	}
+
 
 
 	/*
@@ -90,8 +94,11 @@ public class Player extends Actor implements Resettable {
 		//Restore health
 		hitPoints = maxHitPoints;
 
-		//Move to correct position in game map
-		gameMap.moveActor(this, lastGraceSite);
+		if (!(gameMap.locationOf(this) == lastGraceSite)){
+			//Move to correct position in game map
+			gameMap.moveActor(this, lastGraceSite);
+		}
+
 	}
 
 	/**

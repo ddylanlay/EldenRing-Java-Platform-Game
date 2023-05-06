@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
+import game.actionsgame.SpinAttackActionGrossmesser;
 import game.trading.SellableItem;
 
 import java.util.List;
@@ -21,9 +22,8 @@ import java.util.List;
  * Modified by:
  *
  */
-public class Grossmesser extends WeaponItem implements SellableItem {
+public class Grossmesser extends WeaponItem implements SellableItem{
     private ActionList allowableActions;
-    ActionList actions = new ActionList();
     /**
      * Constructor
      */
@@ -37,14 +37,20 @@ public class Grossmesser extends WeaponItem implements SellableItem {
         int sellingPrice = 100;
         return sellingPrice;
     }
+
+    public int spinAttack(){
+        return 0;
+    }
+
     @Override
     public List<Action> getAllowableActions() {
+
+        this.allowableActions.add(new SpinAttackActionGrossmesser(this));
         return this.allowableActions.getUnmodifiableActionList();
     }
     @Override
     public void tick(Location currentLocation, Actor actor) {
         int counter = 0;
-        ActionList actions = new ActionList();
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
             if (destination.getDisplayChar() == 'K'&& this.allowableActions.size() == 0) {

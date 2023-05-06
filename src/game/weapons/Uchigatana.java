@@ -24,6 +24,8 @@ import java.util.List;
  */
 public class Uchigatana extends WeaponItem implements PurchasableItem, SellableItem {
     private Actor actor;
+    private Actor target;
+    private String direction;
     private ActionList allowableActions;
 
     /**
@@ -33,9 +35,13 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
     public Uchigatana() {
         super("Uchigatana", ')', 115, "slashes", 80);
         this.allowableActions = new ActionList();
+        this.actor = actor;
     }
 
-
+    @Override
+    public char getDisplayChar(){
+        return super.getDisplayChar();
+    }
     public int getPurchasePrice() {
         int purchasePrice = 5000;
         return purchasePrice;
@@ -45,9 +51,34 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
         int sellingPrice = 500;
         return sellingPrice;
     }
+//    public int unsheathe(Actor target){
+//        int newDamage = 0;
+//
+//        if(RandomNumberGenerator.getRandomInt(100) <= 60){
+//            newDamage = super.damage()*2;
+//            return newDamage;
+//        }
+//        return newDamage;
+//    }
+
+//    @Override
+//    public Action getSkill(Actor target, String direction){
+//         return new UnsheatheAttackAction(target, direction,this);
+//    }
+//        if(RandomNumberGenerator.getRandomInt(100) <= 60){
+//            newDamage = newDamage*2;
+//        }
+//        return newDamage;
+//
+//    }
+//    public Action getSkill(Actor holder) {
+//        return
+//    }
+
 
     @Override
     public List<Action> getAllowableActions() {
+        this.addCapability(WeaponType.KATANA);
         return this.allowableActions.getUnmodifiableActionList();
     }
 
