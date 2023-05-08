@@ -21,6 +21,7 @@ public class GoldenRunes extends ConsumeableItem {
     public GoldenRunes() {
 
         super("Golden Runes", '*', true);
+        addCapability(ItemCapability.RUNE_CONSUME);
     }
 
     @Override
