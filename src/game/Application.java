@@ -206,7 +206,7 @@ public class Application {
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
-		gameMap.at(38, 11).addItem(new GoldenRunes());
+		gameMap.at(43, 11).addItem(new GoldenRunes());
 
 		Location LostGrace = gameMap.at(38, 12);
 		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));

@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.PickUpItemAction;
 
 /**
  * Golden Runes Item Class
@@ -18,6 +19,7 @@ public class GoldenRunes extends ConsumeableItem {
      *
      */
     public GoldenRunes() {
+
         super("Golden Runes", '*', true);
     }
 
