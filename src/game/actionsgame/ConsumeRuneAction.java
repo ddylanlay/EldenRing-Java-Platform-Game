@@ -3,6 +3,7 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.GoldenRunes;
 
 /**
  * Consume action for the Golden Runes
@@ -15,6 +16,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
  */
 public class ConsumeRuneAction extends Action {
 
+    GoldenRunes gRunes;
+
+    public ConsumeRuneAction(GoldenRunes runes){
+
+    }
 
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -23,6 +29,7 @@ public class ConsumeRuneAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+
+        return actor + " consumes the Golden Runes.";
     }
 }
