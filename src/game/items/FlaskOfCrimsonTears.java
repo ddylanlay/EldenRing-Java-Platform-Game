@@ -45,8 +45,6 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
         return instance;
     }
 
-    @Override
-    public void consume() { }
 
     //    @Override
 //    public HealAction consume(Actor actor) {
@@ -62,11 +60,12 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
 //            currentUses -= 1;
 //        }
 //    }
-    public String consume(Actor actor, int healAmount){
+    @Override
+    public String consume(Actor actor, int amount){
 
         if (remainingUses != 0) {
             remainingUses -= 1;
-            actor.heal(healAmount);
+            actor.heal(amount);
             return actor + " consumes " + this + " (" + remainingUses + "/" + MAX_USES + ")";
         }
         else{

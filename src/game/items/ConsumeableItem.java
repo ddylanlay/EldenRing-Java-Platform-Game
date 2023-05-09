@@ -27,8 +27,7 @@ public abstract class ConsumeableItem extends Item {
         this.addCapability(ItemCapability.CONSUMEABLE);
     }
 
-   public abstract void consume();
 
-    public abstract String consume(Actor actor, int healthAmount);
+    public abstract String consume(Actor actor, int amount);
 
 }

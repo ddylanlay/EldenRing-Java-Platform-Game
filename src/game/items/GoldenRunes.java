@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.items.PickUpItemAction;
 import game.actionsgame.ConsumeRuneAction;
 import game.actionsgame.DropGRuneAction;
 import game.actionsgame.PickUpGRuneAction;
+import game.trading.RunesManager;
+import game.utils.RandomNumberGenerator;
 
 /**
  * Golden Runes Item Class
@@ -20,7 +22,7 @@ import game.actionsgame.PickUpGRuneAction;
  */
 public class GoldenRunes extends ConsumeableItem {
 
-    ConsumeRuneAction consumeAction;
+    private ConsumeRuneAction consumeAction;
 
     /***
      * Constructor.
@@ -29,7 +31,6 @@ public class GoldenRunes extends ConsumeableItem {
     public GoldenRunes() {
 
         super("Golden Runes", '*', true);
-        addCapability(ItemCapability.RUNE_CONSUME);
     }
 
     public void addConsumeAction(){
@@ -70,13 +71,18 @@ public class GoldenRunes extends ConsumeableItem {
         return null;
     }
 
+    /**
+     *
+     * @param actor
+     * @param amount
+     * @return
+     */
     @Override
-    public void consume() {
+    public String consume(Actor actor, int amount) {
 
-    }
-
-    @Override
-    public String consume(Actor actor, int healthAmount) {
-        return null;
+        //Transfer runes to the player
+        RunesManager runesManager = RunesManager.getInstance();
+        runesManager.addRunes(actor, amount);
+        return actor + " gains " + amount + " runes.";
     }
 }
