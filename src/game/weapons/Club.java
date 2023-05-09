@@ -10,6 +10,7 @@ import game.Player;
 import game.actionsgame.SellAction;
 import game.trading.PurchasableItem;
 import game.trading.SellableItem;
+import game.trading.TradingCapability;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
         int counter = 0;
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
-            if ((destination.getDisplayChar() == 'K' || destination.getDisplayChar() == 'E') && this.allowableActions.size() == 0) {
+            if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.TRADE)) && this.allowableActions.size() == 0) {
                 this.allowableActions.add(new SellAction(actor, this, this));
                 counter ++;
             }

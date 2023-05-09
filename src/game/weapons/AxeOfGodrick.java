@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
 import game.trading.SellableItem;
+import game.trading.TradingCapability;
 
 /**
  * Axe of Godrick weapon, only obtainable by trading a Remembrance of Grafted from Enia.
@@ -58,7 +59,7 @@ public class AxeOfGodrick extends WeaponItem implements SellableItem {
         int counter = 0;
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
-            if ((destination.getDisplayChar() == 'K' || destination.getDisplayChar() == 'E') && this.allowableActions.size() == 0) {
+            if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.TRADE)) && this.allowableActions.size() == 0) {
                 this.allowableActions.add(new SellAction(actor, this, this));
                 counter ++;
             }
