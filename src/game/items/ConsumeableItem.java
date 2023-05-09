@@ -11,7 +11,6 @@ import edu.monash.fit2099.engine.items.Item;
  *
  * Modified by:
  *
- *
  */
 public abstract class ConsumeableItem extends Item {
 
@@ -27,7 +26,13 @@ public abstract class ConsumeableItem extends Item {
         this.addCapability(ItemCapability.CONSUMEABLE);
     }
 
-
+    /**
+     * Consume method for consumable item.
+     *
+     * @param actor The actor that will consume the item.
+     * @param amount Any amount, what this is will depend on what kind of consumable it is.
+     * @return A String description of what has occurred.
+     */
     public abstract String consume(Actor actor, int amount);
 
 }

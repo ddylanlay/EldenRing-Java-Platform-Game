@@ -17,12 +17,27 @@ import game.utils.RandomNumberGenerator;
  */
 public class ConsumeRuneAction extends Action {
 
+    /**
+     * Golden Runes instance that will be consumed.
+     */
     GoldenRunes gRunes;
 
+    /**
+     * Constructor.
+     *
+     * @param runes The Golden Runes instance.
+     */
     public ConsumeRuneAction(GoldenRunes runes){
         this.gRunes = runes;
     }
 
+    /**
+     * Execute the consume action.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return String description of what has occurred.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 
@@ -34,9 +49,13 @@ public class ConsumeRuneAction extends Action {
         return result;
     }
 
+    /**
+     * Menu description for action.
+     *
+     * @param actor The actor performing the action.
+     * @return String for menu description.
+     */
     @Override
-    public String menuDescription(Actor actor) {
+    public String menuDescription(Actor actor) { return actor + " consumes the Golden Runes."; }
 
-        return actor + " consumes the Golden Runes.";
-    }
 }
