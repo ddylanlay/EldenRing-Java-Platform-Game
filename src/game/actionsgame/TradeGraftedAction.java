@@ -47,7 +47,11 @@ public class TradeGraftedAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return "Execute the grafted trade action.";
+
+        actor.removeItemFromInventory(graftedItem); //remove grafted from player inventory
+        actor.addWeaponToInventory(weapon); //Add weapon to our inventory
+        String result = "Traded with " + trader.toString() + " for " + weapon.toString() + ".";
+        return result;
     }
 
     /**
