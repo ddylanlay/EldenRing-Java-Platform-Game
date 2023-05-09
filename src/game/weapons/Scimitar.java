@@ -45,7 +45,7 @@ public class Scimitar extends WeaponItem implements PurchasableItem, SellableIte
         int counter = 0;
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
-            if (destination.getDisplayChar() == 'K'&& this.allowableActions.size() == 0) {
+            if ((destination.getDisplayChar() == 'K' || destination.getDisplayChar() == 'E') && this.allowableActions.size() == 0) {
                 this.allowableActions.add(new SellAction(actor, this, this));
                 counter ++;
             }
