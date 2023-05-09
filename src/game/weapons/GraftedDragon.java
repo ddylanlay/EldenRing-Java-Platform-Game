@@ -1,6 +1,11 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actionsgame.SellAction;
 import game.trading.SellableItem;
 
 /**
@@ -17,11 +22,18 @@ import game.trading.SellableItem;
 public class GraftedDragon extends WeaponItem implements SellableItem {
 
     /**
+     * Allowable actions for Axe of Godrick
+     */
+    private ActionList allowableActions;
+
+    /**
      * Constructor.
      *
      */
     public GraftedDragon() {
+
         super("Grafted Dragon", 'N', 89, "bite", 90);
+        this.allowableActions = new ActionList();
     }
 
     /**
@@ -33,5 +45,27 @@ public class GraftedDragon extends WeaponItem implements SellableItem {
     public int getSellingPrice() {
         int sellingPrice = 200;
         return sellingPrice;
+    }
+
+    /**
+     * Stuff that happens every game tick.
+     *
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        int counter = 0;
+        for (Exit exit : currentLocation.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.getDisplayChar() == 'K' && this.allowableActions.size() == 0) {
+                this.allowableActions.add(new SellAction(actor, this, this));
+                counter ++;
+            }
+            else if(this.allowableActions.size() != 0 && counter == 0){
+                this.allowableActions.clear();
+
+            }
+        }
     }
 }
