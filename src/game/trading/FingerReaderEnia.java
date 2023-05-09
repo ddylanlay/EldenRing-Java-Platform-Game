@@ -25,7 +25,7 @@ public class FingerReaderEnia extends Actor {
      */
     public FingerReaderEnia(){
         super("Finger Reader Enia", 'E', 1000);
-        addCapability(TradingCapability.GODRICK_WEAPON_TRADE);
+        addCapability(TradingCapability.GRAFTED_TRADE);
         addCapability(TradingCapability.TRADE);
     }
 

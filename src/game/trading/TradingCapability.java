@@ -13,5 +13,5 @@ public enum TradingCapability {
     /**
      * Trading for Godrick's Weapons
      */
-    GODRICK_WEAPON_TRADE
+    GRAFTED_TRADE
 }

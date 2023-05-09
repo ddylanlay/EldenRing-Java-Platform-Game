@@ -208,10 +208,10 @@ public class Application {
 		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
-		gameMap.at(42,11).addActor(new FingerReaderEnia());
+		gameMap.at(41,10).addActor(new FingerReaderEnia());
 
 		gameMap.at(38, 11).addItem(new GoldenRunes());
-		gameMap.at(40, 11).addItem(new RemembranceOfGrafted());
+		gameMap.at(39, 10).addItem(new RemembranceOfGrafted());
 
 		Location LostGrace = gameMap.at(38, 12);
 		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
