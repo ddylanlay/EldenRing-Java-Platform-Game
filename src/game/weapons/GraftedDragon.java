@@ -1,5 +1,6 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
@@ -8,6 +9,8 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
 import game.trading.SellableItem;
 import game.trading.TradingCapability;
+
+import java.util.List;
 
 /**
  * Grafted Dragon weapon, only obtainable by trading a Remembrance of Grafted from Enia.
@@ -69,4 +72,13 @@ public class GraftedDragon extends WeaponItem implements SellableItem {
             }
         }
     }
+
+    /**
+     * Get allowable actions of item.
+     *
+     * @return an allowable actions list, unmodifable.
+     */
+    @Override
+    public List<Action> getAllowableActions() { return this.allowableActions.getUnmodifiableActionList(); }
+
 }
