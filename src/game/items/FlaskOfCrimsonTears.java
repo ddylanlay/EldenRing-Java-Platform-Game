@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Resettable;
 import game.actionsgame.HealAction;
-
 import java.util.List;
 
 /**
@@ -17,18 +16,24 @@ import java.util.List;
  * @author Arosh Heenkenda
  *
  * Modified by:
+ * @author Dylan Lay
  *
  */
 public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
 
     /**
-     *
+     * The max number of uses.
      */
     public final int MAX_USES = 2;
+
     /**
-     *
+     * The number of remaining uses.
      */
     public int remainingUses = MAX_USES;
+
+    /**
+     * Instance of Flask Of Crimson Tears.
+     */
     private static FlaskOfCrimsonTears instance;
 
     /**
@@ -36,8 +41,13 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
      */
     public FlaskOfCrimsonTears() {
         super("Flask of Crimson Tears", 'c', false);
-
     }
+
+    /**
+     * Factory getInstance method.
+     *
+     * @return single instance of Flask Of Crimson Tears.
+     */
     public static FlaskOfCrimsonTears getInstance() {
         if (instance == null) {
             instance = new FlaskOfCrimsonTears();
@@ -45,28 +55,20 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
         return instance;
     }
 
-    @Override
-    public void consume() { }
 
-    //    @Override
-//    public HealAction consume(Actor actor) {
-//
-//        if (currentUses == 0){
-//
-//            System.out.println(this + " (" + remainingUses + "/" + MAX_USES + ") is empty.");
-//        }
-//        else {
-//
-//
-//            actor.heal(HEALTH_INCREASE);
-//            currentUses -= 1;
-//        }
-//    }
-    public String consume(Actor actor, int healAmount){
+    /**
+     * Consume action for Flask of Crimson Tears, will heal the actor given there are uses remaining.
+     *
+     * @param actor The actor to be healed.
+     * @param amount The amount to be healed by.
+     * @return String description of the action performed.
+     */
+    @Override
+    public String consume(Actor actor, int amount){
 
         if (remainingUses != 0) {
             remainingUses -= 1;
-            actor.heal(healAmount);
+            actor.heal(amount);
             return actor + " consumes " + this + " (" + remainingUses + "/" + MAX_USES + ")";
         }
         else{
@@ -75,9 +77,16 @@ public class FlaskOfCrimsonTears extends ConsumeableItem implements Resettable {
 
     }
 
-    public String toString() {
-        return super.toString();
-    }
+    /**
+     * Simple to string method.
+     * @return
+     */
+    public String toString() { return super.toString(); }
+
+    /**
+     * Get the allowable actions for this item, also adds healing capability.
+     * @return unmodifiable actions list.
+     */
     public List<Action> getAllowableActions() {
         ActionList actions = new ActionList();
         actions.add(new HealAction());

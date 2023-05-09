@@ -11,9 +11,11 @@ import game.combatclass.CombatClassMenu;
 import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
+import game.items.GoldenRunes;
 import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
+import game.weapons.Scimitar;
 
 import java.util.Arrays;
 import java.util.List;
@@ -205,6 +207,8 @@ public class Application {
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
 
+		gameMap.at(38, 11).addItem(new GoldenRunes());
+
 		Location LostGrace = gameMap.at(38, 12);
 		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
@@ -216,7 +220,7 @@ public class Application {
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));
-		world.addPlayer(player, gameMap.at(24, 23));
+		world.addPlayer(player, gameMap.at(38, 10));
 		world.run();
 	}
 }
