@@ -6,50 +6,57 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Player;
 import game.actionsgame.SellAction;
-import game.trading.PurchasableItem;
 import game.trading.SellableItem;
 import game.trading.TradingCapability;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * A simple weapon that can be used to attack the enemy.
- * It deals 103 damage with 80% hit rate
+ * Axe of Godrick weapon, only obtainable by trading a Remembrance of Grafted from Enia.
+ *
+ * Deals 142 damage with an 84% hit rate.
  *
  * Created by:
- * @author Adrian Kristanto
+ * @author Arosh Heenkenda
  *
  * Modified by:
- * @author Arosh Heenkenda
+ *
  */
-public class Club extends WeaponItem implements PurchasableItem, SellableItem {
-    private ArrayList<Actor> actorInRange = new ArrayList<>();
-    private Actor actor;
-    private Player player;
-    private ActionList allowableActions;
-    Map map;
+public class AxeOfGodrick extends WeaponItem implements SellableItem {
+
     /**
-     * Constructor
+     * Allowable actions for Axe of Godrick
      */
-    public Club() {
-        super("Club", '!', 103, "bonks", 80);
+    private ActionList allowableActions;
+
+    /**
+     * Constructor.
+     *
+     */
+    public AxeOfGodrick() {
+
+        super("Axe of Godrick", 'T', 142, "swing", 84);
         this.allowableActions = new ActionList();
     }
 
-    public int getPurchasePrice(){
-        int purchasePrice = 600;
-        return purchasePrice;
-    }
-
-    public int getSellingPrice(){
+    /**
+     * Selling price of Axe of Godrick.
+     *
+     * @return an integer representing the price.
+     */
+    @Override
+    public int getSellingPrice() {
         int sellingPrice = 100;
         return sellingPrice;
     }
 
+    /**
+     * Stuff that happens every game tick.
+     *
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         int counter = 0;
@@ -64,15 +71,14 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
 
             }
         }
-//        if(counter == 0 && this.allowableActions.size() != 0){
-//            this.allowableActions.clear();
-//        }
-    }
-    @Override
-    public List<Action> getAllowableActions() {
-        this.addCapability(WeaponType.HAMMER);
-        return this.allowableActions.getUnmodifiableActionList();
     }
 
+    /**
+     * Get allowable actions of item.
+     *
+     * @return an allowable actions list, unmodifable.
+     */
+    @Override
+    public List<Action> getAllowableActions() { return this.allowableActions.getUnmodifiableActionList(); }
 
 }

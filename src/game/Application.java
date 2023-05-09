@@ -12,6 +12,8 @@ import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.items.GoldenRunes;
+import game.items.RemembranceOfGrafted;
+import game.trading.FingerReaderEnia;
 import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
@@ -206,8 +208,10 @@ public class Application {
 		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
+		gameMap.at(41,10).addActor(new FingerReaderEnia());
 
 		gameMap.at(38, 11).addItem(new GoldenRunes());
+		gameMap.at(39, 10).addItem(new RemembranceOfGrafted());
 
 		Location LostGrace = gameMap.at(38, 12);
 		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
