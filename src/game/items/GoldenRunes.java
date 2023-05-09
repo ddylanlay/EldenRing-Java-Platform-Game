@@ -1,9 +1,12 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropAction;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.items.PickUpItemAction;
 import game.actionsgame.ConsumeRuneAction;
+import game.actionsgame.DropGRuneAction;
 import game.actionsgame.PickUpGRuneAction;
 
 /**
@@ -17,6 +20,8 @@ import game.actionsgame.PickUpGRuneAction;
  */
 public class GoldenRunes extends ConsumeableItem {
 
+    ConsumeRuneAction consumeAction;
+
     /***
      * Constructor.
      *
@@ -28,7 +33,17 @@ public class GoldenRunes extends ConsumeableItem {
     }
 
     public void addConsumeAction(){
-        addAction(new ConsumeRuneAction(this));
+        if (consumeAction == null) {
+            consumeAction = new ConsumeRuneAction(this);
+            addAction(consumeAction);
+        }
+    }
+
+    public void removeConsumeAction(){
+        if (consumeAction != null){
+            removeAction(consumeAction);
+            consumeAction = null;
+        }
     }
 
     /**
@@ -40,6 +55,18 @@ public class GoldenRunes extends ConsumeableItem {
     public PickUpAction getPickUpAction(Actor actor) {
         if(portable)
             return new PickUpGRuneAction(this);
+        return null;
+    }
+
+    /**
+     *
+     * @param actor
+     * @return
+     */
+    @Override
+    public DropAction getDropAction(Actor actor) {
+        if(portable)
+            return new DropGRuneAction(this);
         return null;
     }
 
