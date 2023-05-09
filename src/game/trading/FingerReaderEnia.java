@@ -23,7 +23,11 @@ public class FingerReaderEnia extends Actor {
     /**
      * Constructor
      */
-    public FingerReaderEnia(){ super("Finger Reader Enia", 'E', 1000); }
+    public FingerReaderEnia(){
+        super("Finger Reader Enia", 'E', 1000);
+        addCapability(TradingCapability.GODRICK_WEAPON_TRADE);
+        addCapability(TradingCapability.TRADE);
+    }
 
     /**
      * Play the Trader Enia's turn.
