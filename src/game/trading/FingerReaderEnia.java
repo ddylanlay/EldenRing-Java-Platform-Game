@@ -54,11 +54,6 @@ public class FingerReaderEnia extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        actions.add(new PurchaseAction(otherActor, new Uchigatana(), new Uchigatana()));
-        actions.add(new PurchaseAction(otherActor, new Club(), new Club()));
-        actions.add(new PurchaseAction(otherActor, new GreatKnife(), new GreatKnife()));
-        actions.add(new PurchaseAction(otherActor, new Scimitar(), new Scimitar()));
-
         return actions;
     }
 }
