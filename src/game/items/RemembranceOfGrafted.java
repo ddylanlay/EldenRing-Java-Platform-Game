@@ -11,6 +11,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actionsgame.SellAction;
 import game.actionsgame.TradeGraftedAction;
 import game.trading.TradingCapability;
+import game.weapons.AxeOfGodrick;
+import game.weapons.GraftedDragon;
 import game.weapons.WeaponType;
 
 import java.util.List;
@@ -47,7 +49,8 @@ public class RemembranceOfGrafted extends Item {
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
             if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.GRAFTED_TRADE)) && this.allowableActions.size() == 0) {
-                this.allowableActions.add(new TradeGraftedAction(this));
+                this.allowableActions.add(new TradeGraftedAction(this, destination.getActor(), new GraftedDragon()));
+                this.allowableActions.add(new TradeGraftedAction(this, destination.getActor(), new AxeOfGodrick()));
             }
         }
     }

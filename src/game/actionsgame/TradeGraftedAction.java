@@ -3,6 +3,7 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.items.RemembranceOfGrafted;
 
 /**
@@ -10,15 +11,31 @@ import game.items.RemembranceOfGrafted;
  */
 public class TradeGraftedAction extends Action {
 
+    /**
+     * Remembrance of Grafted Instance
+     */
     RemembranceOfGrafted graftedItem;
+
+    /**
+     * Trader we are trading with
+     */
+    Actor trader;
+
+    /**
+     * Weapon we are trading for
+     */
+    WeaponItem weapon;
 
     /**
      * Constructor.
      *
      * @param graftedItem The Remembrace of the Grafted Item.
      */
-    public TradeGraftedAction(RemembranceOfGrafted graftedItem){
+    public TradeGraftedAction(RemembranceOfGrafted graftedItem, Actor trader, WeaponItem weapon){
+
         this.graftedItem = graftedItem;
+        this.trader = trader;
+        this.weapon = weapon;
     }
 
     /**
@@ -41,9 +58,6 @@ public class TradeGraftedAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-
-//        System.out.println("We try to do menu description of Trade Grafted Action");
-
-        return "Allow trade for grafted";
+        return "Trade a " + graftedItem.toString() + " with " + trader.toString() + " for " + weapon.toString() + ".";
     }
 }
