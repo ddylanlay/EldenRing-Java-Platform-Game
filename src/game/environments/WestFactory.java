@@ -36,4 +36,14 @@ public class WestFactory implements EnemiesFactory {
             location.addActor(new GiantCrab());
         }
     }
+
+    @Override
+    public void spawnAlliesInvaders(Location location) {
+        if (RandomNumberGenerator.getRandomInt(100) <= 50) {
+            location.addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
+        }
+        else{
+            location.addActor(new Ally(RandomNumberGenerator.getRandomCombatClass()));
+        }
+    }
 }

@@ -33,7 +33,7 @@ import java.util.ArrayList;
  * @author Arosh Heenkenda
  *
  */
-public class Invader extends Enemies implements Resettable {
+public class Ally extends Enemies implements Resettable {
 
     private ArrayList<Actor> actorInRange = new ArrayList<>();
 
@@ -41,8 +41,8 @@ public class Invader extends Enemies implements Resettable {
     RunesManager runesManager = RunesManager.getInstance();
     private CombatClass combatClass;
 
-    public Invader(CombatClass combatClass) {
-        super("Invader", 'ඞ', combatClass.getMaxHitPoints());
+    public Ally(CombatClass combatClass) {
+        super("Ally", 'ඞ', combatClass.getMaxHitPoints());
         behaviours.put(999, new WanderBehaviour());
         resetManager.registerResettable(this, this);
         runesManager.storeActorsRunes(this,dropRunes());
