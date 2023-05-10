@@ -38,4 +38,5 @@ public class EastFactory implements EnemiesFactory {
             location.addActor(new GiantCrayfish());
         }
     }
+
 }

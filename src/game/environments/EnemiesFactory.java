@@ -7,5 +7,6 @@ public interface EnemiesFactory {
     public void spawnSkeleton(Location location);
     public void spawnCanis(Location location);
 
+    public void spawnAlliesInvaders(Location location);
 
 }
