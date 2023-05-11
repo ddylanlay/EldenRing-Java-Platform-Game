@@ -46,6 +46,7 @@ public class Player extends Actor implements Resettable {
 		// name and displayChar are altered in the Application class
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		this.addCapability(Status.FAST_TRAVEL);
 		this.addItemToInventory(bottle);
 		this.lastGraceSite = lastGraceSite;
 		runesManager.storeActorsRunes(this, 300);
