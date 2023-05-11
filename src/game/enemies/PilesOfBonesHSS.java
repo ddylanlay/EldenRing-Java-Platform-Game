@@ -30,6 +30,7 @@ public class PilesOfBonesHSS extends Enemies implements Resettable {
         super("Piles of Bones", 'X', 1);
         resetManager.registerResettable(this, this);
         runesManager.storeActorsRunes(this,dropRunes());
+
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {

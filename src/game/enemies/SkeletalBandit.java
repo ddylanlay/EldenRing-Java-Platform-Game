@@ -34,6 +34,7 @@ public class SkeletalBandit extends Enemies implements Resettable {
         addWeaponToInventory(new Scimitar());
         runesManager.storeActorsRunes(this,0);
         resetManager.registerResettable(this, this);
+        this.addCapability(EnemyType.SKELETAL);
     }
 
     /**

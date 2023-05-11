@@ -28,6 +28,7 @@ public class CombatClassMenu {
             add(new Bandit());
             add(new Samurai());
             add(new Wretch());
+            add(new Astrologer());
         }
     };
 

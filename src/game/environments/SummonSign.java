@@ -11,21 +11,21 @@ import game.actionsgame.SpawnAction;
 
 public class SummonSign extends Ground {
     private Player player;
-    private EnemiesFactory enemiesFactory;
-    public SummonSign(EnemiesFactory enemiesFactory){
+
+    public SummonSign(){
         super('=');
-        this.enemiesFactory = enemiesFactory;
-    }
-    public void tick(Location spawnLocation){
-//        if(!spawnLocation.containsAnActor()){
-//            this.enemiesFactory.spawnSkeleton(spawnLocation);
-//        }
 
     }
+//    public void tick(Location spawnLocation){
+////        if(!spawnLocation.containsAnActor()){
+////            this.enemiesFactory.spawnSkeleton(spawnLocation);
+////        }
+//
+//    }
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actions = super.allowableActions(actor, location, direction);
-        if(actor.hasCapability(Status.SPAWN)){
+        if(actor.hasCapability(Status.SPAWN) && location.containsAnActor() && location.getDisplayChar() == '@'){
             actions.add(new SpawnAction(location));
         }
         return actions;

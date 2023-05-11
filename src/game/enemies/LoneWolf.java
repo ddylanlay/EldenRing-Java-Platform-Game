@@ -34,6 +34,7 @@ public class LoneWolf extends Enemies implements Resettable {
         behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this, dropRunes());
         resetManager.registerResettable(this, this);
+        this.addCapability(EnemyType.CANIS);
     }
 
     /**

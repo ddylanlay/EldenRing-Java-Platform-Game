@@ -13,10 +13,7 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.actionsgame.AttackActionIntrinsic;
-import game.behaviours.AttackBehaviourSlam;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.combatclass.CombatClass;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
@@ -47,6 +44,7 @@ public class Invader extends Enemies implements Resettable {
         resetManager.registerResettable(this, this);
         runesManager.storeActorsRunes(this,dropRunes());
         this.combatClass = combatClass;
+        this.addWeaponToInventory(combatClass.getClassWeapon());
     }
 
     /**
@@ -95,7 +93,7 @@ public class Invader extends Enemies implements Resettable {
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviourSlam(otherActor));
+                behaviours.put(1, new AttackBehaviour(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }

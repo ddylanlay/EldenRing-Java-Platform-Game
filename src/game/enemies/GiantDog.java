@@ -44,6 +44,7 @@ public class GiantDog extends Enemies implements Resettable {
         behaviours.put(999, new WanderBehaviour());
         resetManager.registerResettable(this, this);
         runesManager.storeActorsRunes(this,dropRunes());
+        this.addCapability(EnemyType.CANIS);
     }
 
     /**

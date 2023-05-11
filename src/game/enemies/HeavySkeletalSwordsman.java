@@ -37,6 +37,7 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
         addWeaponToInventory(new Grossmesser());
         resetManager.registerResettable(this, this);
         this.weapon = new Grossmesser();
+        this.addCapability(EnemyType.SKELETAL);
     }
 
     /**

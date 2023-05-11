@@ -43,7 +43,7 @@ public class GiantCrayfish extends Enemies implements SlamAttack, Resettable {
         behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this,dropRunes());
         resetManager.registerResettable(this, this);
-
+        this.addCapability(EnemyType.CRUSTACEAN);
     }
 
     /**

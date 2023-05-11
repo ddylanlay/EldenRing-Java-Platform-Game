@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
+import game.combatclass.Samurai;
+import game.combatclass.Wretch;
+import game.enemies.Ally;
 import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
@@ -204,7 +207,7 @@ public class Application {
 
 //		gameMap.at(35, 10).addActor(new GiantCrab());
 //		gameMap.at(34, 10).addActor(new LoneWolf());
-//		gameMap.at(25, 23).addActor(new LoneWolf());
+		gameMap.at(38, 9).addActor(new Ally(RandomNumberGenerator.getRandomCombatClass()));
 		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		gameMap.at(37,10).addActor(new MerchantKale());
@@ -217,10 +220,10 @@ public class Application {
 		gameMap.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
 		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
-
+		gameMap.at(38, 9).setGround(new SummonSign());
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
-		player.addWeaponToInventory(club);
+//		player.addWeaponToInventory(club);
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, gameMap));

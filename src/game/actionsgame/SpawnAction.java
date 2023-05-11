@@ -25,28 +25,31 @@ public class SpawnAction extends Action {
         for(int x = xLocation - 1; x <= xLocation + 1; x++){
             for(int y = yLocation - 1; y <= yLocation + 1; y++){
                 Location tempLocation = new Location(map, x, y);
-                if(!map.isAnActorAt(tempLocation) && map.getActorAt(tempLocation) != actor && map.getActorAt(tempLocation).getDisplayChar() != 'K'){
+                if(!map.isAnActorAt(tempLocation)){
                     locationInRange.add(tempLocation);
                 }
             }
         }
         if(locationInRange.isEmpty() == false){
             Location spawnLocation = locationInRange.get(0);
+            if (RandomNumberGenerator.getRandomInt(100) <= 50) {
+                spawnLocation.addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
+                result += "Invader spawned";
+            }
+            else{
+                spawnLocation.addActor(new Ally(RandomNumberGenerator.getRandomCombatClass()));
+                result += "Ally spawned";
+            }
+            System.out.println((spawnLocation.x()));
+            System.out.println((spawnLocation.y()));
         } else{
             result += "Unable to spawn Ally or Invader";
             return result;
         }
 
-        if (RandomNumberGenerator.getRandomInt(100) <= 50) {
-            location.addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
-            result += "Invader spawned";
-        }
-        else{
-            location.addActor(new Ally(RandomNumberGenerator.getRandomCombatClass()));
-            result += "Ally spawned";
-        }
 
 
+        locationInRange.clear();
         return result;
     }
 
