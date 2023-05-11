@@ -16,7 +16,9 @@ import game.weapons.Uchigatana;
 public class MerchantKale extends Actor {
     private Player player;
     public MerchantKale(){
+
         super("MerchantKale", 'K', 1000);
+        addCapability(TradingCapability.TRADE);
     }
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display)
     {

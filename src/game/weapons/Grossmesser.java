@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actionsgame.SellAction;
 import game.actionsgame.SpinAttackActionGrossmesser;
 import game.trading.SellableItem;
-import game.weaponabilities.SpinAttack;
+import game.trading.TradingCapability;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import java.util.List;
  * Modified by:
  *
  */
-public class Grossmesser extends WeaponItem implements SellableItem, SpinAttack {
+public class Grossmesser extends WeaponItem implements SellableItem{
     private ActionList allowableActions;
     /**
      * Constructor
@@ -54,7 +54,7 @@ public class Grossmesser extends WeaponItem implements SellableItem, SpinAttack 
         int counter = 0;
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
-            if (destination.getDisplayChar() == 'K'&& this.allowableActions.size() == 0) {
+            if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.TRADE)) && this.allowableActions.size() == 0) {
                 this.allowableActions.add(new SellAction(actor, this, this));
                 counter++;
 

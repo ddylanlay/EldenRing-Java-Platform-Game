@@ -8,8 +8,6 @@ import game.actionsgame.AttackAction;
 import game.actionsgame.SlamAttackAction;
 import game.utils.RandomNumberGenerator;
 
-import java.util.Random;
-
 /**
  * @author Jamie Tran
  */
@@ -18,7 +16,6 @@ public class AttackBehaviourSlam extends Action implements Behaviour{
     public AttackBehaviourSlam(Actor target){
         this.target = target;
     }
-
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location actorPosition = map.locationOf(actor);
