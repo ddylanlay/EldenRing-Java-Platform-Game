@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actionsgame.AttackAction;
+import game.actionsgame.AttackActionIntrinsic;
 import game.actionsgame.SlamAttackAction;
 import game.utils.RandomNumberGenerator;
 
@@ -23,12 +24,15 @@ public class AttackBehaviourSlam extends Action implements Behaviour{
         int distance = distance(actorPosition, targetPosition);
         if(distance == 1){
             if(RandomNumberGenerator.getRandomInt(100)<= 50) {
-                return new AttackAction(target, "to the enemy");
+                return new AttackActionIntrinsic(target, "to the enemy");
             }
             else{
                 return new SlamAttackAction(actor);
             }
         }
+        System.out.println(target);
+        System.out.println(actor);
+        System.out.println("null");
         return null;
     }
     public String execute(Actor actor, GameMap map){

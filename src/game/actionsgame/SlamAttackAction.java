@@ -41,11 +41,14 @@ public class SlamAttackAction extends Action {
         String result = "";
         for(Actor target: actorInRange){
             if(RandomNumberGenerator.getRandomInt(100)<=weapon.chanceToHit()){
-                actor.hurt(weapon.damage());
-                System.out.println(target + " is slammed for " + weapon.damage() + " damage.");
+
+                target.hurt(weapon.damage());
+                result += System.lineSeparator() + (target + " is slammed massively for " + weapon.damage() + " damage.");
+
                 if(actor.isConscious() == false){
                     map.removeActor(target);
-                    System.out.println(target + " has been killed.");
+                    result += System.lineSeparator() + (target + " has been killed.");
+
                 }
             }
         }

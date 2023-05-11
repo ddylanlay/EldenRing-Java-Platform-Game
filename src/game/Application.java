@@ -10,9 +10,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
 import game.combatclass.Samurai;
 import game.combatclass.Wretch;
-import game.enemies.Ally;
-import game.enemies.GiantDog;
-import game.enemies.SkeletalBandit;
+import game.enemies.*;
 import game.environments.*;
 import game.items.GoldenRunes;
 import game.items.RemembranceOfGrafted;
@@ -207,10 +205,14 @@ public class Application {
 
 //		gameMap.at(35, 10).addActor(new GiantCrab());
 //		gameMap.at(34, 10).addActor(new LoneWolf());
-		gameMap.at(38, 9).addActor(new Ally(RandomNumberGenerator.getRandomCombatClass()));
+		gameMap.at(40, 7).addActor(new GiantCrab());
+		gameMap.at(40, 6).addActor(new LoneWolf());
+		gameMap.at(40, 8).addActor(new LoneWolf());
+		gameMap.at(39, 7).addActor(new LoneWolf());
+		gameMap.at(41, 7).addActor(new LoneWolf());
 		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
-		gameMap.at(37,10).addActor(new MerchantKale());
+
 		gameMap.at(41,10).addActor(new FingerReaderEnia());
 
 		gameMap.at(38, 11).addItem(new GoldenRunes());

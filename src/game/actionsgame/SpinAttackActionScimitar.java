@@ -25,7 +25,7 @@ public class SpinAttackActionScimitar extends Action {
         String result = "";
         for (Actor target : actorInRange) {
                 if (RandomNumberGenerator.getRandomInt(100) <= 88) {
-                    actor.hurt(weapon.damage());
+                    target.hurt(weapon.damage());
                     result += target + " is sliced for 118 damage." + System.lineSeparator();
                     if (!actor.isConscious()) {
                         result += new DeathAction(actor).execute(target, map);

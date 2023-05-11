@@ -17,7 +17,9 @@ import game.behaviours.AttackBehaviourSlam;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.items.ItemCapability;
 import game.trading.RunesManager;
+import game.trading.TradingCapability;
 import game.utils.RandomNumberGenerator;
 import game.weaponabilities.SlamAttack;
 
@@ -85,14 +87,21 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        System.out.println(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || !(otherActor.hasCapability(EnemyType.CRUSTACEAN) || otherActor.hasCapability(TradingCapability.TRADE)));
+
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || !(otherActor.hasCapability(EnemyType.CRUSTACEAN) || otherActor.hasCapability(TradingCapability.TRADE))){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
+
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
+            System.out.println(followContained(followBehaviour) == false);
             if(followContained(followBehaviour) == false){
+
+                System.out.println(otherActor);
                 behaviours.clear();
                 behaviours.put(1, new AttackBehaviourSlam(otherActor));
+                System.out.println(otherActor);
                 behaviours.put(500, followBehaviour);
             }
         }

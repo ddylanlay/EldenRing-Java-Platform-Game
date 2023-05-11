@@ -23,7 +23,7 @@ public class SpinAttackActionGrossmesser extends Action {
         String result = "";
         for (Actor target : actorInRange) {
             if (RandomNumberGenerator.getRandomInt(100) <= 100) {
-                actor.hurt(weapon.damage());
+                target.hurt(weapon.damage());
                 result += target + " is sliced for 115 damage." + System.lineSeparator();
                 if (!actor.isConscious()) {
                     result += new DeathAction(actor).execute(target, map);

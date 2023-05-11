@@ -18,6 +18,7 @@ import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
+import game.trading.TradingCapability;
 import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
@@ -91,7 +92,7 @@ public class GiantDog extends Enemies implements Resettable {
             actions.add(new AttackActionIntrinsic(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
-            if(followContained(followBehaviour) == false){
+            if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || !(otherActor.hasCapability(EnemyType.CANIS) || otherActor.hasCapability(TradingCapability.TRADE))){
                 behaviours.clear();
                 behaviours.put(1, new AttackBehaviourSlam(otherActor));
                 behaviours.put(500, followBehaviour);
