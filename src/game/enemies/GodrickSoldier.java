@@ -2,11 +2,14 @@ package game.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Resettable;
 import game.Status;
+import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 import game.utils.RandomNumberGenerator;
 
@@ -20,6 +23,12 @@ public class GodrickSoldier extends Enemies implements Resettable {
     public int dropRunes()
     {
         return RandomNumberGenerator.getRandomInt(38, 70);
+    }
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(64, "shoots heavy crossbow", 57);
+
+
     }
     @Override
     public void reset(GameMap gameMap) {
@@ -42,6 +51,19 @@ public class GodrickSoldier extends Enemies implements Resettable {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return null;
+        if(behaviours.get(999) instanceof WanderBehaviour){
+            if(RandomNumberGenerator.getRandomInt(100)<= 10){
+                resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
+                map.removeActor(this);
+                System.out.println(this + " removed from map");
+                return new DoNothingAction();
+            }
+        }
+        for (Behaviour behaviour : behaviours.values()) {
+            Action action = behaviour.getAction(this, map);
+            if(action != null)
+                return action;
+        }
+        return new DoNothingAction();
     }
 }
