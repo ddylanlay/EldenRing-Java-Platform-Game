@@ -8,4 +8,5 @@ public interface EnemiesFactory {
     public void spawnCanis(Location location);
 
 
+
 }

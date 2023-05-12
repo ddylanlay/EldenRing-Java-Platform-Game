@@ -2,13 +2,12 @@ package game.actionsgame;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Player;
 import game.enemies.Enemies;
-import game.enemies.EnemyType;
 import game.trading.RunesManager;
+
 import java.util.Random;
 
 /**
@@ -101,7 +100,7 @@ public class AttackActionPilesOfBones extends Action {
         target.hurt(damage);
         if (!target.isConscious()) {
             result += new DeathActionPB(actor).execute(target, map);
-            if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@'){
+            if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@' && target.getDisplayChar() == 'q' && target.getDisplayChar() == 'b'){
                 int numOfRunes = runesManager.transferRunes(target, actor);
                 String string = target + " drops " + numOfRunes + " runes";
                 result += System.lineSeparator() + string;
