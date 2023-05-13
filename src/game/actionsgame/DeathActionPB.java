@@ -6,12 +6,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.enemies.HeavySkeletalSwordsman;
+import game.ResetManager;
 import game.enemies.PilesOfBonesHSS;
 import game.enemies.PilesOfBonesSB;
 import game.trading.Runes;
-import game.ResetManager;
 import game.trading.RunesManager;
 
 /**
@@ -113,7 +111,7 @@ public class DeathActionPB extends Action {
     public void spawnPileOfBones(Actor target, GameMap map) {
         Location currentLocation = map.locationOf(target);
         if(target.isConscious() == false){
-            if(target instanceof HeavySkeletalSwordsman) {
+            if(target.getDisplayChar() == 'q') {
                 map.removeActor(target);
                 map.addActor(new PilesOfBonesHSS(), currentLocation);
             }

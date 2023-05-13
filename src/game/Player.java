@@ -7,9 +7,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actionsgame.DeathAction;
+import game.actionsgame.ResetAction;
 import game.combatclass.CombatClass;
 import game.items.FlaskOfCrimsonTears;
-import game.trading.Runes;
 import game.trading.RunesManager;
 
 /**
@@ -48,6 +49,7 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.SPAWN);
 		this.addCapability(Status.ALLY);
+		this.addCapability(Status.FAST_TRAVEL);
 		this.addItemToInventory(bottle);
 		this.lastGraceSite = lastGraceSite;
 		runesManager.storeActorsRunes(this, 300);
@@ -60,12 +62,13 @@ public class Player extends Actor implements Resettable {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		if (hitPoints <= 0) {
-			Location location = map.locationOf(this);
-			location.setGround(new Runes(this, location.getGround()));
-
+//			Location location = map.locationOf(this);
+			new DeathAction(this, previousLocation).execute(this, map);
+			return new ResetAction(lastGraceSite.toString(), lastGraceSite);
 			// return/print the console menu
 		}
 		playerDescription();
+		previousLocation = map.locationOf(this);
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}

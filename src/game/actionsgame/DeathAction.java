@@ -64,12 +64,18 @@ public class DeathAction extends Action {
         this.attacker = actor;
     }
 
+    public DeathAction(Actor actor, Location previousLocation) {
+        this.attacker = actor;
+        this.previousLocation = previousLocation;
+    }
+
+
     /**
      * When the target is killed, the items & weapons carried by target
      * will be dropped to the location in the game map where the target was
      *
      * @param target The actor performing the action.
-     * @param map The map the actor is on.
+     * @param map    The map the actor is on.
      * @return result of the action to be displayed on the UI
      */
     @Override
@@ -86,17 +92,20 @@ public class DeathAction extends Action {
                 drop.execute(target, map);
             resetManager.removeResettable(target);
             map.removeActor(target);
-        }
-        else {
+        } else {
             // NEEDS TO BE PREVIOUS LOCATION BEFORE DEATH
 
             System.out.println(FancyMessage.YOU_DIED);
-            location = map.locationOf(target);
-
-            Runes runesToDrop = new Runes(target, location.getGround());
-            runesManager.playerDied(runesToDrop, location);
+            if (previousLocation == null) {
+                previousLocation = map.locationOf(target);
+            }
+            if (runesManager.retrieveActorsRunes(target) != 0) {
+                Runes runesToDrop = new Runes(target, previousLocation.getGround());
+                runesManager.playerDied(runesToDrop, previousLocation);
+            }
             resetManager.run(map);
         }
+
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }

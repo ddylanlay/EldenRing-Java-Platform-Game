@@ -103,6 +103,32 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
 
         return actions;
     }
+    /**
+     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
+            actions.add(new AttackActionIntrinsic(this, direction));
+            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
+            // HINT 1: How would you attack the enemy with a weapon?
+            if(followContained(followBehaviour) == false){
+                behaviours.clear();
+                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(500, followBehaviour);
+            }
+        }
+
+        return actions;
+    }
 
 
     @Override

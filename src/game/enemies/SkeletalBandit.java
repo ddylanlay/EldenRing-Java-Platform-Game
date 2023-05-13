@@ -34,12 +34,10 @@ import game.weapons.Scimitar;
  */
 public class SkeletalBandit extends Enemies implements Resettable {
     ResetManager resetManager = ResetManager.getInstance();
-    RunesManager runesManager = RunesManager.getInstance();
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 184);
         behaviours.put(999, new WanderBehaviour());
         addWeaponToInventory(new Scimitar());
-        runesManager.storeActorsRunes(this,0);
         resetManager.registerResettable(this, this);
         this.addCapability(EnemyType.SKELETAL);
     }
@@ -84,6 +82,24 @@ public class SkeletalBandit extends Enemies implements Resettable {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || !(otherActor.hasCapability(EnemyType.CRUSTACEAN) || otherActor.hasCapability(TradingCapability.TRADE))){
+            actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
+            actions.add(new AttackActionIntrinsic(this, direction));
+            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
+            // HINT 1: How would you attack the enemy with a weapon?
+            if(followContained(followBehaviour) == false){
+                behaviours.clear();
+                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(500, followBehaviour);
+            }
+        }
+
+        return actions;
+    }
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackActionPilesOfBones(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
