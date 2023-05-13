@@ -261,12 +261,12 @@ public class Application {
 
 //		gameMap.at(35, 10).addActor(new GiantCrab());
 //		gameMap.at(34, 10).addActor(new LoneWolf());
-		gameMap.at(40, 7).addActor(new GiantCrab());
-		gameMap.at(40, 6).addActor(new LoneWolf());
-		gameMap.at(40, 8).addActor(new LoneWolf());
-		gameMap.at(39, 7).addActor(new LoneWolf());
-		gameMap.at(41, 7).addActor(new LoneWolf());
-		gameMap.at(24, 22).addActor(new GiantDog());
+//		gameMap.at(40, 7).addActor(new GiantCrab());
+//		gameMap.at(40, 6).addActor(new LoneWolf());
+//		gameMap.at(40, 8).addActor(new LoneWolf());
+//		gameMap.at(39, 7).addActor(new LoneWolf());
+//		gameMap.at(41, 7).addActor(new LoneWolf());
+//		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
 		limeGrave.at(37,10).addActor(new MerchantKale());
 		limeGrave.at(41,10).addActor(new FingerReaderEnia());
@@ -279,7 +279,7 @@ public class Application {
 
 		limeGrave.at(20, 20).setGround(new GustOfWind(eastFactory));
 
-		gameMap.at(41,10).addActor(new FingerReaderEnia());
+//		gameMap.at(41,10).addActor(new FingerReaderEnia());
 
 
 		// adds Golden Fog Door to the necessary game maps
@@ -294,9 +294,9 @@ public class Application {
 
 
 
-
-		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
-		gameMap.at(38, 9).setGround(new SummonSign());
+//
+//		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
+//		gameMap.at(38, 9).setGround(new SummonSign());
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
 //		player.addWeaponToInventory(club);
