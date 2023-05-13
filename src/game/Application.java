@@ -255,7 +255,7 @@ public class Application {
 //		resetManager.registerResettable(testWolf, testWolf);
 
 		//tester below
-		limeGrave.at(24, 22).addActor(new GiantDog());
+		limeGrave.at(24, 22).addActor(new RaccoonDog());
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
