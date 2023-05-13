@@ -10,7 +10,6 @@ public enum Status {
     RESPAWNABLE,
     RESTING,
     SPAWN,
-    ALLY
-    RESTING,
+    ALLY,
     FAST_TRAVEL
 }
