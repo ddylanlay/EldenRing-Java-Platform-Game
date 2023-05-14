@@ -150,7 +150,7 @@ public class Application {
 //		world.addGameMap(bossRoom);
 
 		for(int i = 0; i <= 1; i++){
-		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		int xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
 		if(xRand < 75/2){
 			limeGrave.at(xRand, yRand).setGround(new Graveyard(westFactory));
@@ -164,7 +164,7 @@ public class Application {
 			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
 			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
 		}
-		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		yRand = RandomNumberGenerator.getRandomInt(1, 22);
 		if(xRand < 75/2){
 			limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(westFactory));
@@ -178,7 +178,7 @@ public class Application {
 			limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(eastFactory));
 			limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(eastFactory));
 		}
-		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		yRand = RandomNumberGenerator.getRandomInt(1, 22);
 		if(xRand < 75/2){
 			limeGrave.at(xRand, yRand).setGround(new GustOfWind(westFactory));
