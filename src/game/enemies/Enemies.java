@@ -37,6 +37,10 @@ public abstract class Enemies extends Actor{
      */
     public Enemies(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        if(this.hasCapability(Status.BURNED)) {
+            this.hurt(5);
+            System.out.println(this + " has been burnt for 5 damage");
+        }
 
     }
 
@@ -92,7 +96,7 @@ public abstract class Enemies extends Actor{
     }
     public Weapon equipWeapon(Actor actor){
         for(Weapon weapon : actor.getWeaponInventory()){
-            System.out.println(asWeapon(weapon));
+
             if(asWeapon(weapon) != null){
 
                 return weapon;
