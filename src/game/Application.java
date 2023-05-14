@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
 import game.enemies.GiantDog;
-import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.items.GoldenRunes;
 import game.items.RemembranceOfGrafted;
@@ -245,7 +244,7 @@ public class Application {
 			}
 		}
 
-		SkeletalBandit testWolf = new SkeletalBandit();
+//		SkeletalBandit testWolf = new SkeletalBandit();
 
 //		limeGrave.at(40, 17).addActor(testWolf);
 //
