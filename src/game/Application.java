@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
 import game.enemies.*;
 import game.enemies.GiantDog;
+import game.enemies.GiantDog;
 import game.enemies.SkeletalBandit;
 import game.environments.*;
 import game.items.GoldenRunes;
