@@ -30,9 +30,6 @@ public class AttackBehaviourSlam extends Action implements Behaviour{
                 return new SlamAttackAction(actor);
             }
         }
-        System.out.println(target);
-        System.out.println(actor);
-        System.out.println("null");
         return null;
     }
     public String execute(Actor actor, GameMap map){

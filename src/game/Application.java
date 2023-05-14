@@ -14,7 +14,6 @@ import game.environments.*;
 import game.items.GoldenRunes;
 import game.items.RemembranceOfGrafted;
 import game.trading.FingerReaderEnia;
-import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
 
@@ -252,7 +251,7 @@ public class Application {
 //		resetManager.registerResettable(testWolf, testWolf);
 
 		//tester below
-		limeGrave.at(24, 22).addActor(new GiantDog());
+		limeGrave.at(24, 22).addActor(new RaccoonDog());
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
@@ -265,7 +264,7 @@ public class Application {
 //		gameMap.at(41, 7).addActor(new LoneWolf());
 //		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
-		limeGrave.at(37,10).addActor(new MerchantKale());
+		limeGrave.at(37,10).addActor(new Madara());
 		limeGrave.at(41,10).addActor(new FingerReaderEnia());
 
 		limeGrave.at(38, 11).addItem(new GoldenRunes());
