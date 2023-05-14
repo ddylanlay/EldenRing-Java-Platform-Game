@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.Status;
 import game.trading.RunesManager;
 import java.util.Random;
 
@@ -80,7 +81,7 @@ public class AttackAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		Weapon weapon = equipWeapon(actor);
-		System.out.println(weapon);
+
 		if (weapon == null) {
 			weapon = actor.getIntrinsicWeapon();
 		}
@@ -102,6 +103,13 @@ public class AttackAction extends Action {
 				}
 
 			}
+		if(actor.hasCapability(Status.SHARINGAN)){
+			if(target.hasCapability(Status.BURNED) == false) {
+				this.target.addCapability(Status.BURNED);
+				String string = target + " has been burnt by amaterasu and will burn infinitely for 5 damage";
+				result += System.lineSeparator() + string;
+			}
+		}
 
 		return result;
 	}

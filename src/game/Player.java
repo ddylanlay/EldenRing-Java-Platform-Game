@@ -67,6 +67,10 @@ public class Player extends Actor implements Resettable {
 			return new ResetAction(lastGraceSite.toString(), lastGraceSite);
 			// return/print the console menu
 		}
+		if(this.hasCapability(Status.BURNED)){
+			this.hurt(5);
+			System.out.println(this + " has been burnt for 5 damage");
+		}
 		playerDescription();
 		previousLocation = map.locationOf(this);
 		// return/print the console menu

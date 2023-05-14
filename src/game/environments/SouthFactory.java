@@ -19,14 +19,14 @@ public class SouthFactory implements EnemiesFactory {
     @Override
     public void spawnCanis(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 33) {
-            location.addActor(new GiantDog());
+            location.addActor(new Borzoi());
         }
     }
 
     @Override
     public void spawnSkeleton(Location location) {
         if (RandomNumberGenerator.getRandomInt(100) <= 27) {
-            location.addActor(new SkeletalBandit());
+            location.addActor(new Madara());
         }
     }
 

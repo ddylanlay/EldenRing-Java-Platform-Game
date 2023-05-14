@@ -11,5 +11,7 @@ public enum Status {
     RESTING,
     SPAWN,
     ALLY,
-    FAST_TRAVEL
+    FAST_TRAVEL,
+    BURNED,
+    SHARINGAN
 }
