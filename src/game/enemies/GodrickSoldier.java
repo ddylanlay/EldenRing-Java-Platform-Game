@@ -12,10 +12,7 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.actionsgame.AttackActionIntrinsic;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.utils.RandomNumberGenerator;
 
 public class GodrickSoldier extends Enemies implements Resettable {
