@@ -3,8 +3,8 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.enemies.Ally;
 import game.enemies.Invader;
 import game.utils.RandomNumberGenerator;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class SpawnAction extends Action {
     private ArrayList<Location> locationInRange = new ArrayList<>();
     private Location location;
+    private Ground ground;
     public SpawnAction(Location location){
         this.location = location;
     }
@@ -22,6 +23,7 @@ public class SpawnAction extends Action {
         String result = "";
         int xLocation = location.x();
         int yLocation = location.y();
+        Ground ground = location.getGround();
         for(int x = xLocation - 1; x <= xLocation + 1; x++){
             for(int y = yLocation - 1; y <= yLocation + 1; y++){
                 Location tempLocation = new Location(map, x, y);
@@ -30,8 +32,12 @@ public class SpawnAction extends Action {
                 }
             }
         }
+        for (int i = 0; i < locationInRange.size(); i++)
+        {
+        }
         if(locationInRange.isEmpty() == false){
             Location spawnLocation = locationInRange.get(0);
+            spawnLocation.setGround(location.getGround());
             if (RandomNumberGenerator.getRandomInt(100) <= 50) {
                 spawnLocation.addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
                 result += "Invader spawned";
@@ -42,6 +48,7 @@ public class SpawnAction extends Action {
             }
             System.out.println((spawnLocation.x()));
             System.out.println((spawnLocation.y()));
+            System.out.println((spawnLocation.getGround()));
         } else{
             result += "Unable to spawn Ally or Invader";
             return result;

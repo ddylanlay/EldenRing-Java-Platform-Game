@@ -297,7 +297,7 @@ public class Application {
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, limeGrave));
-		world.addPlayer(player, limeGrave.at(32, 10));
+		world.addPlayer(player, limeGrave.at(28, 8));
 		world.run();
 	}
 }
