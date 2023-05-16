@@ -25,8 +25,7 @@ import java.util.List;
  */
 public class Uchigatana extends WeaponItem implements PurchasableItem, SellableItem {
     private Actor actor;
-    private Actor target;
-    private String direction;
+
     private ActionList allowableActions;
 
     /**
@@ -52,29 +51,6 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
         int sellingPrice = 500;
         return sellingPrice;
     }
-//    public int unsheathe(Actor target){
-//        int newDamage = 0;
-//
-//        if(RandomNumberGenerator.getRandomInt(100) <= 60){
-//            newDamage = super.damage()*2;
-//            return newDamage;
-//        }
-//        return newDamage;
-//    }
-
-//    @Override
-//    public Action getSkill(Actor target, String direction){
-//         return new UnsheatheAttackAction(target, direction,this);
-//    }
-//        if(RandomNumberGenerator.getRandomInt(100) <= 60){
-//            newDamage = newDamage*2;
-//        }
-//        return newDamage;
-//
-//    }
-//    public Action getSkill(Actor holder) {
-//        return
-//    }
 
 
     @Override
@@ -89,7 +65,7 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
             if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.TRADE)) && this.allowableActions.size() == 0) {
-                this.allowableActions.add(new SellAction(actor, this, this));
+                this.allowableActions.add(new SellAction(actor, this));
                 counter++;
             } else if (this.allowableActions.size() != 0 && counter == 0) {
                 this.allowableActions.clear();
@@ -97,5 +73,12 @@ public class Uchigatana extends WeaponItem implements PurchasableItem, SellableI
             }
 
         }
+    }
+    public void addWeaponToActor(Actor actor){
+        actor.addWeaponToInventory(this);
+    }
+
+    public void removeWeaponToActor(Actor actor){
+        actor.removeWeaponFromInventory(this);
     }
 }

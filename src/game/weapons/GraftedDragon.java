@@ -63,7 +63,7 @@ public class GraftedDragon extends WeaponItem implements SellableItem {
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
             if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.TRADE)) && this.allowableActions.size() == 0) {
-                this.allowableActions.add(new SellAction(actor, this, this));
+                this.allowableActions.add(new SellAction(actor, this));
                 counter ++;
             }
             else if(this.allowableActions.size() != 0 && counter == 0){
@@ -80,5 +80,10 @@ public class GraftedDragon extends WeaponItem implements SellableItem {
      */
     @Override
     public List<Action> getAllowableActions() { return this.allowableActions.getUnmodifiableActionList(); }
+
+
+    public void removeWeaponToActor(Actor actor){
+        actor.removeWeaponFromInventory(this);
+    }
 
 }

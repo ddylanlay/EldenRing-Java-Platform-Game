@@ -3,7 +3,6 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.trading.PurchasableItem;
 import game.trading.RunesManager;
 
@@ -31,7 +30,7 @@ public class PurchaseAction extends Action {
     /**
      * The weapon item instance.
      */
-    private WeaponItem weapon;
+
 
     /**
      * Runes manager, to deal with rune exchange.
@@ -42,12 +41,10 @@ public class PurchaseAction extends Action {
      * Constructor.
      *
      * @param target actor purchasing.
-     * @param weapon the weapon item instance.
      * @param purchaseWeapon weapon to sell, as PurchasableItem interface.
      */
-    public PurchaseAction(Actor target, WeaponItem weapon, PurchasableItem purchaseWeapon){
+    public PurchaseAction(Actor target, PurchasableItem purchaseWeapon){
         this.actor = target;
-        this.weapon = weapon;
         this.purchaseWeapon = purchaseWeapon;
     }
 
@@ -63,7 +60,7 @@ public class PurchaseAction extends Action {
         }
         else{
             runesManager.removeRunes(actor, purchaseWeapon.getPurchasePrice());
-            actor.addWeaponToInventory(weapon);
+            purchaseWeapon.addWeaponToActor(actor);
             return menuDescription(actor);
         }
 
@@ -75,7 +72,7 @@ public class PurchaseAction extends Action {
     }
     @Override
     public String menuDescription(Actor actor){
-        return actor + " purchases " + weapon + " for " + purchaseWeapon.getPurchasePrice();
+        return actor + " purchases " + purchaseWeapon.toString() + " for " + purchaseWeapon.getPurchasePrice();
     }
 
 }
