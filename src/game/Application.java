@@ -8,11 +8,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
+import game.enemies.Invader;
 import game.environments.*;
-import game.items.GoldenRunes;
-import game.items.RemembranceOfGrafted;
-import game.trading.FingerReaderEnia;
-import game.trading.MerchantKale;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Club;
 
@@ -250,7 +247,7 @@ public class Application {
 //		resetManager.registerResettable(testWolf, testWolf);
 
 		//tester below
-//		limeGrave.at(24, 22).addActor(new GiantDog());
+//		limeGrave.at(24, 22).addActor(new Invader());
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
@@ -263,11 +260,12 @@ public class Application {
 //		gameMap.at(41, 7).addActor(new LoneWolf());
 //		gameMap.at(24, 22).addActor(new GiantDog());
 //		gameMap.at(26, 22).addActor(new LoneWolf());
-		limeGrave.at(37,10).addActor(new MerchantKale());
-		limeGrave.at(41,10).addActor(new FingerReaderEnia());
-
-		limeGrave.at(38, 11).addItem(new GoldenRunes());
-		limeGrave.at(39, 10).addItem(new RemembranceOfGrafted());
+		limeGrave.at(31,10).addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
+//		limeGrave.at(37,10).addActor(new MerchantKale());
+//		limeGrave.at(41,10).addActor(new FingerReaderEnia());
+//
+//		limeGrave.at(38, 11).addItem(new GoldenRunes());
+//		limeGrave.at(39, 10).addItem(new RemembranceOfGrafted());
 
 		Location LostGrace = limeGrave.at(38, 12);
 		limeGrave.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
@@ -300,7 +298,7 @@ public class Application {
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, limeGrave));
-		world.addPlayer(player, limeGrave.at(38, 10));
+		world.addPlayer(player, limeGrave.at(32, 10));
 		world.run();
 	}
 }

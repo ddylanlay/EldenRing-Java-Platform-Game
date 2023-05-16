@@ -4,5 +4,6 @@ public enum EnemyType {
     SKELETAL,
     CRUSTACEAN,
     CANIS,
-    INVADER
+    INVADER,
+    STORMVEIL
 }
