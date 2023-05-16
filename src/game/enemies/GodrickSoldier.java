@@ -12,10 +12,7 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.actionsgame.AttackActionIntrinsic;
-import game.behaviours.AttackBehaviourSlam;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.utils.RandomNumberGenerator;
 
 public class GodrickSoldier extends Enemies implements Resettable {
@@ -76,14 +73,14 @@ public class GodrickSoldier extends Enemies implements Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) ||  !(otherActor.hasCapability(EnemyType.STORMVEIL))){
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) &&  !(otherActor.hasCapability(EnemyType.STORMVEIL))){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviourSlam(otherActor));
+                behaviours.put(1, new AttackBehaviour(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }
