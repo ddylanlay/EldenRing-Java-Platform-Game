@@ -13,8 +13,7 @@ import java.util.ArrayList;
 
 public class SpawnAction extends Action {
     private ArrayList<Location> locationInRange = new ArrayList<>();
-    private Location location;
-    private Ground ground;
+    private Location location;;
     public SpawnAction(Location location){
         this.location = location;
     }
@@ -26,18 +25,15 @@ public class SpawnAction extends Action {
         Ground ground = location.getGround();
         for(int x = xLocation - 1; x <= xLocation + 1; x++){
             for(int y = yLocation - 1; y <= yLocation + 1; y++){
-                Location tempLocation = new Location(map, x, y);
+                Location tempLocation = map.at(x,y);
                 if(!map.isAnActorAt(tempLocation)){
                     locationInRange.add(tempLocation);
+
                 }
             }
         }
-        for (int i = 0; i < locationInRange.size(); i++)
-        {
-        }
         if(locationInRange.isEmpty() == false){
             Location spawnLocation = locationInRange.get(0);
-            spawnLocation.setGround(location.getGround());
             if (RandomNumberGenerator.getRandomInt(100) <= 50) {
                 spawnLocation.addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
                 result += "Invader spawned";

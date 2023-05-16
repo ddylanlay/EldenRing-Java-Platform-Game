@@ -246,7 +246,7 @@ public class Application {
 //		resetManager.registerResettable(testWolf, testWolf);
 
 		//tester below
-//		limeGrave.at(24, 22).addActor(new Invader());
+//		limeGrave.at(28, 7).addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
 		//gameMap.at(35, 10).addActor(new LoneWolf());
 //		gameMap.at(37, 10).addActor(new LoneWolf());
 
