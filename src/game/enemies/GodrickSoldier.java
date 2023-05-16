@@ -12,7 +12,7 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.actionsgame.AttackActionIntrinsic;
-import game.behaviours.AttackBehaviourSlam;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -83,7 +83,7 @@ public class GodrickSoldier extends Enemies implements Resettable {
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviourSlam(otherActor));
+                behaviours.put(1, new AttackBehaviour(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }
