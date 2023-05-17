@@ -22,6 +22,10 @@ public class SiteOfLostGrace extends Ground {
      * Name of the Site of Lost Grace
      */
     private String siteName;
+
+    /**
+     * Location of the site
+     */
     private Location locationOfSite;
 
     /**
@@ -33,6 +37,7 @@ public class SiteOfLostGrace extends Ground {
         super('U');
         this.siteName = siteName;
         this.locationOfSite = locationOfSite;
+
     }
 
     @Override
