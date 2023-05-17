@@ -56,7 +56,7 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
             if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.TRADE)) && this.allowableActions.size() == 0) {
-                this.allowableActions.add(new SellAction(actor, this, this));
+                this.allowableActions.add(new SellAction(actor,  this));
                 counter ++;
             }
             else if(this.allowableActions.size() != 0 && counter == 0){
@@ -73,6 +73,14 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
         this.addCapability(WeaponType.HAMMER);
         return this.allowableActions.getUnmodifiableActionList();
     }
+
+    public void addWeaponToActor(Actor actor){
+        actor.addWeaponToInventory(this);
+    }
+    public void removeWeaponToActor(Actor actor){
+        actor.removeWeaponFromInventory(this);
+    }
+
 
 
 }

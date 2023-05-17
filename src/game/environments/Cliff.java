@@ -9,7 +9,7 @@ public class Cliff extends Ground {
 
 
     /**
-     * Constructor.
+     * Constructor for cliff
      *
      *
      * */
@@ -17,6 +17,13 @@ public class Cliff extends Ground {
         super('+');
     }
 
+    /**
+     * Checks if the actor is the player
+     *
+     * @param actor the specific actor
+
+     * @return true or false whether it is the player or not
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         boolean isPlayer = false;
@@ -25,10 +32,17 @@ public class Cliff extends Ground {
         }
         return isPlayer;
     }
-
+    /**
+     * The actions that can be done interacting with the cliff
+     *
+     *  @param actor the Actor that might be interacting with the cliff
+     *  @param location  location of the cliff
+     *  @param direction  String representing the direction of the other Actor
+     *  @return actions
+     *
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
-        String result = "";
         if (location.getActor() == actor)
         {
             actor.hurt(Integer.MAX_VALUE);

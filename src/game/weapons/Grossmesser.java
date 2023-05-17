@@ -55,7 +55,7 @@ public class Grossmesser extends WeaponItem implements SellableItem{
         for (Exit exit : currentLocation.getExits()) {
             Location destination = exit.getDestination();
             if ((destination.containsAnActor() && destination.getActor().hasCapability(TradingCapability.TRADE)) && this.allowableActions.size() == 0) {
-                this.allowableActions.add(new SellAction(actor, this, this));
+                this.allowableActions.add(new SellAction(actor, this));
                 counter++;
 
             }
@@ -64,5 +64,9 @@ public class Grossmesser extends WeaponItem implements SellableItem{
 
             }
         }
+    }
+
+    public void removeWeaponToActor(Actor actor){
+        actor.removeWeaponFromInventory(this);
     }
 }

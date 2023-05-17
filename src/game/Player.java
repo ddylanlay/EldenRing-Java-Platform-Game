@@ -52,7 +52,7 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.FAST_TRAVEL);
 		this.addItemToInventory(bottle);
 		this.lastGraceSite = lastGraceSite;
-		runesManager.storeActorsRunes(this, 300);
+		runesManager.storeActorsRunes(this, 900);
 		resetManager.registerResettable(this, this);
 	}
 

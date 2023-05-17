@@ -3,8 +3,8 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.Weapon;
 import game.enemies.Ally;
 import game.enemies.Invader;
 import game.utils.RandomNumberGenerator;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class SpawnAction extends Action {
     private ArrayList<Location> locationInRange = new ArrayList<>();
-    private Location location;
+    private Location location;;
     public SpawnAction(Location location){
         this.location = location;
     }
@@ -22,11 +22,13 @@ public class SpawnAction extends Action {
         String result = "";
         int xLocation = location.x();
         int yLocation = location.y();
+        Ground ground = location.getGround();
         for(int x = xLocation - 1; x <= xLocation + 1; x++){
             for(int y = yLocation - 1; y <= yLocation + 1; y++){
-                Location tempLocation = new Location(map, x, y);
+                Location tempLocation = map.at(x,y);
                 if(!map.isAnActorAt(tempLocation)){
                     locationInRange.add(tempLocation);
+
                 }
             }
         }
@@ -46,6 +48,7 @@ public class SpawnAction extends Action {
             }
             System.out.println((spawnLocation.x()));
             System.out.println((spawnLocation.y()));
+            System.out.println((spawnLocation.getGround()));
         } else{
             result += "Unable to spawn Ally or Invader";
             return result;

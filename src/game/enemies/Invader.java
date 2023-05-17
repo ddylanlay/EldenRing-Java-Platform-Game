@@ -76,19 +76,19 @@ public class Invader extends Enemies implements Resettable {
         return new DoNothingAction();
     }
 
-    //    /**
-//     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-//     *
-//     * @param otherActor the Actor that might be performing attack
-//     * @param direction  String representing the direction of the other Actor
-//     * @param map        current GameMap
-//     * @return
-//     */
+    /**
+     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || !(otherActor.hasCapability(EnemyType.INVADER) || otherActor.hasCapability(TradingCapability.TRADE))){
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !(otherActor.hasCapability(EnemyType.INVADER) && otherActor.hasCapability(TradingCapability.TRADE))){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
@@ -119,14 +119,7 @@ public class Invader extends Enemies implements Resettable {
 
     }
 
-//    public boolean followContained(FollowBehaviour behaviourContained){
-//        for(int i : behaviours.keySet()){
-//            if(behaviours.get(i) == behaviourContained){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+
 
     /**
      * Reset method for Giant Dog, removes them from player game map.
@@ -151,21 +144,7 @@ public class Invader extends Enemies implements Resettable {
      */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
-//
-//
-//    public Weapon equipWeapon(Actor actor){
-//        for(Weapon weapon : actor.getWeaponInventory()){
-//            System.out.println(asWeapon(weapon));
-//            if(asWeapon(weapon) != null){
-//
-//                return weapon;
-//            }
-//        }
-//        return actor.getIntrinsicWeapon();
-//    }
-//    public Weapon asWeapon(Weapon weapon){
-//        return weapon instanceof Weapon ? weapon : null;
-//    }
+
 
     public int dropRunes()
     {

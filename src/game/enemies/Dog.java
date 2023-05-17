@@ -13,20 +13,22 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.actionsgame.AttackActionIntrinsic;
-import game.behaviours.AttackBehaviourSlam;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
 
-import java.util.ArrayList;
-
 public class Dog extends Enemies implements Resettable {
-    private ArrayList<Actor> actorInRange = new ArrayList<>();
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
 
+    /**
+     * Constructor for dog
+     *
+     *
+     */
     public Dog() {
         super("Dog", 'a', 104);
         behaviours.put(999, new WanderBehaviour());
@@ -62,7 +64,14 @@ public class Dog extends Enemies implements Resettable {
         return new DoNothingAction();
     }
 
-
+    /**
+     * Dog can be attacked by any actor that has the HOSTILE_TO_ENEMY and not the STORMVEIL capability
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return actions
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
@@ -70,11 +79,10 @@ public class Dog extends Enemies implements Resettable {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !(otherActor.hasCapability(EnemyType.STORMVEIL))){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
-            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-            // HINT 1: How would you attack the enemy with a weapon?
-            if(followContained(followBehaviour) == false){
+
+            if(!followContained(followBehaviour)){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviourSlam(otherActor));
+                behaviours.put(1, new AttackBehaviour(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }
@@ -91,16 +99,6 @@ public class Dog extends Enemies implements Resettable {
     }
 
 
-
-//    public boolean followContained(FollowBehaviour behaviourContained){
-//        for(int i : behaviours.keySet()){
-//            if(behaviours.get(i) == behaviourContained){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public int dropRunes()
     {
         return RandomNumberGenerator.getRandomInt(52, 1390);
@@ -114,6 +112,11 @@ public class Dog extends Enemies implements Resettable {
 
         gameMap.removeActor(this);
     }
+    /**
+     * Tells us whether this is the player or not
+     *
+     * @return false, this is not player
+     */
 
     @Override
     public boolean isPlayer() {
@@ -124,21 +127,15 @@ public class Dog extends Enemies implements Resettable {
         return value;
     };
 
+    /**
+     * Does nothing for an enemy.
+     * @param lastSiteOfGrace
+     */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) {
 
     }
 
-    /**
-     * Tells us whether this is the player or not
-     *
-     * @return false, this is not player
-     */
-
-    /**
-     * Does nothing for an enemy.
-     * @param lastSiteOfGrace
-     */
 
 }
 
