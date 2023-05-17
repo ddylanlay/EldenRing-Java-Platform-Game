@@ -44,7 +44,8 @@ public class GodrickSoldier extends Enemies implements Resettable {
 
     }
     @Override
-    public void reset(GameMap gameMap) { gameMap.removeActor(this);
+    public void reset(GameMap gameMap) {
+        gameMap.removeActor(this);
 
     }
 
