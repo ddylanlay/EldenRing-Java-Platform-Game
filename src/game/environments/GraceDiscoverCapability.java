@@ -13,12 +13,7 @@ package game.environments;
 public enum GraceDiscoverCapability {
 
     /**
-     * Has been discovered
-     */
-    DISCOVER_TRUE,
-
-    /**
      * Has not been discovered
      */
-    DISCOVER_FALSE
+    NOT_DISCOVERED
 }
