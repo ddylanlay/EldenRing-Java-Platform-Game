@@ -6,6 +6,12 @@ import game.enemies.GodrickSoldier;
 import game.utils.RandomNumberGenerator;
 
 public class Barrack extends Ground {
+
+    /**
+     * Constructor for Barrack
+     *
+     *
+     */
     public Barrack(){
         super('B');
     }
