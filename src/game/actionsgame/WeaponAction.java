@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 public abstract class WeaponAction extends Action {
     private WeaponItem weapon;
     private Actor target;
-    private String direction;
+
 
     public WeaponAction(WeaponItem weapon){
         this.weapon = weapon;
