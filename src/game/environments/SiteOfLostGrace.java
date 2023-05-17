@@ -37,7 +37,7 @@ public class SiteOfLostGrace extends Ground {
         super('U');
         this.siteName = siteName;
         this.locationOfSite = locationOfSite;
-
+        addCapability(GraceDiscoverCapability.DISCOVER_FALSE);
     }
 
     @Override
