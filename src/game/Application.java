@@ -147,7 +147,7 @@ public class Application {
 		world.addGameMap(bossRoom);
 
 		for(int i = 0; i <= 1; i++){
-		int xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		int xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
 		if(xRand < 75/2){
 			limeGrave.at(xRand, yRand).setGround(new Graveyard(westFactory));
@@ -161,7 +161,7 @@ public class Application {
 			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
 			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
 		}
-		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		yRand = RandomNumberGenerator.getRandomInt(1, 22);
 		if(xRand < 75/2){
 			limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(westFactory));
@@ -175,7 +175,7 @@ public class Application {
 			limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(eastFactory));
 			limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(eastFactory));
 		}
-		xRand = RandomNumberGenerator.getRandomInt(1, 74);
+		xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		yRand = RandomNumberGenerator.getRandomInt(1, 22);
 		if(xRand < 75/2){
 			limeGrave.at(xRand, yRand).setGround(new GustOfWind(westFactory));
@@ -193,44 +193,7 @@ public class Application {
 
 
 
-//
-//		int xxRand = RandomNumberGenerator.getRandomInt(1, 72);
-//		int yyRand = RandomNumberGenerator.getRandomInt(1, 20);
-//		if(xRand < 72/2){
-//
-//			for(int i = 0; i < 5; i++) {
-//				for (int j = 3; j > -1; j--) {
-//					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
-//				}
-//			}
-//		}
-//		else{
-//			for(int i = 0; i < 5; i++){
-//				for(int j = 3; i > -1; i--){
-//					gameMap.at(xxRand - i - j, yyRand + j).setGround(new PuddleOfWater(eastFactory));
-//				}
-//			}
-//		}
-//
-//
-//		int x_Rand = RandomNumberGenerator.getRandomInt(1, 68);
-//
-//		int y_Rand = RandomNumberGenerator.getRandomInt(1, 19);
-//		if(xRand < 68/2){
-//
-//			for(int i = 0; i < 3; i++) {
-//				for (int j = 3; j > -1; j--) {
-//					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
-//				}
-//			}
-//		}
-//		else{
-//			for(int i = 0; i < 5; i++){
-//				for(int j = 3; i > -1; i--){
-//					gameMap.at(x_Rand + i + j, y_Rand + j).setGround(new GustOfWind(eastFactory));
-//				}
-//			}
-//		}
+
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -242,27 +205,7 @@ public class Application {
 			}
 		}
 
-//		SkeletalBandit testWolf = new SkeletalBandit();
-//
-//		limeGrave.at(40, 17).addActor(testWolf);
-//
-//		ResetManager resetManager = ResetManager.getInstance();
-//		resetManager.registerResettable(testWolf, testWolf);
 
-		//tester below
-//		limeGrave.at(28, 7).addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
-		//gameMap.at(35, 10).addActor(new LoneWolf());
-//		gameMap.at(37, 10).addActor(new LoneWolf());
-
-//		gameMap.at(35, 10).addActor(new GiantCrab());
-//		gameMap.at(34, 10).addActor(new LoneWolf());
-//		gameMap.at(40, 7).addActor(new GiantCrab());
-//		gameMap.at(40, 6).addActor(new LoneWolf());
-//		gameMap.at(40, 8).addActor(new LoneWolf());
-//		gameMap.at(39, 7).addActor(new LoneWolf());
-//		gameMap.at(41, 7).addActor(new LoneWolf());
-//		gameMap.at(24, 22).addActor(new GiantDog());
-//		gameMap.at(26, 22).addActor(new LoneWolf());
 
 		limeGrave.at(37,10).addActor(new MerchantKale());
 		limeGrave.at(41,10).addActor(new FingerReaderEnia());
@@ -273,9 +216,6 @@ public class Application {
 		Location LostGrace = limeGrave.at(38, 12);
 		limeGrave.at(38, 12).setGround(new SiteOfLostGrace("The First Step", LostGrace));
 
-//		limeGrave.at(20, 20).setGround(new GustOfWind(eastFactory));
-
-//		gameMap.at(41,10).addActor(new FingerReaderEnia());
 
 
 		// adds Golden Fog Door to the necessary game maps
@@ -292,12 +232,10 @@ public class Application {
 		stormVeilCastle.at(21,16).setGround(new GustOfWind(westFactory));
 		stormVeilCastle.at(21,17).setGround(new GustOfWind(westFactory));
 
-//
-//		gameMap.at(20, 20).setGround(new GustOfWind(eastFactory));
-//		gameMap.at(38, 9).setGround(new SummonSign());
+
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new Player("Tarnished", '@', 300, LostGrace);
-//		player.addWeaponToInventory(club);
+
 		//Select Combat Class
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, limeGrave));
