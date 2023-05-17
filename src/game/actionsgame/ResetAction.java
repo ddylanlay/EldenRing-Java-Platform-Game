@@ -3,8 +3,11 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.FancyMessage;
 import game.ResetManager;
+import game.environments.GraceDiscoverCapability;
 
 public class ResetAction extends Action {
 
@@ -20,6 +23,14 @@ public class ResetAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map){
         resetManager.updatePlayerSiteLocation(actor, locationOfSite);
+
+        //Print grace discovery message if it has the capability to
+        Ground site = locationOfSite.getGround();
+        if (site.hasCapability(GraceDiscoverCapability.NOT_DISCOVERED)){
+            site.removeCapability(GraceDiscoverCapability.NOT_DISCOVERED); //Remove capability
+            System.out.println(FancyMessage.GRACE_DISCOVER);
+        }
+
         resetManager.run(map);
         return menuDescription(actor);
     }
