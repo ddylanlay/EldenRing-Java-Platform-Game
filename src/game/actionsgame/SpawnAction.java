@@ -30,8 +30,12 @@ public class SpawnAction extends Action {
                 }
             }
         }
+        System.out.println(locationInRange);
         if(locationInRange.isEmpty() == false){
             Location spawnLocation = locationInRange.get(0);
+            if(spawnLocation == null){
+                return "unable to spawn";
+            }
             if (RandomNumberGenerator.getRandomInt(100) <= 50) {
                 spawnLocation.addActor(new Invader(RandomNumberGenerator.getRandomCombatClass()));
                 result += "Invader spawned";
