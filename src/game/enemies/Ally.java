@@ -17,6 +17,7 @@ import game.behaviours.*;
 import game.combatclass.CombatClass;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
+import game.weapons.Scimitar;
 
 import java.util.ArrayList;
 
@@ -45,8 +46,8 @@ public class Ally extends Enemies implements Resettable {
         runesManager.storeActorsRunes(this,dropRunes());
         this.combatClass = combatClass;
         this.addCapability(Status.ALLY);
-        this.addWeaponToInventory(combatClass.getClassWeapon());
-
+//        this.addWeaponToInventory(combatClass.getClassWeapon());
+        this.addWeaponToInventory(new Scimitar());
     }
 
     /**

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.combatclass.Bandit;
 import game.combatclass.CombatClassMenu;
 import game.combatclass.Samurai;
 import game.enemies.Ally;
@@ -186,8 +187,9 @@ public class Application {
 		}
 
 
-		limeGrave.at(38,8).addActor(new Dog());
+		limeGrave.at(38,8).addActor(new Ally(new Bandit()));
 		limeGrave.at(39,8).addActor(new LoneWolf());
+		limeGrave.at(38,7).addActor(new LoneWolf());
 		limeGrave.at(37,10).addActor(new MerchantKale());
 		limeGrave.at(41,10).addActor(new FingerReaderEnia());
 
