@@ -39,7 +39,7 @@ public class SpawnAction extends Action {
                 }
             }
         }
-        System.out.println(locationInRange);
+
         if(locationInRange.isEmpty() == false){
             Location spawnLocation = locationInRange.get(0);
             if(spawnLocation == null){
@@ -53,9 +53,7 @@ public class SpawnAction extends Action {
                 spawnLocation.addActor(new Ally(RandomNumberGenerator.getRandomCombatClass()));
                 result += "Ally spawned";
             }
-            System.out.println((spawnLocation.x()));
-            System.out.println((spawnLocation.y()));
-            System.out.println((spawnLocation.getGround()));
+
         } else{
             result += "Unable to spawn Ally or Invader";
             return result;
