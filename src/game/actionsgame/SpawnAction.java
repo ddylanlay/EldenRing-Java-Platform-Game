@@ -7,10 +7,17 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.enemies.Ally;
 import game.enemies.Invader;
+import game.environments.SummonSign;
 import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
 
+/**
+ * A class that manages how Ally and Invader spawn in respect with SummonSign
+ * @see SummonSign
+ * Created by:
+ * @author Jamie Tran
+ */
 public class SpawnAction extends Action {
     private ArrayList<Location> locationInRange = new ArrayList<>();
     private Location location;;
