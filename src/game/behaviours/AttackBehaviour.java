@@ -29,11 +29,6 @@ public class AttackBehaviour extends Action implements Behaviour{
     public Action getAction(Actor actor, GameMap map) {
         Location actorPosition = map.locationOf(actor);
         Location targetPosition = map.locationOf(target);
-        WeaponItem weaponToUse = null;
-        List<WeaponItem> weaponInventory = actor.getWeaponInventory();
-        for(WeaponItem weapon : weaponInventory){
-            weaponToUse = weapon;
-        }
 
         int distance = distance(actorPosition, targetPosition);
 

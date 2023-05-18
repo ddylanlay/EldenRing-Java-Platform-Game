@@ -43,8 +43,8 @@ public class SlamAttackAction extends Action {
             if(RandomNumberGenerator.getRandomInt(100)<=weapon.chanceToHit()){
 
                 target.hurt(weapon.damage());
-                result += System.lineSeparator() + (target + " is slammed massively for " + weapon.damage() + " damage.");
-
+                result += (target + " is slammed massively for " + weapon.damage() + " damage.");
+                result += System.lineSeparator();
                 if(actor.isConscious() == false){
                     map.removeActor(target);
                     result += System.lineSeparator() + (target + " has been killed.");
