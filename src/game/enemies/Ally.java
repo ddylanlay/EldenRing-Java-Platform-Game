@@ -60,14 +60,7 @@ public class Ally extends Enemies implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(behaviours.get(999) instanceof WanderBehaviour == true){
-            if(RandomNumberGenerator.getRandomInt(100)<= 10){
-                resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
-                map.removeActor(this);
-                System.out.println(this + " removed from map");
-                return new DoNothingAction();
-            }
-        }
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
