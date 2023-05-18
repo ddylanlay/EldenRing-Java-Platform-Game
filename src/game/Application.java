@@ -8,6 +8,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
+import game.combatclass.Samurai;
+import game.enemies.Ally;
+import game.enemies.Invader;
 import game.environments.*;
 import game.items.GoldenRunes;
 import game.items.RemembranceOfGrafted;
@@ -181,7 +184,8 @@ public class Application {
 		}
 
 
-
+		limeGrave.at(38,8).addActor(new Ally(new Samurai()));
+		limeGrave.at(39,8).addActor(new Invader(new Samurai()));
 		limeGrave.at(37,10).addActor(new MerchantKale());
 		limeGrave.at(41,10).addActor(new FingerReaderEnia());
 

@@ -74,12 +74,12 @@ public class Ally extends Enemies implements Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.ALLY)){
+        if(!otherActor.hasCapability(Status.ALLY)){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
 
             if(!followContained(followBehaviour)){
-                behaviours.clear();
+
                 behaviours.put(1, new AttackBehaviour(otherActor));
                 behaviours.put(500, followBehaviour);
             }

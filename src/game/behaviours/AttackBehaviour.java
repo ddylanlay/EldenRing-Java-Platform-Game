@@ -30,7 +30,7 @@ public class AttackBehaviour extends Action implements Behaviour{
     }
 
     private int distance(Location a, Location b) {
-        if (b == null) {
+        if (b == null || a == null) {
             return -1;
         } else {
             return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
