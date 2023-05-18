@@ -10,10 +10,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.Bandit;
 import game.combatclass.CombatClassMenu;
 import game.combatclass.Samurai;
-import game.enemies.Ally;
-import game.enemies.Dog;
-import game.enemies.Invader;
-import game.enemies.LoneWolf;
+import game.enemies.*;
 import game.environments.*;
 import game.items.GoldenRunes;
 import game.items.RemembranceOfGrafted;
@@ -187,7 +184,7 @@ public class Application {
 		}
 
 
-		limeGrave.at(38,8).addActor(new Ally(new Bandit()));
+		limeGrave.at(38,8).addActor(new GiantCrab());
 		limeGrave.at(39,8).addActor(new LoneWolf());
 		limeGrave.at(38,7).addActor(new LoneWolf());
 		limeGrave.at(37,10).addActor(new MerchantKale());

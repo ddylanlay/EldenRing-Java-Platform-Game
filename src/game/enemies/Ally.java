@@ -46,8 +46,8 @@ public class Ally extends Enemies implements Resettable {
         runesManager.storeActorsRunes(this,dropRunes());
         this.combatClass = combatClass;
         this.addCapability(Status.ALLY);
-//        this.addWeaponToInventory(combatClass.getClassWeapon());
-        this.addWeaponToInventory(new Scimitar());
+        this.addWeaponToInventory(combatClass.getClassWeapon());
+
     }
 
     /**
@@ -81,7 +81,7 @@ public class Ally extends Enemies implements Resettable {
 
             if(!followContained(followBehaviour)){
 
-                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(1, new AttackBehaviourWithWeapon(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }

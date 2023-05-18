@@ -88,7 +88,7 @@ public class Invader extends Enemies implements Resettable {
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
 
-                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(1, new AttackBehaviourWithWeapon(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }
