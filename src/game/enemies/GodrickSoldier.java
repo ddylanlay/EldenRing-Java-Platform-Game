@@ -15,7 +15,6 @@ import game.actionsgame.AttackAction;
 import game.actionsgame.AttackActionIntrinsic;
 import game.behaviours.*;
 import game.trading.RunesManager;
-import game.trading.TradingCapability;
 import game.utils.RandomNumberGenerator;
 
 public class GodrickSoldier extends Enemies implements Resettable {
@@ -28,11 +27,11 @@ public class GodrickSoldier extends Enemies implements Resettable {
      *
      */
     public GodrickSoldier() {
-        super("Godrick Solider", 'p', 198);
+        super("Godrick Soldier", 'p', 198);
         behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this,dropRunes());
         resetManager.registerResettable(this, this);
-        this.hasCapability(EnemyType.STORMVEIL);
+        this.addCapability(EnemyType.STORMVEIL);
     }
     public int dropRunes()
     {
@@ -103,7 +102,7 @@ public class GodrickSoldier extends Enemies implements Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || !(otherActor.hasCapability(EnemyType.STORMVEIL) || otherActor.hasCapability(TradingCapability.TRADE))){
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || (otherActor.hasCapability(EnemyType.STORMVEIL) == false)){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.

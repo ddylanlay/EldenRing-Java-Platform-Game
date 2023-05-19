@@ -8,8 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.combatclass.CombatClassMenu;
-import game.enemies.GiantCrab;
-import game.enemies.LoneWolf;
+import game.enemies.*;
 import game.environments.*;
 import game.items.GoldenRunes;
 import game.items.RemembranceOfGrafted;
@@ -30,8 +29,11 @@ import java.util.List;
  *
  */
 public class Application {
-	private static EastFactory eastFactory = new EastFactory();
-	private static WestFactory westFactory = new WestFactory();
+	private static NorthEastFactory northEastFactory = new NorthEastFactory();
+	private static NorthWestFactory northWestFactory = new NorthWestFactory();
+	private static SouthEastFactory southEastFactory= new SouthEastFactory();
+	private static SouthWestFactory southWestFactory = new SouthWestFactory();
+
 	private static WeaponItem club = new Club();
 	public static void main(String[] args) {
 
@@ -126,46 +128,83 @@ public class Application {
 		for(int i = 0; i <= 1; i++){
 		int xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		int yRand = RandomNumberGenerator.getRandomInt(1, 22);
-		if(xRand < 75/2){
-			limeGrave.at(xRand, yRand).setGround(new Graveyard(westFactory));
-			limeGrave.at(xRand + 1, yRand).setGround(new Graveyard(westFactory));
-			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(westFactory));
-			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(westFactory));
+		if(xRand < 75/2 && yRand < 75/2){
+			limeGrave.at(xRand, yRand).setGround(new Graveyard(southWestFactory));
+			limeGrave.at(xRand + 1, yRand).setGround(new Graveyard(southWestFactory));
+			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(southWestFactory));
+			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(southWestFactory));
 		}
-		else {
-			limeGrave.at(xRand, yRand).setGround(new Graveyard(eastFactory));
-			limeGrave.at(xRand + 1, yRand).setGround(new Graveyard(eastFactory));
-			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(eastFactory));
-			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(eastFactory));
+		else if(xRand > 75/2 && yRand > 75/2) {
+			limeGrave.at(xRand, yRand).setGround(new Graveyard(northEastFactory));
+			limeGrave.at(xRand + 1, yRand).setGround(new Graveyard(northEastFactory));
+			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(northEastFactory));
+			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(northEastFactory));
 		}
-		xRand = RandomNumberGenerator.getRandomInt(1, 73);
-		yRand = RandomNumberGenerator.getRandomInt(1, 22);
-		if(xRand < 75/2){
-			limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(westFactory));
-			limeGrave.at(xRand + 1, yRand).setGround(new PuddleOfWater(westFactory));
-			limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(westFactory));
-			limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(westFactory));
+		else if(xRand > 75/2 && yRand < 75/2) {
+			limeGrave.at(xRand, yRand).setGround(new Graveyard(southEastFactory));
+			limeGrave.at(xRand + 1, yRand).setGround(new Graveyard(southEastFactory));
+			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(southEastFactory));
+			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(southEastFactory));
 		}
-		else {
-			limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(eastFactory));
-			limeGrave.at(xRand + 1, yRand).setGround(new PuddleOfWater(eastFactory));
-			limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(eastFactory));
-			limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(eastFactory));
+		else if(xRand < 75/2 && yRand > 75/2) {
+			limeGrave.at(xRand, yRand).setGround(new Graveyard(northWestFactory));
+			limeGrave.at(xRand + 1, yRand).setGround(new Graveyard(northWestFactory));
+			limeGrave.at(xRand, yRand + 1).setGround(new Graveyard(northWestFactory));
+			limeGrave.at(xRand + 1, yRand + 1).setGround(new Graveyard(northWestFactory));
 		}
 		xRand = RandomNumberGenerator.getRandomInt(1, 73);
 		yRand = RandomNumberGenerator.getRandomInt(1, 22);
-		if(xRand < 75/2){
-			limeGrave.at(xRand, yRand).setGround(new GustOfWind(westFactory));
-			limeGrave.at(xRand + 1, yRand).setGround(new GustOfWind(westFactory));
-			limeGrave.at(xRand, yRand + 1).setGround(new GustOfWind(westFactory));
-			limeGrave.at(xRand + 1, yRand + 1).setGround(new GustOfWind(westFactory));
-		}
-		else {
-			limeGrave.at(xRand, yRand).setGround(new GustOfWind(eastFactory));
-			limeGrave.at(xRand + 1, yRand).setGround(new GustOfWind(eastFactory));
-			limeGrave.at(xRand, yRand + 1).setGround(new GustOfWind(eastFactory));
-			limeGrave.at(xRand + 1, yRand + 1).setGround(new GustOfWind(eastFactory));
-		}
+			if(xRand < 75/2 && yRand < 75/2){
+				limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(southWestFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new PuddleOfWater(southWestFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(southWestFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(southWestFactory));
+			}
+			else if(xRand > 75/2 && yRand > 75/2) {
+				limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(northEastFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new PuddleOfWater(northEastFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(northEastFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(northEastFactory));
+			}
+			else if(xRand > 75/2 && yRand < 75/2) {
+				limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(southEastFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new PuddleOfWater(southEastFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(southEastFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(southEastFactory));
+			}
+			else if(xRand < 75/2 && yRand > 75/2) {
+				limeGrave.at(xRand, yRand).setGround(new PuddleOfWater(northWestFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new PuddleOfWater(northWestFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new PuddleOfWater(northWestFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new PuddleOfWater(northWestFactory));
+			}
+
+		xRand = RandomNumberGenerator.getRandomInt(1, 73);
+		yRand = RandomNumberGenerator.getRandomInt(1, 22);
+			if(xRand < 75/2 && yRand < 75/2){
+				limeGrave.at(xRand, yRand).setGround(new GustOfWind(southWestFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new GustOfWind(southWestFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new GustOfWind(southWestFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new GustOfWind(southWestFactory));
+			}
+			else if(xRand > 75/2 && yRand > 75/2) {
+				limeGrave.at(xRand, yRand).setGround(new GustOfWind(northEastFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new GustOfWind(northEastFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new GustOfWind(northEastFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new GustOfWind(northEastFactory));
+			}
+			else if(xRand > 75/2 && yRand < 75/2) {
+				limeGrave.at(xRand, yRand).setGround(new GustOfWind(southEastFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new GustOfWind(southEastFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new GustOfWind(southEastFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new GustOfWind(southEastFactory));
+			}
+			else if(xRand < 75/2 && yRand > 75/2) {
+				limeGrave.at(xRand, yRand).setGround(new GustOfWind(northWestFactory));
+				limeGrave.at(xRand + 1, yRand).setGround(new GustOfWind(northWestFactory));
+				limeGrave.at(xRand, yRand + 1).setGround(new GustOfWind(northWestFactory));
+				limeGrave.at(xRand + 1, yRand + 1).setGround(new GustOfWind(northWestFactory));
+			}
 		}
 
 
@@ -183,9 +222,9 @@ public class Application {
 		}
 
 
-		limeGrave.at(38,8).addActor(new GiantCrab());
-		limeGrave.at(39,8).addActor(new LoneWolf());
-		limeGrave.at(38,7).addActor(new LoneWolf());
+		limeGrave.at(38,8).addActor(new Dog());
+		limeGrave.at(39,8).addActor(new GodrickSoldier());
+		limeGrave.at(38,7).addActor(new Dog());
 		limeGrave.at(37,10).addActor(new MerchantKale());
 		limeGrave.at(41,10).addActor(new FingerReaderEnia());
 
@@ -202,14 +241,14 @@ public class Application {
 		limeGrave.at(36,12).setGround(new GoldenFogDoor("Stormveil Castle",stormVeilCastle.at(35,10)));
 
 		stormVeilCastle.at(36,9).setGround(new GoldenFogDoor("Limgrave",limeGrave.at(35,12)));
-		stormVeilCastle.at(37, 9).setGround(new GoldenFogDoor("boss room", bossRoom.at(11,5)));
+		stormVeilCastle.at(37, 9).setGround(new GoldenFogDoor("boss room", bossRoom.at(10,5)));
 
-		roundTableHold.at(8,6).setGround(new GoldenFogDoor("Limgrave", limeGrave.at(34,12)));
+		roundTableHold.at(8,6).setGround(new GoldenFogDoor("Limgrave", limeGrave.at(35,12)));
 
-		stormVeilCastle.at(20,16).setGround(new GustOfWind(westFactory));
-		stormVeilCastle.at(20,17).setGround(new GustOfWind(westFactory));
-		stormVeilCastle.at(21,16).setGround(new GustOfWind(westFactory));
-		stormVeilCastle.at(21,17).setGround(new GustOfWind(westFactory));
+		stormVeilCastle.at(20,16).setGround(new GustOfWind(northWestFactory));
+		stormVeilCastle.at(20,17).setGround(new GustOfWind(northWestFactory));
+		stormVeilCastle.at(21,16).setGround(new GustOfWind(northWestFactory));
+		stormVeilCastle.at(21,17).setGround(new GustOfWind(northWestFactory));
 
 
 		// HINT: what does it mean to prefer composition to inheritance?
