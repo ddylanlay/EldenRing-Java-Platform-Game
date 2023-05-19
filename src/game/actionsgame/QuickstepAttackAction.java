@@ -43,6 +43,12 @@ public class QuickstepAttackAction extends Action {
         this.direction = direction;
         this.weapon = weapon;
     }
+
+    public QuickstepAttackAction(Actor target, Weapon weapon) {
+        this.target = target;
+
+        this.weapon = weapon;
+    }
     @Override
     public String execute(Actor actor, GameMap map) {
 

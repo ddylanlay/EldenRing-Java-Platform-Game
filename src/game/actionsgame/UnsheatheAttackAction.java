@@ -19,7 +19,10 @@ public class UnsheatheAttackAction extends Action{
         this.weapon = weapon;
     }
 
-
+    public UnsheatheAttackAction(Actor target, Weapon weapon) {
+        this.target = target;
+        this.weapon = weapon;
+    }
 
 
     @Override

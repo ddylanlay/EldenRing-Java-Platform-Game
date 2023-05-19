@@ -17,6 +17,7 @@ import game.behaviours.*;
 import game.combatclass.CombatClass;
 import game.trading.RunesManager;
 import game.utils.RandomNumberGenerator;
+import game.weapons.Scimitar;
 
 import java.util.ArrayList;
 
@@ -60,14 +61,7 @@ public class Ally extends Enemies implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(behaviours.get(999) instanceof WanderBehaviour == true){
-            if(RandomNumberGenerator.getRandomInt(100)<= 10){
-                resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
-                map.removeActor(this);
-                System.out.println(this + " removed from map");
-                return new DoNothingAction();
-            }
-        }
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
@@ -81,13 +75,13 @@ public class Ally extends Enemies implements Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !otherActor.hasCapability(Status.ALLY)){
+        if(!otherActor.hasCapability(Status.ALLY)){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
 
             if(!followContained(followBehaviour)){
-                behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
+
+                behaviours.put(1, new AttackBehaviourWithWeapon(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }

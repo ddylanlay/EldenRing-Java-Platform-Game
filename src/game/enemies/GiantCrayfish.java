@@ -117,41 +117,6 @@ public class GiantCrayfish extends Enemies implements SlamAttack, Resettable {
 
     }
 
-    public void SlamAttack(GameMap map) {
-        scanAround(map);
-        for(Actor actor: actorInRange){
-            if(RandomNumberGenerator.getRandomInt(100)<=100){
-                actor.hurt(527);
-                System.out.println(actor + " is slammed for 527 damage.");
-                if(actor.isConscious() == false){
-                    map.removeActor(actor);
-                    System.out.println(actor + " has been killed.");
-                }
-            }
-        }
-        actorInRange.clear();
-
-
-
-
-    }
-
-    public void scanAround(GameMap map){
-        Location crabLocation = map.locationOf(this);
-        int xLocation = crabLocation.x();
-        int yLocation = crabLocation.y();
-
-        for(int x = xLocation - 1; x <= xLocation + 1; x++){
-            for(int y = yLocation - 1; y <= yLocation + 1; y++){
-                Location tempLocation = new Location(map, x, y);
-                if(map.isAnActorAt(tempLocation)){
-                    if(xLocation != x && yLocation != y){
-                        actorInRange.add(map.getActorAt(tempLocation));
-                    }
-                }
-            }
-        }
-    }
 
     public int dropRunes()
     {
@@ -172,19 +137,7 @@ public class GiantCrayfish extends Enemies implements SlamAttack, Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
-//    public Weapon equipWeapon(Actor actor){
-//        for(Weapon weapon : actor.getWeaponInventory()){
-//            System.out.println(asWeapon(weapon));
-//            if(asWeapon(weapon) != null){
-//
-//                return weapon;
-//            }
-//        }
-//        return actor.getIntrinsicWeapon();
-//    }
-//    public Weapon asWeapon(Weapon weapon){
-//        return weapon instanceof Weapon ? weapon : null;
-//    }
+
 
     /**
      * Does nothing for an enemy.

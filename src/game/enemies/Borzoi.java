@@ -120,24 +120,6 @@ public class Borzoi extends Enemies implements Resettable {
 
     }
 
-    public void SlamAttack(GameMap map) {
-        scanAround(map);
-        for(Actor actor: actorInRange){
-            if(RandomNumberGenerator.getRandomInt(100)<=90){
-                actor.hurt(314);
-                System.out.println(actor + " is slammed for 314 damage.");
-                if(actor.isConscious() == false){
-                    map.removeActor(actor);
-                    System.out.println(actor + " has been killed.");
-                }
-            }
-        }
-        actorInRange.clear();
-
-
-
-
-    }
 
     public void scanAround(GameMap map){
         Location crabLocation = map.locationOf(this);
@@ -187,21 +169,7 @@ public class Borzoi extends Enemies implements Resettable {
      */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
-//
-//
-//    public Weapon equipWeapon(Actor actor){
-//        for(Weapon weapon : actor.getWeaponInventory()){
-//            System.out.println(asWeapon(weapon));
-//            if(asWeapon(weapon) != null){
-//
-//                return weapon;
-//            }
-//        }
-//        return actor.getIntrinsicWeapon();
-//    }
-//    public Weapon asWeapon(Weapon weapon){
-//        return weapon instanceof Weapon ? weapon : null;
-//    }
+
 
     public int dropRunes()
     {

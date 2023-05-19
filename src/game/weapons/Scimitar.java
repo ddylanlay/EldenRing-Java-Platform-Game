@@ -59,7 +59,7 @@ public class Scimitar extends WeaponItem implements PurchasableItem, SellableIte
     }
     @Override
     public List<Action> getAllowableActions() {
-        this.allowableActions.add(new SpinAttackActionScimitar(this));
+        this.addCapability(WeaponType.SCIMITAR);
         return this.allowableActions.getUnmodifiableActionList();
     }
     public void addWeaponToActor(Actor actor){
