@@ -11,6 +11,7 @@ import game.FancyMessage;
 import game.ResetManager;
 import game.trading.OLD_Runes;
 import game.trading.RunesManager;
+import game.items.Runes;
 
 /**
  * An action executed if an actor is killed.
@@ -100,8 +101,13 @@ public class DeathAction extends Action {
                 previousLocation = map.locationOf(target);
             }
             if (runesManager.retrieveActorsRunes(target) != 0) {
-                OLD_Runes OLDRunesToDrop = new OLD_Runes(target, previousLocation.getGround());
-                runesManager.playerDied(OLDRunesToDrop, previousLocation);
+                Runes deathRunes = new Runes(runesManager.retrieveActorsRunes(target));
+                int xcoord = previousLocation.x();
+                int ycoord = previousLocation.y();
+                map.at(xcoord, ycoord).addItem(deathRunes);
+
+//                OLD_Runes OLDRunesToDrop = new OLD_Runes(target, previousLocation.getGround());
+//                runesManager.playerDied(OLDRunesToDrop, previousLocation);
             }
             resetManager.run(map);
         }

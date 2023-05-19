@@ -3,15 +3,16 @@ package game.actionsgame;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.Runes;
 import game.trading.OLD_Runes;
 import game.trading.RunesManager;
 
 public class RetrieveAction extends Action{
-    private OLD_Runes OLDRunes;
+    private Runes runes;
     RunesManager runesManager = RunesManager.getInstance();
 
-    public RetrieveAction(OLD_Runes OLDRunes){
-        this.OLDRunes = OLDRunes;
+    public RetrieveAction(Runes _runes){
+        this.runes = _runes;
     }
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -23,7 +24,7 @@ public class RetrieveAction extends Action{
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " retrieves Runes (value: " + OLDRunes.getNumOfRunes() + ")";
+        return actor + " retrieves Runes (value: " + runes.getValue() + ")";
     }
 
 }

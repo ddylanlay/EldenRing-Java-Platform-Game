@@ -23,7 +23,7 @@ public class OLD_Runes extends Ground{
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction){
             ActionList actions = new ActionList();
-            actions.add(new RetrieveAction(this));
+            //actions.add(new RetrieveAction(this));
             return actions;
         }
     public Ground getOriginalGround() {
