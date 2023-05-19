@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.ResetManager;
-import game.trading.Runes;
+import game.trading.OLD_Runes;
 import game.trading.RunesManager;
 
 /**
@@ -43,7 +43,7 @@ public class DeathAction extends Action {
     /**
      * Unused, the runes.
      */
-    Runes runes;
+    OLD_Runes OLDRunes;
 
     /**
      * Runes Manager, to deal with runes exchange.
@@ -100,8 +100,8 @@ public class DeathAction extends Action {
                 previousLocation = map.locationOf(target);
             }
             if (runesManager.retrieveActorsRunes(target) != 0) {
-                Runes runesToDrop = new Runes(target, previousLocation.getGround());
-                runesManager.playerDied(runesToDrop, previousLocation);
+                OLD_Runes OLDRunesToDrop = new OLD_Runes(target, previousLocation.getGround());
+                runesManager.playerDied(OLDRunesToDrop, previousLocation);
             }
             resetManager.run(map);
         }

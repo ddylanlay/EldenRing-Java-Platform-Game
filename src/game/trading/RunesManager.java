@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class RunesManager {
     private HashMap<Actor, Integer> runesList;
 
-    private Runes droppedRunes = null;
+    private OLD_Runes droppedOLDRunes = null;
     private Location droppedRunesLocation = null;
 
     private static RunesManager instance;
@@ -51,21 +51,21 @@ public class RunesManager {
 
 
     public void playerRetrieveDroppedRunes(Actor player){
-        droppedRunes.retrievedByPlayer(player);
-        droppedRunesLocation.setGround(droppedRunes.getOriginalGround());
+        droppedOLDRunes.retrievedByPlayer(player);
+        droppedRunesLocation.setGround(droppedOLDRunes.getOriginalGround());
         droppedRunesLocation = null;
-        droppedRunes = null;
+        droppedOLDRunes = null;
     }
 
-    public void playerDied(Runes runes, Location dropLocation){
+    public void playerDied(OLD_Runes OLDRunes, Location dropLocation){
 
-        if (droppedRunes != null){
-            droppedRunesLocation.setGround(droppedRunes.getOriginalGround());
+        if (droppedOLDRunes != null){
+            droppedRunesLocation.setGround(droppedOLDRunes.getOriginalGround());
         }
 
-        droppedRunes = runes;
+        droppedOLDRunes = OLDRunes;
         droppedRunesLocation = dropLocation;
-        droppedRunesLocation.setGround(droppedRunes);
+        droppedRunesLocation.setGround(droppedOLDRunes);
     }
 
 }
