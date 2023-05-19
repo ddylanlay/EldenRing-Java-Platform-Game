@@ -9,9 +9,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.ResetManager;
-import game.trading.OLD_Runes;
 import game.trading.RunesManager;
-import game.items.Runes;
 
 /**
  * An action executed if an actor is killed.
@@ -41,10 +39,6 @@ public class DeathAction extends Action {
      */
     private Location previousLocation;
 
-    /**
-     * Unused, the runes.
-     */
-    OLD_Runes OLDRunes;
 
     /**
      * Runes Manager, to deal with runes exchange.
@@ -100,11 +94,7 @@ public class DeathAction extends Action {
             if (previousLocation == null) {
                 previousLocation = map.locationOf(target);
             }
-            if (runesManager.retrieveActorsRunes(target) != 0) {
-                Runes deathRunes = new Runes(runesManager.retrieveActorsRunes(target));
-                runesManager.removeRunes(target, deathRunes.getValue()); //Remove runes from player
-                map.at(previousLocation.x(), previousLocation.y()).addItem(deathRunes); //Drop item on the ground
-            }
+            runesManager.playerDied(previousLocation, target, map);
             resetManager.run(map);
         }
 

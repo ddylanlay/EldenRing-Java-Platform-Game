@@ -48,6 +48,7 @@ public class RetrieveAction extends PickUpAction {
     public String execute(Actor actor, GameMap map) {
 
         runesManager.addRunes(actor, runes.getValue()); //Add runes back
+        runesManager.playerRetrieveDroppedRunes();
         return super.execute(actor, map); //Remove item from the map
     }
 
