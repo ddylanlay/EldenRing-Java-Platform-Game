@@ -26,7 +26,7 @@ public class SpinAttackActionScimitar extends Action {
         for (Actor target : actorInRange) {
                 if (RandomNumberGenerator.getRandomInt(100) <= 88) {
                     target.hurt(weapon.damage());
-                    result += target + " is sliced for 118 damage." + System.lineSeparator();
+                    result += target + " is sliced for 118 damage aoe." + System.lineSeparator();
                     if (!actor.isConscious()) {
                         result += new DeathAction(actor).execute(target, map);
                         if (actor.getDisplayChar() == '@' && target.getDisplayChar() != '@') {

@@ -185,21 +185,7 @@ public class Madara extends Enemies implements Resettable {
      */
     @Override
     public void setLastSiteOfGrace(Location lastSiteOfGrace) { }
-//
-//
-//    public Weapon equipWeapon(Actor actor){
-//        for(Weapon weapon : actor.getWeaponInventory()){
-//            System.out.println(asWeapon(weapon));
-//            if(asWeapon(weapon) != null){
-//
-//                return weapon;
-//            }
-//        }
-//        return actor.getIntrinsicWeapon();
-//    }
-//    public Weapon asWeapon(Weapon weapon){
-//        return weapon instanceof Weapon ? weapon : null;
-//    }
+
 
     public int dropRunes()
     {

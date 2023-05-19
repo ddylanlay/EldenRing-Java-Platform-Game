@@ -60,14 +60,7 @@ public class Invader extends Enemies implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(behaviours.get(999) instanceof WanderBehaviour == true){
-            if(RandomNumberGenerator.getRandomInt(100)<= 10){
-                resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
-                map.removeActor(this);
-                System.out.println(this + " removed from map");
-                return new DoNothingAction();
-            }
-        }
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
@@ -88,14 +81,14 @@ public class Invader extends Enemies implements Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         FollowBehaviour followBehaviour = new FollowBehaviour(otherActor);
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && !(otherActor.hasCapability(EnemyType.INVADER) && otherActor.hasCapability(TradingCapability.TRADE))){
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) || !(otherActor.hasCapability(EnemyType.INVADER) || otherActor.hasCapability(TradingCapability.TRADE))){
             actions.add(new AttackAction(this, direction, equipWeapon(otherActor)));
             actions.add(new AttackActionIntrinsic(this, direction));
             // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
-                behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
+
+                behaviours.put(1, new AttackBehaviourWithWeapon(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }

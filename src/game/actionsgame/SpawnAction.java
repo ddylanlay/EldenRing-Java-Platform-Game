@@ -7,10 +7,17 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.enemies.Ally;
 import game.enemies.Invader;
+import game.environments.SummonSign;
 import game.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
 
+/**
+ * A class that manages how Ally and Invader spawn in respect with SummonSign
+ * @see SummonSign
+ * Created by:
+ * @author Jamie Tran
+ */
 public class SpawnAction extends Action {
     private ArrayList<Location> locationInRange = new ArrayList<>();
     private Location location;;
@@ -32,7 +39,7 @@ public class SpawnAction extends Action {
                 }
             }
         }
-        System.out.println(locationInRange);
+
         if(locationInRange.isEmpty() == false){
             Location spawnLocation = locationInRange.get(0);
             if(spawnLocation == null){
@@ -46,9 +53,7 @@ public class SpawnAction extends Action {
                 spawnLocation.addActor(new Ally(RandomNumberGenerator.getRandomCombatClass()));
                 result += "Ally spawned";
             }
-            System.out.println((spawnLocation.x()));
-            System.out.println((spawnLocation.y()));
-            System.out.println((spawnLocation.getGround()));
+
         } else{
             result += "Unable to spawn Ally or Invader";
             return result;

@@ -19,9 +19,9 @@ import java.util.Random;
 /**
  * @author Jamie Tran
  */
-public class AttackBehaviour extends Action implements Behaviour{
+public class AttackBehaviourWithWeapon extends Action implements Behaviour{
     private Actor target;
-    public AttackBehaviour(Actor target){
+    public AttackBehaviourWithWeapon(Actor target){
         this.target = target;
     }
 
@@ -29,13 +29,26 @@ public class AttackBehaviour extends Action implements Behaviour{
     public Action getAction(Actor actor, GameMap map) {
         Location actorPosition = map.locationOf(actor);
         Location targetPosition = map.locationOf(target);
+        WeaponItem weaponToUse = null;
+        List<WeaponItem> weaponInventory = actor.getWeaponInventory();
+        for(WeaponItem weapon : weaponInventory){
+            weaponToUse = weapon;
+        }
 
         int distance = distance(actorPosition, targetPosition);
 
-        if(distance == 1){
-
-            return new AttackAction(target, "to the enemy");
-
+        if(distance == 1 && weaponToUse != null){
+            if(RandomNumberGenerator.getRandomInt(100)<=50){
+                if (weaponToUse.hasCapability(WeaponType.KATANA)) {
+                    return new UnsheatheAttackAction(target, weaponToUse);
+                } else if (weaponToUse.hasCapability(WeaponType.DAGGER)) {
+                    return new QuickstepAttackAction(target, weaponToUse);
+                } else if (weaponToUse.hasCapability(WeaponType.SCIMITAR)) {
+                    return new SpinAttackActionScimitar(weaponToUse);
+                }
+            } else{
+                return new AttackAction(target, "to the enemy");
+            }
         }
         return null;
     }

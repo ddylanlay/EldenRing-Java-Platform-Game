@@ -13,10 +13,7 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackActionIntrinsic;
 import game.actionsgame.AttackActionPilesOfBones;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.trading.TradingCapability;
 import game.utils.RandomNumberGenerator;
 import game.weapons.Scimitar;
@@ -87,7 +84,7 @@ public class SkeletalBandit extends Enemies implements Resettable {
             // HINT 1: How would you attack the enemy with a weapon?
             if(followContained(followBehaviour) == false){
                 behaviours.clear();
-                behaviours.put(1, new AttackBehaviour(otherActor));
+                behaviours.put(1, new AttackBehaviourWithWeapon(otherActor));
                 behaviours.put(500, followBehaviour);
             }
         }
