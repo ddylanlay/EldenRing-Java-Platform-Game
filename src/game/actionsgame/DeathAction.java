@@ -102,12 +102,8 @@ public class DeathAction extends Action {
             }
             if (runesManager.retrieveActorsRunes(target) != 0) {
                 Runes deathRunes = new Runes(runesManager.retrieveActorsRunes(target));
-                int xcoord = previousLocation.x();
-                int ycoord = previousLocation.y();
-                map.at(xcoord, ycoord).addItem(deathRunes);
-
-//                OLD_Runes OLDRunesToDrop = new OLD_Runes(target, previousLocation.getGround());
-//                runesManager.playerDied(OLDRunesToDrop, previousLocation);
+                runesManager.removeRunes(target, deathRunes.getValue()); //Remove runes from player
+                map.at(previousLocation.x(), previousLocation.y()).addItem(deathRunes); //Drop item on the ground
             }
             resetManager.run(map);
         }
