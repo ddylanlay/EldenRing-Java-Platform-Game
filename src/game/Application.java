@@ -222,9 +222,9 @@ public class Application {
 		}
 
 
-		limeGrave.at(38,8).addActor(new GiantCrab());
-		limeGrave.at(39,8).addActor(new LoneWolf());
-		limeGrave.at(38,7).addActor(new LoneWolf());
+		limeGrave.at(38,8).addActor(new Dog());
+		limeGrave.at(39,8).addActor(new GodrickSoldier());
+		limeGrave.at(38,7).addActor(new Dog());
 		limeGrave.at(37,10).addActor(new MerchantKale());
 		limeGrave.at(41,10).addActor(new FingerReaderEnia());
 
