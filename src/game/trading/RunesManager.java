@@ -1,15 +1,18 @@
 package game.trading;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.Runes;
 
 import java.util.HashMap;
 
 public class RunesManager {
     private HashMap<Actor, Integer> runesList;
 
-    private Runes droppedRunes = null;
+    private Runes oldRunes = null;
     private Location droppedRunesLocation = null;
+    private boolean haveRunesCollected = true;
 
     private static RunesManager instance;
     private RunesManager() {
@@ -50,22 +53,29 @@ public class RunesManager {
     }
 
 
-    public void playerRetrieveDroppedRunes(Actor player){
-        droppedRunes.retrievedByPlayer(player);
-        droppedRunesLocation.setGround(droppedRunes.getOriginalGround());
+    public void playerRetrieveDroppedRunes(){
+        haveRunesCollected = true;
         droppedRunesLocation = null;
-        droppedRunes = null;
+        oldRunes = null;
     }
 
-    public void playerDied(Runes runes, Location dropLocation){
+    public void playerDied(Location dropLocation, Actor target, GameMap map){
 
-        if (droppedRunes != null){
-            droppedRunesLocation.setGround(droppedRunes.getOriginalGround());
+        Runes deathRunes = new Runes(retrieveActorsRunes(target)); //New runes to drop
+        removeRunes(target, deathRunes.getValue()); //Remove runes from player
+        map.at(dropLocation.x(), dropLocation.y()).addItem(deathRunes); //Drop item on the ground
+
+        //If runes haven't been collected, remove them from the gamemap
+        if (!haveRunesCollected){
+            map.at(droppedRunesLocation.x(), droppedRunesLocation.y()).removeItem(oldRunes);
         }
 
-        droppedRunes = runes;
+        //Update our old runes item
+        oldRunes = deathRunes;
+        //Update the drop location
         droppedRunesLocation = dropLocation;
-        droppedRunesLocation.setGround(droppedRunes);
+        //Make sure to set haveRunesCollected to be false
+        haveRunesCollected = false;
     }
 
 }

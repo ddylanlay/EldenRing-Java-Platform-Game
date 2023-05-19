@@ -258,6 +258,11 @@ public class Application {
 		Action classAction = new CombatClassMenu(player).showMenu();
 		System.out.println(classAction.execute(player, limeGrave));
 		world.addPlayer(player, limeGrave.at(36, 10));
+
+		//FOR TESTING REMOVE BEFORE MERGE
+//		world.addPlayer(player, limeGrave.at(43, 11));
+//		limeGrave.at(43,12).addActor(new GodrickSoldier());
+
 		world.run();
 	}
 }

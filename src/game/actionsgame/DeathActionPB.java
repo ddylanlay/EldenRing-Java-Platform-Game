@@ -9,7 +9,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.ResetManager;
 import game.enemies.PilesOfBonesHSS;
 import game.enemies.PilesOfBonesSB;
-import game.trading.Runes;
 import game.trading.RunesManager;
 
 /**
@@ -30,10 +29,6 @@ public class DeathActionPB extends Action {
      */
     private Actor attacker;
 
-    /**
-     * Unused, the runes.
-     */
-    Runes runes;
 
     /**
      * Runes manager, deals with rune exchange.
