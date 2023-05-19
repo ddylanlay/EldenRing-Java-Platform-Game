@@ -260,8 +260,8 @@ public class Application {
 		//world.addPlayer(player, limeGrave.at(36, 10));
 
 		//FOR TESTING REMOVE BEFORE MERGE
-		world.addPlayer(player, limeGrave.at(45, 10));
-		limeGrave.at(45,11).addActor(new GodrickSoldier());
+		world.addPlayer(player, limeGrave.at(43, 11));
+		limeGrave.at(43,12).addActor(new GodrickSoldier());
 
 		world.run();
 	}
