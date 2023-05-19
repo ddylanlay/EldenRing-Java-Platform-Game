@@ -37,7 +37,7 @@ public class Runes extends Item {
         super("Runes", '$', false);
         this.value = _value;
         this.allowableActions = new ActionList();
-        this.addAction(new RetrieveAction(this));
+        this.allowableActions.add(new RetrieveAction(this));
     }
 
     /**
