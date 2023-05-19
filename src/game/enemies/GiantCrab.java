@@ -17,7 +17,6 @@ import game.behaviours.AttackBehaviourSlam;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
-import game.items.ItemCapability;
 import game.trading.RunesManager;
 import game.trading.TradingCapability;
 import game.utils.RandomNumberGenerator;
@@ -59,7 +58,7 @@ public class GiantCrab extends Enemies implements SlamAttack, Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(behaviours.get(999) instanceof WanderBehaviour == true){
+        if(behaviours.get(999) instanceof WanderBehaviour){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 resetManager.removeResettable(this); //Remove actor from reset hashmap
                 map.removeActor(this);
