@@ -14,7 +14,7 @@ import game.utils.RandomNumberGenerator;
  * @author Arosh Heenkenda
  *
  */
-public class SouthFactory implements EnemiesFactory {
+public class SouthWestFactory implements EnemiesFactory {
 
     @Override
     public void spawnCanis(Location location) {

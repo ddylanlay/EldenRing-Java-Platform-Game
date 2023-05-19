@@ -5,7 +5,7 @@ import game.enemies.*;
 import game.utils.RandomNumberGenerator;
 
 /**
- * Spawn enemies unique to east side of the map.
+ * Spawn enemies unique to west side of the map.
  *
  * Created by:
  * @author Jamie Tran
@@ -14,26 +14,26 @@ import game.utils.RandomNumberGenerator;
  * @author Arosh Heenkenda
  *
  */
-public class NorthFactory implements EnemiesFactory {
+public class NorthWestFactory implements EnemiesFactory {
 
     @Override
     public void spawnCanis(Location location) {
-        if (RandomNumberGenerator.getRandomInt(100) <= 75) {
-            location.addActor(new RaccoonDog());
+        if (RandomNumberGenerator.getRandomInt(100) <= 33) {
+            location.addActor(new LoneWolf());
         }
     }
 
     @Override
     public void spawnSkeleton(Location location) {
-        if (RandomNumberGenerator.getRandomInt(100) <= 10) {
-            location.addActor(new Gashadokuro());
+        if (RandomNumberGenerator.getRandomInt(100) <= 27) {
+            location.addActor(new HeavySkeletalSwordsman());
         }
     }
 
     @Override
     public void spawnCrustacean(Location location) {
-        if (RandomNumberGenerator.getRandomInt(100) <= 15) {
-            location.addActor(new SpiderCrab());
+        if (RandomNumberGenerator.getRandomInt(100) <= 2) {
+            location.addActor(new GiantCrab());
         }
     }
 
