@@ -7,10 +7,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.combatclass.Bandit;
 import game.combatclass.CombatClassMenu;
-import game.combatclass.Samurai;
-import game.enemies.*;
+import game.enemies.GiantCrab;
+import game.enemies.LoneWolf;
 import game.environments.*;
 import game.items.GoldenRunes;
 import game.items.RemembranceOfGrafted;
@@ -203,9 +202,9 @@ public class Application {
 		limeGrave.at(36,12).setGround(new GoldenFogDoor("Stormveil Castle",stormVeilCastle.at(35,10)));
 
 		stormVeilCastle.at(36,9).setGround(new GoldenFogDoor("Limgrave",limeGrave.at(35,12)));
-		stormVeilCastle.at(37, 9).setGround(new GoldenFogDoor("boss room", bossRoom.at(10,5)));
+		stormVeilCastle.at(37, 9).setGround(new GoldenFogDoor("boss room", bossRoom.at(11,5)));
 
-		roundTableHold.at(8,6).setGround(new GoldenFogDoor("Limgrave", limeGrave.at(35,12)));
+		roundTableHold.at(8,6).setGround(new GoldenFogDoor("Limgrave", limeGrave.at(34,12)));
 
 		stormVeilCastle.at(20,16).setGround(new GustOfWind(westFactory));
 		stormVeilCastle.at(20,17).setGround(new GustOfWind(westFactory));

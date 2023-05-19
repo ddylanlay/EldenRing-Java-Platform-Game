@@ -1,11 +1,11 @@
 package game.environments;
 
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actionsgame.FastTravelAction;
 
 public class GoldenFogDoor extends Ground {
     private Location destination;
@@ -30,7 +30,8 @@ public class GoldenFogDoor extends Ground {
         ActionList actions = super.allowableActions(actor, location, direction);
         if(location.containsAnActor() && actor.hasCapability(Status.FAST_TRAVEL))
         {
-            actions.add(new FastTravelAction(name, destination));
+//            actions.add(new FastTravelAction(name, destination));
+            actions.add(new MoveActorAction(destination, name));
             return actions;
         }
         return super.allowableActions(actor, location, direction);
