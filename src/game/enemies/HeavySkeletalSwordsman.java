@@ -55,10 +55,10 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(this.isConscious() == false){
+        if(!this.isConscious()){
             spawnPileOfBones(map);
         }
-        if(behaviours.get(999) instanceof WanderBehaviour == true){
+        if(behaviours.get(999) instanceof WanderBehaviour){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 resetManager.removeResettable(this); //Remove reference to HSS when they despawn
                 map.removeActor(this);

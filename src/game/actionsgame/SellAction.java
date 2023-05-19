@@ -6,10 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.trading.RunesManager;
 import game.trading.SellableItem;
 
-import java.util.ArrayList;
-
 public class SellAction extends Action {
-    private ArrayList<Actor> actorInRange = new ArrayList<>();
     private SellableItem sellWeapon;
     private Actor actor;
     RunesManager runesManager = RunesManager.getInstance();

@@ -59,7 +59,7 @@ public class GiantDog extends Enemies implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if(behaviours.get(999) instanceof WanderBehaviour == true){
+        if(behaviours.get(999) instanceof WanderBehaviour){
             if(RandomNumberGenerator.getRandomInt(100)<= 10){
                 resetManager.removeResettable(this); //Remove instance of GiantDog when they despawn
                 map.removeActor(this);
