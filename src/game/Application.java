@@ -258,6 +258,8 @@ public class Application {
 		//FOR TESTING REMOVE BEFORE MERGE
 //		world.addPlayer(player, limeGrave.at(43, 11));
 //		limeGrave.at(43,12).addActor(new GodrickSoldier());
+//		stormVeilCastle.at(32,11).addActor(new LoneWolf());
+//		stormVeilCastle.at(31,11).addActor(new LoneWolf());
 
 		world.run();
 	}

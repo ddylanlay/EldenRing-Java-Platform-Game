@@ -30,7 +30,7 @@ public class GoldenFogDoor extends Ground {
         ActionList actions = super.allowableActions(actor, location, direction);
         if(location.containsAnActor() && actor.hasCapability(Status.FAST_TRAVEL))
         {
-//            actions.add(new FastTravelAction(name, destination));
+
             actions.add(new MoveActorAction(destination, name));
             return actions;
         }
