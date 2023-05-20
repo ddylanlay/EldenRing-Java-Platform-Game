@@ -28,7 +28,7 @@ public class GoldenFogDoor extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = super.allowableActions(actor, location, direction);
-        if(location.containsAnActor() && actor.hasCapability(Status.RESPAWNABLE))
+        if(location.containsAnActor() && actor.hasCapability(Status.FAST_TRAVEL))
         {
 
             actions.add(new MoveActorAction(destination, name));
