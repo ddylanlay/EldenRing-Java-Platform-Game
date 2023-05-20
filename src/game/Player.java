@@ -49,6 +49,7 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.SPAWN);
 		this.addCapability(Status.ALLY);
+		this.addCapability(Status.RESPAWNABLE);
 		this.addCapability(Status.FAST_TRAVEL);
 		this.addItemToInventory(bottle);
 		this.lastGraceSite = lastGraceSite;
