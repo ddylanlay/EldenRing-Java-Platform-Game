@@ -73,15 +73,15 @@ public class GiantCrayfish extends Enemies implements SlamAttack, Resettable {
         }
         return new DoNothingAction();
     }
-//
-//    /**
-//     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
-//     *
-//     * @param otherActor the Actor that might be performing attack
-//     * @param direction  String representing the direction of the other Actor
-//     * @param map        current GameMap
-//     * @return
-//     */
+
+    /**
+     * The GiantCrayfish can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return actions
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();

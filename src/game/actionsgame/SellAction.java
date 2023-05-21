@@ -11,11 +11,22 @@ public class SellAction extends Action {
     private Actor actor;
     RunesManager runesManager = RunesManager.getInstance();
 
+    /**
+     *  Constructor
+     * @param target actor wanting to sell
+     * @param sellWeapon the weapon to be sold
+     */
     public SellAction(Actor target, SellableItem sellWeapon) {
         this.actor = target;
         this.sellWeapon = sellWeapon;
     }
 
+    /**
+     * Selling the weapon
+     * @param actor actor wanting to sell
+     * @param sellWeapon the weapon to be sold
+     * @return string menuDescription
+     */
     public String sell(Actor actor, SellableItem sellWeapon) {
         runesManager.addRunes(actor, sellWeapon.getSellingPrice());
         sellWeapon.removeWeaponToActor(actor);
@@ -23,16 +34,25 @@ public class SellAction extends Action {
 
     }
 
+    /**
+     * Executing the sell action
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return string menuDescription
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         return sell(actor, sellWeapon);
     }
-    public String theMenuDescription(Actor actor, SellableItem sellWeapon) {
-        return actor + " sells " + sellWeapon.toString() + " for " + sellWeapon.getSellingPrice();
-    }
+
+    /**
+     *  Menu description of selling action
+     * @param actor The actor performing the action.
+     * @return string menuDescription
+     */
     @Override
     public String menuDescription(Actor actor) {
-        return theMenuDescription(actor, sellWeapon);
+        return actor + " sells " + sellWeapon.toString() + " for " + sellWeapon.getSellingPrice();
     }
 
 }

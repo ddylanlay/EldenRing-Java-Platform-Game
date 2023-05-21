@@ -37,7 +37,7 @@ public class RaccoonDog extends Enemies implements Resettable {
 
 
     public RaccoonDog() {
-        super("Tanuki", '狸', 69); //102
+        super("Tanuki", '狸', 69);
         behaviours.put(999, new WanderBehaviour());
         runesManager.storeActorsRunes(this, dropRunes());
         resetManager.registerResettable(this, this);
@@ -140,19 +140,7 @@ public class RaccoonDog extends Enemies implements Resettable {
      */
     @Override
     public boolean isPlayer() { return false; }
-//    public Weapon equipWeapon(Actor actor){
-//        for(Weapon weapon : actor.getWeaponInventory()){
-//            System.out.println(asWeapon(weapon));
-//            if(asWeapon(weapon) != null){
-//
-//                return weapon;
-//            }
-//        }
-//        return actor.getIntrinsicWeapon();
-//    }
-//    public Weapon asWeapon(Weapon weapon){
-//        return weapon instanceof Weapon ? weapon : null;
-//    }
+
 
     /**
      * Does nothing for an enemy.

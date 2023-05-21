@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Enemies extends Actor{
+    /**
+     * Hashmap that takes an integer and Behaviour
+     */
     public Map<Integer, Behaviour> behaviours = new HashMap<>();
     RunesManager runesManager = RunesManager.getInstance();
     ResetManager resetManager = ResetManager.getInstance();
@@ -73,9 +76,7 @@ public abstract class Enemies extends Actor{
         return actions;
     }
     public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
-    public void getParticularEnemy(){
 
-    };
 
     public boolean followContained(FollowBehaviour behaviourContained){
         for(int i : behaviours.keySet()){

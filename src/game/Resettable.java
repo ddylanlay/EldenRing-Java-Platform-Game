@@ -15,20 +15,23 @@ import edu.monash.fit2099.engine.positions.Location;
  */
 public interface Resettable {
 
-    /*
-
+    /**
+     *
+     * @param gameMap the map with of the game
+     *
      */
     void reset(GameMap gameMap);
 
     /**
      *
-     * @return
+     * @return boolean true or false
      */
     boolean isPlayer();
 
     /**
      *
-     * @param lastSiteOfGrace
+     * @param lastSiteOfGrace the most recent site that the player rested on
+     *
      */
     void setLastSiteOfGrace(Location lastSiteOfGrace);
 }

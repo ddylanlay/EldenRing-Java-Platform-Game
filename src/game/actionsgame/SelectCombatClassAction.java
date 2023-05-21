@@ -12,13 +12,28 @@ public class SelectCombatClassAction extends Action {
     private CombatClass combatClass;
     private Player player;
 
+    /**
+     *
+     * @return CombatClass specific class of chosen by player
+     */
     public CombatClass getCombatClass() { return combatClass; }
 
+    /**
+     * Constructor
+     * @param _combatClass specific class of chosen by player
+     * @param _player the specific actor choosing the class
+     */
     public SelectCombatClassAction(CombatClass _combatClass, Player _player){
         this.combatClass = _combatClass;
         this.player = _player;
     }
 
+    /**
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return string menuDescription
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 
@@ -31,6 +46,11 @@ public class SelectCombatClassAction extends Action {
         return menuDescription(actor);
     }
 
+    /**
+     *
+     * @param actor The actor performing the action.
+     * @return string output
+     */
     @Override
     public String menuDescription(Actor actor) {
 

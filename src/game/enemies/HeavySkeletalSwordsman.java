@@ -75,7 +75,7 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
     }
 
     /**
-     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     * The HeavySkeletalSwordsman can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
      *
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
@@ -101,12 +101,9 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
         return actions;
     }
     /**
-     * The lone wolf can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     * The HeavySkeletalSwordsman can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
      *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return
+     * @return IntrinsicWeapon new instance of IntrinsicWeapon
      */
 
 
@@ -134,14 +131,6 @@ public class HeavySkeletalSwordsman extends Enemies implements Resettable {
             map.addActor(new PilesOfBonesHSS(), currentLocation);
         }
     }
-//    public boolean followContained(FollowBehaviour behaviourContained){
-//        for(int i : behaviours.keySet()){
-//            if(behaviours.get(i) == behaviourContained){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     /**
      * Reset method for the Heavy Skeletal Swordsman, removes them from player map.

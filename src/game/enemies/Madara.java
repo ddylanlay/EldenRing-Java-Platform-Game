@@ -13,11 +13,13 @@ import game.Resettable;
 import game.Status;
 import game.actionsgame.AttackAction;
 import game.actionsgame.AttackActionIntrinsic;
-import game.behaviours.*;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.WanderBehaviour;
 import game.trading.RunesManager;
 import game.trading.TradingCapability;
 import game.utils.RandomNumberGenerator;
-import game.weapons.Uchigatana;
 
 import java.util.ArrayList;
 
@@ -153,14 +155,7 @@ public class Madara extends Enemies implements Resettable {
             }
         }
     }
-//    public boolean followContained(FollowBehaviour behaviourContained){
-//        for(int i : behaviours.keySet()){
-//            if(behaviours.get(i) == behaviourContained){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+
 
     /**
      * Reset method for Giant Dog, removes them from player game map.
