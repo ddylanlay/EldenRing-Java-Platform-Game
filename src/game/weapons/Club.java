@@ -64,9 +64,7 @@ public class Club extends WeaponItem implements PurchasableItem, SellableItem {
 
             }
         }
-//        if(counter == 0 && this.allowableActions.size() != 0){
-//            this.allowableActions.clear();
-//        }
+
     }
     @Override
     public List<Action> getAllowableActions() {
